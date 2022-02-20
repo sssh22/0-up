@@ -11,6 +11,12 @@
   <link rel="stylesheet" href="../../plugins/fontawesome-free/css/all.min.css">
   <!-- Theme style -->
   <link rel="stylesheet" href="../../dist/css/adminlte.min.css">
+
+
+ <!-- ssh CSS -->
+ <link rel="stylesheet" href="../../dist/css/chart.css">
+
+
 </head>
 <body class="hold-transition sidebar-mini">
 <div class="wrapper">
@@ -828,6 +834,15 @@
     <!-- /.sidebar -->
   </aside>
 
+<!-- ======================================================= -->
+<!-- ======================================================= -->
+<!-- ======================================================= -->
+<!-- ======================================================= -->
+<!-- ======================================================= -->
+<!-- ======================================================= -->
+<!-- ======================================================= -->
+
+
   <!-- Content Wrapper. Contains page content -->
   <div class="content-wrapper">
     <!-- Content Header (Page header) -->
@@ -853,8 +868,8 @@
         <div class="row">
           <div class="col-md-6">
             <!-- AREA CHART -->
-            <div class="card card-primary">
-              <div class="card-header">
+            <div class="card">
+              <div id="card-title" class="card-header">
                 <h3 class="card-title">Area Chart</h3>
 
                 <div class="card-tools">
@@ -877,7 +892,7 @@
 
             <!-- DONUT CHART -->
             <div class="card card-danger">
-              <div class="card-header">
+              <div id="card-title" class="card-header">
                 <h3 class="card-title">Donut Chart</h3>
 
                 <div class="card-tools">
@@ -896,9 +911,10 @@
             </div>
             <!-- /.card -->
 
+
             <!-- PIE CHART -->
             <div class="card card-danger">
-              <div class="card-header">
+              <div id="card-title" class="card-header">
                 <h3 class="card-title">Pie Chart</h3>
 
                 <div class="card-tools">
@@ -917,12 +933,19 @@
             </div>
             <!-- /.card -->
 
+
+
+
+
+          
+
           </div>
           <!-- /.col (LEFT) -->
+          
           <div class="col-md-6">
             <!-- LINE CHART -->
             <div class="card card-info">
-              <div class="card-header">
+              <div id="card-title" class="card-header">
                 <h3 class="card-title">Line Chart</h3>
 
                 <div class="card-tools">
@@ -945,7 +968,7 @@
 
             <!-- BAR CHART -->
             <div class="card card-success">
-              <div class="card-header">
+              <div id="card-title" class="card-header">
                 <h3 class="card-title">Bar Chart</h3>
 
                 <div class="card-tools">
@@ -960,29 +983,6 @@
               <div class="card-body">
                 <div class="chart">
                   <canvas id="barChart" style="min-height: 250px; height: 250px; max-height: 250px; max-width: 100%;"></canvas>
-                </div>
-              </div>
-              <!-- /.card-body -->
-            </div>
-            <!-- /.card -->
-
-            <!-- STACKED BAR CHART -->
-            <div class="card card-success">
-              <div class="card-header">
-                <h3 class="card-title">Stacked Bar Chart</h3>
-
-                <div class="card-tools">
-                  <button type="button" class="btn btn-tool" data-card-widget="collapse">
-                    <i class="fas fa-minus"></i>
-                  </button>
-                  <button type="button" class="btn btn-tool" data-card-widget="remove">
-                    <i class="fas fa-times"></i>
-                  </button>
-                </div>
-              </div>
-              <div class="card-body">
-                <div class="chart">
-                  <canvas id="stackedBarChart" style="min-height: 250px; height: 250px; max-height: 250px; max-width: 100%;"></canvas>
                 </div>
               </div>
               <!-- /.card-body -->
@@ -1021,6 +1021,8 @@
 <script src="../../plugins/chart.js/Chart.min.js"></script>
 <!-- AdminLTE App -->
 <script src="../../dist/js/adminlte.min.js"></script>
+<!-- AdminLTE for demo purposes -->
+<script src="../../dist/js/demo.js"></script>
 <!-- Page specific script -->
 <script>
   $(function () {
@@ -1041,19 +1043,19 @@
       datasets: [
         {
           label               : 'Digital Goods',
-          backgroundColor     : 'rgba(60,141,188,0.9)',
-          borderColor         : 'rgba(60,141,188,0.8)',
+          backgroundColor     : 'rgba(137,119,173,0.9)',
+          borderColor         : 'rgba(137,119,173,0.9)',
           pointRadius          : false,
-          pointColor          : '#3b8bba',
-          pointStrokeColor    : 'rgba(60,141,188,1)',
+          pointColor          : '#8977ad',
+          pointStrokeColor    : 'rgba(50,141,18,1)',
           pointHighlightFill  : '#fff',
-          pointHighlightStroke: 'rgba(60,141,188,1)',
+          pointHighlightStroke: 'rgba(60,10,188,1)',
           data                : [28, 48, 40, 19, 86, 27, 90]
         },
         {
           label               : 'Electronics',
-          backgroundColor     : 'rgba(210, 214, 222, 1)',
-          borderColor         : 'rgba(210, 214, 222, 1)',
+          backgroundColor     : 'rgba(235, 231, 241, 1)',
+          borderColor         : 'rgba(235, 231, 241, 1)',
           pointRadius         : false,
           pointColor          : 'rgba(210, 214, 222, 1)',
           pointStrokeColor    : '#c1c7d1',
@@ -1124,7 +1126,7 @@
       datasets: [
         {
           data: [700,500,400,600,300,100],
-          backgroundColor : ['#f56954', '#00a65a', '#f39c12', '#00c0ef', '#3c8dbc', '#d2d6de'],
+          backgroundColor : ['#ebe7f1', '#d7d0e3', '#c3b9d6', '#b0a2c8', '#9c8cba', '#8977ad'],
         }
       ]
     }

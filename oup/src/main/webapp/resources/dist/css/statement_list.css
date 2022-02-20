@@ -1,0 +1,43 @@
+.content-wrapper {
+    background-color: white;
+    padding-left: 50px;
+    padding-right: 50px;
+}
+.card{
+    padding: 100px;
+    background-color: #ebe7f1;
+}
+#btb th{
+    background-color: #d7d0e3;
+}
+
+#btb td{
+    background-color: white !important;
+}
+.atb1{width: 25%;}
+.atb1 td:nth-child(1){width: 10%;}
+.atb1 td:nth-child(3){width: 10%;}
+
+
+.atb2{width: 30%;}
+.atb2 td:nth-child(1){width: 20%;}
+.atb2 td:nth-child(2){width: 60%;}
+.atb2 td:nth-child(2)>input{width: 100%;}
+
+
+
+.page-item{
+    margin: 1px;
+    border: none;
+    border-radius: 10px;
+}
+.page-item a{
+    color: #8977ad;
+    font-weight: bolder;
+}
+
+input, select{
+    height: 35px;
+    border: 1px solid #d7d0e3;
+    border-radius: 3px;
+}
