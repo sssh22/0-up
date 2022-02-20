@@ -3,7 +3,7 @@
 <head>
   <meta charset="utf-8">
   <meta name="viewport" content="width=device-width, initial-scale=1">
-  <title>AdminLTE 3 | Project Add</title>
+  <title>AdminLTE 3 | Projects</title>
 
   <!-- Google Font: Source Sans Pro -->
   <link rel="stylesheet" href="https://fonts.googleapis.com/css?family=Source+Sans+Pro:300,400,400i,700&display=fallback">
@@ -13,7 +13,7 @@
   <link rel="stylesheet" href="../../dist/css/adminlte.min.css">
 
   <!-- ssh CSS -->
-  <link rel="stylesheet" href="../../dist/css/project_add.css">
+  <link rel="stylesheet" href="../../dist/css/project_list.css">
 
 
 
@@ -536,16 +536,17 @@
                 </a>
               </li>
               <li class="nav-item">
-                <a href="../examples/projects.html" class="nav-link">
+                <a href="../examples/projects.html" class="nav-link active">
                   <i class="far fa-circle nav-icon"></i>
                   <p>Projects</p>
                 </a>
               </li>
               <li class="nav-item">
-                <a href="../examples/project-add.html" class="nav-link active">
+                <a href="../examples/project-add.html" class="nav-link">
                   <i class="far fa-circle nav-icon"></i>
                   <p>Project Add</p>
                 </a>
+              </li>
               <li class="nav-item">
                 <a href="../examples/project-edit.html" class="nav-link">
                   <i class="far fa-circle nav-icon"></i>
@@ -834,14 +835,6 @@
     <!-- /.sidebar -->
   </aside>
 
-  <!-- ===================================================================================== -->
-  <!-- ===================================================================================== -->
-  <!-- ===================================================================================== -->
-  <!-- ===================================================================================== -->
-  <!-- ===================================================================================== -->
-  <!-- ===================================================================================== -->
-  <!-- ===================================================================================== -->
-  <!-- ===================================================================================== -->
   <!-- Content Wrapper. Contains page content -->
   <div class="content-wrapper">
     <!-- Content Header (Page header) -->
@@ -849,7 +842,13 @@
       <div class="container-fluid">
         <div class="row mb-2">
           <div class="col-sm-6">
-            <h1>프로젝트 추가</h1>
+            <h1>Projects List</h1>
+          </div>
+          <div class="col-sm-6">
+            <ol class="breadcrumb float-sm-right">
+              <li class="breadcrumb-item"><a href="#">Home</a></li>
+              <li class="breadcrumb-item active">Projects</li>
+            </ol>
           </div>
         </div>
       </div><!-- /.container-fluid -->
@@ -857,76 +856,323 @@
 
     <!-- Main content -->
     <section class="content">
-      
-        <div class="col-md-12" id="miandiv">
-          <div class="card card-primary">
-            <div class="card-header">
-              <h3 class="card-title">Project</h3>
 
-              <div class="card-tools">
-                <button type="button" class="btn btn-tool" data-card-widget="collapse" title="Collapse">
-                  <i class="fas fa-minus"></i>
-                </button>
-              </div>
-            </div>
-            <div class="card-body">
-              <div class="form-group">
-                <label for="inputName">- 프로젝트 이름</label>
-                <input type="text" id="inputName" class="form-control">
-              </div>
-              <div class="form-group">
-                <label for="inputDescription">1. 프로젝트 시행 목적</label>
-                <textarea id="inputDescription" class="form-control" rows="4"></textarea>
-              </div>
-              <div class="form-group">
-                <label for="inputDescription">2. 프로젝트 개요 및 추친방향</label>
-                <textarea id="inputDescription" class="form-control" rows="4"></textarea>
-              </div>
-              <div class="form-group">
-                <label for="inputDescription">3. 프로젝트 시행 효과</label>
-                <textarea id="inputDescription" class="form-control" rows="4"></textarea>
-              </div>
-              <div class="form-group">
-                <label for="inputDescription">4. 제안 및 요구사항</label>
-                <textarea id="inputDescription" class="form-control" rows="4"></textarea>
-              </div>
-              <br><hr>
-              <div class="form-group">
-                <label for="inputClientCompany">- 프로젝트 기간</label>
-                <input type="date" id="" > ~ <input type="date" id="" >
-              </div>
-              <hr><br>
-              
-                <div class="form-group">
-                  <label for="inputProjectLeader">- 프로젝트 책임자</label>
-                  <input type="text" id="inputProjectLeader">
-                  <input type="button" id="" value="검색">
-                </div>
-                <div class="form-group">
-                  <label for="inputProjectLeader">- 프로젝트 그룹 </label>
-                  <input type="button" id="" value="검색">
-                  <textarea id="inputDescription" class="form-control" rows="4"></textarea>
-                </div>
-              
-                
-                
-                
-              </div>
-              <!-- /.card-body -->
-            </div>
+      <!-- Default box -->
+      <div class="card">
+        <div class="card-header">
+          <h3 class="card-title">Projects</h3>
 
-
-
-            <div class="row">
-              <div class="col-12">
-                <a href="#" class="btn btn-secondary">취소</a>
-                <input type="submit" value="프로젝트 생성" class="btn btn-secondary float-right">
-              </div>
-            </div>
-          <!-- /.card -->
+          <div class="card-tools">
+            <button type="button" class="btn btn-tool" data-card-widget="collapse" title="Collapse">
+              <i class="fas fa-minus"></i>
+            </button>
+            <button type="button" class="btn btn-tool" data-card-widget="remove" title="Remove">
+              <i class="fas fa-times"></i>
+            </button>
+          </div>
         </div>
+        <div class="card-body p-0">
+          <table class="table table-striped projects">
+              <thead>
+                  <tr>
+                      <th style="width: 1%">
+                          #
+                      </th>
+                      <th style="width: 20%">
+                          Project Name
+                      </th>
+                      <th style="width: 30%">
+                          Project Group Members
+                      </th>
+                      <th>
+                          Payment Status
+                      </th>
+                      <th style="width: 8%" class="text-center">
+                          Approval Status
+                      </th>
+                      <th style="width: 20%">
+                      </th>
+                  </tr>
+              </thead>
+              <tbody>
+                  <tr>
+                      <td>
+                          #
+                      </td>
+                      <td>
+                          <a>
+                              프로젝트명
+                          </a>
+                          <br/>
+                          <small>
+                              작성일 2022-02-05
+                          </small>
+                      </td>
+                      <td>
+                          <ul class="list-inline">
+                              <li class="list-inline-item">
+                                  <img alt="Avatar" class="table-avatar" src="../../dist/img/avatar.png">
+                              </li>
+                              <li class="list-inline-item">
+                                  <img alt="Avatar" class="table-avatar" src="../../dist/img/avatar2.png">
+                              </li>
+                              <li class="list-inline-item">
+                                  <img alt="Avatar" class="table-avatar" src="../../dist/img/avatar3.png">
+                              </li>
+                              <li class="list-inline-item">
+                                  <img alt="Avatar" class="table-avatar" src="../../dist/img/avatar4.png">
+                              </li>
+                          </ul>
+                      </td>
+                      <td class="project_progress">
+                          <div class="progress progress-sm">
+                              <div class="progress-bar" role="progressbar" aria-valuenow="57" aria-valuemin="0" aria-valuemax="100" style="width: 57%">
+                              </div>
+                          </div>
+                          <small>
+                              57% Complete
+                          </small>
+                      </td>
+                      <td class="project-state">
+                          <span class="badge badge-secondary">승인 대기</span>
+                      </td>
+                      <td class="project-actions text-right">
+                          <a class="btn btn-info btn-sm" href="#">
+                              <i class="fas fa-pencil-alt">
+                              </i>
+                              수정
+                          </a>
+                          <a class="btn btn-danger btn-sm" href="#">
+                              <i class="fas fa-trash">
+                              </i>
+                              삭제
+                          </a>
+                      </td>
+                  </tr>
+                  <tr>
+                    <td>
+                        #
+                    </td>
+                    <td>
+                        <a>
+                            프로젝트명
+                        </a>
+                        <br/>
+                        <small>
+                            작성일 2022-02-05
+                        </small>
+                    </td>
+                    <td>
+                        <ul class="list-inline">
+                            <li class="list-inline-item">
+                                <img alt="Avatar" class="table-avatar" src="../../dist/img/avatar.png">
+                            </li>
+                            <li class="list-inline-item">
+                                <img alt="Avatar" class="table-avatar" src="../../dist/img/avatar2.png">
+                            </li>
+                            <li class="list-inline-item">
+                                <img alt="Avatar" class="table-avatar" src="../../dist/img/avatar3.png">
+                            </li>
+                            <li class="list-inline-item">
+                                <img alt="Avatar" class="table-avatar" src="../../dist/img/avatar4.png">
+                            </li>
+                        </ul>
+                    </td>
+                    <td class="project_progress">
+                        <div class="progress progress-sm">
+                            <div class="progress-bar" role="progressbar" aria-valuenow="57" aria-valuemin="0" aria-valuemax="100" style="width: 57%">
+                            </div>
+                        </div>
+                        <small>
+                            57% Complete
+                        </small>
+                    </td>
+                    <td class="project-state">
+                        <span id="approvalBadge" class="badge">승인</span>
+                    </td>
+                    <td class="project-actions text-right">
+                        <a class="btn btn-info btn-sm" href="#">
+                            <i class="fas fa-pencil-alt">
+                            </i>
+                            수정
+                        </a>
+                        <a class="btn btn-danger btn-sm" href="#">
+                            <i class="fas fa-trash">
+                            </i>
+                            삭제
+                        </a>
+                    </td>
+                </tr>
+                <tr>
+                  <td>
+                      #
+                  </td>
+                  <td>
+                      <a>
+                          프로젝트명
+                      </a>
+                      <br/>
+                      <small>
+                          작성일 2022-02-05
+                      </small>
+                  </td>
+                  <td>
+                      <ul class="list-inline">
+                          <li class="list-inline-item">
+                              <img alt="Avatar" class="table-avatar" src="../../dist/img/avatar.png">
+                          </li>
+                          <li class="list-inline-item">
+                              <img alt="Avatar" class="table-avatar" src="../../dist/img/avatar2.png">
+                          </li>
+                          <li class="list-inline-item">
+                              <img alt="Avatar" class="table-avatar" src="../../dist/img/avatar3.png">
+                          </li>
+                          <li class="list-inline-item">
+                              <img alt="Avatar" class="table-avatar" src="../../dist/img/avatar4.png">
+                          </li>
+                      </ul>
+                  </td>
+                  <td class="project_progress">
+                      <div class="progress progress-sm">
+                          <div class="progress-bar" role="progressbar" aria-valuenow="57" aria-valuemin="0" aria-valuemax="100" style="width: 57%">
+                          </div>
+                      </div>
+                      <small>
+                          57% Complete
+                      </small>
+                  </td>
+                  <td class="project-state">
+                      <span class="badge badge-secondary">승인 대기</span>
+                  </td>
+                  <td class="project-actions text-right">
+                      <a class="btn btn-info btn-sm" href="#">
+                          <i class="fas fa-pencil-alt">
+                          </i>
+                          수정
+                      </a>
+                      <a class="btn btn-danger btn-sm" href="#">
+                          <i class="fas fa-trash">
+                          </i>
+                          삭제
+                      </a>
+                  </td>
+              </tr>
+              <tr>
+                <td>
+                    #
+                </td>
+                <td>
+                    <a>
+                        프로젝트명
+                    </a>
+                    <br/>
+                    <small>
+                        작성일 2022-02-05
+                    </small>
+                </td>
+                <td>
+                    <ul class="list-inline">
+                        <li class="list-inline-item">
+                            <img alt="Avatar" class="table-avatar" src="../../dist/img/avatar.png">
+                        </li>
+                        <li class="list-inline-item">
+                            <img alt="Avatar" class="table-avatar" src="../../dist/img/avatar2.png">
+                        </li>
+                        <li class="list-inline-item">
+                            <img alt="Avatar" class="table-avatar" src="../../dist/img/avatar3.png">
+                        </li>
+                        <li class="list-inline-item">
+                            <img alt="Avatar" class="table-avatar" src="../../dist/img/avatar4.png">
+                        </li>
+                    </ul>
+                </td>
+                <td class="project_progress">
+                    <div class="progress progress-sm">
+                        <div class="progress-bar" role="progressbar" aria-valuenow="57" aria-valuemin="0" aria-valuemax="100" style="width: 57%">
+                        </div>
+                    </div>
+                    <small>
+                        57% Complete
+                    </small>
+                </td>
+                <td class="project-state">
+                    <span class="badge badge-secondary">승인 대기</span>
+                </td>
+                <td class="project-actions text-right">
+                    <a class="btn btn-info btn-sm" href="#">
+                        <i class="fas fa-pencil-alt">
+                        </i>
+                        수정
+                    </a>
+                    <a class="btn btn-danger btn-sm" href="#">
+                        <i class="fas fa-trash">
+                        </i>
+                        삭제
+                    </a>
+                </td>
+            </tr>
+            <tr>
+              <td>
+                  #
+              </td>
+              <td>
+                  <a>
+                      프로젝트명
+                  </a>
+                  <br/>
+                  <small>
+                      작성일 2022-02-05
+                  </small>
+              </td>
+              <td>
+                  <ul class="list-inline">
+                      <li class="list-inline-item">
+                          <img alt="Avatar" class="table-avatar" src="../../dist/img/avatar.png">
+                      </li>
+                      <li class="list-inline-item">
+                          <img alt="Avatar" class="table-avatar" src="../../dist/img/avatar2.png">
+                      </li>
+                      <li class="list-inline-item">
+                          <img alt="Avatar" class="table-avatar" src="../../dist/img/avatar3.png">
+                      </li>
+                      <li class="list-inline-item">
+                          <img alt="Avatar" class="table-avatar" src="../../dist/img/avatar4.png">
+                      </li>
+                  </ul>
+              </td>
+              <td class="project_progress">
+                  <div class="progress progress-sm">
+                      <div class="progress-bar" role="progressbar" aria-valuenow="57" aria-valuemin="0" aria-valuemax="100" style="width: 57%">
+                      </div>
+                  </div>
+                  <small>
+                      57% Complete
+                  </small>
+              </td>
+              <td class="project-state">
+                  <span class="badge badge-secondary">승인 대기</span>
+              </td>
+              <td class="project-actions text-right">
+                  <a class="btn btn-info btn-sm" href="#">
+                      <i class="fas fa-pencil-alt">
+                      </i>
+                      수정
+                  </a>
+                  <a class="btn btn-danger btn-sm" href="#">
+                      <i class="fas fa-trash">
+                      </i>
+                      삭제
+                  </a>
+              </td>
+          </tr>
+            
+              </tbody>
+          </table>
         </div>
-      
+        <!-- /.card-body -->
+      </div>
+      <!-- /.card -->
+
     </section>
     <!-- /.content -->
   </div>
