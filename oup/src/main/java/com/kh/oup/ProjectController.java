@@ -7,6 +7,6 @@ import org.springframework.web.bind.annotation.GetMapping;
 public class ProjectController {
 	@GetMapping("project")
 	public String project() {
-		return "pages/examples/projects";
+		return "pages/order/addOrder";
 	}
 }
