@@ -20,9 +20,51 @@
   <link href="https://cdn.jsdelivr.net/npm/bootstrap@5.1.3/dist/css/bootstrap.min.css" rel="stylesheet">
   <script src="https://cdn.jsdelivr.net/npm/bootstrap@5.1.3/dist/js/bootstrap.bundle.min.js"></script>  
   <script src="https://maxcdn.bootstrapcdn.com/bootstrap/3.3.2/js/bootstrap.min.js"></script>
+  
+  
+  <meta http-equiv="Content-Type" content="text/html; charset=UTF-8">
+  <% 
+  String inputYn = request.getParameter("inputYn"); 
+  String roadFullAddr = request.getParameter("roadFullAddr"); 
+  String roadAddrPart1 = request.getParameter("roadAddrPart1"); 
+  String roadAddrPart2 = request.getParameter("roadAddrPart2"); 
+  String engAddr = request.getParameter("engAddr"); 
+  String jibunAddr = request.getParameter("jibunAddr"); 
+  String zipNo = request.getParameter("zipNo"); 
+  String addrDetail = request.getParameter("addrDetail"); 
+  %>
+
 
 </head>
 <body class="hold-transition sidebar-mini">
+
+	<script language="javascript"> // opener관련 오류가 발생하는 경우 아래 주석을 해지하고, 사용자의 도메인정보를 입력합니다. ("주소입력화면 소스"도 동일하게 적용시켜야 합니다.) 
+	document.domain = "http://localhost:8282/oup/client/addList"; 
+	function init(){ 
+		var url = location.href; 
+		var confmKey = "devU01TX0FVVEgyMDIyMDIyMjIxMDAyMDExMjI3MDU="; 
+		var resultType = "4"; // 도로명주소 검색결과 화면 출력내용, 1 : 도로명, 2 : 도로명+지번, 3 : 도로명+상세건물명, 4 : 도로명+지번+상세건물명 
+		var inputYn= "<%=inputYn%>"; 
+		if(inputYn != "Y"){ 
+			document.form.confmKey.value = confmKey; 
+			document.form.returnUrl.value = url; 
+			document.form.resultType.value = resultType; 
+			document.form.action="http://www.juso.go.kr/addrlink/addrLinkUrl.do";
+			document.form.submit(); 
+		}else{ 
+			window.opener.jusoCallBack(
+					"<%=roadFullAddr%>",
+					"<%=roadAddrPart1%>",
+					"<%=addrDetail%>",
+					"<%=roadAddrPart2%>", 
+					"<%=engAddr%>", 
+					"<%=jibunAddr%>", 
+					"<%=zipNo%>" 
+			); 
+		} 
+	} 
+	</script>
+
 
   <div class="offcanvas offcanvas-start" id="home">
     <input type="hidden" value="https://haenny.tistory.com/191  (jsp로 바꿀때 주소 가져오기 오픈 api사용 방법)">
@@ -31,8 +73,9 @@
       <button type="button" class="btn-close text-reset" data-bs-dismiss="offcanvas"></button>
     </div>
     <div class="offcanvas-body">
-      <input type="text" id="inputTaxRegistrationID" class="form-control col-md" value="간단주소">
-      <input type="text" id="inputTaxRegistrationID" class="form-control col-md" value="상세 주소 경기 수원시 장안구 율전동2123-1 .....">
+    <button type="button" class="zip_code_btn" onclick="javascript:goPopup();">우편번호</button><br/> 
+    <input type="text" class="form-control col-md" placeholder="기본 주소를 입력해 주세요" id="addr"><br/> 
+    <input type="text" class="form-control col-md" placeholder="나머지 주소를 입력해 주세요" id="addrDetail">
       <button class="btn btn-secondary" type="button">확인</button>
     </div>
   </div>
@@ -56,88 +99,57 @@
            
             	<form action="" method="post">
 	              <div class="form-group">
-	                <label>거래처 코드</label>
-	                <input type="text" id="clientCode" class="form-control" value="SeqNum">
-	              </div>
-	              <div class="form-group">
 	                <label>상호이름</label>
-	                <input type="text" id="clientName" class="form-control" value="(주)영업 2팀">
+	                <input type="text" name="cName" class="form-control" placeholder="(주)영업 2팀">
 	              </div>
 	              <div class="form-group">
 	                <label>사업자등록번호</label><br>
-	                <select id="inputStatus" class="form-control col-md-3">
+	                <select id="bNo" class="form-control col-md-3">
 	                  <option>사업자등록번호</option>
-	                  <option>비사업자(내국인)</option>
-	                  <option>비사업자(외국인)</option>
+	                  <option>비사업자</option>
 	                </select>
-	                <input type="text" id="inputTaxRegistrationID" class="form-control col-md-3" value="사업자 번호 1010101010">
+	                <input type="text" name="bNo" class="form-control col-md-3" placeholder="사업자 번호 1010101010">
 	              </div><br><br>
 	              <div class="form-group">
 	                <label>종사업장번호</label>
-	                <input type="text" id="inputTaxRegistrationID" class="form-control" value="종사업장번호 1010">
+	                <input type="number" name="bNo2" class="form-control" placeholder="1010 (없을경우 0)">
+	              </div>
+	              <div class="form-group">
+	                <label>업태</label>
+	                <input type="text" name="cType" class="form-control" placeholder="서비스 외 (개발공급 외)">
 	              </div>
 	              <div class="form-group">
 	                <label>대표자명</label>
-	                <input type="text" id="inputReaderName" class="form-control" value="홍길동">
-	              </div>
-	              <div class="form-group">
-	                <label>업형</label>
-	                <input type="text" id="inputTaxRegistrationID" class="form-control" value="서비스">
-	              </div>
-	              <div class="form-group">
-	                <label>품목</label>
-	                <input type="text" id="inputTaxRegistrationID" class="form-control" value="제조">
-	              </div>
-	              <div class="form-group">
-	                <label>담당자</label>
-	                <input type="text" id="inputTaxRegistrationID" class="form-control" value="홍길동2">
+	                <input type="text" name="cOwner" class="form-control" placeholder="홍길동">
 	              </div>
 	              <div class="form-group">
 	                <label>전화</label>
-	                <input type="text" id="inputTaxRegistrationID" class="form-control" value="010-1010-1010">
+	                <input type="text" name="cPhone" class="form-control" placeholder="010-1010-1010">
 	              </div>
 	              <div class="form-group">
 	                <label>Fax</label>
-	                <input type="text" id="inputTaxRegistrationID" class="form-control" value="010-1010-1010">
+	                <input type="text" name="cFax" class="form-control" placeholder="010-1010-1010">
 	              </div>
 	              <div class="form-group">
 	                <label>Email</label>
-	                <input type="text" id="inputTaxRegistrationID" class="form-control" value="aabbcc@aabbcc.com">
+	                <input type="text" name="cEmail" class="form-control" placeholder="aabbcc@aabbcc.com">
 	              </div>
 	              <div class="form-group">
-	                <label>주소</label><br>
-	                <div class="input-group mb-3">
-	                  <input type="text" class="form-control col-md-3" placeholder="간단 주소">
-	                  <button class="btn btn-secondary" data-bs-toggle="offcanvas" type="submit" data-bs-target="#home">주소찾기</button>
-	                </div>
-	                <input type="text" id="inputTaxRegistrationID" class="form-control col-md" value="상세 주소 경기 수원시 장안구 율전동2123-1 ....." readonly>
+	                <label>주소</label>
+	                <button class="btn btn-secondary mb-3" data-bs-toggle="offcanvas" type="button" data-bs-target="#home" style="margin-left: 30px;">주소찾기</button>
+	                <input type="text" name="cAddr" class="form-control col-md" value="상세 주소 경기 수원시 장안구 율전동2123-1 ....." readonly>
 	              </div>
-	              <div class="form-group">
-	                <label>업종별구분</label><br>
-	                <select id="inputStatus" class="form-control col-md-3">
-	                  <option>일반</option>
-	                  <option>관세</option>
-	                </select>
-	              </div><br><br>
 	              <div class="form-group">
 	                <label>적요</label>
-	                <input type="text" id="inputTaxRegistrationID" class="form-control" value="특이사항">
-	              </div>
-	              <div class="form-group">
-	                <label>거래처계층그룹</label>
-	                <button type="button" class="btn btn-secondary " style="margin-left: 40px;">계층그룹</button><br>
-	                <div class="input-group mb-3">
-	                  <input type="text" id="inputTaxRegistrationID" class="form-control col-md-3" placeholder="자동차판매처" readonly>
-	                  <input type="text" id="inputTaxRegistrationID" class="form-control col-md-3" placeholder="도매/ 소매" readonly>
-	                </div>
+	                <input type="text" name="inputTaxRegistrationID" class="form-control" placeholder="특이사항">
 	              </div>
 	              <div class="form-group">
 	                <label>여신한도</label>
-	                <input type="number" id="inputTaxRegistrationID" class="form-control" value="300000000">
+	                <input type="number" name="cCreditLimit" class="form-control" placeholder="300000000">
 	              </div>
 	              <div class="form-group">
 	                <label>여신기한 (월/일)</label><br>
-	                <select id="inputMonth" class="form-control col-md-3" >
+	                <select name="cCreditDateMonth" class="form-control col-md-3" >
 	                  <option>0</option>
 	                  <option>1</option>
 	                  <option>2</option>
@@ -152,7 +164,7 @@
 	                  <option>11</option>
 	                  <option>12</option>
 	                </select>
-	                <select id="inputDay" class="form-control col-md-3">
+	                <select name="cCreditDateDay" class="form-control col-md-3">
 	                  <option>0</option>
 	                  <option>1</option>
 	                  <option>2</option>
@@ -188,7 +200,7 @@
 	              </div>
 	              <br><br>
 	              <div class="form-group" style="float: right; margin-right: 20px;">
-	                <button type="button" class="btn btn-outline-primary btn-lg">등록</button>
+	                <button type="submit" class="btn btn-outline-primary btn-lg">등록</button>
 	                <button type="button" class="btn btn-outline-primary btn-lg">취소</button>
 	              </div>
               </form>
@@ -204,5 +216,20 @@
 <script src="${path}/resources/plugins/bootstrap/js/bootstrap.bundle.min.js"></script>
 <!-- AdminLTE App -->
 <script src="${path}/resources/dist/js/adminlte.min.js"></script>
+
+<script> 
+	var goPopup = function(){ 
+		var pop = window.open("${ctx}/hp/member/jusoPopup.do","pop","width=570,height=420, scrollbars=yes, resizable=yes"); 
+		} 
+	var jusoCallBack = function(roadFullAddr,roadAddrPart1,addrDetail,roadAddrPart2,engAddr, jibunAddr, zipNo){ 
+		document.getElementById("zipNo").value = zipNo; 
+		document.getElementById("addr").value = roadAddrPart1; 
+		if(addrDetail.length>30){ 
+			alert('상세주소가 너무 길어 다시 입력해야 합니다.'); 
+			return; 
+		} 
+		document.getElementById("addrDetail").value = addrDetail; 
+	} 
+</script>
 </body>
 </html>

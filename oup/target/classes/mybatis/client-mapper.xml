@@ -1,0 +1,45 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<!DOCTYPE mapper
+  PUBLIC "-//mybatis.org//DTD Mapper 3.0//EN"
+  "http://mybatis.org/dtd/mybatis-3-mapper.dtd">
+ 
+ <mapper namespace="client">
+ 	
+ 	<insert id="insertClient" parameterType="clientVo">
+ 		insert into client
+ 		(
+ 			C_NO,
+ 			C_NAME,
+ 			B_NO,
+ 			B_NO2,
+ 			C_TYPE,
+ 			C_OWNER,
+ 			C_ADDR,
+ 			C_PHONE,
+ 			C_FAX,
+ 			C_EMAIL,
+ 			C_PIC,
+ 			C_CREDITLIMIT,
+ 			C_CREDIT_MONTH,
+ 			C_CREDIT_DAY
+ 		)
+ 		values
+ 		(
+ 			C_NO_SEQ.NEXTVAL,
+ 			#{cName},
+ 			${bNo},
+ 			${bNo2},
+ 			#{cType},
+ 			#{cOwner},
+ 			#{cAddr},
+ 			#{cPhone},
+ 			#{cFax},
+ 			#{cEmail},
+ 			${cPic},
+ 			${cCreditLimit},
+ 			${cCreditDateMonth},
+ 			${cCreditDateDay}
+ 		)
+ 	</insert>
+ 	
+ </mapper>

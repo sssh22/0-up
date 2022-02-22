@@ -9,7 +9,7 @@
 	</settings>
   
   	<typeAliases>
-  	
+  		<typeAlias type="com.kh.oup.client.vo.ClientVo" alias="clientVo"/>
   	</typeAliases>
   
   </configuration>
