@@ -71,15 +71,6 @@
               <form class="form-horizontal">
                 <div class="card-body">
                   <div class="form-group row">
-                    <div class="input-group date" id="reservationdate" data-target-input="nearest">
-                      <label for="inputPassword3" class="col-sm-1 col-form-label">일자</label>
-                          <input type="text" class="form-control datetimepicker-input" data-target="#reservationdate" placeholder="날짜를 입력해주세요."/>
-                          <div class="input-group-append" data-target="#reservationdate" data-toggle="datetimepicker">
-                              <div class="input-group-text"><i class="fa fa-calendar"></i></div>
-                          </div>
-                      </div>
-                  </div>
-                  <div class="form-group row">
                     <label for="inputPassword3" class="col-sm-1 col-form-label">제목</label>
                     <div class="col-sm-8">
                       <input type="text" class="form-control" id="inputPassword3" placeholder="제목을 입력해주세요.">
