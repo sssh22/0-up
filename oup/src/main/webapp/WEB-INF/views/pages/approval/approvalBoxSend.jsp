@@ -18,7 +18,7 @@
   <!-- Theme style -->
   <link rel="stylesheet" href="${path}/resources/dist/css/adminlte.min.css">
 </head>
-<body class="hold-transition sidebar-mini">
+<body class="hold-transition sidebar-mini layout-fixed">
 <div class="wrapper">
   <%@ include file="../../common/menubar-sidebar.jsp" %>
 
