@@ -1,3 +1,7 @@
+<%@ page language="java" contentType="text/html; charset=UTF-8"
+    pageEncoding="UTF-8"%>
+<%@ taglib prefix="c" uri="http://java.sun.com/jsp/jstl/core" %>
+<c:set var="path" value="${pageContext.request.contextPath}"></c:set>
 <!DOCTYPE html>
 <html lang="ko">
 <head>
@@ -8,11 +12,11 @@
   <!-- Google Font: Source Sans Pro -->
   <link rel="stylesheet" href="https://fonts.googleapis.com/css?family=Source+Sans+Pro:300,400,400i,700&display=fallback">
   <!-- Font Awesome -->
-  <link rel="stylesheet" href="../../plugins/fontawesome-free/css/all.min.css">
+  <link rel="stylesheet" href="${path}/resources/plugins/fontawesome-free/css/all.min.css">
   <!-- icheck bootstrap -->
-  <link rel="stylesheet" href="../../plugins/icheck-bootstrap/icheck-bootstrap.min.css">
+  <link rel="stylesheet" href="${path}/resources/plugins/icheck-bootstrap/icheck-bootstrap.min.css">
   <!-- Theme style -->
-  <link rel="stylesheet" href="../../dist/css/adminlte.min.css">
+  <link rel="stylesheet" href="${path}/resources/dist/css/adminlte.min.css">
 
 <style>
 
@@ -22,7 +26,7 @@
   }
   /* Reset */
   body {
-      background-image: url("/dist/img/univ3.png");
+      background-image: url("${path}/resources/dist/img/univ3.png");
       background-size: cover;
       background-position: center;
       background-repeat: no-repeat;
@@ -115,7 +119,7 @@
         <br><br>
         
         
-        <form action="../../index3.html" method="post">
+        <form action="" method="post">
           <div class="input-group mb-3">
             <input type="email" class="form-control" placeholder="ID">
             <div class="input-group-append">
