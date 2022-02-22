@@ -7,6 +7,7 @@
 <html>
 <head>
 <meta charset="UTF-8">
+ <meta name="viewport" content="width=device-width, initial-scale=1">
 <title>Insert title here</title>
 
 <!-- Google Font: Source Sans Pro -->
@@ -16,25 +17,26 @@
 <!--   Theme style -->
  <link rel="stylesheet" href="${path}/resources/dist/css/adminlte.min.css">
 
-<!-- ssh CSS -->
- <link rel="stylesheet" href="${path}/resources/dist/css/statement.css">
+ <!-- ssh CSS -->
+  <link rel="stylesheet" href="${path}/resources/dist/css/statement.css">
 
 
 </head>
-
 <body class="hold-transition sidebar-mini layout-fixed">
-<div class = "wrapper"> 
 
+<div class="wrapper">
 <%@ include file="/WEB-INF/views/common/menubar-sidebar.jsp" %>
+  
+<!-- ======================================================= -->
 
- <!-- Content Wrapper. Contains page content -->
+  <!-- Content Wrapper. Contains page content -->
   <div class="content-wrapper">
     <!-- Content Header (Page header) -->
     <section class="content-header">
       <div class="container-fluid">
         <div class="row mb-2">
           <div class="col-sm-6">
-            <h1 style="font-size: 40px;">거래 명세서 [저장]</h1>
+            <h1 style="font-size: 40px;">거래 명세서 [수정]</h1>
           </div>
           <br><br><br>
 
@@ -58,7 +60,7 @@
         </td>
       </tr>
       <tr>
-        <td>주문서</td>
+        <td>주문서</td>
         <td>
           <select>
             <option></option>
@@ -78,10 +80,10 @@
         
        
 
-        <table border="1" id="btb">
+   <table border="1" id="btb">
           <tr>
             <td class="colName">일련번호</td>
-            <td colspan="9"></td>
+            <td colspan="9"><input type="text"></td>
           </tr>
           <tr>
             <td class="colName">작성일자</td>
@@ -91,48 +93,48 @@
             <td><input type="date"></td>
           </tr>
           <tr>
-            <td colspan="5" class="colName2"> 곻급 받는 자</td>
+            <td colspan="5" class="colName2"> 곻급 받는 자 <button id="search-client">검색</button></td>
             <td colspan="5" class="colName3">공급자</td>
           </tr>
           <tr>
             <td class="colName">상호명</td>
-            <td colspan="2"></td>
+            <td colspan="2"><input type="text"></td>
             <td class="colName">성명</td>
-            <td></td>
+            <td><input type="text"></td>
             <td class="colName">상호명</td>
-            <td colspan="2"></td>
+            <td colspan="2"><input type="text"></td>
             <td class="colName">성명</td>
-            <td></td>
+            <td><input type="text"></td>
           </tr>
           <tr>
             <td class="colName">등록번호</td>
-            <td colspan="4"></td>
+            <td colspan="4"><input type="text"></td>
             <td class="colName">등록번호</td>
-            <td colspan="4"></td>
+            <td colspan="4"><input type="text"></td>
           </tr>
           <tr>
             <td class="colName">사업장 주소</td>
-            <td colspan="4"></td>
+            <td colspan="4"><input type="text"></td>
             <td class="colName">사업장 주소</td>
-            <td colspan="4"></td>
+            <td colspan="4"><input type="text"></td>
           </tr>
           <tr>
             <td class="colName">전화번호</td>
-            <td colspan="2">5654</td>
+            <td colspan="2"><input type="text"></td>
             <td class="colName">팩스</td>
-            <td>5555</td>
+            <td><input type="text"></td>
             <td class="colName">전화번호</td>
-            <td colspan="2">54682</td>
+            <td colspan="2"><input type="text"></td>
             <td class="colName">팩스</td>
-            <td>00</td>
+            <td><input type="text"></td>
           </tr>
           <tr>
             <td colspan="5" class="colName"> 거래일자 </td>
-            <td colspan="5"></td>
+            <td colspan="5"><input type="date"></td>
           </tr>
           <tr>
             <td colspan="5" class="colName"> 합계금액(VAT포함)</td>
-            <td colspan="5"></td>
+            <td colspan="5"><input type="text"></td>
           </tr>
         </table>
 
@@ -290,13 +292,14 @@
       <!-- /.card -->
       <br>
       <div id="btn2">
-        <input class="b1" type="button" value="목록으로">
+        <input class="b2" type="button" value="수정">
+        <input class="b2" type="button" value="삭제">
       </div>
 
       
     </div>
   <!-- /.content-wrapper -->
-
+  
  <%@ include file="/WEB-INF/views/common/footer.jsp" %>
 
   <!-- Control Sidebar -->
@@ -315,6 +318,8 @@
 <script src="${path}/resources/dist/js/adminlte.min.js"></script>
 <!-- AdminLTE for demo purposes -->
 <script src="${path}/resources/dist/js/demo.js"></script>
+
+
 
 
 </body>

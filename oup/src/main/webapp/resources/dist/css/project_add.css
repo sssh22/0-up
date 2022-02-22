@@ -1,0 +1,22 @@
+.card-header{
+    background-color: #716094 !important;
+}
+.card-primary{
+    background-color: #d7d0e3;
+}
+.card-title{
+    font-size: 30px;
+}
+
+#miandiv{
+    padding-top: 50px;
+    padding-left: 200px;
+    padding-right: 200px;
+
+}
+
+
+/* project edit */
+#bntbottom{
+    margin-left: 3px !important;
+}
