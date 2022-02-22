@@ -1,12 +1,31 @@
 <%@ page language="java" contentType="text/html; charset=UTF-8"
     pageEncoding="UTF-8"%>
+<%@ taglib prefix="c" uri="http://java.sun.com/jsp/jstl/core" %>
+<c:set var="path" value="${pageContext.request.contextPath}"></c:set>
 <!DOCTYPE html>
 <html>
 <head>
 <meta charset="UTF-8">
+<meta name="viewport" content="width=device-width, initial-scale=1">
 <title>Insert title here</title>
+
+<!-- Google Font: Source Sans Pro -->
+ <link rel="stylesheet" href="https://fonts.googleapis.com/css?family=Source+Sans+Pro:300,400,400i,700&display=fallback">
+<!--   Font Awesome -->
+ <link rel="stylesheet" href="${path}/resources/plugins/fontawesome-free/css/all.min.css">
+<!--   Theme style -->
+ <link rel="stylesheet" href="${path}/resources/dist/css/adminlte.min.css">
+
+<!-- ssh CSS -->
+<link rel="stylesheet" href="${path}/resources/dist/css/chart.css">
+
+
 </head>
-<body>
+<body class="hold-transition sidebar-mini layout-fixed">
+<div class = "wrapper">
+
+<%@ include file="/WEB-INF/views/common/menubar-sidebar.jsp" %>
+
 
   <!-- Content Wrapper. Contains page content -->
   <div class="content-wrapper">
@@ -98,12 +117,6 @@
             </div>
             <!-- /.card -->
 
-
-
-
-
-          
-
           </div>
           <!-- /.col (LEFT) -->
           
@@ -163,14 +176,9 @@
     <!-- /.content -->
   </div>
   <!-- /.content-wrapper -->
-  <footer class="main-footer">
-    <div class="float-right d-none d-sm-block">
-      <b>Version</b> 3.2.0-rc
-    </div>
-    <strong>Copyright &copy; 2014-2021 <a href="https://adminlte.io">AdminLTE.io</a>.</strong> All rights reserved.
-  </footer>
+  <%@ include file="/WEB-INF/views/common/footer.jsp" %>
 
-  <!-- Control Sidebar -->
+
   <aside class="control-sidebar control-sidebar-dark">
     <!-- Add Content Here -->
   </aside>
@@ -179,15 +187,15 @@
 <!-- ./wrapper -->
 
 <!-- jQuery -->
-<script src="../../plugins/jquery/jquery.min.js"></script>
+<script src="${path}/resources/plugins/jquery/jquery.min.js"></script>
 <!-- Bootstrap 4 -->
-<script src="../../plugins/bootstrap/js/bootstrap.bundle.min.js"></script>
+<script src="${path}/resources/plugins/bootstrap/js/bootstrap.bundle.min.js"></script>
 <!-- ChartJS -->
-<script src="../../plugins/chart.js/Chart.min.js"></script>
+<script src="${path}/resources/plugins/chart.js/Chart.min.js"></script>
 <!-- AdminLTE App -->
-<script src="../../dist/js/adminlte.min.js"></script>
+<script src="${path}/resources/dist/js/adminlte.min.js"></script>
 <!-- AdminLTE for demo purposes -->
-<script src="../../dist/js/demo.js"></script>
+<script src="${path}/resources/dist/js/demo.js"></script>
 <!-- Page specific script -->
 <script>
   $(function () {
@@ -373,6 +381,9 @@
     })
   })
 </script>
+
+
+
 
 
 </body>
