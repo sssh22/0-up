@@ -51,146 +51,152 @@
                 </button>
               </div>
             </div>
+            
             <div class="card-body">
-              <div class="form-group">
-                <label>거래처 코드</label>
-                <input type="text" id="clientCode" class="form-control" value="SeqNum">
-              </div>
-              <div class="form-group">
-                <label>상호이름</label>
-                <input type="text" id="clientName" class="form-control" value="(주)영업 2팀">
-              </div>
-              <div class="form-group">
-                <label>사업자등록번호</label><br>
-                <select id="inputStatus" class="form-control col-md-3">
-                  <option>사업자등록번호</option>
-                  <option>비사업자(내국인)</option>
-                  <option>비사업자(외국인)</option>
-                </select>
-                <input type="text" id="inputTaxRegistrationID" class="form-control col-md-3" value="사업자 번호 1010101010">
-              </div><br><br>
-              <div class="form-group">
-                <label>종사업장번호</label>
-                <input type="text" id="inputTaxRegistrationID" class="form-control" value="종사업장번호 1010">
-              </div>
-              <div class="form-group">
-                <label>대표자명</label>
-                <input type="text" id="inputReaderName" class="form-control" value="홍길동">
-              </div>
-              <div class="form-group">
-                <label>업형</label>
-                <input type="text" id="inputTaxRegistrationID" class="form-control" value="서비스">
-              </div>
-              <div class="form-group">
-                <label>품목</label>
-                <input type="text" id="inputTaxRegistrationID" class="form-control" value="제조">
-              </div>
-              <div class="form-group">
-                <label>담당자</label>
-                <input type="text" id="inputTaxRegistrationID" class="form-control" value="홍길동2">
-              </div>
-              <div class="form-group">
-                <label>전화</label>
-                <input type="text" id="inputTaxRegistrationID" class="form-control" value="010-1010-1010">
-              </div>
-              <div class="form-group">
-                <label>Fax</label>
-                <input type="text" id="inputTaxRegistrationID" class="form-control" value="010-1010-1010">
-              </div>
-              <div class="form-group">
-                <label>Email</label>
-                <input type="text" id="inputTaxRegistrationID" class="form-control" value="aabbcc@aabbcc.com">
-              </div>
-              <div class="form-group">
-                <label>주소</label><br>
-                <div class="input-group mb-3">
-                  <input type="text" class="form-control col-md-3" placeholder="간단 주소">
-                  <button class="btn btn-secondary" data-bs-toggle="offcanvas" type="submit" data-bs-target="#home">주소찾기</button>
-                </div>
-                <input type="text" id="inputTaxRegistrationID" class="form-control col-md" value="상세 주소 경기 수원시 장안구 율전동2123-1 ....." readonly>
-              </div>
-              <div class="form-group">
-                <label>업종별구분</label><br>
-                <select id="inputStatus" class="form-control col-md-3">
-                  <option>일반</option>
-                  <option>관세</option>
-                </select>
-              </div><br><br>
-              <div class="form-group">
-                <label>적요</label>
-                <input type="text" id="inputTaxRegistrationID" class="form-control" value="특이사항">
-              </div>
-              <div class="form-group">
-                <label>거래처계층그룹</label>
-                <button type="button" class="btn btn-secondary " style="margin-left: 40px;">계층그룹</button><br>
-                <div class="input-group mb-3">
-                  <input type="text" id="inputTaxRegistrationID" class="form-control col-md-3" placeholder="자동차판매처" readonly>
-                  <input type="text" id="inputTaxRegistrationID" class="form-control col-md-3" placeholder="도매/ 소매" readonly>
-                </div>
-              </div>
-              <div class="form-group">
-                <label>여신한도</label>
-                <input type="number" id="inputTaxRegistrationID" class="form-control" value="300000000">
-              </div>
-              <div class="form-group">
-                <label>여신기한 (월/일)</label><br>
-                <select id="inputMonth" class="form-control col-md-3" >
-                  <option>0</option>
-                  <option>1</option>
-                  <option>2</option>
-                  <option>3</option>
-                  <option>4</option>
-                  <option>5</option>
-                  <option>6</option>
-                  <option>7</option>
-                  <option>8</option>
-                  <option>9</option>
-                  <option>10</option>
-                  <option>11</option>
-                  <option>12</option>
-                </select>
-                <select id="inputDay" class="form-control col-md-3">
-                  <option>0</option>
-                  <option>1</option>
-                  <option>2</option>
-                  <option>3</option>
-                  <option>4</option>
-                  <option>5</option>
-                  <option>6</option>
-                  <option>7</option>
-                  <option>8</option>
-                  <option>9</option>
-                  <option>10</option>
-                  <option>11</option>
-                  <option>12</option>
-                  <option>13</option>
-                  <option>14</option>
-                  <option>15</option>
-                  <option>16</option>
-                  <option>17</option>
-                  <option>18</option>
-                  <option>19</option>
-                  <option>20</option>
-                  <option>21</option>
-                  <option>22</option>
-                  <option>23</option>
-                  <option>24</option>
-                  <option>25</option>
-                  <option>26</option>
-                  <option>27</option>
-                  <option>28</option>
-                  <option>29</option>
-                  <option>30</option>
-                </select>
-              </div>
-              <br><br>
-              <div class="form-group" style="float: right; margin-right: 20px;">
-                <button type="button" class="btn btn-outline-primary btn-lg">등록</button>
-                <button type="button" class="btn btn-outline-primary btn-lg">취소</button>
-              </div>
+           
+            	<form action="" method="post">
+	              <div class="form-group">
+	                <label>거래처 코드</label>
+	                <input type="text" id="clientCode" class="form-control" value="SeqNum">
+	              </div>
+	              <div class="form-group">
+	                <label>상호이름</label>
+	                <input type="text" id="clientName" class="form-control" value="(주)영업 2팀">
+	              </div>
+	              <div class="form-group">
+	                <label>사업자등록번호</label><br>
+	                <select id="inputStatus" class="form-control col-md-3">
+	                  <option>사업자등록번호</option>
+	                  <option>비사업자(내국인)</option>
+	                  <option>비사업자(외국인)</option>
+	                </select>
+	                <input type="text" id="inputTaxRegistrationID" class="form-control col-md-3" value="사업자 번호 1010101010">
+	              </div><br><br>
+	              <div class="form-group">
+	                <label>종사업장번호</label>
+	                <input type="text" id="inputTaxRegistrationID" class="form-control" value="종사업장번호 1010">
+	              </div>
+	              <div class="form-group">
+	                <label>대표자명</label>
+	                <input type="text" id="inputReaderName" class="form-control" value="홍길동">
+	              </div>
+	              <div class="form-group">
+	                <label>업형</label>
+	                <input type="text" id="inputTaxRegistrationID" class="form-control" value="서비스">
+	              </div>
+	              <div class="form-group">
+	                <label>품목</label>
+	                <input type="text" id="inputTaxRegistrationID" class="form-control" value="제조">
+	              </div>
+	              <div class="form-group">
+	                <label>담당자</label>
+	                <input type="text" id="inputTaxRegistrationID" class="form-control" value="홍길동2">
+	              </div>
+	              <div class="form-group">
+	                <label>전화</label>
+	                <input type="text" id="inputTaxRegistrationID" class="form-control" value="010-1010-1010">
+	              </div>
+	              <div class="form-group">
+	                <label>Fax</label>
+	                <input type="text" id="inputTaxRegistrationID" class="form-control" value="010-1010-1010">
+	              </div>
+	              <div class="form-group">
+	                <label>Email</label>
+	                <input type="text" id="inputTaxRegistrationID" class="form-control" value="aabbcc@aabbcc.com">
+	              </div>
+	              <div class="form-group">
+	                <label>주소</label><br>
+	                <div class="input-group mb-3">
+	                  <input type="text" class="form-control col-md-3" placeholder="간단 주소">
+	                  <button class="btn btn-secondary" data-bs-toggle="offcanvas" type="submit" data-bs-target="#home">주소찾기</button>
+	                </div>
+	                <input type="text" id="inputTaxRegistrationID" class="form-control col-md" value="상세 주소 경기 수원시 장안구 율전동2123-1 ....." readonly>
+	              </div>
+	              <div class="form-group">
+	                <label>업종별구분</label><br>
+	                <select id="inputStatus" class="form-control col-md-3">
+	                  <option>일반</option>
+	                  <option>관세</option>
+	                </select>
+	              </div><br><br>
+	              <div class="form-group">
+	                <label>적요</label>
+	                <input type="text" id="inputTaxRegistrationID" class="form-control" value="특이사항">
+	              </div>
+	              <div class="form-group">
+	                <label>거래처계층그룹</label>
+	                <button type="button" class="btn btn-secondary " style="margin-left: 40px;">계층그룹</button><br>
+	                <div class="input-group mb-3">
+	                  <input type="text" id="inputTaxRegistrationID" class="form-control col-md-3" placeholder="자동차판매처" readonly>
+	                  <input type="text" id="inputTaxRegistrationID" class="form-control col-md-3" placeholder="도매/ 소매" readonly>
+	                </div>
+	              </div>
+	              <div class="form-group">
+	                <label>여신한도</label>
+	                <input type="number" id="inputTaxRegistrationID" class="form-control" value="300000000">
+	              </div>
+	              <div class="form-group">
+	                <label>여신기한 (월/일)</label><br>
+	                <select id="inputMonth" class="form-control col-md-3" >
+	                  <option>0</option>
+	                  <option>1</option>
+	                  <option>2</option>
+	                  <option>3</option>
+	                  <option>4</option>
+	                  <option>5</option>
+	                  <option>6</option>
+	                  <option>7</option>
+	                  <option>8</option>
+	                  <option>9</option>
+	                  <option>10</option>
+	                  <option>11</option>
+	                  <option>12</option>
+	                </select>
+	                <select id="inputDay" class="form-control col-md-3">
+	                  <option>0</option>
+	                  <option>1</option>
+	                  <option>2</option>
+	                  <option>3</option>
+	                  <option>4</option>
+	                  <option>5</option>
+	                  <option>6</option>
+	                  <option>7</option>
+	                  <option>8</option>
+	                  <option>9</option>
+	                  <option>10</option>
+	                  <option>11</option>
+	                  <option>12</option>
+	                  <option>13</option>
+	                  <option>14</option>
+	                  <option>15</option>
+	                  <option>16</option>
+	                  <option>17</option>
+	                  <option>18</option>
+	                  <option>19</option>
+	                  <option>20</option>
+	                  <option>21</option>
+	                  <option>22</option>
+	                  <option>23</option>
+	                  <option>24</option>
+	                  <option>25</option>
+	                  <option>26</option>
+	                  <option>27</option>
+	                  <option>28</option>
+	                  <option>29</option>
+	                  <option>30</option>
+	                </select>
+	              </div>
+	              <br><br>
+	              <div class="form-group" style="float: right; margin-right: 20px;">
+	                <button type="button" class="btn btn-outline-primary btn-lg">등록</button>
+	                <button type="button" class="btn btn-outline-primary btn-lg">취소</button>
+	              </div>
+              </form>
             </div>
           </div>
         </div>
+        </div>
+        </section>
 
 <!-- jQuery -->
 <script src="${path}/resources/plugins/jquery/jquery.min.js"></script>
