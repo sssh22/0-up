@@ -18,7 +18,7 @@
   <!-- summernote -->
   <link rel="stylesheet" href="${path}/resources/plugins/summernote/summernote-bs4.min.css">
 </head>
-<body class="hold-transition sidebar-mini">
+<body class="hold-transition sidebar-mini layout-fixed">
 <div class="wrapper">
   <%@ include file="../../common/menubar-sidebar.jsp" %>
   <!-- Content Wrapper. Contains page content -->
