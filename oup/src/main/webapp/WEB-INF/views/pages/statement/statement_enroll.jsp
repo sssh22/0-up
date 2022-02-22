@@ -21,10 +21,8 @@
 
 
 </head>
-
 <body class="hold-transition sidebar-mini layout-fixed">
 <div class = "wrapper"> 
-
 <%@ include file="/WEB-INF/views/common/menubar-sidebar.jsp" %>
 
  <!-- Content Wrapper. Contains page content -->
@@ -88,7 +86,7 @@
             <td rowspan="2" colspan="9" style="font-size: 50px; font-family: 궁서체;"> 거 래 명 세 서</td>
           </tr>
           <tr>
-            <td><input type="date"></td>
+            <td></td>
           </tr>
           <tr>
             <td colspan="5" class="colName2"> 곻급 받는 자</td>
@@ -290,7 +288,7 @@
       <!-- /.card -->
       <br>
       <div id="btn2">
-        <input class="b1" type="button" value="목록으로">
+        <input class="b1" type="button" value="저장">
       </div>
 
       
@@ -298,12 +296,6 @@
   <!-- /.content-wrapper -->
 
  <%@ include file="/WEB-INF/views/common/footer.jsp" %>
-
-  <!-- Control Sidebar -->
-  <aside class="control-sidebar control-sidebar-dark">
-    <!-- Control sidebar content goes here -->
-  </aside>
-  <!-- /.control-sidebar -->
 </div>
 <!-- ./wrapper -->
 

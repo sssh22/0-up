@@ -9,13 +9,15 @@
 }
 #btb th{
     background-color: #d7d0e3;
+    text-align: center;
 }
 
 #btb td{
     background-color: white !important;
+    text-align: right;
 }
-.atb1{width: 25%;}
-.atb1 td:nth-child(1){width: 10%;}
+.atb1{width: 30%;}
+.atb1 td:nth-child(1){width: 15%;}
 .atb1 td:nth-child(3){width: 10%;}
 
 
