@@ -159,7 +159,7 @@
           <img src="${path}/resources/dist/img/user2-160x160.jpg" class="img-circle elevation-2" alt="User Image">
         </div> --%>
         <div class="info">
-          <a href="#" class="d-block" style="color: #ebe7f1">사원명</a>
+          <a href="#" class="d-block" style="color: #ebe7f1">${loginEmployee.employeeName}</a>
         </div>
       </div>
 
