@@ -29,7 +29,7 @@
 		<interceptor>
 			<mapping path="/**"/>
 			<exclude-mapping path="/login"/>
-			<beans:bean class="com.kh.oup.interceptor.Interceptor"></beans:bean>
+			<beans:bean class="com.kh.oup.interceptor.LoginInterceptor"></beans:bean>
 		</interceptor>
 	</interceptors>
 	 -->
