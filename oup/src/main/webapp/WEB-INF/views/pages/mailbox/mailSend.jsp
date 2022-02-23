@@ -84,19 +84,21 @@
           <!-- /.col -->
           <div class="col-md-9">
             <div class="card card-primary card-outline">
+            <form action="" method="post" enctype="multipart/form-data">
               <div class="card-header">
                 <h3 class="card-title">새 메일 작성</h3>
               </div>
               <!-- /.card-header -->
               <div class="card-body">
-                <div class="form-group">
-                  <input class="form-control" placeholder="받는사람:">
+              	<div class="form-group">
+                  <input class="form-control" name="recipientId" placeholder="받는사람 아이디 :">
+                  <input type="hidden" class="form-control" name="senderId" placeholder="보낸사람:" value="${loginEmployee.employeeId}">
                 </div>
                 <div class="form-group">
-                  <input class="form-control" placeholder="제목:">
+                  <input class="form-control" name="mailTitle" placeholder="제목:">
                 </div>
                 <div class="form-group">
-                    <textarea id="compose-textarea" class="form-control" style="height: 300px">
+                    <textarea id="compose-textarea" name="mailContent" class="form-control" style="height: 300px">
                       <h1><u>Heading Of Message</u></h1>
                       <h4>Subheading</h4>
                       <p>But I must explain to you how all this mistaken idea of denouncing pleasure and praising pain
@@ -125,10 +127,11 @@
                 <div class="form-group">
                   <div class="btn btn-default btn-file">
                     <i class="fas fa-paperclip"></i> 첨부파일
-                    <input type="file" name="attachment" onchange="preview();">
+                    <input type="file" name="attachment" onchange="preview();" multiple="multiple">
                   </div> <span id="filename"></span>
                   <p class="help-block">최대. 32MB</p>
                 </div>
+              
               </div>
               <!-- /.card-body -->
               <div class="card-footer">
@@ -137,6 +140,7 @@
                   <button type="submit" class="btn btn-primary"><i class="far fa-envelope"></i> 보내기</button>
                 </div>
               </div>
+              </form>
               <!-- /.card-footer -->
             </div>
             <!-- /.card -->
@@ -163,7 +167,6 @@
   <!-- /.control-sidebar -->
 </div>
 <!-- ./wrapper -->
-
 <!-- jQuery -->
 <script src="${path}/resources/plugins/jquery/jquery.min.js"></script>
 <!-- Bootstrap 4 -->
@@ -172,29 +175,32 @@
 <script src="${path}/resources/dist/js/adminlte.min.js"></script>
 <!-- Summernote -->
 <script src="${path}/resources/plugins/summernote/summernote-bs4.min.js"></script>
-<!-- AdminLTE for demo purposes -->
-<script src="${path}/resources/dist/js/demo.js"></script>
 <!-- Page specific script -->
-<script>
-  $(function () {
-    //Add text editor
-    $('#compose-textarea').summernote()
-  })
-</script>
 <script type="text/javascript">
+	
+</script>
+<script>
 	function preview() {
 		let fileTag = document.querySelector('input[name=attachment]');
 		let divTag = document.querySelector('#filename');
 		
 		if(fileTag.files.length > 0) {
-			divTag.innerHTML = fileTag.files[0].name;
+			divTag.innerHTML = "";
+			for(let i = 0; i < fileTag.files.length; i++) {
+				divTag.innerHTML += fileTag.files[i].name;
+				divTag.innerHTML += "&nbsp&nbsp&nbsp&nbsp";
+			}
 		}else {
 			//취소 버튼을 눌렀을 때
-			
 			//div 안에 싹 다 비우기
 			divTag.innerHTML = "";
 		}
 	}
+
+  $(function () {
+    //Add text editor
+    $('#compose-textarea').summernote()
+  })
 </script>
 </body>
 </html>

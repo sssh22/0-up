@@ -1,21 +1,14 @@
-*{
-    box-sizing: border-box;
-}
 .content-wrapper {
     background-color: white;
     padding-left: 50px;
     padding-right: 50px;
 }
-.tableprox{
-    padding: 100px;
-}
-
 
 #atb{
     width: 20%;
 }
 #atb td{
-    font-size: 20px;
+    font-size: 16px;
     font-weight: bold;
 }
 select{
@@ -34,7 +27,7 @@ input {
     padding: 0%;
     margin: 0%;
     text-align: center;
-    font-size: 20px;
+    font-size: 16px;
     background-color: white;
 }
 /* 위 테이블 - 기본정보, 거래처*/
@@ -90,3 +83,29 @@ input {
     background-color: #ebe7f1;
     margin: 3px;
 }
+
+#border1{
+    width: 80%;
+    border: 2px solid black;
+    padding: 50px;
+}
+#tb1{
+    width: 100%;
+    border: 2px solid black;
+}
+
+#tb1 td:nth-child(1){
+    width: 20%;
+    background-color: #d8d3e2;
+    padding-left: 10px !important;
+}
+#tb1 tr{
+    height: 130px;
+}
+
+#tb1 tr:nth-child(1){ height: 50px;}
+#tb1 tr:nth-child(6){ height: 50px;}
+#tb1 tr:nth-child(7){ height: 40px; }
+#tb1 tr:nth-child(7)>td{ background-color: #757080; text-align: center; }
+#tb1 tr:nth-child(8){ height: 50px;}
+#tb1 tr:nth-child(9){ height: 50px;}

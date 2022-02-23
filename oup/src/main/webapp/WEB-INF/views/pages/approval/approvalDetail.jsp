@@ -110,212 +110,253 @@
                     </tbody>
                   </table>
                   <br>
-                  <!-- Default box -->
-			        <table border="1" id="btb">
-			          <tr>
-			            <td class="colName">일련번호</td>
-			            <td colspan="9"></td>
-			          </tr>
-			          <tr>
-			            <td class="colName">작성일자</td>
-			            <td rowspan="2" colspan="9" style="font-size: 50px; font-family: 궁서체;"> 거 래 명 세 서</td>
-			          </tr>
-			          <tr>
-			            <td><input type="date"></td>
-			          </tr>
-			          <tr>
-			            <td colspan="5" class="colName2"> 곻급 받는 자</td>
-			            <td colspan="5" class="colName3">공급자</td>
-			          </tr>
-			          <tr>
-			            <td class="colName">상호명</td>
-			            <td colspan="2"></td>
-			            <td class="colName">성명</td>
-			            <td></td>
-			            <td class="colName">상호명</td>
-			            <td colspan="2"></td>
-			            <td class="colName">성명</td>
-			            <td></td>
-			          </tr>
-			          <tr>
-			            <td class="colName">등록번호</td>
-			            <td colspan="4"></td>
-			            <td class="colName">등록번호</td>
-			            <td colspan="4"></td>
-			          </tr>
-			          <tr>
-			            <td class="colName">사업장 주소</td>
-			            <td colspan="4"></td>
-			            <td class="colName">사업장 주소</td>
-			            <td colspan="4"></td>
-			          </tr>
-			          <tr>
-			            <td class="colName">전화번호</td>
-			            <td colspan="2">5654</td>
-			            <td class="colName">팩스</td>
-			            <td>5555</td>
-			            <td class="colName">전화번호</td>
-			            <td colspan="2">54682</td>
-			            <td class="colName">팩스</td>
-			            <td>00</td>
-			          </tr>
-			          <tr>
-			            <td colspan="5" class="colName"> 거래일자 </td>
-			            <td colspan="5"></td>
-			          </tr>
-			          <tr>
-			            <td colspan="5" class="colName"> 합계금액(VAT포함)</td>
-			            <td colspan="5"></td>
-			          </tr>
-			        </table>
-			
-			
-			
-			        <table border="1" id="ctb">
-			          <tr>
-			            <th>번호</th>
-			            <th>상품코드</th>
-			            <th>상품명</th>
-			            <th>규격</th>
-			            <th>수량</th>
-			            <th>단가</th>
-			            <th>공급가액</th>
-			            <th>세액</th>
-			            <th>금액</th>
-			            <th>비고</th>
-			          </tr>
-			          <tr>
-			            <td>1</td>
-			            <td></td>
-			            <td></td>
-			            <td></td>
-			            <td></td>
-			            <td></td>
-			            <td></td>
-			            <td></td>
-			            <td></td>
-			            <td></td>
-			          </tr>
-			          <tr>
-			            <td>2</td>
-			            <td></td>
-			            <td></td>
-			            <td></td>
-			            <td></td>
-			            <td></td>
-			            <td></td>
-			            <td></td>
-			            <td></td>
-			            <td></td>
-			          </tr>
-			          <tr>
-			            <td>3</td>
-			            <td></td>
-			            <td></td>
-			            <td></td>
-			            <td></td>
-			            <td></td>
-			            <td></td>
-			            <td></td>
-			            <td></td>
-			            <td></td>
-			          </tr>
-			          <tr>
-			            <td>4</td>
-			            <td></td>
-			            <td></td>
-			            <td></td>
-			            <td></td>
-			            <td></td>
-			            <td></td>
-			            <td></td>
-			            <td></td>
-			            <td></td>
-			          </tr>
-			          <tr>
-			            <tr>
-			              <td>4</td>
-			              <td></td>
-			              <td></td>
-			              <td></td>
-			              <td></td>
-			              <td></td>
-			              <td></td>
-			              <td></td>
-			              <td></td>
-			              <td></td>
-			            </tr>
-			            <tr>
-			              <tr>
-			                <td>4</td>
-			                <td></td>
-			                <td></td>
-			                <td></td>
-			                <td></td>
-			                <td></td>
-			                <td></td>
-			                <td></td>
-			                <td></td>
-			                <td></td>
-			              </tr>
-			              <tr>
-			                <tr>
-			                  <td>4</td>
-			                  <td></td>
-			                  <td></td>
-			                  <td></td>
-			                  <td></td>
-			                  <td></td>
-			                  <td></td>
-			                  <td></td>
-			                  <td></td>
-			                  <td></td>
-			                </tr>
-			                <tr>
-			                  <tr>
-			                    <td>4</td>
-			                    <td></td>
-			                    <td></td>
-			                    <td></td>
-			                    <td></td>
-			                    <td></td>
-			                    <td></td>
-			                    <td></td>
-			                    <td></td>
-			                    <td></td>
-			                  </tr>
-			                  <tr>
-			                    <tr>
-			                      <td>4</td>
-			                      <td></td>
-			                      <td></td>
-			                      <td></td>
-			                      <td></td>
-			                      <td></td>
-			                      <td></td>
-			                      <td></td>
-			                      <td></td>
-			                      <td></td>
-			                    </tr>
-			                    <tr>
-			                      <tr>
-			                        <td>4</td>
-			                        <td></td>
-			                        <td></td>
-			                        <td></td>
-			                        <td></td>
-			                        <td></td>
-			                        <td></td>
-			                        <td></td>
-			                        <td></td>
-			                        <td></td>
-			                      </tr>
-			                      <tr>
-			            <td>비고</td>
-			            <td colspan="9"></td>
-			            
-			          </tr>
-			        </table>
+                <!-- 거래명세서 -->
+		        <table border="1" id="btb" width=100%>
+		          <tr>
+		            <td class="colName">일련번호</td>
+		            <td colspan="9"></td>
+		          </tr>
+		          <tr>
+		            <td class="colName">작성일자</td>
+		            <td rowspan="2" colspan="9" style="font-size: 50px; font-family: 궁서체;"> 거 래 명 세 서</td>
+		          </tr>
+		          <tr>
+		            <td><input type="date"></td>
+		          </tr>
+		          <tr>
+		            <td colspan="5" class="colName2"> 곻급 받는 자</td>
+		            <td colspan="5" class="colName3">공급자</td>
+		          </tr>
+		          <tr>
+		            <td class="colName">상호명</td>
+		            <td colspan="2"></td>
+		            <td class="colName">성명</td>
+		            <td></td>
+		            <td class="colName">상호명</td>
+		            <td colspan="2"></td>
+		            <td class="colName">성명</td>
+		            <td></td>
+		          </tr>
+		          <tr>
+		            <td class="colName">등록번호</td>
+		            <td colspan="4"></td>
+		            <td class="colName">등록번호</td>
+		            <td colspan="4"></td>
+		          </tr>
+		          <tr>
+		            <td class="colName">사업장 주소</td>
+		            <td colspan="4"></td>
+		            <td class="colName">사업장 주소</td>
+		            <td colspan="4"></td>
+		          </tr>
+		          <tr>
+		            <td class="colName">전화번호</td>
+		            <td colspan="2">5654</td>
+		            <td class="colName">팩스</td>
+		            <td>5555</td>
+		            <td class="colName">전화번호</td>
+		            <td colspan="2">54682</td>
+		            <td class="colName">팩스</td>
+		            <td>00</td>
+		          </tr>
+		          <tr>
+		            <td colspan="5" class="colName"> 거래일자 </td>
+		            <td colspan="5"></td>
+		          </tr>
+		          <tr>
+		            <td colspan="5" class="colName"> 합계금액(VAT포함)</td>
+		            <td colspan="5"></td>
+		          </tr>
+		        </table>
+		        
+		        <table border="1" id="ctb" width=100%>
+		          <tr>
+		            <th>번호</th>
+		            <th>상품코드</th>
+		            <th>상품명</th>
+		            <th>규격</th>
+		            <th>수량</th>
+		            <th>단가</th>
+		            <th>공급가액</th>
+		            <th>세액</th>
+		            <th>금액</th>
+		            <th>비고</th>
+		          </tr>
+		          <tr>
+		            <td>1</td>
+		            <td></td>
+		            <td></td>
+		            <td></td>
+		            <td></td>
+		            <td></td>
+		            <td></td>
+		            <td></td>
+		            <td></td>
+		            <td></td>
+		          </tr>
+		          <tr>
+		            <td>2</td>
+		            <td></td>
+		            <td></td>
+		            <td></td>
+		            <td></td>
+		            <td></td>
+		            <td></td>
+		            <td></td>
+		            <td></td>
+		            <td></td>
+		          </tr>
+		          <tr>
+		            <td>3</td>
+		            <td></td>
+		            <td></td>
+		            <td></td>
+		            <td></td>
+		            <td></td>
+		            <td></td>
+		            <td></td>
+		            <td></td>
+		            <td></td>
+		          </tr>
+		          <tr>
+		            <td>4</td>
+		            <td></td>
+		            <td></td>
+		            <td></td>
+		            <td></td>
+		            <td></td>
+		            <td></td>
+		            <td></td>
+		            <td></td>
+		            <td></td>
+		          </tr>
+		          <tr>
+		            <tr>
+		              <td>4</td>
+		              <td></td>
+		              <td></td>
+		              <td></td>
+		              <td></td>
+		              <td></td>
+		              <td></td>
+		              <td></td>
+		              <td></td>
+		              <td></td>
+		            </tr>
+		            <tr>
+		              <tr>
+		                <td>4</td>
+		                <td></td>
+		                <td></td>
+		                <td></td>
+		                <td></td>
+		                <td></td>
+		                <td></td>
+		                <td></td>
+		                <td></td>
+		                <td></td>
+		              </tr>
+		              <tr>
+		                <tr>
+		                  <td>4</td>
+		                  <td></td>
+		                  <td></td>
+		                  <td></td>
+		                  <td></td>
+		                  <td></td>
+		                  <td></td>
+		                  <td></td>
+		                  <td></td>
+		                  <td></td>
+		                </tr>
+		                <tr>
+		                  <tr>
+		                    <td>4</td>
+		                    <td></td>
+		                    <td></td>
+		                    <td></td>
+		                    <td></td>
+		                    <td></td>
+		                    <td></td>
+		                    <td></td>
+		                    <td></td>
+		                    <td></td>
+		                  </tr>
+		                  <tr>
+		                    <tr>
+		                      <td>4</td>
+		                      <td></td>
+		                      <td></td>
+		                      <td></td>
+		                      <td></td>
+		                      <td></td>
+		                      <td></td>
+		                      <td></td>
+		                      <td></td>
+		                      <td></td>
+		                    </tr>
+		                    <tr>
+		                      <tr>
+		                        <td>4</td>
+		                        <td></td>
+		                        <td></td>
+		                        <td></td>
+		                        <td></td>
+		                        <td></td>
+		                        <td></td>
+		                        <td></td>
+		                        <td></td>
+		                        <td></td>
+		                      </tr>
+		                      <tr>
+		            <td>비고</td>
+		            <td colspan="9"></td>
+		            
+		          </tr>
+		        </table>
+		        
+		        <!-- 프로젝트 기안서 -->
+                <div id="border1">
+		          <br>
+		          <div style="text-align: center;"><h2><u>프로젝트 기안서</u></h2></div><br>
+		          <table id="tb1" border="1px">
+		            <tr>
+		              <td>프로젝트명</td>
+		              <td></td>
+		            </tr>
+		            <tr>
+		              <td>1. 프로젝트 시행 목적</td>
+		              <td></td>
+		            </tr>
+		            <tr>
+		              <td>2. 프로젝트 개요 및 추진방향</td>
+		              <td></td>
+		            </tr>
+		            <tr>
+		              <td>3. 프로젝트 시행 효과</td>
+		              <td></td>
+		            </tr>
+		            <tr>
+		              <td>4. 제안 및 요구사항</td>
+		              <td></td>
+		            </tr>
+		            <tr>
+		              <td>프로젝트 기간</td>
+		              <td></td>
+		            </tr>
+		            <tr>
+		              <td colspan="2">프로젝트 그룹</td>
+		            </tr>
+		            <tr>
+		              <td>책임자</td>
+		              <td></td>
+		            </tr>
+		            <tr>
+		              <td>그룹원</td>
+		              <td></td>
+		            </tr>
+		          </table>
+		        </div>
                   </div>
 			      <!-- /.card -->
                   <%-- <img src="${path}/resources/dist/발주서_1.png" style="width: 100%;"> --%>
@@ -330,6 +371,7 @@
                   <button type="submit" class="btn btn-default float-right">취소</button>
                 </div>
                 <!-- /.card-footer -->
+                
               </form>
             </div>
             <!-- /.card -->

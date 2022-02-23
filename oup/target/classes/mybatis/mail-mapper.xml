@@ -1,0 +1,65 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<!DOCTYPE mapper
+  PUBLIC "-//mybatis.org//DTD Mapper 3.0//EN"
+  "http://mybatis.org/dtd/mybatis-3-mapper.dtd">
+ 
+ <!-- 파일이름 바꾸기 -->
+ 
+ <mapper namespace="mail">
+ 	<select id="getSeq" resultType="int">
+ 		SELECT SEQ_MAIL.NEXTVAL FROM DUAL
+ 	</select>
+ 	
+ 	<insert id="insertMail" parameterType="mailVo">
+ 		INSERT INTO MAIL
+ 		(
+ 			MAIL_NO,
+ 			MAIL_TITLE,
+ 			MAIL_CONTENT,
+ 			RECIPIENT,
+ 			SENDER,
+ 			MAIL_DATE,
+ 			READ_YN
+ 		)
+ 		VALUES
+ 		(
+ 			#{mailNo},
+ 			#{mailTitle},
+ 			#{mailContent},
+ 			#{recipient},
+ 			#{sender},
+ 			SYSDATE,
+ 			'N'
+ 		)
+ 	</insert>
+ 	
+ 	<insert id="insertMailFile" parameterType="mailVo">
+ 		INSERT INTO MAILFILE
+ 		(
+ 			MAIL_FILE_NO,
+ 			MAIL_NO,
+ 			FILE_SERVER_NAME1,
+ 			FILE_SERVER_NAME2,
+ 			FILE_SERVER_NAME3
+ 		)
+ 		VALUES
+ 		(
+ 			SEQ_MAIL_FILE.NEXTVAL,
+ 			#{mailNo},
+ 			#{changeName1},
+ 			#{changeName2},
+ 			#{changeName3}
+ 		)
+ 	</insert>
+ 	
+ 	<select id="getRecipientNo" resultType="int">
+ 		SELECT EMPLOYEE_NO
+ 		FROM EMPLOYEE
+ 		WHERE EMPLOYEE_ID = #{r}
+ 	</select>
+ 	<select id="getSenderNo" resultType="int">
+ 		SELECT EMPLOYEE_NO
+ 		FROM EMPLOYEE
+ 		WHERE EMPLOYEE_ID = #{s}
+ 	</select>
+ </mapper>
