@@ -78,22 +78,45 @@
                 <label for="inputClientCompany">- 프로젝트 기간</label>
                 <input type="date" id="" > ~ <input type="date" id="" >
               </div>
-              <hr><br>
+              <hr>
               
                 <div class="form-group">
-                  <label for="inputProjectLeader">- 프로젝트 책임자</label>
-                  <input type="text" id="inputProjectLeader">
-                  <input type="button" id="" value="검색">
+
+                  <h5> 프로젝트 그룹 </h5><br>
+                  <table>
+                    <tr>
+                      <th>- 프로젝트 책임자</th>
+                      <td><input type="text" id="inputProjectLeader"></td>
+                      <td><input type="button" id="" value="검색"></td>
+                    </tr>
+                    <tr>
+                      <td>&nbsp;</td>
+                      <td></td>
+                      <td></td>
+                    </tr>
+                    <tr>
+                      <th>- 프로젝트 그룹원</th>
+                      <td><input type="text" name="gMember"></td>
+                      <td><input type="button" id="" value="검색"></td>
+                    </tr>
+                    <tr>
+                      <td></td>
+                      <td><input type="text" name="gMember"></td>
+                      <td><input type="button" id="" value="검색"></td>
+                    </tr>
+                    <tr>
+                      <td></td>
+                      <td><input type="text" name="gMember"></td>
+                      <td><input type="button" id="" value="검색"></td>
+                    </tr>
+                    <tr>
+                      <td></td>
+                      <td><input type="text" name="gMember"></td>
+                      <td><input type="button" id="" value="검색"></td>
+                    </tr>
+                  </table>
+                
                 </div>
-                <div class="form-group">
-                  <label for="inputProjectLeader">- 프로젝트 그룹 </label>
-                  <input type="button" id="" value="검색">
-                  <textarea id="inputDescription" class="form-control" rows="4"></textarea>
-                </div>
-              
-                
-                
-                
               </div>
               <!-- /.card-body -->
             </div>

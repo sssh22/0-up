@@ -26,4 +26,9 @@ public class ProjectController {
 		return "pages/project/project_list";
 	}
 	
+	@GetMapping("search_member")
+	public String search_member() {
+		return "pages/project/search_member";
+	}
+	
 }
