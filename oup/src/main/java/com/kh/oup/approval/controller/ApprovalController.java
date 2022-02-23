@@ -23,7 +23,7 @@ public class ApprovalController {
 		return "pages/approval/approvalBoxReceive";
 	}
 	
-	@GetMapping("appdetail")
+	@GetMapping("detail")
 	public String appDetail() {
 		return "pages/approval/approvalDetail";
 	}

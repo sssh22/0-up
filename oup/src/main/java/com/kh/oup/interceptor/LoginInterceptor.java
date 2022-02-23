@@ -5,9 +5,9 @@ import javax.servlet.http.HttpServletResponse;
 
 import org.springframework.web.servlet.handler.HandlerInterceptorAdapter;
 
-import com.kh.oup.employee.Vo.EmployeeVo;
+import com.kh.oup.employee.vo.EmployeeVo;
 
-public class Interceptor extends HandlerInterceptorAdapter {
+public class LoginInterceptor extends HandlerInterceptorAdapter {
 
 	@Override
 	public boolean preHandle(HttpServletRequest request, HttpServletResponse response, Object handler)

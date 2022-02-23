@@ -3,8 +3,8 @@ package com.kh.oup.employee.service;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Service;
 
-import com.kh.oup.employee.Vo.EmployeeVo;
 import com.kh.oup.employee.dao.EmployeeDao;
+import com.kh.oup.employee.vo.EmployeeVo;
 
 @Service
 public class EmployeeServiceImpl implements EmployeeService{

@@ -7,8 +7,8 @@ import org.springframework.stereotype.Controller;
 import org.springframework.web.bind.annotation.GetMapping;
 import org.springframework.web.bind.annotation.PostMapping;
 
-import com.kh.oup.employee.Vo.EmployeeVo;
 import com.kh.oup.employee.service.EmployeeService;
+import com.kh.oup.employee.vo.EmployeeVo;
 
 @Controller
 public class EmployeeController {
