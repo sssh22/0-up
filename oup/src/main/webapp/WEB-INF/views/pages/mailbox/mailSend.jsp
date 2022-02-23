@@ -125,8 +125,8 @@
                 <div class="form-group">
                   <div class="btn btn-default btn-file">
                     <i class="fas fa-paperclip"></i> 첨부파일
-                    <input type="file" name="attachment">
-                  </div>
+                    <input type="file" name="attachment" onchange="preview();">
+                  </div> <span id="filename"></span>
                   <p class="help-block">최대. 32MB</p>
                 </div>
               </div>
@@ -180,6 +180,21 @@
     //Add text editor
     $('#compose-textarea').summernote()
   })
+</script>
+<script type="text/javascript">
+	function preview() {
+		let fileTag = document.querySelector('input[name=attachment]');
+		let divTag = document.querySelector('#filename');
+		
+		if(fileTag.files.length > 0) {
+			divTag.innerHTML = fileTag.files[0].name;
+		}else {
+			//취소 버튼을 눌렀을 때
+			
+			//div 안에 싹 다 비우기
+			divTag.innerHTML = "";
+		}
+	}
 </script>
 </body>
 </html>

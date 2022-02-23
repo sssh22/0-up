@@ -9,6 +9,7 @@
 	</settings>
   
   	<typeAliases>
+  		<typeAlias type="com.kh.oup.employee.vo.EmployeeVo" alias="employeeVo"/>
   		<typeAlias type="com.kh.oup.client.vo.ClientVo" alias="clientVo"/>
   	</typeAliases>
   

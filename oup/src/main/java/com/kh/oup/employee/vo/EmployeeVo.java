@@ -1,4 +1,4 @@
-package com.kh.oup.employee.Vo;
+package com.kh.oup.employee.vo;
 
 import java.util.Date;
 

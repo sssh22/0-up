@@ -4,7 +4,7 @@ import org.apache.ibatis.session.SqlSession;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Repository;
 
-import com.kh.oup.employee.Vo.EmployeeVo;
+import com.kh.oup.employee.vo.EmployeeVo;
 
 @Repository
 public class EmployeeDaoImpl implements EmployeeDao{
