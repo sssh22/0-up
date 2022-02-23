@@ -78,79 +78,20 @@
                   </tr>
               </thead>
               <tbody>
-                  <tr>
-                      <td>
-                        <input type="checkbox">
-                      </td>
-                      <td>
-                              AA123
-                      </td>
-                      <td>
-                        (주)영업2팀
-                      </td>
-                      <td class="project_progress">
-                          홍홍길동
-                      </td>
-                      <td class="project-state">
-                          1010101010
-                      </td>
-                      <td>
-                          300000000
-                      </td>
-                      <td>
-                            경기도 수원시 수원구 수원대로333번길 33, 수원아파트 11동 1103호
-                      </td>
-                  </tr>
-                  <tr>
-                    <td>
-                      <input type="checkbox">
-                    </td>
-                    <td>
-                            AA123
-                    </td>
-                    <td>
-                      (주)영업2팀
-                    </td>
-                    <td class="project_progress">
-                        홍홍길동
-                    </td>
-                    <td class="project-state">
-                        1010101010
-                    </td>
-                    <td>
-                        300000000
-                    </td>
-                    <td>
-                          경기도 수원시 수원구 수원대로333번길 33, 수원아파트 11동 1103호
-                    </td>
-                </tr>
-                <tr>
-                    <td>
-                      <input type="checkbox">
-                    </td>
-                    <td>
-                            AA123
-                    </td>
-                    <td>
-                      (주)영업2팀
-                    </td>
-                    <td class="project_progress">
-                        홍홍길동
-                    </td>
-                    <td class="project-state">
-                        1010101010
-                    </td>
-                    <td>
-                        300000000
-                    </td>
-                    <td>
-                          경기도 수원시 수원구 수원대로333번길 33, 수원아파트 11동 1103호
-                    </td>
-                </tr>
-                  
-                
+              	<c:forEach items="${list}" var="l">				
+					<tr>
+						<td><input type="checkbox" class="checkbox-no" value="${l.cNo}"></td>
+						<td>${l.cNo}</td>
+						<td>${l.cName}</td>
+						<td>${l.cOwner}</td>
+						<td>${l.bNo}</td>
+						<td>${l.cUmony}</td>
+						<td>${l.cAddr}</td>
+					</tr>
+				</c:forEach>
               </tbody>
           </table>
+          
           <div style="margin: 30px;">
             <button type="button" class="btn btn-secondary btn-sm">신규</button>
             <button type="button" class="btn btn-secondary btn-sm">계층그룹</button>
@@ -158,14 +99,24 @@
             <button type="button" class="btn btn-secondary btn-sm">사용중단/재사용</button>
             <button type="button" class="btn btn-secondary btn-sm">Excel</button>
 
-                <div class="btn-group me-2" role="group" aria-label="First group" style="float: right;">
-                  <button type="button" class="btn btn-secondary">Previous</button>
-                  <button type="button" class="btn btn-secondary active">1</button>
-                  <button type="button" class="btn btn-secondary">2</button>
-                  <button type="button" class="btn btn-secondary">3</button>
-                  <button type="button" class="btn btn-secondary">4</button>
-                  <button type="button" class="btn btn-secondary">Next</button>
+            	<div class="btn-group me-2" role="group" aria-label="First group" style="float: right;">
+                	<button type="button" class="btn btn-secondary" onClick="location.href='${path}/client/list/${page.startPage - 1}'">Previous</button>
+		            <c:forEach var="i" begin="${page.startPage}" end="${page.endPage}">
+				        <c:if test="${page.currentPage != i and i <= page.lastPage}">                  
+				        	<button type="button" class="btn btn-secondary" onClick="location.href='${path}/client/list/${i}'">${i}</button>
+				      	</c:if>
+						<c:if test="${page.currentPage == i and i <= page.lastPage}">                  
+				        	<button type="button" class="btn btn-secondary active" onClick="location.href='${path}/client/list/${i}'">${i}</button>
+				        </c:if>
+					</c:forEach>
+		            <c:if test="${page.endPage < page.lastPage}">
+						<button type="button" class="btn btn-secondary" onClick="location.href='${path}/client/list/${page.endPage + 1}'">Next</button>
+					</c:if>
+					<c:if test="${page.endPage >= page.lastPage}">
+						<button type="button" class="btn btn-secondary" onClick="location.href='${path}/client/list/${page.lastPage}'">Next</button>
+					</c:if>
                 </div>
+                
             </div>
           </div>
         </div>
