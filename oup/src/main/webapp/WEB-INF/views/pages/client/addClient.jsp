@@ -21,64 +21,7 @@
   <script src="https://cdn.jsdelivr.net/npm/bootstrap@5.1.3/dist/js/bootstrap.bundle.min.js"></script>  
   <script src="https://maxcdn.bootstrapcdn.com/bootstrap/3.3.2/js/bootstrap.min.js"></script>
   
-  
-  <meta http-equiv="Content-Type" content="text/html; charset=UTF-8">
-  <% 
-  String inputYn = request.getParameter("inputYn"); 
-  String roadFullAddr = request.getParameter("roadFullAddr"); 
-  String roadAddrPart1 = request.getParameter("roadAddrPart1"); 
-  String roadAddrPart2 = request.getParameter("roadAddrPart2"); 
-  String engAddr = request.getParameter("engAddr"); 
-  String jibunAddr = request.getParameter("jibunAddr"); 
-  String zipNo = request.getParameter("zipNo"); 
-  String addrDetail = request.getParameter("addrDetail"); 
-  %>
-
-
-</head>
 <body class="hold-transition sidebar-mini">
-
-	<script language="javascript"> // opener관련 오류가 발생하는 경우 아래 주석을 해지하고, 사용자의 도메인정보를 입력합니다. ("주소입력화면 소스"도 동일하게 적용시켜야 합니다.) 
-	document.domain = "http://localhost:8888/oup/client/addList"; 
-	function init(){ 
-		var url = location.href; 
-		var confmKey = "devU01TX0FVVEgyMDIyMDIyMjIxMDAyMDExMjI3MDU="; 
-		var resultType = "3"; // 도로명주소 검색결과 화면 출력내용, 1 : 도로명, 2 : 도로명+지번, 3 : 도로명+상세건물명, 4 : 도로명+지번+상세건물명 
-		var inputYn= "<%=inputYn%>"; 
-		if(inputYn != "Y"){ 
-			document.form.confmKey.value = confmKey; 
-			document.form.returnUrl.value = url; 
-			document.form.resultType.value = resultType; 
-			document.form.action="http://www.juso.go.kr/addrlink/addrLinkUrl.do";
-			document.form.submit(); 
-		}else{ 
-			window.opener.jusoCallBack(
-					"<%=roadFullAddr%>",
-					"<%=roadAddrPart1%>",
-					"<%=addrDetail%>",
-					"<%=roadAddrPart2%>", 
-					"<%=engAddr%>", 
-					"<%=jibunAddr%>", 
-					"<%=zipNo%>" 
-			); 
-		} 
-	} 
-	</script>
-
-
-  <div class="offcanvas offcanvas-start" id="home">
-    <input type="hidden" value="https://haenny.tistory.com/191  (jsp로 바꿀때 주소 가져오기 오픈 api사용 방법)">
-    <div class="offcanvas-header">
-      <h1 class="offcanvas-title">주소찾기</h1>
-      <button type="button" class="btn-close text-reset" data-bs-dismiss="offcanvas"></button>
-    </div>
-    <div class="offcanvas-body">
-    <button type="button" class="zip_code_btn" onclick="javascript:goPopup();">우편번호</button><br/> 
-    <input type="text" class="form-control col-md" placeholder="기본 주소를 입력해 주세요" id="addr"><br/> 
-    <input type="text" class="form-control col-md" placeholder="나머지 주소를 입력해 주세요" id="addrDetail">
-      <button class="btn btn-secondary" type="button">확인</button>
-    </div>
-  </div>
 
     <!-- Main content -->
     <section class="content">
@@ -104,15 +47,15 @@
 	              </div>
 	              <div class="form-group">
 	                <label>사업자등록번호</label><br>
-	                <select id="bNo" class="form-control col-md-3">
+	                <select id="bNoSelect" class="form-control col-md-3" onchange="bNoChange(this)">
 	                  <option>사업자등록번호</option>
-	                  <option>비사업자</option>
+	                  <option>비사업자</option>	<!-- 비사업자 선택 시 bNo에 999 값을 넣었음 -->
 	                </select>
-	                <input type="text" name="bNo" class="form-control col-md-3" placeholder="사업자 번호 1010101010">
+	                <input type="text" name="bNo" class="form-control col-md-3" placeholder="사업자 번호 10자리" id="bNoText">
 	              </div><br><br>
 	              <div class="form-group">
 	                <label>종사업장번호</label>
-	                <input type="number" name="bNo2" class="form-control" placeholder="1010 (없을경우 0)">
+	                <input type="number" name="bNo2" class="form-control" placeholder="0001 (없을경우 0001)">
 	              </div>
 	              <div class="form-group">
 	                <label>업태</label>
@@ -136,8 +79,8 @@
 	              </div>
 	              <div class="form-group">
 	                <label>주소</label>
-	                <button class="btn btn-secondary mb-3" data-bs-toggle="offcanvas" type="button" data-bs-target="#home" style="margin-left: 30px;">주소찾기</button>
-	                <input type="text" name="cAddr" class="form-control col-md" value="상세 주소 경기 수원시 장안구 율전동2123-1 ....." readonly>
+	                <button class="btn btn-secondary mb-3" type="button" style="margin: 15px;" onclick="javascript:goPopup();">주소찾기</button>
+   	 				<input type="text" class="form-control col-md" placeholder="기본 주소를 입력해 주세요" id="addr" name="cAddr" readonly>
 	              </div>
 	              <div class="form-group">
 	                <label>적요</label>
@@ -218,17 +161,29 @@
 <script src="${path}/resources/dist/js/adminlte.min.js"></script>
 
 <script> 
+	function bNoChange(e) {
+		var selectText = document.getElementById("bNoText");
+		if(e.value == "사업자등록번호") {
+			selectText.style.visibility="visible";
+		}
+		else if(e.value == "비사업자") {
+			selectText.style.visibility="hidden";
+			selectText.value="999";
+		}
+	}
+	
 	var goPopup = function(){ 
-		var pop = window.open("${ctx}/hp/member/jusoPopup.do","pop","width=570,height=420, scrollbars=yes, resizable=yes"); 
+		var pop = window.open("${path}/resources/pages/popup/jusoPopup.jsp","pop","width=570,height=420, scrollbars=yes, resizable=yes"); 
 		} 
-	var jusoCallBack = function(roadFullAddr,roadAddrPart1,addrDetail,roadAddrPart2,engAddr, jibunAddr, zipNo){ 
-		document.getElementById("zipNo").value = zipNo; 
-		document.getElementById("addr").value = roadAddrPart1; 
-		if(addrDetail.length>30){ 
-			alert('상세주소가 너무 길어 다시 입력해야 합니다.'); 
-			return; 
+	var jusoCallBack = function(
+			roadFullAddr,roadAddrPart1,addrDetail,
+			roadAddrPart2,engAddr, jibunAddr, zipNo
+			){ 
+				document.getElementById("addr").value = roadFullAddr; 
+				if(addrDetail.length>30){ 
+					alert('상세주소가 너무 길어 다시 입력해야 합니다.'); 
+					return; 
 		} 
-		document.getElementById("addrDetail").value = addrDetail; 
 	} 
 </script>
 </body>

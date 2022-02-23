@@ -4,7 +4,6 @@
   "http://mybatis.org/dtd/mybatis-3-mapper.dtd">
  
  <mapper namespace="client">
- 	
  	<insert id="insertClient" parameterType="clientVo">
  		insert into client
  		(
@@ -39,5 +38,25 @@
  			${cCreditDateDay}
  		)
  	</insert>
+ 	
+ 	<select id="selectClientCnt" resultType="int">
+ 		select count(c_no) 
+  		from client
+  		where c_delete_yn = 'N'
+ 	</select>
+ 	
+ 	<select id="selectClientList" parameterType="pageVo" resultType="clientVo">
+  		select * from 
+  		(
+	  		select rownum rn, c.* 
+	  		from(
+		  		select * 
+		  		from client 
+		  		where c_delete_yn = 'N'
+		  		order by c_no  		
+	  		) c
+  		)
+  		where rn between #{startRow} and #{endRow}
+  	</select>
  	
  </mapper>
