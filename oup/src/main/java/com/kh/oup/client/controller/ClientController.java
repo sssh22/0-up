@@ -30,8 +30,7 @@ public class ClientController {
 	}
 	
 	@PostMapping("addList")
-	public String addList(ClientVo vo, HttpSession session) throws Exception {
-		vo.setCPic(1);		// 후에 session에서 로그인 직원 번호 저장 예정
+	public String addList(ClientVo vo) throws Exception {
 		int result = service.addclient(vo);
 		
 		System.out.println(result);

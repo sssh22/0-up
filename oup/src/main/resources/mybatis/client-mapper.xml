@@ -18,7 +18,6 @@
  			C_PHONE,
  			C_FAX,
  			C_EMAIL,
- 			C_PIC,
  			C_CREDITLIMIT,
  			C_CREDIT_MONTH,
  			C_CREDIT_DAY
@@ -35,7 +34,6 @@
  			#{cPhone},
  			#{cFax},
  			#{cEmail},
- 			${cPic},
  			${cCreditLimit},
  			${cCreditDateMonth},
  			${cCreditDateDay}

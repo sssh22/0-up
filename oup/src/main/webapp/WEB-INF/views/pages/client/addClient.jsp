@@ -39,11 +39,11 @@
 <body class="hold-transition sidebar-mini">
 
 	<script language="javascript"> // opener관련 오류가 발생하는 경우 아래 주석을 해지하고, 사용자의 도메인정보를 입력합니다. ("주소입력화면 소스"도 동일하게 적용시켜야 합니다.) 
-	document.domain = "http://localhost:8282/oup/client/addList"; 
+	document.domain = "http://localhost:8888/oup/client/addList"; 
 	function init(){ 
 		var url = location.href; 
 		var confmKey = "devU01TX0FVVEgyMDIyMDIyMjIxMDAyMDExMjI3MDU="; 
-		var resultType = "4"; // 도로명주소 검색결과 화면 출력내용, 1 : 도로명, 2 : 도로명+지번, 3 : 도로명+상세건물명, 4 : 도로명+지번+상세건물명 
+		var resultType = "3"; // 도로명주소 검색결과 화면 출력내용, 1 : 도로명, 2 : 도로명+지번, 3 : 도로명+상세건물명, 4 : 도로명+지번+상세건물명 
 		var inputYn= "<%=inputYn%>"; 
 		if(inputYn != "Y"){ 
 			document.form.confmKey.value = confmKey; 

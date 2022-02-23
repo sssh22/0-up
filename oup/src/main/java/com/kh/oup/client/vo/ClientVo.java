@@ -16,7 +16,6 @@ public class ClientVo {
 	String cPhone;	// 전화번호
 	String cFax;	// Fax
 	String cEmail;	// email
-	int cPic;		// 거래처 추가하는 직원
 	int cUmony;		// 미수금
 	int cCreditLimit;	// 여신한도
 	int cCreditDateMonth;	// 여신기한 (월)
