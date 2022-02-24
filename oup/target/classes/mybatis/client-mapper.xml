@@ -58,5 +58,38 @@
   		)
   		where rn between #{startRow} and #{endRow}
   	</select>
+  	
+  	<select id="selectSearchClientCnt" parameterType="string" resultType="int">
+ 		select count(c_no) 
+  		from client
+  		where c_delete_yn = 'N' and (
+  			c_name like'%${search}%' or c_owner like '%${search}%' or c_addr like '%${search}%'
+  		)
+ 	</select>
+ 	
+ 	<select id="selectSearchClientList" parameterType="pageVo" resultType="clientVo">
+  		select * from 
+  		(
+	  		select rownum rn, c.* 
+	  		from(
+		  		select * 
+		  		from client 
+		  		where c_delete_yn = 'N'and (
+  					c_name like'%${search}%' or c_owner like '%${search}%' or c_addr like '%${search}%'
+  				)
+		  		order by c_no  		
+	  		) c
+  		)
+  		where rn between #{startRow} and #{endRow}
+  	</select>
+  	
+  	<update id="deleteClient">
+  		update client
+  		set c_delete_yn = 'Y'
+  		where c_no in 
+  		<foreach collection="array" item="cNn" open="(" close=")" separator=",">
+  			${cNn}  		
+  		</foreach>
+  	</update>
  	
  </mapper>

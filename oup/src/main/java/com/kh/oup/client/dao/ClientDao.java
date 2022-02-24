@@ -13,4 +13,10 @@ public interface ClientDao {
 
 	List<ClientVo> selectClientList(PageVo vo) throws Exception;
 
+	int selectSearchClientCnt(String search) throws Exception;
+
+	List<ClientVo> selectSearchClientList(PageVo vo) throws Exception;
+
+	int deleteClient(String[] delArr) throws Exception;
+
 }

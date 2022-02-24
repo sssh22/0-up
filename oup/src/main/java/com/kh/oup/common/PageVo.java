@@ -4,6 +4,8 @@ import lombok.Data;
 
 @Data
 public class PageVo { 
+	private String search;	// 검색내용 페이징 시 사용
+	
 	private int currentPage;	// 현재 페이지
 	private int cntPerPage;	// 페이지 하나당 보여줄 row 갯수
 	private int pageBtnCnt;	// 페이지 버튼 몇개 보여줄지
@@ -24,6 +26,15 @@ public class PageVo {
 	}
 	
 	public PageVo(String currentPage, int totalRow) {
+		this.currentPage = Integer.parseInt(currentPage);
+		this.cntPerPage = 10;
+		this.pageBtnCnt = 5;
+		this.totalRow = totalRow;
+		calc(this.currentPage, cntPerPage, pageBtnCnt, totalRow);
+	}
+	
+	public PageVo(String currentPage, int totalRow, String search) {
+		this.search = search;
 		this.currentPage = Integer.parseInt(currentPage);
 		this.cntPerPage = 10;
 		this.pageBtnCnt = 5;

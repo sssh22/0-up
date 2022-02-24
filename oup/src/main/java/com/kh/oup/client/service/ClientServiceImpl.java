@@ -29,5 +29,22 @@ public class ClientServiceImpl implements ClientService{
 	public List<ClientVo> getClientList(PageVo vo) throws Exception {
 		return dao.selectClientList(vo);
 	}
+
+	@Override
+	public int getSearchClientCnt(String search) throws Exception {
+		return dao.selectSearchClientCnt(search);
+	}
+
+	@Override
+	public List<ClientVo> getSearchClientList(PageVo vo) throws Exception {
+		return dao.selectSearchClientList(vo);
+	}
+
+	@Override
+	public int deleteClient(String client) throws Exception {
+		String[] delArr = client.split(",");
+		
+		return dao.deleteClient(delArr);
+	}
 	
 }
