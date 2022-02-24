@@ -19,7 +19,8 @@
  			RECIPIENT,
  			SENDER,
  			MAIL_DATE,
- 			READ_YN
+ 			READ_YN,
+ 			MAIL_DEL_YN
  		)
  		VALUES
  		(
@@ -29,6 +30,7 @@
  			#{recipient},
  			#{sender},
  			SYSDATE,
+ 			'N',
  			'N'
  		)
  	</insert>
@@ -62,4 +64,25 @@
  		FROM EMPLOYEE
  		WHERE EMPLOYEE_ID = #{s}
  	</select>
+ 	
+ 	<select id="selectMailCnt">
+ 		SELECT COUNT(MAIL_NO)
+ 		FROM MAIL
+ 		WHERE MAIL_DEL_YN = 'N'
+ 	</select>
+ 	
+ 	<select id="selectMailList" parameterType="pageVo" resultType="mailVo">
+  		SELECT * FROM 
+  		(
+	  		SELECT ROWNUM RN, M.* 
+	  		FROM(
+		  		SELECT * 
+		  		FROM MAIL
+		  		WHERE MAIL_DEL_YN = 'N'
+		  		ORDER BY MAIL_NO DESC  		
+	  		) M
+  		)
+  		WHERE RN BETWEEN #{startRow} AND #{endRow}
+  	</select>
+  	
  </mapper>
