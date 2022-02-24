@@ -10,6 +10,7 @@ import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Service;
 import org.springframework.web.multipart.MultipartFile;
 
+import com.kh.oup.common.PageVo;
 import com.kh.oup.mail.dao.MailDao;
 import com.kh.oup.mail.vo.MailVo;
 
@@ -66,6 +67,16 @@ public class MailServiceImpl implements MailService{
 		}
 		
 		return result;
+	}
+
+	@Override
+	public int getMailCnt() throws Exception {
+		return dao.selectMailCnt();
+	}
+
+	@Override
+	public List<MailVo> getMailList(PageVo vo) throws Exception {
+		return dao.selectMailList(vo);
 	}
 
 }
