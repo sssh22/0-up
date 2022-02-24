@@ -83,10 +83,6 @@
    	 				<input type="text" class="form-control col-md" placeholder="기본 주소를 입력해 주세요" id="addr" name="cAddr" readonly>
 	              </div>
 	              <div class="form-group">
-	                <label>적요</label>
-	                <input type="text" name="inputTaxRegistrationID" class="form-control" placeholder="특이사항">
-	              </div>
-	              <div class="form-group">
 	                <label>여신한도</label>
 	                <input type="number" name="cCreditLimit" class="form-control" placeholder="300000000">
 	              </div>
@@ -143,8 +139,8 @@
 	              </div>
 	              <br><br>
 	              <div class="form-group" style="float: right; margin-right: 20px;">
-	                <button type="submit" class="btn btn-outline-primary btn-lg">등록</button>
-	                <button type="button" class="btn btn-outline-primary btn-lg">취소</button>
+	                <button type="submit" class="btn btn-outline-primary btn-lg" >등록</button>
+	                <button type="button" class="btn btn-outline-primary btn-lg" onclick="window.close()">취소</button>
 	              </div>
               </form>
             </div>

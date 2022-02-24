@@ -12,5 +12,11 @@ public interface ClientService {
 	int getClientCnt() throws Exception;
 
 	List<ClientVo> getClientList(PageVo vo) throws Exception;
+
+	int getSearchClientCnt(String search) throws Exception;
+
+	List<ClientVo> getSearchClientList(PageVo vo) throws Exception;
+
+	int deleteClient(String client) throws Exception;
 	
 }

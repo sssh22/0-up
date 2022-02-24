@@ -17,17 +17,32 @@ public class ClientDaoImpl implements ClientDao{
 
 	@Override
 	public int insertClient(ClientVo vo) throws Exception {
-		return session.insert("insertClient", vo);
+		return session.insert("client.insertClient", vo);
 	}
 
 	@Override
 	public int selectClientCnt() throws Exception {
-		return session.selectOne("selectClientCnt");
+		return session.selectOne("client.selectClientCnt");
 	}
 
 	@Override
 	public List<ClientVo> selectClientList(PageVo vo) throws Exception {
-		return session.selectList("selectClientList", vo);
+		return session.selectList("client.selectClientList", vo);
+	}
+
+	@Override
+	public int selectSearchClientCnt(String search) throws Exception {
+		return session.selectOne("client.selectSearchClientCnt", search);
+	}
+
+	@Override
+	public List<ClientVo> selectSearchClientList(PageVo vo) throws Exception {
+		return session.selectList("client.selectSearchClientList", vo);
+	}
+
+	@Override
+	public int deleteClient(String[] delArr) throws Exception {
+		return session.update("client.deleteClient", delArr);
 	}
 	
 	

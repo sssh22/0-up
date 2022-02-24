@@ -1,5 +1,7 @@
 <%@ page language="java" contentType="text/html; charset=UTF-8"
     pageEncoding="UTF-8"%>
+    
+<%@ taglib prefix="c" uri="http://java.sun.com/jsp/jstl/core" %>
 <!DOCTYPE html>
 <html>
 <head>
@@ -11,6 +13,7 @@
 <form>
       부서명: 
       <select>
+      
         <option value="">기획/영업</option>
         <option value="">물류</option>
         <option value="">인사</option>
