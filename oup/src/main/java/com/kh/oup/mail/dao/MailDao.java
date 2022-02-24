@@ -19,6 +19,10 @@ public interface MailDao {
 
 	int selectMailCnt() throws Exception;
 
-	List<MailVo> selectMailList(PageVo vo) throws Exception;
+	List<MailVo> selectReceiveMailList(PageVo vo, long receiverNo) throws Exception;
+
+	String getSenderStr(long sender) throws Exception;
+
+	String getSenderId(long sender) throws Exception;
 
 }

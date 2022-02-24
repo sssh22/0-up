@@ -65,24 +65,38 @@
  		WHERE EMPLOYEE_ID = #{s}
  	</select>
  	
- 	<select id="selectMailCnt">
+ 	<select id="selectMailCnt" resultType="int">
  		SELECT COUNT(MAIL_NO)
  		FROM MAIL
  		WHERE MAIL_DEL_YN = 'N'
  	</select>
  	
- 	<select id="selectMailList" parameterType="pageVo" resultType="mailVo">
+ 	<select id="selectReceiveMailList" parameterType="HashMap" resultType="mailVo">
   		SELECT * FROM 
   		(
-	  		SELECT ROWNUM RN, M.* 
-	  		FROM(
-		  		SELECT * 
-		  		FROM MAIL
-		  		WHERE MAIL_DEL_YN = 'N'
-		  		ORDER BY MAIL_NO DESC  		
-	  		) M
+	  		SELECT ROWNUM RN, R.* 
+	  		 FROM(
+                SELECT M.*, E.EMPLOYEE_NAME AS recipientStr, E.EMPLOYEE_ID AS recipientId
+                FROM MAIL M
+                JOIN EMPLOYEE E
+                ON M.RECIPIENT = E.EMPLOYEE_NO
+                WHERE MAIL_DEL_YN = 'N' AND RECIPIENT = #{receiverNo}
+                ORDER BY MAIL_NO DESC
+            ) R
   		)
-  		WHERE RN BETWEEN #{startRow} AND #{endRow}
+  		WHERE RN BETWEEN #{page.startRow} AND #{page.endRow}
+  	</select>
+  	
+  	<select id="getSenderStr" resultType="String">
+  		SELECT EMPLOYEE_NAME
+  		FROM EMPLOYEE
+  		WHERE EMPLOYEE_NO = #{sender}
+  	</select>
+  	
+  	<select id="getSenderId" resultType="String">
+  		SELECT EMPLOYEE_ID
+  		FROM EMPLOYEE
+  		WHERE EMPLOYEE_NO = #{sender}
   	</select>
   	
  </mapper>

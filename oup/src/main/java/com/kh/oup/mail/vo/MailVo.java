@@ -13,11 +13,16 @@ public class MailVo {
 	private String mailTitle;
 	private String mailContent;
 	private long recipient;
+	private String recipientStr;
+	private String recipientId;
 	private long sender;
+	private String senderStr;
+	private String senderId;
 	private Date mailDate;
 	private char readYn;
 	private List<MultipartFile> attachment;
 	private String changeName1;
 	private String changeName2;
 	private String changeName3;
+	private char mailDelYn;
 }
