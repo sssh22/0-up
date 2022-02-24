@@ -25,7 +25,7 @@ public class MailServiceImpl implements MailService{
 		
 		Random random = new Random();
 		
-		//메일번호 nextval
+		//硫붿씪踰덊샇 nextval
 		int no = dao.getMailSeq();
 		
 		int recipientNo = dao.getrecipientNo(rId);
@@ -34,16 +34,15 @@ public class MailServiceImpl implements MailService{
 		vo.setRecipient(recipientNo);
 		vo.setSender(senderNo);
 		
-		//insert 처리
+		//insert 泥섎━
 		vo.setMailNo(no);
 		
 		int result = dao.insertMail(vo);
 		
-		//파일 업로드
 		List<MultipartFile> fArr = vo.getAttachment();
 		
 		if(!fArr.isEmpty()) {
-			System.out.println("첨부파일 있음");
+			System.out.println("泥⑤��뙆�씪 �엳�쓬");
 			String path = req.getServletContext().getRealPath("/resources/dist/img/mail/");
 			
 			int index = 0;

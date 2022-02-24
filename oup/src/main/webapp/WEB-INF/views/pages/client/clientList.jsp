@@ -41,16 +41,18 @@
     </section>
 
     <!-- Main content -->
-    <section class="content">
 
       <!-- Default box -->
       <div class="card">
         </div>
         <div class="card-body p-0">
-            <div class="input-group mb-3" style="left: 40%; margin: 30px;">
-                <input type="text" class="form-control col-sm-6" placeholder="Search">
-                <button class="btn btn-success" type="submit"><i class="fa fa-search"></i></button>
-              </div>
+        
+            <form action="${path}/client/list/1" method="get" id="searchform">
+	            <div class="input-group mb-3" style="left: 40%; margin: 30px;">
+		                <input type="text" name="search" class="form-control col-sm-6" placeholder="Search">
+	    	            <button class="btn btn-success" onclick="submit()"><i class="fa fa-search"></i></button>
+	            </div>
+            </form>
           <table class="table table-bordered projects">
               <thead>
                   <tr>
@@ -93,28 +95,48 @@
           </table>
           
           <div style="margin: 30px;">
-            <button type="button" class="btn btn-secondary btn-sm">신규</button>
-            <button type="button" class="btn btn-secondary btn-sm">계층그룹</button>
-            <button type="button" class="btn btn-secondary btn-sm">변경</button>
-            <button type="button" class="btn btn-secondary btn-sm">사용중단/재사용</button>
+            <button type="button" class="btn btn-secondary btn-sm" onclick="addClientPop()">신규</button>
+            <button type="button" class="btn btn-secondary btn-sm" onclick="changeClient()">변경</button>
+            <button type="button" class="btn btn-secondary btn-sm" onclick="delClient()">삭제</button>
             <button type="button" class="btn btn-secondary btn-sm">Excel</button>
 
             	<div class="btn-group me-2" role="group" aria-label="First group" style="float: right;">
-                	<button type="button" class="btn btn-secondary" onClick="location.href='${path}/client/list/${page.startPage - 1}'">Previous</button>
-		            <c:forEach var="i" begin="${page.startPage}" end="${page.endPage}">
-				        <c:if test="${page.currentPage != i and i <= page.lastPage}">                  
-				        	<button type="button" class="btn btn-secondary" onClick="location.href='${path}/client/list/${i}'">${i}</button>
-				      	</c:if>
-						<c:if test="${page.currentPage == i and i <= page.lastPage}">                  
-				        	<button type="button" class="btn btn-secondary active" onClick="location.href='${path}/client/list/${i}'">${i}</button>
-				        </c:if>
-					</c:forEach>
-		            <c:if test="${page.endPage < page.lastPage}">
-						<button type="button" class="btn btn-secondary" onClick="location.href='${path}/client/list/${page.endPage + 1}'">Next</button>
-					</c:if>
-					<c:if test="${page.endPage >= page.lastPage}">
-						<button type="button" class="btn btn-secondary" onClick="location.href='${path}/client/list/${page.lastPage}'">Next</button>
-					</c:if>
+            	
+            		<c:if test="${empty search}">
+	                	<button type="button" class="btn btn-secondary" onClick="location.href='${path}/client/list/${page.startPage - 1}'">Previous</button>
+			            <c:forEach var="i" begin="${page.startPage}" end="${page.endPage}">
+					        <c:if test="${page.currentPage != i and i <= page.lastPage}">                  
+					        	<button type="button" class="btn btn-secondary" onClick="location.href='${path}/client/list/${i}'">${i}</button>
+					      	</c:if>
+							<c:if test="${page.currentPage == i and i <= page.lastPage}">                  
+					        	<button type="button" class="btn btn-secondary active" onClick="location.href='${path}/client/list/${i}'">${i}</button>
+					        </c:if>
+						</c:forEach>
+			            <c:if test="${page.endPage < page.lastPage}">
+							<button type="button" class="btn btn-secondary" onClick="location.href='${path}/client/list/${page.endPage + 1}'">Next</button>
+						</c:if>
+						<c:if test="${page.endPage >= page.lastPage}">
+							<button type="button" class="btn btn-secondary" onClick="location.href='${path}/client/list/${page.lastPage}'">Next</button>
+						</c:if>
+            		</c:if>
+            		
+            		<c:if test="${not empty search}">
+	                	<button type="button" class="btn btn-secondary" onClick="location.href='${path}/client/list/${page.startPage - 1}?search=${search}'">Previous</button>
+			            <c:forEach var="i" begin="${page.startPage}" end="${page.endPage}">
+					        <c:if test="${page.currentPage != i and i <= page.lastPage}">                  
+					        	<button type="button" class="btn btn-secondary" onClick="location.href='${path}/client/list/${i}?search=${search}'">${i}</button>
+					      	</c:if>
+							<c:if test="${page.currentPage == i and i <= page.lastPage}">                  
+					        	<button type="button" class="btn btn-secondary active" onClick="location.href='${path}/client/list/${i}?search=${search}'">${i}</button>
+					        </c:if>
+						</c:forEach>
+			            <c:if test="${page.endPage < page.lastPage}">
+							<button type="button" class="btn btn-secondary" onClick="location.href='${path}/client/list/${page.endPage + 1}?search=${search}'">Next</button>
+						</c:if>
+						<c:if test="${page.endPage >= page.lastPage}">
+							<button type="button" class="btn btn-secondary" onClick="location.href='${path}/client/list/${page.lastPage}?search=${search}'">Next</button>
+						</c:if>
+            		</c:if>
                 </div>
                 
             </div>
@@ -160,6 +182,65 @@
 			}
 		}
 	}
+	
+	var addClientPop = function(){ 
+		var addClient = window.open("${path}/client/addList","addClient","width=570,height=420, location=yes, menubar=yes, resizable=no, status=no, toolbar=no, scrollbas=yes, fullscreen=no"); 
+	} 
+	
+	function delClient(){
+		let result="";
+		
+		for(let i=0; i<checkArr.length; ++i){
+			let t = checkArr[i];
+			if(t.checked){
+				console.log(t.value);
+				result += t.value + ',';					
+			}
+		}
+		
+		$.ajax({
+			url : "${path}/client/delete",
+			data : {"client" : result},
+			type : 'post',
+			success : function(data){
+				console.log(data);
+			},
+			error : function(e){
+				console.log(e);
+			}
+		});
+		
+		window.location.reload();	// 작동안함
+	}
+	
+	function changeClient(){
+		if(checkArr.)
+		
+		let result="";
+		
+		for(let i=0; i<checkArr.length; ++i){
+			let t = checkArr[i];
+			if(t.checked){
+				console.log(t.value);
+				result += t.value + ',';					
+			}
+		}
+		
+		$.ajax({
+			url : "${path}/client/change",
+			data : {"client" : result},
+			type : 'post',
+			success : function(data){
+				console.log(data);
+			},
+			error : function(e){
+				console.log(e);
+			}
+		});
+		
+		window.location.reload();	// 작동안함
+	}
+	
 </script>
 
 </body>
