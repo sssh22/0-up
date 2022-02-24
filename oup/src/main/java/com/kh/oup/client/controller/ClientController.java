@@ -30,10 +30,6 @@ public class ClientController {
 		PageVo vo = new PageVo(page, totalRow);
 		
 		List<ClientVo> list = service.getClientList(vo);
-//		
-//		for(ClientVo vo2 : list) {
-//			System.out.println(vo2);
-//		}
 		model.addAttribute("list",list);
 		model.addAttribute("page", vo);
 		
