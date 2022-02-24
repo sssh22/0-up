@@ -80,13 +80,13 @@
               <tbody>
               	<c:forEach items="${list}" var="l">				
 					<tr>
-						<td><input type="checkbox" class="checkbox-no" value="${l.cNo}"></td>
-						<td>${l.cNo}</td>
-						<td>${l.cName}</td>
-						<td>${l.cOwner}</td>
-						<td>${l.bNo}</td>
-						<td>${l.cUmony}</td>
-						<td>${l.cAddr}</td>
+						<td><input type="checkbox" class="checkbox-no" value="${l.CNo}"></td>
+						<td>${l.CNo}</td>
+						<td>${l.CName}</td>
+						<td>${l.COwner}</td>
+						<td>${l.BNo}</td>
+						<td>${l.CUmony}</td>
+						<td>${l.CAddr}</td>
 					</tr>
 				</c:forEach>
               </tbody>
@@ -143,6 +143,24 @@
 <script src="${path}/resources/plugins/bootstrap/js/bootstrap.bundle.min.js"></script>
 <!-- AdminLTE App -->
 <script src="${path}/resources/dist/js/adminlte.min.js"></script>
+
+<script type="text/javascript">
+	let topCheckBox = document.querySelector('thead input[type=checkbox]');
+	let checkArr = document.getElementsByClassName('checkbox-no');
+		
+	topCheckBox.onchange = function(e){
+		// 맨 위의 체크박스가 체크될시 
+		if(this.checked){
+			for(let i=0; i< checkArr.length; ++i){
+				checkArr[i].checked = true;
+			}
+		}else{
+			for(let i=0; i< checkArr.length; ++i){
+				checkArr[i].checked = false;
+			}
+		}
+	}
+</script>
 
 </body>
 </html>
