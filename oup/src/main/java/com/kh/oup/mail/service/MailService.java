@@ -14,6 +14,6 @@ public interface MailService {
 
 	int getMailCnt() throws Exception;
 
-	List<MailVo> getMailList(PageVo vo) throws Exception;
+	List<MailVo> getMailList(PageVo vo, long senderId) throws Exception;
 
 }

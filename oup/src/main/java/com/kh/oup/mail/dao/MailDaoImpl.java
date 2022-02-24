@@ -1,5 +1,6 @@
 package com.kh.oup.mail.dao;
 
+import java.util.HashMap;
 import java.util.List;
 
 import org.apache.ibatis.session.SqlSession;
@@ -42,12 +43,27 @@ public class MailDaoImpl implements MailDao{
 
 	@Override
 	public int selectMailCnt() throws Exception {
-		return ss.selectOne("selectMailCnt");
+		return ss.selectOne("mail.selectMailCnt");
 	}
 
 	@Override
-	public List<MailVo> selectMailList(PageVo vo) throws Exception {
-		return ss.selectList("selectMailList", vo);
+	public List<MailVo> selectReceiveMailList(PageVo vo, long receiverNo) throws Exception {
+		//맵 만들기
+		HashMap<String, Object> test = new HashMap<String, Object>();
+		test.put("page", vo);
+		test.put("receiverNo", receiverNo);
+		
+		return ss.selectList("mail.selectReceiveMailList", test);
+	}
+
+	@Override
+	public String getSenderStr(long sender) throws Exception {
+		return ss.selectOne("mail.getSenderStr", sender);
+	}
+
+	@Override
+	public String getSenderId(long sender) throws Exception {
+		return ss.selectOne("mail.getSenderId", sender);
 	}
 
 }

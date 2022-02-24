@@ -41,8 +41,7 @@ public class MailServiceImpl implements MailService{
 		
 		List<MultipartFile> fArr = vo.getAttachment();
 		
-		if(!fArr.isEmpty()) {
-			System.out.println("泥⑤��뙆�씪 �엳�쓬");
+		if(fArr.get(0).getOriginalFilename() != "") {
 			String path = req.getServletContext().getRealPath("/resources/dist/img/mail/");
 			
 			int index = 0;
@@ -74,8 +73,15 @@ public class MailServiceImpl implements MailService{
 	}
 
 	@Override
-	public List<MailVo> getMailList(PageVo vo) throws Exception {
-		return dao.selectMailList(vo);
+	public List<MailVo> getMailList(PageVo vo, long receiverNo) throws Exception {
+		List<MailVo> receiveMailList = dao.selectReceiveMailList(vo, receiverNo);
+		
+		for(int i = 0; i < receiveMailList.size(); i++) {
+			receiveMailList.get(i).setSenderStr(dao.getSenderStr(receiveMailList.get(i).getSender()));
+			receiveMailList.get(i).setSenderId(dao.getSenderId(receiveMailList.get(i).getSender()));
+		}
+		
+		return receiveMailList;
 	}
 
 }
