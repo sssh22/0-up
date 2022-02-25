@@ -6,6 +6,7 @@ import org.apache.ibatis.session.SqlSession;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Repository;
 
+import com.kh.oup.project.vo.DeptVo;
 import com.kh.oup.project.vo.MemberSearchVo;
 
 @Repository
@@ -15,7 +16,7 @@ public class ProjectDaoImpl implements ProjectDao {
 	private SqlSession ss;
 	
 	@Override
-	public List<MemberSearchVo> getDeptList() {
+	public List<DeptVo> getDeptList() {
 				
 		return ss.selectList("projectgroup.getDeptList");
 	}
