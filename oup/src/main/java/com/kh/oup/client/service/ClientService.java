@@ -18,5 +18,9 @@ public interface ClientService {
 	List<ClientVo> getSearchClientList(PageVo vo) throws Exception;
 
 	int deleteClient(String client) throws Exception;
+
+	ClientVo selectClientOne(String cNo) throws Exception;
+
+	int changeClient(ClientVo vo) throws Exception;
 	
 }

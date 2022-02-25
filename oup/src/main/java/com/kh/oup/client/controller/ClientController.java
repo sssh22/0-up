@@ -80,7 +80,7 @@ public class ClientController {
 	
 	@PostMapping("delete")
 	@ResponseBody
-	public String delete(String client) throws Exception {
+	public String deleteList(String client) throws Exception {
 		int result = service.deleteClient(client);
 		
 		if(result == client.length()/8) {
@@ -90,6 +90,30 @@ public class ClientController {
 		
 		log.info("거래처 삭제 fail");
 			return "거래처 삭제 fail";
+	}
+	
+	@GetMapping(value = {"change/{result}"})
+	public String changeList(Model model, @PathVariable String result) throws Exception {
+		ClientVo vo = service.selectClientOne(result);
+
+		model.addAttribute("client", vo);
+		
+		return "pages/client/changeClient";
+	}
+	
+	@PostMapping(value = {"change"})
+	@ResponseBody
+	public String changeList(ClientVo vo) throws Exception {
+		System.out.println(vo);
+		int result = service.changeClient(vo);
+		
+		if(result >0) {
+			log.info("거래처 변경 success");
+			return "거래처 변경 success";			
+		}
+		
+		log.info("거래처 변경 fail");
+		return "거래처 변경 실패";
 	}
 	
 }

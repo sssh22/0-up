@@ -209,38 +209,28 @@
 				console.log(e);
 			}
 		});
-		
-		window.location.reload();	// 작동안함
 	}
 	
 	function changeClient(){
-		if(checkArr.)
-		
+		let checkNum=0;
 		let result="";
 		
 		for(let i=0; i<checkArr.length; ++i){
 			let t = checkArr[i];
 			if(t.checked){
-				console.log(t.value);
-				result += t.value + ',';					
+				checkNum++;
+				result = t.value;
 			}
 		}
 		
-		$.ajax({
-			url : "${path}/client/change",
-			data : {"client" : result},
-			type : 'post',
-			success : function(data){
-				console.log(data);
-			},
-			error : function(e){
-				console.log(e);
-			}
-		});
+		if(checkNum != 1){
+			alert("1개 선택이 아니면 변경이 불가능합니다 ");
+		}
 		
-		window.location.reload();	// 작동안함
-	}
-	
+		if(checkNum ==1){
+			var changeClient = window.open("${path}/client/change/"+ result, "changeClient","width=570,height=420, location=yes, menubar=yes, resizable=no, status=no, toolbar=no, scrollbas=yes, fullscreen=no"); 
+			}
+		}
 </script>
 
 </body>

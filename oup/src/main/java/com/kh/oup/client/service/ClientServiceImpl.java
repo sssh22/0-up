@@ -46,5 +46,15 @@ public class ClientServiceImpl implements ClientService{
 		
 		return dao.deleteClient(delArr);
 	}
-	
+
+	@Override
+	public ClientVo selectClientOne(String cNo) throws Exception {
+		return dao.selectClientOne(Integer.parseInt(cNo));
+	}
+
+	@Override
+	public int changeClient(ClientVo vo) throws Exception {
+		return dao.updateClient(vo);
+	}
+
 }
