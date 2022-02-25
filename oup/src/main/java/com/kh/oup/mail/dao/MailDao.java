@@ -17,12 +17,14 @@ public interface MailDao {
 
 	int insertMailFile(MailVo vo) throws Exception;
 
-	int selectMailCnt() throws Exception;
+	int selectReMailCnt(long receiverNo) throws Exception;
 
 	List<MailVo> selectReceiveMailList(PageVo vo, long receiverNo) throws Exception;
 
 	String getSenderStr(long sender) throws Exception;
 
 	String getSenderId(long sender) throws Exception;
+
+	int selectSeMailCnt(long loginNo) throws Exception;
 
 }

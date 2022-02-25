@@ -49,17 +49,36 @@ public class MailController {
 		if(page == null || Integer.parseInt(page) <= 0 )
 			page = "1";
 		
-		int totalRow = service.getMailCnt();
-		PageVo vo = new PageVo(page, totalRow);
-		
 		HttpSession session = request.getSession();
 		EmployeeVo loginEmployee = (EmployeeVo) session.getAttribute("loginEmployee");
-		long receiverNo = loginEmployee.getEmployeeNo();
+		long loginNo = loginEmployee.getEmployeeNo();
 		
-		List<MailVo> list = service.getMailList(vo, receiverNo);
+		int totalRow = service.getReMailCnt(loginNo);
+		PageVo vo = new PageVo(page, totalRow);
+		
+		List<MailVo> list = service.getMailList(vo, loginNo);
 
 		model.addAttribute("list",list);
 		model.addAttribute("page", vo);
 		return "pages/mailbox/mailBoxReceive";
+	}
+	
+	@GetMapping(value = {"/sbox/{page}", "/sbox"})
+	public String sendBox(Model model, @PathVariable(required = false)String page, HttpServletRequest request) throws Exception {
+		if(page == null || Integer.parseInt(page) <= 0 )
+			page = "1";
+		
+		HttpSession session = request.getSession();
+		EmployeeVo loginEmployee = (EmployeeVo) session.getAttribute("loginEmployee");
+		long loginNo = loginEmployee.getEmployeeNo();
+		
+		int totalRow = service.getSeMailCnt(loginNo);
+		PageVo vo = new PageVo(page, totalRow);
+		
+		List<MailVo> list = service.getMailList(vo, loginNo);
+
+		model.addAttribute("list",list);
+		model.addAttribute("page", vo);
+		return "pages/mailbox/mailBoxSend";
 	}
 }

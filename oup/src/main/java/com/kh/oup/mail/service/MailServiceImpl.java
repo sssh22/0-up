@@ -68,13 +68,13 @@ public class MailServiceImpl implements MailService{
 	}
 
 	@Override
-	public int getMailCnt() throws Exception {
-		return dao.selectMailCnt();
+	public int getReMailCnt(long loginNo) throws Exception {
+		return dao.selectReMailCnt(loginNo);
 	}
 
 	@Override
-	public List<MailVo> getMailList(PageVo vo, long receiverNo) throws Exception {
-		List<MailVo> receiveMailList = dao.selectReceiveMailList(vo, receiverNo);
+	public List<MailVo> getMailList(PageVo vo, long loginNo) throws Exception {
+		List<MailVo> receiveMailList = dao.selectReceiveMailList(vo, loginNo);
 		
 		for(int i = 0; i < receiveMailList.size(); i++) {
 			receiveMailList.get(i).setSenderStr(dao.getSenderStr(receiveMailList.get(i).getSender()));
@@ -82,6 +82,11 @@ public class MailServiceImpl implements MailService{
 		}
 		
 		return receiveMailList;
+	}
+
+	@Override
+	public int getSeMailCnt(long loginNo) throws Exception {
+		return dao.selectSeMailCnt(loginNo);
 	}
 
 }
