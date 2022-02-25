@@ -19,4 +19,8 @@ public interface ClientDao {
 
 	int deleteClient(String[] delArr) throws Exception;
 
+	ClientVo selectClientOne(int cNo) throws Exception;
+
+	int updateClient(ClientVo vo) throws Exception;
+
 }

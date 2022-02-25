@@ -44,6 +44,16 @@ public class ClientDaoImpl implements ClientDao{
 	public int deleteClient(String[] delArr) throws Exception {
 		return session.update("client.deleteClient", delArr);
 	}
+
+	@Override
+	public ClientVo selectClientOne(int cNo) throws Exception {
+		return session.selectOne("client.selectClientOne", cNo);
+	}
+
+	@Override
+	public int updateClient(ClientVo vo) throws Exception {
+		return session.update("client.updateClient", vo);
+	}
 	
 	
 }
