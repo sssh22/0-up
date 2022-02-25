@@ -27,4 +27,10 @@ public interface MailDao {
 
 	int selectSeMailCnt(long loginNo) throws Exception;
 
+	List<MailVo> selectSendMailList(PageVo vo, long loginNo) throws Exception;
+
+	int deleteSendMail(String[] delArr) throws Exception;
+
+	int deleteReceiveMail(String[] delArr) throws Exception;
+
 }

@@ -71,4 +71,24 @@ public class MailDaoImpl implements MailDao{
 		return ss.selectOne("mail.selectSeMailCnt", senderNo);
 	}
 
+	@Override
+	public List<MailVo> selectSendMailList(PageVo vo, long senderNo) throws Exception {
+		//맵 만들기
+		HashMap<String, Object> test = new HashMap<String, Object>();
+		test.put("page", vo);
+		test.put("senderNo", senderNo);
+		
+		return ss.selectList("mail.selectSendMailList", test);
+	}
+
+	@Override
+	public int deleteSendMail(String[] delArr) throws Exception {
+		return ss.update("mail.deletSendMail", delArr);
+	}
+
+	@Override
+	public int deleteReceiveMail(String[] delArr) throws Exception {
+		return ss.update("mail.deletReceiveMail", delArr);
+	}
+
 }

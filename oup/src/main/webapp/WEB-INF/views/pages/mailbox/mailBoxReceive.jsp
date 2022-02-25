@@ -46,13 +46,12 @@
     <!-- Main content -->
     <section class="content">
       <div class="row">
-        <div class="col-md-3">
-          <a href="compose.html" class="btn btn-primary btn-block mb-3">받은 메일함</a>
+        <div class="col-md-2">
+          <a href="${path}/mail/send" class="btn btn-primary btn-block mb-3">메일쓰기</a>
 
           <div class="card">
             <div class="card-header">
               <h3 class="card-title">메일함</h3>
-
               <div class="card-tools">
                 <button type="button" class="btn btn-tool" data-card-widget="collapse">
                   <i class="fas fa-minus"></i>
@@ -62,18 +61,18 @@
             <div class="card-body p-0">
               <ul class="nav nav-pills flex-column">
                 <li class="nav-item active">
-                  <a href="#" class="nav-link">
+                  <a href="${path}/mail/rbox" class="nav-link">
                     <i class="fas fa-inbox"></i> 받은메일함
                     <span class="badge bg-primary float-right">12</span>
                   </a>
                 </li>
                 <li class="nav-item">
-                  <a href="#" class="nav-link">
+                  <a href="${path}/mail/sbox" class="nav-link">
                     <i class="far fa-envelope"></i> 보낸메일함
                   </a>
                 </li>
                 <li class="nav-item">
-                  <a href="#" class="nav-link">
+                  <a href="${path}/mail/trash" class="nav-link">
                     <i class="far fa-trash-alt"></i> 휴지통
                   </a>
                 </li>
@@ -108,14 +107,8 @@
                 <button type="button" class="btn btn-default btn-sm checkbox-toggle"><i class="far fa-square"></i>
                 </button>
                 <div class="btn-group">
-                  <button type="button" class="btn btn-default btn-sm">
+                  <button type="button" class="btn btn-default btn-sm" onclick="del();">
                     <i class="far fa-trash-alt"></i>
-                  </button>
-                  <button type="button" class="btn btn-default btn-sm">
-                    <i class="fas fa-reply"></i>
-                  </button>
-                  <button type="button" class="btn btn-default btn-sm">
-                    <i class="fas fa-share"></i>
                   </button>
                 </div>
                 <!-- /.btn-group -->
@@ -149,12 +142,18 @@
 	                  <tr>
 	                    <td style="width : 1%">
 	                      <div class="icheck-primary">
-	                        <input type="checkbox" value="" id="check1">
+	                        <input type="checkbox" class="checkbox-del" value="${l.mailNo}" id="check1">
 	                        <label for="check1"></label>
 	                      </div>
 	                    </td>
+	                    <c:if test="${l.readYn eq 'N'.charAt(0)}">
+	                    	<td class="mailbox-star" style="width : 1%; vertical-align:middle;"><i class="far fa-envelope"></i></td>	                    
+	                    </c:if>
+	                    <c:if test="${l.readYn eq 'Y'.charAt(0)}">
+	                    	<td class="mailbox-star" style="width : 1%; vertical-align:middle;"><i class="far fa-envelope-open"></i></td>	                    
+	                    </c:if>
 	                    <td class="mailbox-name"  style="width : 10%"><a href="read-mail.html">${l.senderStr}(${l.senderId})</a></td>
-	                    <td class="mailbox-subject" colspan="2">${l.mailTitle}
+	                    <td class="mailbox-subject" >${l.mailTitle}
 	                    </td>
 	                    <td class="mailbox-attachment"></td>
 	                    <td class="mailbox-date" style="width : 10%"><fmt:formatDate value="${l.mailDate}" pattern="MM-dd HH:mm"/></td>
@@ -174,14 +173,8 @@
                   <i class="far fa-square"></i>
                 </button>
                 <div class="btn-group">
-                  <button type="button" class="btn btn-default btn-sm">
+                  <button type="button" class="btn btn-default btn-sm" onclick="del();">
                     <i class="far fa-trash-alt"></i>
-                  </button>
-                  <button type="button" class="btn btn-default btn-sm">
-                    <i class="fas fa-reply"></i>
-                  </button>
-                  <button type="button" class="btn btn-default btn-sm">
-                    <i class="fas fa-share"></i>
                   </button>
                 </div>
                 <!-- /.btn-group -->
@@ -271,6 +264,40 @@
       }
     })
   })
+  
+  	//삭제 버튼 클릭
+	function del() {
+		//삭제할 번호들 가져오기
+		//가져온 번호들을 ,,, 하나의 문자열로 합치기
+		let result = "";
+		let delArr = document.getElementsByClassName('checkbox-del');
+		
+		for(let i = 0; i < delArr.length; i++) {
+			let t = delArr[i];
+			if(t.checked) {
+				//console.log(t.parentNode.parentNode.children[1].innerText); //번거로운 방법
+				console.log(t.value); //체크박스에 value를 넣어줌
+				result += t.value + ',';
+			}
+		}
+		
+		//삭제 요청 보내기 (삭제할 번호 전달해주면서)
+		$.ajax({
+			url : "${path}/mail/rdelete",
+			data : {"str" : result},
+			type : 'post',
+			success : function(data) {
+				console.log(data);
+			},
+			error : function(e) {
+				console.log(e);
+			},
+			complete : function() {
+				//새로고침
+				window.location.reload();
+			}
+		});
+	}
 </script>
 </body>
 </html>

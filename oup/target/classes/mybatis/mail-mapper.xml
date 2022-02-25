@@ -20,7 +20,8 @@
  			SENDER,
  			MAIL_DATE,
  			READ_YN,
- 			MAIL_DEL_YN
+ 			MAIL_R_DEL_YN,
+ 			MAIL_S_DEL_YN
  		)
  		VALUES
  		(
@@ -30,6 +31,7 @@
  			#{recipient},
  			#{sender},
  			SYSDATE,
+ 			'N',
  			'N',
  			'N'
  		)
@@ -68,13 +70,13 @@
  	<select id="selectReMailCnt" parameterType="long" resultType="int">
  		SELECT COUNT(MAIL_NO)
  		FROM MAIL
- 		WHERE MAIL_DEL_YN = 'N' AND RECIPIENT = #{rNo}
+ 		WHERE MAIL_R_DEL_YN = 'N' AND RECIPIENT = #{rNo}
  	</select>
  	
  	<select id="selectSeMailCnt" parameterType="long" resultType="int">
  		SELECT COUNT(MAIL_NO)
  		FROM MAIL
- 		WHERE MAIL_DEL_YN = 'N' AND SENDER = #{sNo}
+ 		WHERE MAIL_S_DEL_YN = 'N' AND SENDER = #{sNo}
  	</select>
  	
  	<select id="selectReceiveMailList" parameterType="HashMap" resultType="mailVo">
@@ -86,7 +88,23 @@
                 FROM MAIL M
                 JOIN EMPLOYEE E
                 ON M.RECIPIENT = E.EMPLOYEE_NO
-                WHERE MAIL_DEL_YN = 'N' AND RECIPIENT = #{receiverNo}
+                WHERE MAIL_R_DEL_YN = 'N' AND RECIPIENT = #{receiverNo}
+                ORDER BY MAIL_NO DESC
+            ) R
+  		)
+  		WHERE RN BETWEEN #{page.startRow} AND #{page.endRow}
+  	</select>
+  	
+  	<select id="selectSendMailList" parameterType="HashMap" resultType="mailVo">
+  		SELECT * FROM 
+  		(
+	  		SELECT ROWNUM RN, R.* 
+	  		 FROM(
+                SELECT M.*, E.EMPLOYEE_NAME AS recipientStr, E.EMPLOYEE_ID AS recipientId
+                FROM MAIL M
+                JOIN EMPLOYEE E
+                ON M.RECIPIENT = E.EMPLOYEE_NO
+                WHERE MAIL_S_DEL_YN = 'N' AND SENDER = #{senderNo}
                 ORDER BY MAIL_NO DESC
             ) R
   		)
@@ -105,4 +123,21 @@
   		WHERE EMPLOYEE_NO = #{sender}
   	</select>
   	
+  	<update id="deletSendMail">
+  		UPDATE MAIL
+  		SET MAIL_S_DEL_YN = 'Y'
+  		WHERE MAIL_NO IN
+  		<foreach collection="array" item="m" open="(" close=")" separator=",">
+  			${m}
+  		</foreach>
+  	</update>
+  	
+  	<update id="deletReceiveMail">
+  		UPDATE MAIL
+  		SET MAIL_R_DEL_YN = 'Y'
+  		WHERE MAIL_NO IN
+  		<foreach collection="array" item="m" open="(" close=")" separator=",">
+  			${m}
+  		</foreach>
+  	</update>
  </mapper>

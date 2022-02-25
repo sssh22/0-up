@@ -19,7 +19,7 @@
   <!-- Theme style -->
   <link rel="stylesheet" href="${path}/resources/dist/css/adminlte.min.css">
 </head>
-<body class="hold-transition sidebar-mini layout-fixed">
+<body class="hold-transition sidebar-mini">
 <div class="wrapper">
 
   <%@ include file="../../common/menubar-sidebar.jsp" %>
@@ -31,12 +31,12 @@
       <div class="container-fluid">
         <div class="row mb-2">
           <div class="col-sm-6">
-            <h1>보낸 메일함</h1>
+            <h1>휴지통</h1>
           </div>
           <div class="col-sm-6">
             <ol class="breadcrumb float-sm-right">
               <li class="breadcrumb-item"><a href="#">Home</a></li>
-              <li class="breadcrumb-item active">보낸메일함</li>
+              <li class="breadcrumb-item active">휴지통</li>
             </ol>
           </div>
         </div>
@@ -52,7 +52,6 @@
           <div class="card">
             <div class="card-header">
               <h3 class="card-title">메일함</h3>
-
               <div class="card-tools">
                 <button type="button" class="btn btn-tool" data-card-widget="collapse">
                   <i class="fas fa-minus"></i>
@@ -64,11 +63,12 @@
                 <li class="nav-item active">
                   <a href="${path}/mail/rbox" class="nav-link">
                     <i class="fas fa-inbox"></i> 받은메일함
+                    <span class="badge bg-primary float-right">12</span>
                   </a>
                 </li>
                 <li class="nav-item">
                   <a href="${path}/mail/sbox" class="nav-link">
-                   <i class="far fa-envelope"></i>보낸메일함
+                    <i class="far fa-envelope"></i> 보낸메일함
                   </a>
                 </li>
                 <li class="nav-item">
@@ -86,7 +86,7 @@
         <div class="col-md-9">
           <div class="card card-primary card-outline">
             <div class="card-header">
-              <h3 class="card-title">보낸 메일함</h3>
+              <h3 class="card-title">휴지통</h3>
 
               <div class="card-tools">
                 <div class="input-group input-group-sm">
@@ -106,48 +106,49 @@
                 <!-- Check all button -->
                 <button type="button" class="btn btn-default btn-sm checkbox-toggle"><i class="far fa-square"></i>
                 </button>
-                <div class="btn-group">
-                  <button type="button" class="btn btn-default btn-sm" onclick="del();">
-                    <i class="far fa-trash-alt"></i>
-                  </button>
-                </div>
                 <!-- /.btn-group -->
                 <button type="button" class="btn btn-default btn-sm">
                   <i class="fas fa-sync-alt"></i>
                 </button>
                 <div class="float-right">
-                  <div class="btn-group" role="group" aria-label="First group">
-	                	<button type="button" class="btn btn-default btn-sm" onClick="location.href='${path}/mail/sbox/${page.startPage - 1}'"><i class="fas fa-chevron-left"></i></button>
+	                  <div class="btn-group" role="group" aria-label="First group">
+	                	<button type="button" class="btn btn-default btn-sm" onClick="location.href='${path}/mail/rbox/${page.startPage - 1}'"><i class="fas fa-chevron-left"></i></button>
 			            <c:forEach var="i" begin="${page.startPage}" end="${page.endPage}">
 					        <c:if test="${page.currentPage != i and i <= page.lastPage}">       
-					        	<button type="button" class="btn btn-default btn-sm" onClick="location.href='${path}/mail/sbox/${i}'">${i}</button>
+					        	<button type="button" class="btn btn-default btn-sm" onClick="location.href='${path}/mail/rbox/${i}'">${i}</button>
 					      	</c:if>
 							<c:if test="${page.currentPage == i and i <= page.lastPage}">                  
-					        	<button type="button" class="btn btn-default btn-sm" onClick="location.href='${path}/mail/sbox/${i}'">${i}</button>
+					        	<button type="button" class="btn btn-default btn-sm" onClick="location.href='${path}/mail/rbox/${i}'">${i}</button>
 					        </c:if>
 						</c:forEach>
 			            <c:if test="${page.endPage < page.lastPage}">
-							<button type="button" class="btn btn-default btn-sm" onClick="location.href='${path}/mail/sbox/${page.endPage + 1}'"><i class="fas fa-chevron-right"></i></button>
+							<button type="button" class="btn btn-default btn-sm" onClick="location.href='${path}/mail/rbox/${page.endPage + 1}'"><i class="fas fa-chevron-right"></i></button>
 						</c:if>
 						<c:if test="${page.endPage >= page.lastPage}">
-							<button type="button" class="btn btn-default btn-sm" onClick="location.href='${path}/mail/sbox/${page.lastPage}'"><i class="fas fa-chevron-right"></i></button>
+							<button type="button" class="btn btn-default btn-sm" onClick="location.href='${path}/mail/rbox/${page.lastPage}'"><i class="fas fa-chevron-right"></i></button>
 						</c:if>
 	                </div>
+                <!-- /.float-right -->
               </div>
               <div class="table-responsive mailbox-messages">
                 <table class="table table-hover table-striped">
                   <tbody>
-                  	<c:forEach items="${list}" var="l">	
+                  <c:forEach items="${list}" var="l">	
 	                  <tr>
 	                    <td style="width : 1%">
 	                      <div class="icheck-primary">
-	                        <input class="checkbox-del" type="checkbox" value="${l.mailNo}" id="check1">
+	                        <input type="checkbox" class="checkbox-del" value="${l.mailNo}" id="check1">
 	                        <label for="check1"></label>
 	                      </div>
 	                    </td>
-	                    <td class="mailbox-star" style="width : 1%; vertical-align:middle;"><i class="far fa-envelope-open"></i></td>	                    
-	                    <td class="mailbox-name"  style="width : 10%"><a href="read-mail.html">${l.recipientStr}(${l.recipientId})</a></td>
-	                    <td class="mailbox-subject" colspan=>${l.mailTitle}
+	                    <c:if test="${l.readYn eq 'N'.charAt(0)}">
+	                    	<td class="mailbox-star" style="width : 1%; vertical-align:middle;"><i class="far fa-envelope"></i></td>	                    
+	                    </c:if>
+	                    <c:if test="${l.readYn eq 'Y'.charAt(0)}">
+	                    	<td class="mailbox-star" style="width : 1%; vertical-align:middle;"><i class="far fa-envelope-open"></i></td>	                    
+	                    </c:if>
+	                    <td class="mailbox-name"  style="width : 10%"><a href="read-mail.html">${l.senderStr}(${l.senderId})</a></td>
+	                    <td class="mailbox-subject" >${l.mailTitle}
 	                    </td>
 	                    <td class="mailbox-attachment"></td>
 	                    <td class="mailbox-date" style="width : 10%"><fmt:formatDate value="${l.mailDate}" pattern="MM-dd HH:mm"/></td>
@@ -175,24 +176,25 @@
                 <button type="button" class="btn btn-default btn-sm">
                   <i class="fas fa-sync-alt"></i>
                 </button>
-                <div class="float-right">
-                  <div class="btn-group" role="group" aria-label="First group">
-	                	<button type="button" class="btn btn-default btn-sm" onClick="location.href='${path}/mail/sbox/${page.startPage - 1}'"><i class="fas fa-chevron-left"></i></button>
+	                <div class="float-right">
+	                  <div class="btn-group" role="group" aria-label="First group">
+	                	<button type="button" class="btn btn-default btn-sm" onClick="location.href='${path}/mail/rbox/${page.startPage - 1}'"><i class="fas fa-chevron-left"></i></button>
 			            <c:forEach var="i" begin="${page.startPage}" end="${page.endPage}">
 					        <c:if test="${page.currentPage != i and i <= page.lastPage}">       
-					        	<button type="button" class="btn btn-default btn-sm" onClick="location.href='${path}/mail/sbox/${i}'">${i}</button>
+					        	<button type="button" class="btn btn-default btn-sm" onClick="location.href='${path}/mail/rbox/${i}'">${i}</button>
 					      	</c:if>
 							<c:if test="${page.currentPage == i and i <= page.lastPage}">                  
-					        	<button type="button" class="btn btn-default btn-sm" onClick="location.href='${path}/mail/sbox/${i}'">${i}</button>
+					        	<button type="button" class="btn btn-default btn-sm" onClick="location.href='${path}/mail/rbox/${i}'">${i}</button>
 					        </c:if>
 						</c:forEach>
 			            <c:if test="${page.endPage < page.lastPage}">
-							<button type="button" class="btn btn-default btn-sm" onClick="location.href='${path}/mail/sbox/${page.endPage + 1}'"><i class="fas fa-chevron-right"></i></button>
+							<button type="button" class="btn btn-default btn-sm" onClick="location.href='${path}/mail/rbox/${page.endPage + 1}'"><i class="fas fa-chevron-right"></i></button>
 						</c:if>
 						<c:if test="${page.endPage >= page.lastPage}">
-							<button type="button" class="btn btn-default btn-sm" onClick="location.href='${path}/mail/sbox/${page.lastPage}'"><i class="fas fa-chevron-right"></i></button>
+							<button type="button" class="btn btn-default btn-sm" onClick="location.href='${path}/mail/rbox/${page.lastPage}'"><i class="fas fa-chevron-right"></i></button>
 						</c:if>
 	                </div>
+                  <!-- /.btn-group -->
                 </div>
                 <!-- /.float-right -->
               </div>
@@ -207,12 +209,7 @@
     <!-- /.content -->
   </div>
   <!-- /.content-wrapper -->
-  <footer class="main-footer">
-    <div class="float-right d-none d-sm-block">
-      <b>Version</b> 3.2.0-rc
-    </div>
-    <strong>Copyright &copy; 2014-2021 <a href="https://adminlte.io">AdminLTE.io</a>.</strong> All rights reserved.
-  </footer>
+  <%@ include file="../../common/footer.jsp" %>
 
   <!-- Control Sidebar -->
   <aside class="control-sidebar control-sidebar-dark">
@@ -228,6 +225,8 @@
 <script src="${path}/resources/plugins/bootstrap/js/bootstrap.bundle.min.js"></script>
 <!-- AdminLTE App -->
 <script src="${path}/resources/dist/js/adminlte.min.js"></script>
+<!-- overlayScrollbars -->
+<script src="${path}/resources/plugins/overlayScrollbars/js/jquery.overlayScrollbars.min.js"></script>
 <!-- Page specific script -->
 <script>
   $(function () {
@@ -260,40 +259,6 @@
       }
     })
   })
-  
-  	//삭제 버튼 클릭
-	function del() {
-		//삭제할 번호들 가져오기
-		//가져온 번호들을 ,,, 하나의 문자열로 합치기
-		let result = "";
-		let delArr = document.getElementsByClassName('checkbox-del');
-		
-		for(let i = 0; i < delArr.length; i++) {
-			let t = delArr[i];
-			if(t.checked) {
-				//console.log(t.parentNode.parentNode.children[1].innerText); //번거로운 방법
-				console.log(t.value); //체크박스에 value를 넣어줌
-				result += t.value + ',';
-			}
-		}
-		
-		//삭제 요청 보내기 (삭제할 번호 전달해주면서)
-		$.ajax({
-			url : "${path}/mail/sdelete",
-			data : {"str" : result},
-			type : 'post',
-			success : function(data) {
-				console.log(data);
-			},
-			error : function(e) {
-				console.log(e);
-			},
-			complete : function() {
-				//새로고침
-				window.location.reload();
-			}
-		});
-	}
 </script>
 </body>
 </html>
