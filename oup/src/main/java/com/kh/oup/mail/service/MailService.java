@@ -14,8 +14,14 @@ public interface MailService {
 
 	int getReMailCnt(long receiverNo) throws Exception;
 
-	List<MailVo> getMailList(PageVo vo, long loginNo) throws Exception;
+	List<MailVo> getReMailList(PageVo vo, long loginNo) throws Exception;
 
 	int getSeMailCnt(long loginNo)  throws Exception;
+
+	List<MailVo> getSeMailList(PageVo vo, long loginNo) throws Exception;
+
+	int deleteSendMail(String str) throws Exception;
+
+	int deleteReceiveMail(String str) throws Exception;
 
 }

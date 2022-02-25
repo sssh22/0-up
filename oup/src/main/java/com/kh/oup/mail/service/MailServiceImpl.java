@@ -24,45 +24,50 @@ public class MailServiceImpl implements MailService{
 	public int send(MailVo vo, HttpServletRequest req, String rId, String sId) throws Exception {
 		
 		Random random = new Random();
+		int result = 0;
 		
-		//硫붿씪踰덊샇 nextval
-		int no = dao.getMailSeq();
-		
-		int recipientNo = dao.getrecipientNo(rId);
-		int senderNo = dao.getsenderNo(sId);
-		
-		vo.setRecipient(recipientNo);
-		vo.setSender(senderNo);
-		
-		//insert 泥섎━
-		vo.setMailNo(no);
-		
-		int result = dao.insertMail(vo);
-		
-		List<MultipartFile> fArr = vo.getAttachment();
-		
-		if(fArr.get(0).getOriginalFilename() != "") {
-			String path = req.getServletContext().getRealPath("/resources/dist/img/mail/");
+		//테스트
+		for(int i = 0; i < 50; i++) {
+			//硫붿씪踰덊샇 nextval
+			int no = dao.getMailSeq();
 			
-			int index = 0;
-			for(MultipartFile mf : fArr) {
-				String changeName = System.currentTimeMillis() + "_" + random.nextInt() + "_" + mf.getOriginalFilename();
-				index++;
+			int recipientNo = dao.getrecipientNo(rId);
+			int senderNo = dao.getsenderNo(sId);
+			
+			vo.setRecipient(recipientNo);
+			vo.setSender(senderNo);
+			
+			//insert 泥섎━
+			vo.setMailNo(no);
+			
+			result = dao.insertMail(vo);
+			
+			List<MultipartFile> fArr = vo.getAttachment();
+			
+			if(fArr.get(0).getOriginalFilename() != "") {
+				String path = req.getServletContext().getRealPath("/resources/dist/img/mail/");
 				
-				if(index == 1) {
-					vo.setChangeName1(changeName);
-				} else if(index == 2) {
-					vo.setChangeName2(changeName);
-				} else if(index == 3) {
-					vo.setChangeName3(changeName);
+				int index = 0;
+				for(MultipartFile mf : fArr) {
+					String changeName = System.currentTimeMillis() + "_" + random.nextInt() + "_" + mf.getOriginalFilename();
+					index++;
+					
+					if(index == 1) {
+						vo.setChangeName1(changeName);
+					} else if(index == 2) {
+						vo.setChangeName2(changeName);
+					} else if(index == 3) {
+						vo.setChangeName3(changeName);
+					}
+					
+					File file = new File(path + changeName);
+					mf.transferTo(file);
 				}
 				
-				File file = new File(path + changeName);
-				mf.transferTo(file);
+				int result2 = dao.insertMailFile(vo);
 			}
-			
-			int result2 = dao.insertMailFile(vo);
 		}
+		
 		
 		return result;
 	}
@@ -73,7 +78,7 @@ public class MailServiceImpl implements MailService{
 	}
 
 	@Override
-	public List<MailVo> getMailList(PageVo vo, long loginNo) throws Exception {
+	public List<MailVo> getReMailList(PageVo vo, long loginNo) throws Exception {
 		List<MailVo> receiveMailList = dao.selectReceiveMailList(vo, loginNo);
 		
 		for(int i = 0; i < receiveMailList.size(); i++) {
@@ -83,10 +88,34 @@ public class MailServiceImpl implements MailService{
 		
 		return receiveMailList;
 	}
+	
+	@Override
+	public List<MailVo> getSeMailList(PageVo vo, long loginNo) throws Exception {
+		List<MailVo> sendMailList = dao.selectSendMailList(vo, loginNo);
+		
+		for(int i = 0; i < sendMailList.size(); i++) {
+			sendMailList.get(i).setSenderStr(dao.getSenderStr(sendMailList.get(i).getSender()));
+			sendMailList.get(i).setSenderId(dao.getSenderId(sendMailList.get(i).getSender()));
+		}
+		
+		return sendMailList;
+	}
 
 	@Override
 	public int getSeMailCnt(long loginNo) throws Exception {
 		return dao.selectSeMailCnt(loginNo);
+	}
+
+	@Override
+	public int deleteSendMail(String str) throws Exception {
+		String[] delArr = str.split(",");
+		return dao.deleteSendMail(delArr);
+	}
+
+	@Override
+	public int deleteReceiveMail(String str) throws Exception {
+		String[] delArr = str.split(",");
+		return dao.deleteReceiveMail(delArr);
 	}
 
 }

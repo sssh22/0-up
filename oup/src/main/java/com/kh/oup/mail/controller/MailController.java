@@ -12,6 +12,7 @@ import org.springframework.web.bind.annotation.GetMapping;
 import org.springframework.web.bind.annotation.PathVariable;
 import org.springframework.web.bind.annotation.PostMapping;
 import org.springframework.web.bind.annotation.RequestMapping;
+import org.springframework.web.bind.annotation.ResponseBody;
 
 import com.kh.oup.client.vo.ClientVo;
 import com.kh.oup.common.PageVo;
@@ -19,8 +20,11 @@ import com.kh.oup.employee.vo.EmployeeVo;
 import com.kh.oup.mail.service.MailService;
 import com.kh.oup.mail.vo.MailVo;
 
+import lombok.extern.slf4j.Slf4j;
+
 @Controller
 @RequestMapping("/mail")
+@Slf4j
 public class MailController {
 	
 	@Autowired
@@ -55,8 +59,9 @@ public class MailController {
 		
 		int totalRow = service.getReMailCnt(loginNo);
 		PageVo vo = new PageVo(page, totalRow);
+		vo.setCntPerPage(15);
 		
-		List<MailVo> list = service.getMailList(vo, loginNo);
+		List<MailVo> list = service.getReMailList(vo, loginNo);
 
 		model.addAttribute("list",list);
 		model.addAttribute("page", vo);
@@ -74,11 +79,45 @@ public class MailController {
 		
 		int totalRow = service.getSeMailCnt(loginNo);
 		PageVo vo = new PageVo(page, totalRow);
+		vo.setCntPerPage(15);
 		
-		List<MailVo> list = service.getMailList(vo, loginNo);
+		List<MailVo> list = service.getSeMailList(vo, loginNo);
 
 		model.addAttribute("list",list);
 		model.addAttribute("page", vo);
 		return "pages/mailbox/mailBoxSend";
+	}
+	
+	@PostMapping("/sdelete")
+	@ResponseBody
+	public String sendeDelete(String str) throws Exception {
+		int result = service.deleteSendMail(str);
+		
+		log.warn("건드린 row 갯수 : {}", result);
+		
+		if(result == str.length()/2) {
+			return "ok";
+		}else {
+			return "fail_" + result;
+		}
+	}
+	
+	@PostMapping("/rdelete")
+	@ResponseBody
+	public String receiveDelete(String str) throws Exception {
+		int result = service.deleteReceiveMail(str);
+		
+		log.warn("건드린 row 갯수 : {}", result);
+		
+		if(result == str.length()/2) {
+			return "ok";
+		}else {
+			return "fail_" + result;
+		}
+	}
+	
+	@GetMapping("/trash")
+	public String trashMailBox() {
+		return "pages/mailbox/mailBoxTrash";
 	}
 }

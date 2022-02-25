@@ -24,5 +24,6 @@ public class MailVo {
 	private String changeName1;
 	private String changeName2;
 	private String changeName3;
-	private char mailDelYn;
+	private char mailRDelYn;
+	private char mailSDelYn;	
 }
