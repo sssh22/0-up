@@ -42,8 +42,8 @@ public class MailDaoImpl implements MailDao{
 	}
 
 	@Override
-	public int selectMailCnt() throws Exception {
-		return ss.selectOne("mail.selectMailCnt");
+	public int selectReMailCnt(long receiverNo) throws Exception {
+		return ss.selectOne("mail.selectReMailCnt", receiverNo);
 	}
 
 	@Override
@@ -64,6 +64,11 @@ public class MailDaoImpl implements MailDao{
 	@Override
 	public String getSenderId(long sender) throws Exception {
 		return ss.selectOne("mail.getSenderId", sender);
+	}
+
+	@Override
+	public int selectSeMailCnt(long senderNo) throws Exception {
+		return ss.selectOne("mail.selectSeMailCnt", senderNo);
 	}
 
 }

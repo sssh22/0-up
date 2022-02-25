@@ -65,10 +65,16 @@
  		WHERE EMPLOYEE_ID = #{s}
  	</select>
  	
- 	<select id="selectMailCnt" resultType="int">
+ 	<select id="selectReMailCnt" parameterType="long" resultType="int">
  		SELECT COUNT(MAIL_NO)
  		FROM MAIL
- 		WHERE MAIL_DEL_YN = 'N'
+ 		WHERE MAIL_DEL_YN = 'N' AND RECIPIENT = #{rNo}
+ 	</select>
+ 	
+ 	<select id="selectSeMailCnt" parameterType="long" resultType="int">
+ 		SELECT COUNT(MAIL_NO)
+ 		FROM MAIL
+ 		WHERE MAIL_DEL_YN = 'N' AND SENDER = #{sNo}
  	</select>
  	
  	<select id="selectReceiveMailList" parameterType="HashMap" resultType="mailVo">

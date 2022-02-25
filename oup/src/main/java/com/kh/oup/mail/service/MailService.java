@@ -12,8 +12,10 @@ public interface MailService {
 
 	int send(MailVo vo, HttpServletRequest req, String recipientId, String senderId) throws Exception;
 
-	int getMailCnt() throws Exception;
+	int getReMailCnt(long receiverNo) throws Exception;
 
-	List<MailVo> getMailList(PageVo vo, long senderId) throws Exception;
+	List<MailVo> getMailList(PageVo vo, long loginNo) throws Exception;
+
+	int getSeMailCnt(long loginNo)  throws Exception;
 
 }
