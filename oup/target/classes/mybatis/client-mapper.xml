@@ -100,7 +100,7 @@
   	
   	<update id="updateClient" parameterType="clientVo">
   		update client
-  		set 
+  		set ( 
  			c_name = #{cName},
  			b_no = ${bNo},
  			b_no2 = ${bNo2},
@@ -113,7 +113,8 @@
  			c_creditlimit = ${cCreditLimit},
  			c_credit_month = ${cCreditDateMonth},
  			c_credit_day = ${cCreditDateDay}
- 		where c_no = ${cNo}
+ 			)
+ 		where c_no like ${cNo}
   	</update>
  	
  </mapper>

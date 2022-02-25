@@ -8,22 +8,8 @@
  
  <select id="getDeptList" resultType="MemberSearchVo">
  
- SELECT <!-- detp만 화면으로.. -->
+ SELECT 
  
  </select>
- 
- <select id="getTeamList" resultType="MemberSearchVo">
- 
- <!-- detp받아서 team만 화면으로 -->
- 
- </select>
- 
-  <select id="getEmpList" resultType="MemberSearchVo">
- 
- <!--  team받아서 emp리스트 화면으로 -->
- 
- </select>
- 
- 
  	
 </mapper>
