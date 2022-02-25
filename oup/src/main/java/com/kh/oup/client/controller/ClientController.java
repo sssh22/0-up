@@ -104,7 +104,6 @@ public class ClientController {
 	@PostMapping(value = {"change"})
 	@ResponseBody
 	public String changeList(ClientVo vo) throws Exception {
-		System.out.println(vo);
 		int result = service.changeClient(vo);
 		
 		if(result >0) {
