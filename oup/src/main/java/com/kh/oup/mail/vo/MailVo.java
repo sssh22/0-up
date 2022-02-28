@@ -10,6 +10,8 @@ import lombok.Data;
 @Data
 public class MailVo {
 	private long mailNo;
+	private long mailNextNo;
+	private long mailPreNo;
 	private String mailTitle;
 	private String mailContent;
 	private long recipient;
@@ -24,6 +26,9 @@ public class MailVo {
 	private String changeName1;
 	private String changeName2;
 	private String changeName3;
+	private String originName1;
+	private String originName2;
+	private String originName3;
 	private char mailRDelYn;
 	private char mailSDelYn;	
 }

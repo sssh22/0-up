@@ -137,18 +137,17 @@
               <div class="table-responsive mailbox-messages">
                 <table class="table table-hover table-striped">
                   <tbody>
-                  	<c:forEach items="${list}" var="l">	
+                  	<c:forEach items="${list}" var="l" varStatus="status">	
 	                  <tr>
 	                    <td style="width : 1%">
 	                      <div class="icheck-primary">
-	                        <input class="checkbox-del" type="checkbox" value="${l.mailNo}" id="check1">
-	                        <label for="check1"></label>
+	                        <input type="checkbox" class="checkbox-del" value="${l.mailNo}" id="check${status.count}">
+	                        <label for="check${status.count}"></label>
 	                      </div>
 	                    </td>
 	                    <td class="mailbox-star" style="width : 1%; vertical-align:middle;"><i class="far fa-envelope-open"></i></td>	                    
-	                    <td class="mailbox-name"  style="width : 10%"><a href="read-mail.html">${l.recipientStr}(${l.recipientId})</a></td>
-	                    <td class="mailbox-subject" colspan=>${l.mailTitle}
-	                    </td>
+	                    <td class="mailbox-name"  style="width : 10%">${l.recipientStr}(${l.recipientId})</td>
+	                    <td class="mailbox-subject"><a href="${path}/mail/detail/${l.mailNo}">${l.mailTitle}</a></td>
 	                    <td class="mailbox-attachment"></td>
 	                    <td class="mailbox-date" style="width : 10%"><fmt:formatDate value="${l.mailDate}" pattern="MM-dd HH:mm"/></td>
 	                  </tr>

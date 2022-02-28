@@ -18,6 +18,7 @@
   <link rel="stylesheet" href="${path}/resources/plugins/icheck-bootstrap/icheck-bootstrap.min.css">
   <!-- Theme style -->
   <link rel="stylesheet" href="${path}/resources/dist/css/adminlte.min.css">
+  
 </head>
 <body class="hold-transition sidebar-mini">
 <div class="wrapper">
@@ -112,20 +113,20 @@
                 </button>
                 <div class="float-right">
 	                  <div class="btn-group" role="group" aria-label="First group">
-	                	<button type="button" class="btn btn-default btn-sm" onClick="location.href='${path}/mail/rbox/${page.startPage - 1}'"><i class="fas fa-chevron-left"></i></button>
+	                	<button type="button" class="btn btn-default btn-sm" onClick="location.href='${path}/mail/trash/${page.startPage - 1}'"><i class="fas fa-chevron-left"></i></button>
 			            <c:forEach var="i" begin="${page.startPage}" end="${page.endPage}">
 					        <c:if test="${page.currentPage != i and i <= page.lastPage}">       
-					        	<button type="button" class="btn btn-default btn-sm" onClick="location.href='${path}/mail/rbox/${i}'">${i}</button>
+					        	<button type="button" class="btn btn-default btn-sm" onClick="location.href='${path}/mail/trash/${i}'">${i}</button>
 					      	</c:if>
 							<c:if test="${page.currentPage == i and i <= page.lastPage}">                  
-					        	<button type="button" class="btn btn-default btn-sm" onClick="location.href='${path}/mail/rbox/${i}'">${i}</button>
+					        	<button type="button" class="btn btn-default btn-sm" onClick="location.href='${path}/mail/trash/${i}'">${i}</button>
 					        </c:if>
 						</c:forEach>
 			            <c:if test="${page.endPage < page.lastPage}">
-							<button type="button" class="btn btn-default btn-sm" onClick="location.href='${path}/mail/rbox/${page.endPage + 1}'"><i class="fas fa-chevron-right"></i></button>
+							<button type="button" class="btn btn-default btn-sm" onClick="location.href='${path}/mail/trash/${page.endPage + 1}'"><i class="fas fa-chevron-right"></i></button>
 						</c:if>
 						<c:if test="${page.endPage >= page.lastPage}">
-							<button type="button" class="btn btn-default btn-sm" onClick="location.href='${path}/mail/rbox/${page.lastPage}'"><i class="fas fa-chevron-right"></i></button>
+							<button type="button" class="btn btn-default btn-sm" onClick="location.href='${path}/mail/trash/${page.lastPage}'"><i class="fas fa-chevron-right"></i></button>
 						</c:if>
 	                </div>
                 <!-- /.float-right -->
@@ -133,23 +134,27 @@
               <div class="table-responsive mailbox-messages">
                 <table class="table table-hover table-striped">
                   <tbody>
-                  <c:forEach items="${list}" var="l">	
+                  <c:forEach items="${list}" var="l" varStatus="status">	
 	                  <tr>
 	                    <td style="width : 1%">
 	                      <div class="icheck-primary">
-	                        <input type="checkbox" class="checkbox-del" value="${l.mailNo}" id="check1">
-	                        <label for="check1"></label>
+	                        <input type="checkbox" class="checkbox-del" value="${l.mailNo}" id="check${status.count}">
+	                        <label for="check${status.count}"></label>
 	                      </div>
 	                    </td>
-	                    <c:if test="${l.readYn eq 'N'.charAt(0)}">
+	                    <c:if test="${l.readYn eq 'N'.charAt(0) and loginEmployee.employeeNo eq l.recipient}">
 	                    	<td class="mailbox-star" style="width : 1%; vertical-align:middle;"><i class="far fa-envelope"></i></td>	                    
 	                    </c:if>
-	                    <c:if test="${l.readYn eq 'Y'.charAt(0)}">
+	                    <c:if test="${l.readYn eq 'Y'.charAt(0) or loginEmployee.employeeNo eq l.sender}">
 	                    	<td class="mailbox-star" style="width : 1%; vertical-align:middle;"><i class="far fa-envelope-open"></i></td>	                    
 	                    </c:if>
-	                    <td class="mailbox-name"  style="width : 10%"><a href="read-mail.html">${l.senderStr}(${l.senderId})</a></td>
-	                    <td class="mailbox-subject" >${l.mailTitle}
-	                    </td>
+	                   	<td class="mailbox-name"  style="width : 10%"><a href="read-mail.html">${l.senderStr}(${l.senderId})</a></td>
+	                    <c:if test="${loginEmployee.employeeNo eq l.sender}">
+	                    	<td class="mailbox-subject"><a href="${path}/mail/detail/${l.mailNo}"><span style="border: 1px solid #d1d1d1; font-size: 12px">SENT</span> ${l.mailTitle}</a></td>
+	                    </c:if>
+	                    <c:if test="${loginEmployee.employeeNo eq l.recipient}">
+	                    	<td class="mailbox-subject" ><a href="${path}/mail/detail/${l.mailNo}">${l.mailTitle}</a></td>
+	                    </c:if>
 	                    <td class="mailbox-attachment"></td>
 	                    <td class="mailbox-date" style="width : 10%"><fmt:formatDate value="${l.mailDate}" pattern="MM-dd HH:mm"/></td>
 	                  </tr>
@@ -178,20 +183,20 @@
                 </button>
 	                <div class="float-right">
 	                  <div class="btn-group" role="group" aria-label="First group">
-	                	<button type="button" class="btn btn-default btn-sm" onClick="location.href='${path}/mail/rbox/${page.startPage - 1}'"><i class="fas fa-chevron-left"></i></button>
+	                	<button type="button" class="btn btn-default btn-sm" onClick="location.href='${path}/mail/trash/${page.startPage - 1}'"><i class="fas fa-chevron-left"></i></button>
 			            <c:forEach var="i" begin="${page.startPage}" end="${page.endPage}">
 					        <c:if test="${page.currentPage != i and i <= page.lastPage}">       
-					        	<button type="button" class="btn btn-default btn-sm" onClick="location.href='${path}/mail/rbox/${i}'">${i}</button>
+					        	<button type="button" class="btn btn-default btn-sm" onClick="location.href='${path}/mail/trash/${i}'">${i}</button>
 					      	</c:if>
 							<c:if test="${page.currentPage == i and i <= page.lastPage}">                  
-					        	<button type="button" class="btn btn-default btn-sm" onClick="location.href='${path}/mail/rbox/${i}'">${i}</button>
+					        	<button type="button" class="btn btn-default btn-sm" onClick="location.href='${path}/mail/trash/${i}'">${i}</button>
 					        </c:if>
 						</c:forEach>
 			            <c:if test="${page.endPage < page.lastPage}">
-							<button type="button" class="btn btn-default btn-sm" onClick="location.href='${path}/mail/rbox/${page.endPage + 1}'"><i class="fas fa-chevron-right"></i></button>
+							<button type="button" class="btn btn-default btn-sm" onClick="location.href='${path}/mail/trash/${page.endPage + 1}'"><i class="fas fa-chevron-right"></i></button>
 						</c:if>
 						<c:if test="${page.endPage >= page.lastPage}">
-							<button type="button" class="btn btn-default btn-sm" onClick="location.href='${path}/mail/rbox/${page.lastPage}'"><i class="fas fa-chevron-right"></i></button>
+							<button type="button" class="btn btn-default btn-sm" onClick="location.href='${path}/mail/trash/${page.lastPage}'"><i class="fas fa-chevron-right"></i></button>
 						</c:if>
 	                </div>
                   <!-- /.btn-group -->

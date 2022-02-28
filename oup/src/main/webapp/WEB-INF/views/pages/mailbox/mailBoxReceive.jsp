@@ -138,12 +138,12 @@
               <div class="table-responsive mailbox-messages">
                 <table class="table table-hover table-striped">
                   <tbody>
-                  <c:forEach items="${list}" var="l">	
+                  <c:forEach items="${list}" var="l" varStatus="status">	
 	                  <tr>
 	                    <td style="width : 1%">
 	                      <div class="icheck-primary">
-	                        <input type="checkbox" class="checkbox-del" value="${l.mailNo}" id="check1">
-	                        <label for="check1"></label>
+	                        <input type="checkbox" class="checkbox-del" value="${l.mailNo}" id="check${status.count}">
+	                        <label for="check${status.count}"></label>
 	                      </div>
 	                    </td>
 	                    <c:if test="${l.readYn eq 'N'.charAt(0)}">
@@ -152,8 +152,8 @@
 	                    <c:if test="${l.readYn eq 'Y'.charAt(0)}">
 	                    	<td class="mailbox-star" style="width : 1%; vertical-align:middle;"><i class="far fa-envelope-open"></i></td>	                    
 	                    </c:if>
-	                    <td class="mailbox-name"  style="width : 10%"><a href="read-mail.html">${l.senderStr}(${l.senderId})</a></td>
-	                    <td class="mailbox-subject" >${l.mailTitle}
+	                    <td class="mailbox-name"  style="width : 10%">${l.senderStr}(${l.senderId})</td>
+	                    <td class="mailbox-subject" ><a href="${path}/mail/detail/${l.mailNo}">${l.mailTitle}</a>
 	                    </td>
 	                    <td class="mailbox-attachment"></td>
 	                    <td class="mailbox-date" style="width : 10%"><fmt:formatDate value="${l.mailDate}" pattern="MM-dd HH:mm"/></td>

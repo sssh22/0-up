@@ -24,4 +24,12 @@ public interface MailService {
 
 	int deleteReceiveMail(String str) throws Exception;
 
+	int getTrashMailCnt(long loginNo) throws Exception;
+
+	List<MailVo> getTrashMailList(PageVo vo, long loginNo) throws Exception;
+
+	MailVo getMail(String mailno) throws Exception;
+
+	int deleteMail(String mailno) throws Exception;
+
 }
