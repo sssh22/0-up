@@ -37,8 +37,10 @@ public interface MailDao {
 
 	List<MailVo> selectTrashMailList(PageVo vo, long loginNo) throws Exception;
 
-	MailVo selectMail(String mailno) throws Exception;
+	MailVo selectMail(String mailno, String fileYN) throws Exception;
 
 	int deleteMail(String mailno) throws Exception;
+
+	String checkFile(String mailno) throws Exception;
 
 }

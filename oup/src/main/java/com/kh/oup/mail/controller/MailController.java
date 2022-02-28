@@ -144,8 +144,6 @@ public class MailController {
 		mail.setMailNextNo(mail.getMailNo()+1);
 		mail.setMailPreNo(mail.getMailNo()-1);
 		
-		System.out.println("화면 ::: " + mail);
-		
 		model.addAttribute("mail",mail);
 		return "pages/mailbox/mailDetail";
 	}
