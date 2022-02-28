@@ -79,17 +79,16 @@ public class ClientController {
 	}
 	
 	@PostMapping("delete")
-	@ResponseBody
 	public String deleteList(String client) throws Exception {
 		int result = service.deleteClient(client);
 		
 		if(result == client.length()/8) {
 			log.info("거래처 삭제 success");
-			return "거래처 삭제 success";
+			return "common/closePopup";
 		}
 		
 		log.info("거래처 삭제 fail");
-			return "거래처 삭제 fail";
+		return "common/closePopup";
 	}
 	
 	@GetMapping(value = {"change/{result}"})
@@ -102,18 +101,37 @@ public class ClientController {
 	}
 	
 	@PostMapping(value = {"change"})
-	@ResponseBody
 	public String changeList(ClientVo vo) throws Exception {
 		System.out.println(vo);
 		int result = service.changeClient(vo);
 		
 		if(result >0) {
 			log.info("거래처 변경 success");
-			return "거래처 변경 success";			
+			return "common/closePopup";		
 		}
 		
 		log.info("거래처 변경 fail");
-		return "거래처 변경 실패";
+		return "common/closePopup";
+	}
+	
+	@GetMapping("searchClient")
+	public String searchClient(HttpServletRequest req, Model model) throws Exception {
+		String search = req.getParameter("search");
+		System.out.println(search);
+		
+		if(search == null) {
+			return "pages/client/searchClient";
+		}
+		
+		if(search != null) {
+			int totalRow = service.getSearchClientCnt(search);	
+			
+			List<ClientVo> list = service.getSearchClientList(search);
+			model.addAttribute("list",list);
+			model.addAttribute("search", search);
+		}
+		
+		return "pages/client/searchClient";
 	}
 	
 }

@@ -54,6 +54,11 @@ public class ClientDaoImpl implements ClientDao{
 	public int updateClient(ClientVo vo) throws Exception {
 		return session.update("client.updateClient", vo);
 	}
+
+	@Override
+	public List<ClientVo> selectSearchClientList(String search) throws Exception {
+		return session.selectList("client.searchClientList", search);
+	}
 	
 	
 }

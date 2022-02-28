@@ -22,5 +22,7 @@ public interface ClientService {
 	ClientVo selectClientOne(String cNo) throws Exception;
 
 	int changeClient(ClientVo vo) throws Exception;
+
+	List<ClientVo> getSearchClientList(String search) throws Exception;
 	
 }

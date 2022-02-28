@@ -57,4 +57,9 @@ public class ClientServiceImpl implements ClientService{
 		return dao.updateClient(vo);
 	}
 
+	@Override
+	public List<ClientVo> getSearchClientList(String search) throws Exception {
+		return dao.selectSearchClientList(search);
+	}
+
 }
