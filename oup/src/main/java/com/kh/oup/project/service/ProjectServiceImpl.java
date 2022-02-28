@@ -8,6 +8,7 @@ import org.springframework.stereotype.Service;
 import com.kh.oup.project.dao.ProjectDao;
 import com.kh.oup.project.vo.DeptVo;
 import com.kh.oup.project.vo.MemberSearchVo;
+import com.kh.oup.project.vo.TeamVo;
 
 @Service
 public class ProjectServiceImpl implements ProjectService{
@@ -17,9 +18,16 @@ public class ProjectServiceImpl implements ProjectService{
 	
 	
 	@Override
-	public List<DeptVo> selectList() {
+	public List<DeptVo> selectDeptList() {
 		
-		return null;
+		return dao.getDeptList();
+	}
+
+
+	@Override
+	public List<TeamVo> selectTeamList(String departCode) {
+		
+		return dao.getTeamList(departCode);
 	}
 
 }
