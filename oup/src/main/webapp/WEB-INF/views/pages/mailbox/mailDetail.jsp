@@ -1,6 +1,7 @@
 <%@ page language="java" contentType="text/html; charset=UTF-8"
     pageEncoding="UTF-8"%>
 <%@ taglib prefix="c" uri="http://java.sun.com/jsp/jstl/core" %>
+<%@ taglib uri="http://java.sun.com/jsp/jstl/fmt" prefix="fmt" %>
 <c:set var="path" value="${pageContext.request.contextPath}"></c:set>
 <!DOCTYPE html>
 <html lang="en">
@@ -42,7 +43,7 @@
     <section class="content">
       <div class="container-fluid">
         <div class="row">
-          <div class="col-md-3">
+          <div class="col-md-2">
             <a href="mailbox.html" class="btn btn-primary btn-block mb-3">받은 메일함</a>
 
             <div class="card">
@@ -56,25 +57,24 @@
                 </div>
               </div>
               <div class="card-body p-0">
-                <ul class="nav nav-pills flex-column">
-                  <li class="nav-item active">
-                    <a href="#" class="nav-link">
-                      <i class="fas fa-inbox"></i> 받은메일함
-                      <span class="badge bg-primary float-right">12</span>
-                    </a>
-                  </li>
-                  <li class="nav-item">
-                    <a href="#" class="nav-link">
-                      <i class="far fa-envelope"></i> 보낸메일함
-                    </a>
-                  </li>
-                  <li class="nav-item">
-                    <a href="#" class="nav-link">
-                      <i class="far fa-trash-alt"></i> 휴지통
-                    </a>
-                  </li>
-                </ul>
-              </div>
+              <ul class="nav nav-pills flex-column">
+                <li class="nav-item active">
+                  <a href="${path}/mail/rbox" class="nav-link">
+                    <i class="fas fa-inbox"></i> 받은메일함
+                  </a>
+                </li>
+                <li class="nav-item">
+                  <a href="${path}/mail/sbox" class="nav-link">
+                   <i class="far fa-envelope"></i>보낸메일함
+                  </a>
+                </li>
+                <li class="nav-item">
+                  <a href="${path}/mail/trash" class="nav-link">
+                    <i class="far fa-trash-alt"></i> 휴지통
+                  </a>
+                </li>
+              </ul>
+            </div>
               <!-- /.card-body -->
             </div>
             <!-- /.card -->
@@ -86,103 +86,54 @@
               <h3 class="card-title">자세히보기</h3>
 
               <div class="card-tools">
-                <a href="#" class="btn btn-tool" title="Previous"><i class="fas fa-chevron-left"></i></a>
-                <a href="#" class="btn btn-tool" title="Next"><i class="fas fa-chevron-right"></i></a>
+                <a href="${path}/mail/detail/${mail.mailPreNo}" class="btn btn-tool" title="Previous"><i class="fas fa-chevron-left"></i></a>
+                <a href="${path}/mail/detail/${mail.mailNextNo}" class="btn btn-tool" title="Next"><i class="fas fa-chevron-right"></i></a>
               </div>
             </div>
             <!-- /.card-header -->
             <div class="card-body p-0">
               <div class="mailbox-read-info">
-                <h5>Message Subject Is Placed Here</h5>
-                <h6>From: support@adminlte.io
-                  <span class="mailbox-read-time float-right">15 Feb. 2015 11:03 PM</span></h6>
+              <input type="hidden" id="mailNo" value="${mail.mailNo}">
+                <h5>${mail.mailTitle}</h5><br>
+                <h6>보낸사람 : ${mail.senderStr} (${mail.senderId})</h6>
+                <h6>받는사람 : ${mail.recipientStr} (${mail.recipientId})
+                  <span class="mailbox-read-time float-right"><fmt:formatDate value="${mail.mailDate}" pattern="yy-MM-dd (E) HH:mm"/></span></h6>
               </div>
               <!-- /.mailbox-read-info -->
               <!-- /.mailbox-controls -->
               <div class="mailbox-read-message">
-                <p>Hello John,</p>
-
-                <p>Keffiyeh blog actually fashion axe vegan, irony biodiesel. Cold-pressed hoodie chillwave put a bird
-                  on it aesthetic, bitters brunch meggings vegan iPhone. Dreamcatcher vegan scenester mlkshk. Ethical
-                  master cleanse Bushwick, occupy Thundercats banjo cliche ennui farm-to-table mlkshk fanny pack
-                  gluten-free. Marfa butcher vegan quinoa, bicycle rights disrupt tofu scenester chillwave 3 wolf moon
-                  asymmetrical taxidermy pour-over. Quinoa tote bag fashion axe, Godard disrupt migas church-key tofu
-                  blog locavore. Thundercats cronut polaroid Neutra tousled, meh food truck selfies narwhal American
-                  Apparel.</p>
-
-                <p>Raw denim McSweeney's bicycle rights, iPhone trust fund quinoa Neutra VHS kale chips vegan PBR&amp;B
-                  literally Thundercats +1. Forage tilde four dollar toast, banjo health goth paleo butcher. Four dollar
-                  toast Brooklyn pour-over American Apparel sustainable, lumbersexual listicle gluten-free health goth
-                  umami hoodie. Synth Echo Park bicycle rights DIY farm-to-table, retro kogi sriracha dreamcatcher PBR&amp;B
-                  flannel hashtag irony Wes Anderson. Lumbersexual Williamsburg Helvetica next level. Cold-pressed
-                  slow-carb pop-up normcore Thundercats Portland, cardigan literally meditation lumbersexual crucifix.
-                  Wayfarers raw denim paleo Bushwick, keytar Helvetica scenester keffiyeh 8-bit irony mumblecore
-                  whatever viral Truffaut.</p>
-
-                <p>Post-ironic shabby chic VHS, Marfa keytar flannel lomo try-hard keffiyeh cray. Actually fap fanny
-                  pack yr artisan trust fund. High Life dreamcatcher church-key gentrify. Tumblr stumptown four dollar
-                  toast vinyl, cold-pressed try-hard blog authentic keffiyeh Helvetica lo-fi tilde Intelligentsia. Lomo
-                  locavore salvia bespoke, twee fixie paleo cliche brunch Schlitz blog McSweeney's messenger bag swag
-                  slow-carb. Odd Future photo booth pork belly, you probably haven't heard of them actually tofu ennui
-                  keffiyeh lo-fi Truffaut health goth. Narwhal sustainable retro disrupt.</p>
-
-                <p>Skateboard artisan letterpress before they sold out High Life messenger bag. Bitters chambray
-                  leggings listicle, drinking vinegar chillwave synth. Fanny pack hoodie American Apparel twee. American
-                  Apparel PBR listicle, salvia aesthetic occupy sustainable Neutra kogi. Organic synth Tumblr viral
-                  plaid, shabby chic single-origin coffee Etsy 3 wolf moon slow-carb Schlitz roof party tousled squid
-                  vinyl. Readymade next level literally trust fund. Distillery master cleanse migas, Vice sriracha
-                  flannel chambray chia cronut.</p>
-
-                <p>Thanks,<br>Jane</p>
+                ${mail.mailContent}
               </div>
               <!-- /.mailbox-read-message -->
             </div>
             <!-- /.card-body -->
-            <div class="card-footer bg-white">
+            <div class="card-footer bg-white" >
               <ul class="mailbox-attachments d-flex align-items-stretch clearfix">
-                <li>
-                  <span class="mailbox-attachment-icon"><i class="far fa-file-pdf"></i></span>
-
-                  <div class="mailbox-attachment-info">
-                    <a href="#" class="mailbox-attachment-name"><i class="fas fa-paperclip"></i> Sep2014-report.pdf</a>
-                        <span class="mailbox-attachment-size clearfix mt-1">
-                          <span>1,245 KB</span>
-                          <a href="#" class="btn btn-default btn-sm float-right"><i class="fas fa-cloud-download-alt"></i></a>
+                <li style="width: 100%">
+                <c:if test="${mail.originName1 ne null}">
+                	<div class="mailbox-attachment-info">
+                  	<p>
+                    <a href="${path}/resources/dist/img/mail/${mail.changeName1}" download="${mail.originName1}" class="mailbox-attachment-name"><i class="fas fa-paperclip"></i> ${mail.originName1}</a>
+                        <span>
+                          <a href="" class="btn btn-default btn-sm float-right"><i class="fas fa-file-alt"></i></a>
                         </span>
-                  </div>
-                </li>
-                <li>
-                  <span class="mailbox-attachment-icon"><i class="far fa-file-word"></i></span>
-
-                  <div class="mailbox-attachment-info">
-                    <a href="#" class="mailbox-attachment-name"><i class="fas fa-paperclip"></i> App Description.docx</a>
-                        <span class="mailbox-attachment-size clearfix mt-1">
-                          <span>1,245 KB</span>
-                          <a href="#" class="btn btn-default btn-sm float-right"><i class="fas fa-cloud-download-alt"></i></a>
+                    </p>
+                    <c:if test="${mail.originName2 ne null}">
+                    <p>
+                    <a href="${path}/resources/dist/img/mail/${mail.changeName2}" download="${mail.originName2}" class="mailbox-attachment-name"><i class="fas fa-paperclip"></i></a>
+                        <span>
+                          <a href="${path}/resources/dist/img/mail/${mail.changeName2}" download="${mail.originName1}" class="btn btn-default btn-sm float-right"><i class="fas fa-file-alt"></i></a>
+                        </span><br>
+                    </p>
+                    </c:if>
+                    <c:if test="${mail.originName3 ne null}">
+                    <a href="${path}/resources/dist/img/mail/${mail.changeName3}" download="${mail.originName3}" class="mailbox-attachment-name"><i class="fas fa-paperclip"></i> Sep2014-report.pdf</a>
+                        <span>
+                          <a href="${path}/resources/dist/img/mail/${mail.changeName3}" download="${mail.originName3}" class="btn btn-default btn-sm float-right"><i class="fas fa-file-alt"></i></a>
                         </span>
+                    </c:if>
                   </div>
-                </li>
-                <li>
-                  <span class="mailbox-attachment-icon has-img"><img src="../../dist/img/photo1.png" alt="Attachment"></span>
-
-                  <div class="mailbox-attachment-info">
-                    <a href="#" class="mailbox-attachment-name"><i class="fas fa-camera"></i> photo1.png</a>
-                        <span class="mailbox-attachment-size clearfix mt-1">
-                          <span>2.67 MB</span>
-                          <a href="#" class="btn btn-default btn-sm float-right"><i class="fas fa-cloud-download-alt"></i></a>
-                        </span>
-                  </div>
-                </li>
-                <li>
-                  <span class="mailbox-attachment-icon has-img"><img src="../../dist/img/photo2.png" alt="Attachment"></span>
-
-                  <div class="mailbox-attachment-info">
-                    <a href="#" class="mailbox-attachment-name"><i class="fas fa-camera"></i> photo2.png</a>
-                        <span class="mailbox-attachment-size clearfix mt-1">
-                          <span>1.9 MB</span>
-                          <a href="#" class="btn btn-default btn-sm float-right"><i class="fas fa-cloud-download-alt"></i></a>
-                        </span>
-                  </div>
+                </c:if>
                 </li>
               </ul>
             </div>
@@ -227,7 +178,53 @@
 <script src="${path}/resources/plugins/bootstrap/js/bootstrap.bundle.min.js"></script>
 <!-- AdminLTE App -->
 <script src="${path}/resources/dist/js/adminlte.min.js"></script>
-<!-- AdminLTE for demo purposes -->
-<script src="${path}/resources/dist/js/demo.js"></script>
+
+<script type="text/javascript">
+	//삭제 버튼 클릭
+	function sdel() {
+		//삭제할 번호 가져오기
+		let delNo = document.getElementsById('mailNo');
+		
+		//삭제 요청 보내기 (삭제할 번호 전달해주면서)
+		$.ajax({
+			url : "${path}/mail/sdelete",
+			data : {"str" : delNo},
+			type : 'post',
+			success : function(data) {
+				console.log(data);
+			},
+			error : function(e) {
+				console.log(e);
+			},
+			complete : function() {
+				//새로고침
+				location.href='http://127.0.0.1:8888/oup/mail/sbox';
+			}
+		});
+	}
+	
+	function rdel() {
+		//삭제할 번호 가져오기
+		let delNo = document.getElementsById('mailNo');
+		
+		//삭제 요청 보내기 (삭제할 번호 전달해주면서)
+		$.ajax({
+			url : "${path}/mail/rdelete",
+			data : {"str" : delNo},
+			type : 'post',
+			success : function(data) {
+				console.log(data);
+			},
+			error : function(e) {
+				console.log(e);
+			},
+			complete : function() {
+				//페이지 이동
+				location.href='${path}/mail/rbox';
+			}
+		});
+	}
+</script>
+
 </body>
 </html>

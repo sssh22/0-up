@@ -44,7 +44,10 @@
  			MAIL_NO,
  			FILE_SERVER_NAME1,
  			FILE_SERVER_NAME2,
- 			FILE_SERVER_NAME3
+ 			FILE_SERVER_NAME3,
+ 			FILE_ORIGIN_NAME1,
+ 			FILE_ORIGIN_NAME2,
+ 			FILE_ORIGIN_NAME3
  		)
  		VALUES
  		(
@@ -52,7 +55,10 @@
  			#{mailNo},
  			#{changeName1},
  			#{changeName2},
- 			#{changeName3}
+ 			#{changeName3},
+ 			#{originName1},
+ 			#{originName2},
+ 			#{originName3}
  		)
  	</insert>
  	
@@ -139,5 +145,48 @@
   		<foreach collection="array" item="m" open="(" close=")" separator=",">
   			${m}
   		</foreach>
+  	</update>
+  	
+  	<select id="selectTrashMailCnt" resultType="int">
+  		SELECT COUNT(MAIL_NO)
+ 		FROM MAIL
+ 		WHERE (MAIL_R_DEL_YN = 'Y' OR MAIL_S_DEL_YN = 'Y') AND (RECIPIENT = #{lNo} OR SENDER = #{lNo})
+  	</select>
+  	
+  	<select id="selectTrashMailList" parameterType="HashMap" resultType="mailVo">
+  		SELECT * FROM 
+  		(
+	  		SELECT ROWNUM RN, T.* 
+	  		 FROM(
+                SELECT M.*, E.EMPLOYEE_NAME AS recipientStr, E.EMPLOYEE_ID AS recipientId
+                FROM MAIL M
+                JOIN EMPLOYEE E
+                ON M.RECIPIENT = E.EMPLOYEE_NO
+                WHERE (MAIL_R_DEL_YN = 'Y' OR MAIL_S_DEL_YN = 'Y') AND (RECIPIENT = #{loginNo} OR SENDER = #{loginNo})
+                ORDER BY MAIL_NO DESC
+            ) T
+  		)
+  		WHERE RN BETWEEN #{page.startRow} AND #{page.endRow}
+  	</select>
+  	
+  	<select id="selectMail" resultType="mailVo">
+  		SELECT M.*, E.EMPLOYEE_NAME AS recipientStr, E.EMPLOYEE_ID AS recipientId
+  		
+  		, F.FILE_SERVER_NAME1 AS changeName1, F.FILE_SERVER_NAME2 AS changeName2, F.FILE_SERVER_NAME3 AS changeName3, F.FILE_ORIGIN_NAME1 AS originName1, F.FILE_ORIGIN_NAME2 AS originName2, F.FILE_ORIGIN_NAME3 AS originName3
+        
+        FROM MAIL M
+        JOIN EMPLOYEE E
+        	ON M.RECIPIENT = E.EMPLOYEE_NO
+        	
+        JOIN MAILFILE F
+        	ON M.MAIL_NO = F.MAIL_NO
+        
+  		WHERE M.MAIL_NO = #{mailNo}
+  	</select>
+  	
+  	<update id="deleteMail">
+  		UPDATE MAIL
+  		SET MAIL_R_DEL_YN = 'Y', MAIL_S_DEL_YN = 'Y'
+  		WHERE MAIL_NO = #{mailNo}
   	</update>
  </mapper>

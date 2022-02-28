@@ -33,4 +33,12 @@ public interface MailDao {
 
 	int deleteReceiveMail(String[] delArr) throws Exception;
 
+	int selectTrashMailCnt(long loginNo) throws Exception;
+
+	List<MailVo> selectTrashMailList(PageVo vo, long loginNo) throws Exception;
+
+	MailVo selectMail(String mailno) throws Exception;
+
+	int deleteMail(String mailno) throws Exception;
+
 }

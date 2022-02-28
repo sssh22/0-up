@@ -115,9 +115,46 @@ public class MailController {
 			return "fail_" + result;
 		}
 	}
-	
-	@GetMapping("/trash")
-	public String trashMailBox() {
+
+	@GetMapping(value = {"/trash/{page}", "/trash"})
+	public String trashMailBox(Model model, @PathVariable(required = false)String page, HttpServletRequest request) throws Exception {
+		if(page == null || Integer.parseInt(page) <= 0 )
+			page = "1";
+		
+		HttpSession session = request.getSession();
+		EmployeeVo loginEmployee = (EmployeeVo) session.getAttribute("loginEmployee");
+		long loginNo = loginEmployee.getEmployeeNo();
+		
+		int totalRow = service.getTrashMailCnt(loginNo);
+		PageVo vo = new PageVo(page, totalRow);
+		vo.setCntPerPage(15);
+		
+		List<MailVo> list = service.getTrashMailList(vo, loginNo);
+
+		model.addAttribute("list",list);
+		model.addAttribute("page", vo);
 		return "pages/mailbox/mailBoxTrash";
+	}
+	
+	@GetMapping(value = {"/detail/{mailno}", "/detail"})
+	public String mailDetail(Model model, @PathVariable(required = false)String mailno, HttpServletRequest request) throws Exception {
+		
+		MailVo mail = service.getMail(mailno);
+
+		mail.setMailNextNo(mail.getMailNo()+1);
+		mail.setMailPreNo(mail.getMailNo()-1);
+		
+		System.out.println("화면 ::: " + mail);
+		
+		model.addAttribute("mail",mail);
+		return "pages/mailbox/mailDetail";
+	}
+	
+	@GetMapping(value = {"/delete/{mailno}", "/delete"})
+	public String mailDelete(@PathVariable(required = false)String mailno) throws Exception {
+		int result = service.deleteMail(mailno);
+		
+		return "pages/mailbox/mailBoxReceive";
+
 	}
 }
