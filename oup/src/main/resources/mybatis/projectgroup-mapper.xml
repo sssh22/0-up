@@ -8,7 +8,7 @@
  
  <select id="getDeptList" resultType="com.kh.oup.project.vo.DeptVo">
  
- SELECT DISTINCT *  FROM DEPARTMENT <!-- detp만 화면으로.. -->
+ SELECT DISTINCT * FROM DEPARTMENT <!-- detp만 화면으로.. -->
  
  </select>
  

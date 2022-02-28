@@ -7,6 +7,8 @@ import org.springframework.stereotype.Controller;
 import org.springframework.ui.Model;
 import org.springframework.web.bind.annotation.GetMapping;
 import org.springframework.web.bind.annotation.PostMapping;
+import org.springframework.web.bind.annotation.RequestMapping;
+import org.springframework.web.bind.annotation.ResponseBody;
 
 import com.kh.oup.project.service.ProjectService;
 import com.kh.oup.project.vo.DeptVo;
@@ -14,6 +16,7 @@ import com.kh.oup.project.vo.MemberSearchVo;
 import com.kh.oup.project.vo.TeamVo;
 
 @Controller
+@RequestMapping("project")
 public class ProjectController {
 
 	@Autowired
@@ -23,6 +26,10 @@ public class ProjectController {
 	public String project_add() {
 		return "pages/project/project_add";
 	}
+	/*
+	 * @PostMapping("project_add") public String project_add() { return
+	 * "pages/project/project_add"; }
+	 */
 	
 	@GetMapping("project_detail")
 	public String project_detail() {
@@ -38,10 +45,7 @@ public class ProjectController {
 	public String project_list() {
 		return "pages/project/project_list";
 	}
-	
-	
-	
-	
+
 	
 	@GetMapping("search_member")
 	public String search_member(Model model) {
@@ -53,14 +57,16 @@ public class ProjectController {
 	}
 	
 	
-	@PostMapping("search_member")
-	public String search_team(String departCode,Model model) {
+	@PostMapping("search_member.do")
+	@ResponseBody
+	public List<TeamVo> search_team(String departCode,Model model) {
 		System.out.println(departCode);
 		
 		List<TeamVo> tlist = service.selectTeamList(departCode);
 		System.out.println(tlist);
 		model.addAttribute("tlist",tlist);
-		return "pages/project/search_member";
+		//tlist -> json Object 
+		return tlist;
 	}
 	
 	
