@@ -7,15 +7,19 @@
 <head>
 <meta charset="UTF-8">
 <title>Insert title here</title>
+<script src="https://ajax.googleapis.com/ajax/libs/jquery/3.6.0/jquery.min.js"></script>
 </head>
 <body>
+<script src="http://code.jquery.com/jquery-latest.js"></script>
+
+
 
 <form>
       부서명: 
       <select name="dept_name" id="dept_name" onchange="getTeam(this.value);">
       	<option value="">선택</option>
         <c:forEach items="${dlist}" var="d"> 
-       	 <option value="${d.departCode}">${d.departCode}</option>
+       	 <option value="${d.departCode}">${d.departName}</option>
         </c:forEach>
       </select>
       팀명: 
@@ -42,40 +46,33 @@
       </tr>
     </table>
 
+
 <script type="text/javascript">
 
 function getTeam(param){
-	var $target=$("select[name='team_name']");
-	$target.empty();
+
 	
 	alert("onchange작동"+param);
-	
-	if(param == ""){
-		
-	}else{
+
 		$.ajax({
-			url:"/search_member",
+			url:"/oup/search_member.do",
 			type:"POST",
-			data:{"departCode" : param},
+			data:{departCode : param},
 			success: function(data){
-					if(data.length == 0){
-						$target.append("<option value="">선택</option>");
-					}else{
-						$(data).each(function(i){
-							$target.append("<option value=""+data[i].teamCode+"">"+data[i].teamName+"</option>")
-						});
-					}
-					}
+					alert("성공");
+					console.log(data);
+					console.log(data[0].teamName);
+					
+					},
 			error: function(){
 					alert("에러");
 			}
-		});
-	}
+		});//ajax
+	
 	
 };
 
 </script>
-
 
 
 
