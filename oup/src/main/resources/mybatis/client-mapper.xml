@@ -115,5 +115,13 @@
  			c_credit_day = ${cCreditDateDay}
  		where c_no = ${cNo}
   	</update>
+  	
+  	<select id="searchClientList" parameterType="string" resultType="clientVo">
+  		select * from client
+		where c_delete_yn = 'N'and (
+  			c_name like'%${search}%' or c_owner like '%${search}%' or c_no like '%${search}%'
+  			)
+		order by c_no  		
+  	</select>
  	
  </mapper>

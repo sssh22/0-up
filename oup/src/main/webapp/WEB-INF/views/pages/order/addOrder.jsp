@@ -67,9 +67,9 @@
                 <div class="col-sm-1"></div>
                 <div class="col-sm-4">                  
                   <div class="input-group col mt-3">
-                    <input type="text" class="form-control" placeholder="거래처">
-                    <span class="input-group-text"><i class="bi bi-search"></i></span>
-                    <input type="text" class="form-control" readonly>
+                    <input type="text" class="form-control" id="clientText" placeholder="거래처">
+                    <button class="input-group-text" onclick="goPopup()"><i class="bi bi-search"></i></button>
+                    <input type="text" class="form-control" id="client" name="client" readonly>
                   </div>
                 </div>
 
@@ -77,9 +77,9 @@
                 <div class="col-sm-1"></div>
                 <div class="col-sm-4">
                   <div class="input-group col mb-3">
-                    <input type="text" class="form-control" placeholder="담당자">
-                    <span class="input-group-text"><i class="bi bi-search"></i></span>
-                    <input type="text" class="form-control" readonly>
+                    <input type="text" class="form-control" placeholder="담당자" id="ownerText">
+                    <button class="input-group-text" onclick="changeOwner()"><i class="bi bi-arrow-right"></i></button>
+                    <input type="text" class="form-control" name="onwer" id="owner" readonly>
                   </div>
                 </div>
 
@@ -292,6 +292,30 @@
 <script src="${path}/resources/plugins/bootstrap/js/bootstrap.bundle.min.js"></script>
 <!-- AdminLTE App -->
 <script src="${path}/resources/dist/js/adminlte.min.js"></script>
+
+<script>
+	function changeOwner(){
+		let ownerText = document.getElementById("ownerText").value;
+		document.getElementById("owner").value = ownerText;
+	}
+	
+	var goPopup = function(){ 
+		let clientText = document.getElementById("clientText").value;
+		
+		var search = window.open("${path}/client/searchClient?search="+clientText,"search","width=570,height=420, scrollbars=no, resizable=no"); 
+		} 
+	var jusoCallBack = function(
+			roadFullAddr,roadAddrPart1,addrDetail,
+			roadAddrPart2,engAddr, jibunAddr, zipNo
+			){ 
+				document.getElementById("addr").value = roadFullAddr; 
+				if(addrDetail.length>30){ 
+					alert('상세주소가 너무 길어 다시 입력해야 합니다.'); 
+					return; 
+		} 
+	} 
+
+</script>
 
 </body>
 </html>

@@ -23,4 +23,6 @@ public interface ClientDao {
 
 	int updateClient(ClientVo vo) throws Exception;
 
+	List<ClientVo> selectSearchClientList(String search) throws Exception;
+
 }
