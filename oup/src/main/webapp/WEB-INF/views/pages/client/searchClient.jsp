@@ -40,7 +40,7 @@
             	<form action="${path}/client/searchClient" method="get" name="searchform">
                 <div class="input-group mb-3 " style="left:45%;">
                   <input type="text" name="search" class="form-control col-sm-6" placeholder="Search" id="searchClient">
-                  <button class="btn btn-secondary" onclick="submit()"><i class="fa fa-search"></i></button>
+                  <button class="btn btn-secondary" onclick="submit(); return false;";><i class="fa fa-search"></i></button>
                 </div>
                 <table class="table table-bordered projects">
                   <thead>
@@ -65,7 +65,7 @@
                   <tbody>
                   <c:forEach items="${list}" var="l">				
                     <tr>
-                      <td>${l.CNo}</td>
+                      <td><button onclick="returnCNo(${l.CNo},${l.CName},${l.COwner},${l.CCreditMonth},${l.CCreditDay})">${l.CNo}</button></td>
                       <td>${l.CName}</td>
                       <td>${l.COwner}</td>
                       <td>${l.BNo}</td>
@@ -98,19 +98,19 @@
 		document.searchform.submit(search);
 	}	
 	
-	var goPopup = function(){ 
-		var pop = window.open("${path}/resources/pages/popup/jusoPopup.jsp","pop","width=570,height=420, scrollbars=yes, resizable=yes"); 
-		} 
-	var jusoCallBack = function(
-			roadFullAddr,roadAddrPart1,addrDetail,
-			roadAddrPart2,engAddr, jibunAddr, zipNo
-			){ 
-				document.getElementById("addr").value = roadFullAddr; 
-				if(addrDetail.length>30){ 
-					alert('상세주소가 너무 길어 다시 입력해야 합니다.'); 
-					return; 
-		} 
-	} 
+	function returnCNo(cNo,cName,cOwner,creditMonth,creditDay) { 
+			let orderDate = new Date(opener.document.getElementById("orderDate").value);
+			orderDate.setMonth(orderDate.getMonth() + creditMonth);
+			orderDate.setDate(orderDate.getDate() + creditDay);
+			let returnDate = new Date(+orderDate + 3240 * 10000).toISOString().split("T")[0];
+			
+			opener.document.getElementById("clientNo").value = cNo;
+			opener.document.getElementById("client").value = cName;
+			opener.document.getElementById("owner").value = cOwner;
+			opener.document.getElementById("creditDate").value = returnDate; 
+			window.close();
+	}
+
 </script>
 </body>
 </html>

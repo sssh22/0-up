@@ -65,17 +65,16 @@ public class ClientController {
 	}
 	
 	@PostMapping("addList")
-	@ResponseBody
 	public String addList(ClientVo vo) throws Exception {
 		int result = service.addclient(vo);
 		
 		if(result >0) {
 			log.info("거래처 추가 success");
-			return "거래처 추가 success";			
+			return "common/closePopup";
 		}
 		
 		log.info("거래처 추가 fail");
-		return "거래처 저장 실패";
+		return "common/closePopup";
 	}
 	
 	@PostMapping("delete")
@@ -84,11 +83,11 @@ public class ClientController {
 		
 		if(result == client.length()/8) {
 			log.info("거래처 삭제 success");
-			return "common/closePopup";
+			return "client/clientList";	
 		}
 		
 		log.info("거래처 삭제 fail");
-		return "common/closePopup";
+		return "client/clientList";	
 	}
 	
 	@GetMapping(value = {"change/{result}"})
@@ -102,7 +101,6 @@ public class ClientController {
 	
 	@PostMapping(value = {"change"})
 	public String changeList(ClientVo vo) throws Exception {
-		System.out.println(vo);
 		int result = service.changeClient(vo);
 		
 		if(result >0) {
@@ -111,7 +109,7 @@ public class ClientController {
 		}
 		
 		log.info("거래처 변경 fail");
-		return "common/closePopup";
+		return "redirect:/closePage";
 	}
 	
 	@GetMapping("searchClient")
@@ -124,14 +122,17 @@ public class ClientController {
 		}
 		
 		if(search != null) {
-			int totalRow = service.getSearchClientCnt(search);	
-			
 			List<ClientVo> list = service.getSearchClientList(search);
 			model.addAttribute("list",list);
 			model.addAttribute("search", search);
 		}
 		
 		return "pages/client/searchClient";
+	}
+	
+	@GetMapping("closePage")
+	public String closePage() {
+		return "common/closePopup";
 	}
 	
 }

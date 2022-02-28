@@ -18,8 +18,8 @@ public class ClientVo {
 	private String cEmail;	
 	private int cUmony;		
 	private int cCreditLimit;	
-	private int cCreditDateMonth;	
-	private int cCreditDateDay;		
+	private int cCreditMonth;	
+	private int cCreditDay;		
 	private Date cDate;				
 	private String cDeleteYn;		
 }

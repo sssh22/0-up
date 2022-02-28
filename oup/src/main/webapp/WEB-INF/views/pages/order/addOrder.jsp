@@ -59,7 +59,7 @@
                 <div class="col-sm-1"></div>
                 <div class="col-sm-4">  
                   <div class="col">
-                    <input type="text" class="form-control mb-3 mt-3" placeholder="기한">
+                    <input type="date" class="form-control mb-3 mt-3" id="orderDate" required>
                   </div>
                 </div>
 
@@ -70,9 +70,9 @@
                     <input type="text" class="form-control" id="clientText" placeholder="거래처">
                     <button class="input-group-text" onclick="goPopup()"><i class="bi bi-search"></i></button>
                     <input type="text" class="form-control" id="client" name="client" readonly>
+                    <input type="hidden" id="clientNo" name="cNo">
                   </div>
                 </div>
-
                 <div class="col-sm-1" style="padding:5px;"><b>담당자</b></div>
                 <div class="col-sm-1"></div>
                 <div class="col-sm-4">
@@ -87,9 +87,9 @@
                 </div><div class="col-sm-1"></div>
                 <div class="col-sm-4">
                   <div class="input-group col">
-                    <input type="text" class="form-control" placeholder="출하창고">
-                    <span class="input-group-text"><i class="bi bi-search"></i></span>
-                    <input type="text" class="form-control" readonly>
+                    <input type="text" class="form-control" placeholder="출하창고" id="wareText">
+                    <button class="input-group-text" onclick="changeWare()"><i class="bi bi-arrow-right"></i></button>
+                    <input type="text" class="form-control" name="warehouse" id="ware" readonly>
                   </div>
                 </div>
 
@@ -97,18 +97,18 @@
                 <div class="col-sm-1"></div>
                 <div class="col-sm-4">
                   <div class="col">
-                    <select class="form-control mb-3">
-                      <option>부가세적용</option>
+                    <select class="form-control mb-3" onchange="selectVat()" id="vat">
                       <option>부가세미적용</option>
+                      <option>부가세적용</option>
                     </select>
                   </div>
                 </div>
 
-                <div class="col-sm-1" style="padding:5px;"><b>유효기간</b></div>
+                <div class="col-sm-1" style="padding:5px;"><b>여신기한</b></div>
                 <div class="col-sm-1"></div>
                 <div class="col-sm-4">
                   <div class="col">
-                    <input type="text" class="form-control mb-3" placeholder="유효기간" readonly>
+                    <input type="date" class="form-control mb-3" id="creditDate" readonly>
                   </div>
                 </div>
 
@@ -186,75 +186,16 @@
                         <input type="text" class="form-control" placeholder="3000원">
                       </td>
                       <td>
-                        <input type="text" class="form-control" placeholder="100원">
+                        <input type="text" class="form-control" placeholder="100원" id="supplyPrice">
                       </td>
                       <td>
-                        <input type="text" class="form-control" placeholder="0원">
+                        <input type="text" class="form-control" placeholder="0원" id="vatText" value="0" readonly>
                       </td>
                       <td>
-                        <input type="text" class="form-control" placeholder="2022-04-18">
+                        <input type="date" class="form-control">
                       </td>
                   </tr>
 
-                  <tr>
-                    <td>
-                      <input type="checkbox">
-                    </td>
-                    <td>
-                            <a href="#"><i class="bi bi-arrow-bar-down"></i></a>
-                    </td>
-                    <td>
-                      <input type="text" class="form-control" placeholder="AA00">
-                    </td>
-                    <td class="project_progress">
-                      <input type="text" class="form-control" placeholder="단단한돌">
-                    </td>
-                    <td>
-                      <input type="text" class="form-control" placeholder="1000">
-                    </td>
-                    <td>
-                      <input type="text" class="form-control" placeholder="3000원">
-                    </td>
-                    <td>
-                      <input type="text" class="form-control" placeholder="100원">
-                    </td>
-                    <td>
-                      <input type="text" class="form-control" placeholder="0원">
-                    </td>
-                    <td>
-                      <input type="text" class="form-control" placeholder="2022-04-18">
-                    </td>
-                </tr>
-
-                <tr>
-                  <td>
-                    <input type="checkbox">
-                  </td>
-                  <td>
-                          <a href="#"><i class="bi bi-arrow-bar-down"></i></a>
-                  </td>
-                  <td>
-                    <input type="text" class="form-control" placeholder="AA00">
-                  </td>
-                  <td class="project_progress">
-                    <input type="text" class="form-control" placeholder="단단한돌">
-                  </td>
-                  <td>
-                    <input type="text" class="form-control" placeholder="1000">
-                  </td>
-                  <td>
-                    <input type="text" class="form-control" placeholder="3000원">
-                  </td>
-                  <td>
-                    <input type="text" class="form-control" placeholder="100원">
-                  </td>
-                  <td>
-                    <input type="text" class="form-control" placeholder="0원">
-                  </td>
-                  <td>
-                    <input type="text" class="form-control" placeholder="2022-04-18">
-                  </td>
-              </tr>
             </tbody>
           </table>
 
@@ -298,22 +239,31 @@
 		let ownerText = document.getElementById("ownerText").value;
 		document.getElementById("owner").value = ownerText;
 	}
+	function changeWare(){
+		let wareText = document.getElementById("wareText").value;
+		document.getElementById("ware").value = wareText;
+	}
+	
+
+	function selectVat(){
+		let Vat = document.getElementById("vat").value;
+		if(Vat == "부가세적용"){
+			document.getElementById("vatText").value = document.getElementById("supplyPrice").value / 10;
+		}
+		if(Vat == "부가세미적용"){
+			document.getElementById("vatText").value=0;
+		}
+	}
 	
 	var goPopup = function(){ 
+		if(document.getElementById("orderDate").value == ""){
+			alert("주문일자를 입력해주세요");
+			return;
+		}
 		let clientText = document.getElementById("clientText").value;
 		
-		var search = window.open("${path}/client/searchClient?search="+clientText,"search","width=570,height=420, scrollbars=no, resizable=no"); 
+		var search = window.open("${path}/client/searchClient?search="+clientText,"search","width=570,height=420, scrollbars=yes, resizable=no"); 
 		} 
-	var jusoCallBack = function(
-			roadFullAddr,roadAddrPart1,addrDetail,
-			roadAddrPart2,engAddr, jibunAddr, zipNo
-			){ 
-				document.getElementById("addr").value = roadFullAddr; 
-				if(addrDetail.length>30){ 
-					alert('상세주소가 너무 길어 다시 입력해야 합니다.'); 
-					return; 
-		} 
-	} 
 
 </script>
 

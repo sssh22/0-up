@@ -5,12 +5,12 @@
 <head>
 <meta charset="UTF-8">
 <title>Insert title here</title>
-</head>
-<body onload="close()">
 <script type="text/javascript">
 function close(){
-	window.close;
+	 window.open('','_self').close(); 
 }
 </script>
+</head>
+<body onload="close();">
 </body>
 </html>
