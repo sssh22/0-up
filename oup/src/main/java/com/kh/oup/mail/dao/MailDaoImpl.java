@@ -107,13 +107,26 @@ public class MailDaoImpl implements MailDao{
 	}
 
 	@Override
-	public MailVo selectMail(String mailno) throws Exception {
-		return ss.selectOne("mail.selectMail", mailno);
+	public MailVo selectMail(String mailno, String fileYN) throws Exception {
+		HashMap<String, String> emp = new HashMap<String, String>();
+		emp.put("mailNo", mailno);
+		emp.put("fileYN", fileYN);
+		return ss.selectOne("mail.selectMail", emp);
 	}
 
 	@Override
 	public int deleteMail(String mailno) throws Exception {
 		return ss.update("mail.deleteMail", mailno);
+	}
+
+	@Override
+	public String checkFile(String mailno) throws Exception {
+		return ss.selectOne("mail.checkFile", mailno);
+	}
+
+	@Override
+	public int mailRead(String mailno) throws Exception {
+		return ss.update("mail.mailRead", mailno);
 	}
 
 }

@@ -30,7 +30,7 @@ public class MailServiceImpl implements MailService{
 		int result = 0;
 		
 		//테스트
-//		for(int i = 0; i < 50; i++) {
+//		for(int i = 0; i < 20; i++) {
 			//硫붿씪踰덊샇 nextval
 			int no = dao.getMailSeq();
 			
@@ -57,15 +57,12 @@ public class MailServiceImpl implements MailService{
 					
 					if(index == 1) {
 						vo.setChangeName1(changeName);
-						System.out.println(fArr.get(0).getOriginalFilename());
 						vo.setOriginName1(fArr.get(0).getOriginalFilename());
 					} else if(index == 2) {
 						vo.setChangeName2(changeName);
-						System.out.println(fArr.get(1).getOriginalFilename());
 						vo.setOriginName2(fArr.get(1).getOriginalFilename());
 					} else if(index == 3) {
 						vo.setChangeName3(changeName);
-						System.out.println(fArr.get(2).getOriginalFilename());
 						vo.setOriginName3(fArr.get(2).getOriginalFilename());
 					}
 					
@@ -145,18 +142,23 @@ public class MailServiceImpl implements MailService{
 
 	@Override
 	public MailVo getMail(String mailno) throws Exception {
-		MailVo mail = dao.selectMail(mailno);
-		log.info("mailNo ::: " + mailno);
-		log.info("mail 하나만 가지고 왓을 때" + mail);
+		//1 = 첨부파일 있음, 0 = 첨부파일 없음
+		String fileYN = dao.checkFile(mailno);
+		MailVo mail = dao.selectMail(mailno, fileYN);
+		log.info("mail 하나만 가지고 왓을 때 " + mail);
 		mail.setSenderStr(dao.getSenderStr(mail.getSender()));
 		mail.setSenderId(dao.getSenderId(mail.getSender()));
-		
 		return mail;
 	}
 
 	@Override
 	public int deleteMail(String mailno) throws Exception {
 		return dao.deleteMail(mailno);
+	}
+
+	@Override
+	public int mailRead(String mailno) throws Exception {
+		return dao.mailRead(mailno);
 	}
 
 }

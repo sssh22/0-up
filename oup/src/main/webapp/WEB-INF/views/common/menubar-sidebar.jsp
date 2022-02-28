@@ -184,7 +184,7 @@
           <!-- Add icons to the links using the .nav-icon class
                with font-awesome or any other icon font library -->
           <li class="nav-item">
-            <a href="#" class="nav-link">
+            <a href="${path}/mail/rbox" class="nav-link">
               <i class="nav-icon far fa-envelope"></i>
               <p style="color: #ffffff">
                 메일함
@@ -193,38 +193,21 @@
             </a>
             <ul class="nav nav-treeview">
               <li class="nav-item">
-                <a href="./index.html" class="nav-link">
+                <a href="${path}/mail/rbox" class="nav-link">
                   <i class="far fa-circle nav-icon"></i>
                   <p style="color: #ebe7f1">받은메일함</p>
                 </a>
               </li>
               <li class="nav-item">
-                <a href="./index2.html" class="nav-link">
+                <a href="${path}/mail/sbox" class="nav-link">
                   <i class="far fa-circle nav-icon"></i>
                   <p style="color: #ebe7f1">보낸메일함</p>
                 </a>
               </li>
-            </ul>
-          </li>
-          <li class="nav-item">
-            <a href="#" class="nav-link">
-              <i class="nav-icon fas fa-table"></i>
-              <p style="color: #ebe7f1">
-                게시판
-                <i class="right fas fa-angle-left"></i>
-              </p>
-            </a>
-            <ul class="nav nav-treeview">
               <li class="nav-item">
-                <a href="./index.html" class="nav-link">
+                <a href="${path}/mail/trash" class="nav-link">
                   <i class="far fa-circle nav-icon"></i>
-                  <p style="color: #ebe7f1">공지사항</p>
-                </a>
-              </li>
-              <li class="nav-item">
-                <a href="./index2.html" class="nav-link">
-                  <i class="far fa-circle nav-icon"></i>
-                  <p style="color: #ebe7f1">자유게시판</p>
+                  <p style="color: #ebe7f1">휴지통</p>
                 </a>
               </li>
             </ul>
@@ -239,13 +222,19 @@
             </a>
             <ul class="nav nav-treeview">
               <li class="nav-item">
-                <a href="./index.html" class="nav-link">
+                <a href="${path}/" class="nav-link">
                   <i class="far fa-circle nav-icon"></i>
                   <p style="color: #ebe7f1">캘린더</p>
                 </a>
               </li>
               <li class="nav-item">
-                <a href="./index2.html" class="nav-link">
+                <a href="${path}/project/project_list" class="nav-link">
+                  <i class="far fa-circle nav-icon"></i>
+                  <p style="color: #ebe7f1">프로젝트 조회</p>
+                </a>
+              </li>
+              <li class="nav-item">
+                <a href="${path}/project/project_add" class="nav-link">
                   <i class="far fa-circle nav-icon"></i>
                   <p style="color: #ebe7f1">프로젝트 등록</p>
                 </a>
@@ -295,44 +284,9 @@
             </a>
             <ul class="nav nav-treeview">
               <li class="nav-item">
-                <a href="./index.html" class="nav-link">
+                <a href="${path}/client/list" class="nav-link">
                   <i class="far fa-circle nav-icon"></i>
                   <p style="color: #ebe7f1">거래처조회</p>
-                </a>
-              </li>
-              <li class="nav-item">
-                <a href="./index2.html" class="nav-link">
-                  <i class="far fa-circle nav-icon"></i>
-                  <p style="color: #ebe7f1">거래처입력</p>
-                </a>
-              </li>
-            </ul>
-          </li>
-          <li class="nav-item">
-            <a href="#" class="nav-link">
-              <i class="nav-icon fas fa-file"></i>
-              <p style="color: #ebe7f1">
-                견적서
-                <i class="right fas fa-angle-left"></i>
-              </p>
-            </a>
-            <ul class="nav nav-treeview">
-              <li class="nav-item">
-                <a href="./index.html" class="nav-link">
-                  <i class="far fa-circle nav-icon"></i>
-                  <p style="color: #ebe7f1">견적서 조회</p>
-                </a>
-              </li>
-              <li class="nav-item">
-                <a href="./index2.html" class="nav-link">
-                  <i class="far fa-circle nav-icon"></i>
-                  <p style="color: #ebe7f1">견적서 입력</p>
-                </a>
-              </li>
-              <li class="nav-item">
-                <a href="./index2.html" class="nav-link">
-                  <i class="far fa-circle nav-icon"></i>
-                  <p style="color: #ebe7f1">견적서 현황</p>
                 </a>
               </li>
             </ul>
@@ -423,14 +377,6 @@
                 </a>
               </li>
             </ul>
-          </li>
-          <li class="nav-item">
-            <a href="#" class="nav-link">
-              <i class="nav-icon fas fa-dollar-sign"></i>
-              <p style="color: #ebe7f1">
-                거래처별채권
-              </p>
-            </a>
           </li>
           <li class="nav-item">
             <a href="#" class="nav-link">

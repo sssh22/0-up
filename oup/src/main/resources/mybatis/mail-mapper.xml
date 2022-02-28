@@ -169,24 +169,38 @@
   		WHERE RN BETWEEN #{page.startRow} AND #{page.endRow}
   	</select>
   	
-  	<select id="selectMail" resultType="mailVo">
+  	<select id="selectMail" parameterType="HashMap" resultType="mailVo">
   		SELECT M.*, E.EMPLOYEE_NAME AS recipientStr, E.EMPLOYEE_ID AS recipientId
-  		
+  		<if test="fileYN == 1">  		
   		, F.FILE_SERVER_NAME1 AS changeName1, F.FILE_SERVER_NAME2 AS changeName2, F.FILE_SERVER_NAME3 AS changeName3, F.FILE_ORIGIN_NAME1 AS originName1, F.FILE_ORIGIN_NAME2 AS originName2, F.FILE_ORIGIN_NAME3 AS originName3
-        
+  		</if>
         FROM MAIL M
         JOIN EMPLOYEE E
         	ON M.RECIPIENT = E.EMPLOYEE_NO
-        	
+        <if test="fileYN == 1">
         JOIN MAILFILE F
         	ON M.MAIL_NO = F.MAIL_NO
-        
+        </if>
   		WHERE M.MAIL_NO = #{mailNo}
   	</select>
   	
   	<update id="deleteMail">
   		UPDATE MAIL
   		SET MAIL_R_DEL_YN = 'Y', MAIL_S_DEL_YN = 'Y'
+  		WHERE MAIL_NO = #{mailNo}
+  	</update>
+  	
+  	<select id="checkFile" resultType="String">
+  		SELECT COUNT(*)
+  		FROM MAIL M
+  		JOIN MAILFILE F
+  			ON M.MAIL_NO = F.MAIL_NO
+  		WHERE M.MAIL_NO = #{mailno}
+  	</select>
+  	
+  	<update id="mailRead">
+  		UPDATE MAIL
+  		SET READ_YN = 'Y'
   		WHERE MAIL_NO = #{mailNo}
   	</update>
  </mapper>

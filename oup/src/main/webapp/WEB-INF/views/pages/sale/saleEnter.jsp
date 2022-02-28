@@ -78,8 +78,8 @@
                 <div class="col-sm-4">
                   <div class="input-group col mb-3">
                     <input type="text" class="form-control" placeholder="담당자">
-                    <span class="input-group-text"><i class="bi bi-search"></i></span>
-                    <input type="text" class="form-control" readonly>
+                    <button class="input-group-text" onclick="goPopup()"><i class="bi bi-search"></i></button>
+                    <input type="text" class="form-control" readonly id="id">
                   </div>
                 </div>
 
@@ -114,7 +114,7 @@
                   </div>
                 </div>
                 
-                <div class="col-sm-1" style="padding:5px;"><b>미수금액</b></div>
+                <div class="col-sm-1" style="padding:5px;"><b>미수금액(전 잔액)</b></div>
                 <div class="col-sm-1"></div>
                 <div class="col-sm-4">
                   <div class="col">
@@ -122,11 +122,11 @@
                   </div>
                 </div>
                 
-                <div class="col-sm-1" style="padding:5px;"><b>첨부</b></div>
+                <div class="col-sm-1" style="padding:5px;"><b>미수금액(후잔액)</b></div>
                 <div class="col-sm-1"></div>
                 <div class="col-sm-4">
                   <div class="col">
-                    <input type="file" class="form-control mb-3" placeholder="첨부">
+                    <input type="text" class="form-control mb-3" placeholder="미수금액" readonly>
                   </div>
                 </div>
 				
@@ -136,139 +136,85 @@
             <button type="button">찾기</button>
             <button type="button">거래내역보기</button>
             <button type="button">My품목</button>
-            <button type="button">견적</button>
-            <button type="button">할인</button>
-            <button type="button">재고불러오기</button>
-            <button type="button">생성한전표</button>
-            <button type="button">이익계산</button>
-          </div>
-
-          <table class="table table-bordered projects">
-              <thead>
-                  <tr>
-                      <th style="width: 3%">
-                        <input type="checkbox">
-                      </th>
-                      <th style="width: 3%" class="text-center">
-                        <i class="bi bi-arrow-bar-down"></i>
-                      </th>
-                      <th style="width: 10%" class="text-center">
-                          품목코드
-                      </th>
-                      <th style="width: 15%" class="text-center">
-                          품목명
-                      </th>
-                      <th style="width: 9%" class="text-center">
-                        수량
-                      </th>
-                      <th style="width: 13%" class="text-center">
-                          단가
-                      </th>
-                      <th style="width: 14%" class="text-center">
-                        공급가액
-                      </th>
-                      <th style="width: 13%" class="text-center">
-                        부가세
-                      </th>
-                      <th style="width: 20%" class="text-center">
-                        납기일자
-                      </th>
-                  </tr>
-              </thead>
-              <tbody>
-                  <tr>
-                      <td>
-                        <input type="checkbox">
-                      </td>
-                      <td>
-                              <a href="#"><i class="bi bi-arrow-bar-down"></i></a>
-                      </td>
-                      <td>
-                        <input type="text" class="form-control" placeholder="AA00">
-                      </td>
-                      <td class="project_progress">
-                        <input type="text" class="form-control" placeholder="단단한돌">
-                      </td>
-                      <td>
-                        <input type="text" class="form-control" placeholder="1000">
-                      </td>
-                      <td>
-                        <input type="text" class="form-control" placeholder="3000원">
-                      </td>
-                      <td>
-                        <input type="text" class="form-control" placeholder="100원">
-                      </td>
-                      <td>
-                        <input type="text" class="form-control" placeholder="0원">
-                      </td>
-                      <td>
-                        <input type="text" class="form-control" placeholder="2022-04-18">
-                      </td>
-                  </tr>
-
-                  <tr>
-                    <td>
-                      <input type="checkbox">
-                    </td>
-                    <td>
-                            <a href="#"><i class="bi bi-arrow-bar-down"></i></a>
-                    </td>
-                    <td>
-                      <input type="text" class="form-control" placeholder="AA00">
-                    </td>
-                    <td class="project_progress">
-                      <input type="text" class="form-control" placeholder="단단한돌">
-                    </td>
-                    <td>
-                      <input type="text" class="form-control" placeholder="1000">
-                    </td>
-                    <td>
-                      <input type="text" class="form-control" placeholder="3000원">
-                    </td>
-                    <td>
-                      <input type="text" class="form-control" placeholder="100원">
-                    </td>
-                    <td>
-                      <input type="text" class="form-control" placeholder="0원">
-                    </td>
-                    <td>
-                      <input type="text" class="form-control" placeholder="2022-04-18">
-                    </td>
-                </tr>
-
-                <tr>
-                  <td>
-                    <input type="checkbox">
-                  </td>
-                  <td>
-                          <a href="#"><i class="bi bi-arrow-bar-down"></i></a>
-                  </td>
-                  <td>
-                    <input type="text" class="form-control" placeholder="AA00">
-                  </td>
-                  <td class="project_progress">
-                    <input type="text" class="form-control" placeholder="단단한돌">
-                  </td>
-                  <td>
-                    <input type="text" class="form-control" placeholder="1000">
-                  </td>
-                  <td>
-                    <input type="text" class="form-control" placeholder="3000원">
-                  </td>
-                  <td>
-                    <input type="text" class="form-control" placeholder="100원">
-                  </td>
-                  <td>
-                    <input type="text" class="form-control" placeholder="0원">
-                  </td>
-                  <td>
-                    <input type="text" class="form-control" placeholder="2022-04-18">
-                  </td>
-              </tr>
-            </tbody>
-          </table>
-
-          <div style="margin: 10px;">
+            <button type="button">주문</button>
+	       </div>
+	
+			<table class="table table-bordered projects">
+				<thead>
+					<tr>
+						<th style="width: 3%"><input type="checkbox"></th>
+						<th style="width: 3%" class="text-center"><i
+							class="bi bi-arrow-bar-down"></i></th>
+						<th style="width: 10%" class="text-center">품목코드</th>
+						<th style="width: 15%" class="text-center">품목명</th>
+						<th style="width: 9%" class="text-center">수량</th>
+						<th style="width: 13%" class="text-center">단가</th>
+						<th style="width: 14%" class="text-center">공급가액</th>
+						<th style="width: 13%" class="text-center">부가세</th>
+						<th style="width: 20%" class="text-center">납기일자</th>
+					</tr>
+				</thead>
+				<tbody>
+					<tr>
+						<td><input type="checkbox"></td>
+						<td><a href="#"><i class="bi bi-arrow-bar-down"></i></a></td>
+						<td><input type="text" class="form-control"
+							placeholder="AA00"></td>
+						<td class="project_progress"><input type="text"
+							class="form-control" placeholder="단단한돌"></td>
+						<td><input type="text" class="form-control"
+							placeholder="1000"></td>
+						<td><input type="text" class="form-control"
+							placeholder="3000원"></td>
+						<td><input type="text" class="form-control"
+							placeholder="100원"></td>
+						<td><input type="text" class="form-control"
+							placeholder="0원"></td>
+						<td><input type="text" class="form-control"
+							placeholder="2022-04-18"></td>
+					</tr>
+	
+					<tr>
+						<td><input type="checkbox"></td>
+						<td><a href="#"><i class="bi bi-arrow-bar-down"></i></a></td>
+						<td><input type="text" class="form-control"
+							placeholder="AA00"></td>
+						<td class="project_progress"><input type="text"
+							class="form-control" placeholder="단단한돌"></td>
+						<td><input type="text" class="form-control"
+							placeholder="1000"></td>
+						<td><input type="text" class="form-control"
+							placeholder="3000원"></td>
+						<td><input type="text" class="form-control"
+							placeholder="100원"></td>
+						<td><input type="text" class="form-control"
+							placeholder="0원"></td>
+						<td><input type="text" class="form-control"
+							placeholder="2022-04-18"></td>
+					</tr>
+	
+					<tr>
+						<td><input type="checkbox"></td>
+						<td><a href="#"><i class="bi bi-arrow-bar-down"></i></a></td>
+						<td><input type="text" class="form-control"
+							placeholder="AA00"></td>
+						<td class="project_progress"><input type="text"
+							class="form-control" placeholder="단단한돌"></td>
+						<td><input type="text" class="form-control"
+							placeholder="1000"></td>
+						<td><input type="text" class="form-control"
+							placeholder="3000원"></td>
+						<td><input type="text" class="form-control"
+							placeholder="100원"></td>
+						<td><input type="text" class="form-control"
+							placeholder="0원"></td>
+						<td><input type="text" class="form-control"
+							placeholder="2022-04-18"></td>
+					</tr>
+				</tbody>
+			</table>
+	
+			<div style="margin: 10px;">
             <button type="button" class="btn btn-secondary btn-sm">저장</button>
             <button type="button" class="btn btn-secondary btn-sm">저장/전표</button>
             <button type="button" class="btn btn-secondary btn-sm">다시작성</button>
@@ -297,6 +243,13 @@
 <script src="${path}/resources/plugins/bootstrap/js/bootstrap.bundle.min.js"></script>
 <!-- AdminLTE App -->
 <script src="${path}/resources/dist/js/adminlte.min.js"></script>
-
+<script type="text/javascript">
+	var goPopup = function(){ 
+		var url = "${path}/sale/test";
+		var windowTargetName = "employee";
+		var features = "width=570,height=420, scrollbars=no, resizable=no";
+		var search = window.open(url, windowTargetName, features);	
+	} 
+</script>
 </body>
 </html>

@@ -115,19 +115,19 @@
                   	<p>
                     <a href="${path}/resources/dist/img/mail/${mail.changeName1}" download="${mail.originName1}" class="mailbox-attachment-name"><i class="fas fa-paperclip"></i> ${mail.originName1}</a>
                         <span>
-                          <a href="" class="btn btn-default btn-sm float-right"><i class="fas fa-file-alt"></i></a>
+                          <a href="${path}/resources/dist/img/mail/${mail.changeName1}" download="${mail.originName1}" class="btn btn-default btn-sm float-right"><i class="fas fa-file-alt"></i></a>
                         </span>
                     </p>
                     <c:if test="${mail.originName2 ne null}">
                     <p>
-                    <a href="${path}/resources/dist/img/mail/${mail.changeName2}" download="${mail.originName2}" class="mailbox-attachment-name"><i class="fas fa-paperclip"></i></a>
+                    <a href="${path}/resources/dist/img/mail/${mail.changeName2}" download="${mail.originName2}" class="mailbox-attachment-name"><i class="fas fa-paperclip"></i>${mail.originName2}</a>
                         <span>
-                          <a href="${path}/resources/dist/img/mail/${mail.changeName2}" download="${mail.originName1}" class="btn btn-default btn-sm float-right"><i class="fas fa-file-alt"></i></a>
+                          <a href="${path}/resources/dist/img/mail/${mail.changeName2}" download="${mail.originName2}" class="btn btn-default btn-sm float-right"><i class="fas fa-file-alt"></i></a>
                         </span><br>
                     </p>
                     </c:if>
                     <c:if test="${mail.originName3 ne null}">
-                    <a href="${path}/resources/dist/img/mail/${mail.changeName3}" download="${mail.originName3}" class="mailbox-attachment-name"><i class="fas fa-paperclip"></i> Sep2014-report.pdf</a>
+                    <a href="${path}/resources/dist/img/mail/${mail.changeName3}" download="${mail.originName3}" class="mailbox-attachment-name"><i class="fas fa-paperclip"></i> ${mail.originName3}</a>
                         <span>
                           <a href="${path}/resources/dist/img/mail/${mail.changeName3}" download="${mail.originName3}" class="btn btn-default btn-sm float-right"><i class="fas fa-file-alt"></i></a>
                         </span>
@@ -143,7 +143,13 @@
                 <button type="button" class="btn btn-default"><i class="fas fa-reply"></i> Reply</button>
                 <button type="button" class="btn btn-default"><i class="fas fa-share"></i> Forward</button>
               </div>
-              <button type="button" class="btn btn-default"><i class="far fa-trash-alt"></i> Delete</button>
+              <c:if test="${loginEmployee.employeeNo eq mail.sender}">
+              <button type="button" class="btn btn-default" onclick="sdel();"><i class="far fa-trash-alt"></i> 삭제</button>
+              </c:if>
+              <c:if test="${loginEmployee.employeeNo eq mail.recipient}">
+              <button type="button" class="btn btn-default" onclick="rdel();"><i class="far fa-trash-alt"></i> 삭제</button>
+              </c:if>
+              
               <button type="button" class="btn btn-default"><i class="fas fa-print"></i> Print</button>
             </div>
             <!-- /.card-footer -->
@@ -183,7 +189,7 @@
 	//삭제 버튼 클릭
 	function sdel() {
 		//삭제할 번호 가져오기
-		let delNo = document.getElementsById('mailNo');
+		let delNo = document.getElementById('mailNo').value;
 		
 		//삭제 요청 보내기 (삭제할 번호 전달해주면서)
 		$.ajax({
@@ -205,7 +211,7 @@
 	
 	function rdel() {
 		//삭제할 번호 가져오기
-		let delNo = document.getElementsById('mailNo');
+		let delNo = document.getElementById('mailNo').value;
 		
 		//삭제 요청 보내기 (삭제할 번호 전달해주면서)
 		$.ajax({
@@ -220,7 +226,7 @@
 			},
 			complete : function() {
 				//페이지 이동
-				location.href='${path}/mail/rbox';
+				location.href="${path}/mail/rbox";
 			}
 		});
 	}

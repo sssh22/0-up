@@ -32,4 +32,6 @@ public interface MailService {
 
 	int deleteMail(String mailno) throws Exception;
 
+	int mailRead(String mailno) throws Exception;
+
 }
