@@ -1,5 +1,7 @@
 package com.kh.oup.employee.service;
 
+import java.util.List;
+
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Service;
 
@@ -22,6 +24,11 @@ public class EmployeeServiceImpl implements EmployeeService{
 		}
 		
 		return dbUser;
+	}
+
+	@Override
+	public List<EmployeeVo> getEmployeeList() throws Exception {
+		return dao.getEmployeeList();
 	}
 
 }

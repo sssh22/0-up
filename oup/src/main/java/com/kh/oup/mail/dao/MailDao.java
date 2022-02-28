@@ -43,4 +43,6 @@ public interface MailDao {
 
 	String checkFile(String mailno) throws Exception;
 
+	int mailRead(String mailno) throws Exception;
+
 }

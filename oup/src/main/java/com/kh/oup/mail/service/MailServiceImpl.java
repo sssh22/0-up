@@ -30,7 +30,7 @@ public class MailServiceImpl implements MailService{
 		int result = 0;
 		
 		//테스트
-		for(int i = 0; i < 20; i++) {
+//		for(int i = 0; i < 20; i++) {
 			//硫붿씪踰덊샇 nextval
 			int no = dao.getMailSeq();
 			
@@ -72,7 +72,7 @@ public class MailServiceImpl implements MailService{
 				
 				int result2 = dao.insertMailFile(vo);
 			}
-		}
+//		}
 		
 		
 		return result;
@@ -154,6 +154,11 @@ public class MailServiceImpl implements MailService{
 	@Override
 	public int deleteMail(String mailno) throws Exception {
 		return dao.deleteMail(mailno);
+	}
+
+	@Override
+	public int mailRead(String mailno) throws Exception {
+		return dao.mailRead(mailno);
 	}
 
 }

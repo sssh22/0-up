@@ -16,6 +16,7 @@ import org.springframework.web.bind.annotation.ResponseBody;
 
 import com.kh.oup.client.vo.ClientVo;
 import com.kh.oup.common.PageVo;
+import com.kh.oup.employee.service.EmployeeService;
 import com.kh.oup.employee.vo.EmployeeVo;
 import com.kh.oup.mail.service.MailService;
 import com.kh.oup.mail.vo.MailVo;
@@ -29,9 +30,14 @@ public class MailController {
 	
 	@Autowired
 	private MailService service;
+	@Autowired
+	private EmployeeService emplservice;
 	
 	@GetMapping("/send")
-	public String send() {
+	public String send(Model model) throws Exception {
+		List<EmployeeVo> list = emplservice.getEmployeeList();
+		
+		model.addAttribute("employeelist", list);
 		return "pages/mailbox/mailSend";
 	}
 	
@@ -41,7 +47,7 @@ public class MailController {
 		int result = service.send(vo, req, recipientId, senderId);
 		
 		if(result > 0) {
-			return "redirect:/";
+			return "redirect:/mail/rbox";
 		}else {
 			req.setAttribute("msg", "메일 보내기 실패");
 			return "error/MailErrorPage";
@@ -140,6 +146,7 @@ public class MailController {
 	public String mailDetail(Model model, @PathVariable(required = false)String mailno, HttpServletRequest request) throws Exception {
 		
 		MailVo mail = service.getMail(mailno);
+		int result = service.mailRead(mailno);
 
 		mail.setMailNextNo(mail.getMailNo()+1);
 		mail.setMailPreNo(mail.getMailNo()-1);

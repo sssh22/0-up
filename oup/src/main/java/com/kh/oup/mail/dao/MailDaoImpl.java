@@ -124,4 +124,9 @@ public class MailDaoImpl implements MailDao{
 		return ss.selectOne("mail.checkFile", mailno);
 	}
 
+	@Override
+	public int mailRead(String mailno) throws Exception {
+		return ss.update("mail.mailRead", mailno);
+	}
+
 }

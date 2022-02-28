@@ -1,5 +1,7 @@
 package com.kh.oup.employee.dao;
 
+import java.util.List;
+
 import org.apache.ibatis.session.SqlSession;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Repository;
@@ -15,6 +17,11 @@ public class EmployeeDaoImpl implements EmployeeDao{
 	@Override
 	public EmployeeVo getEmployee(EmployeeVo vo) throws Exception {
 		return ss.selectOne("employee.getEmployee", vo);
+	}
+
+	@Override
+	public List<EmployeeVo> getEmployeeList() throws Exception {
+		return ss.selectList("employee.getEmployeeList");
 	}
 
 }
