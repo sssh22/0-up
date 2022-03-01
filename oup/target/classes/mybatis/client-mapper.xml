@@ -34,8 +34,8 @@
  			#{cFax},
  			#{cEmail},
  			${cCreditLimit},
- 			${cCreditDateMonth},
- 			${cCreditDateDay}
+ 			${cCreditMonth},
+ 			${cCreditDay}
  		)
  	</insert>
  	
@@ -111,8 +111,8 @@
  			c_fax = #{cFax},
  			c_email = #{cEmail},
  			c_creditlimit = ${cCreditLimit},
- 			c_credit_month = ${cCreditDateMonth},
- 			c_credit_day = ${cCreditDateDay}
+ 			c_credit_month = ${cCreditMonth},
+ 			c_credit_day = ${cCreditDay}
  		where c_no = ${cNo}
   	</update>
   	

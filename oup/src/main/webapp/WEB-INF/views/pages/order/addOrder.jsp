@@ -54,158 +54,159 @@
       <div class="card"></div>
         <div class="card-body p-0">
 
-          <div class="row" style="background-color: rgb(196, 194, 194); margin: 20px; padding: 6px;">
-                <div class="col-sm-1 mt-3" style="padding:5px;"><b>일자</b></div>
-                <div class="col-sm-1"></div>
-                <div class="col-sm-4">  
-                  <div class="col">
-                    <input type="date" class="form-control mb-3 mt-3" id="orderDate" required>
-                  </div>
-                </div>
+	          <div class="row" style="background-color: rgb(196, 194, 194); margin: 20px; padding: 6px;">
+	                <div class="col-sm-1 mt-3" style="padding:5px;"><b>일자</b></div>
+	                <div class="col-sm-1"></div>
+	                <div class="col-sm-4">  
+	                  <div class="col">
+	                    <input type="date" class="form-control mb-3 mt-3" id="orderDate" name="oDate" required>
+	                  </div>
+	                </div>
+	
+	                <div class="col-sm-1 mt-3" style="padding:5px;"><b>거래처</b></div>
+	                <div class="col-sm-1"></div>
+	                <div class="col-sm-4">                  
+	                  <div class="input-group col mt-3">
+	                    <input type="text" class="form-control" id="clientText" placeholder="거래처">
+	                    <button class="input-group-text" onclick="goPopup()"><i class="bi bi-search"></i></button>
+	                    <input type="text" class="form-control" id="client" name="client" readonly>
+	                    <input type="hidden" id="clientNo" name="cNo">
+	                  </div>
+	                </div>
+	                <div class="col-sm-1" style="padding:5px;"><b>담당자</b></div>
+	                <div class="col-sm-1"></div>
+	                <div class="col-sm-4">
+	                  <div class="input-group col mb-3">
+	                    <input type="text" class="form-control" placeholder="거래처담당자" id="ownerText">
+	                    <button class="input-group-text" onclick="changeOwner()"><i class="bi bi-arrow-right"></i></button>
+	                    <input type="text" class="form-control" name="onwer" id="owner" readonly>
+	                  </div>
+	                </div>
+	
+	                <div class="col-sm-1" style="padding:5px;"><b>출하창고</b>
+	                </div><div class="col-sm-1"></div>
+	                <div class="col-sm-4">
+	                  <div class="input-group col">
+	                    <input type="text" class="form-control" placeholder="출하창고" id="wareText">
+	                    <button class="input-group-text" onclick="changeWare()"><i class="bi bi-arrow-right"></i></button>
+	                    <input type="text" class="form-control" name="warehouse" id="ware" readonly>
+	                  </div>
+	                </div>
+	
+	                <div class="col-sm-1" style="padding:5px;"><b>거래유형</b></div>
+	                <div class="col-sm-1"></div>
+	                <div class="col-sm-4">
+	                  <div class="col">
+	                    <select class="form-control mb-3" onchange="selectVat()" id="vat" name="vatYn">
+	                      <option value="N">부가세미적용</option>
+	                      <option value="Y">부가세적용</option>
+	                    </select>
+	                  </div>
+	                </div>
+	
+	                <div class="col-sm-1" style="padding:5px;"><b>여신기한</b></div>
+	                <div class="col-sm-1"></div>
+	                <div class="col-sm-4">
+	                  <div class="col">
+	                    <input type="date" class="form-control mb-3" id="creditDate" name="creditDate" readonly>
+	                  </div>
+	                </div>
+	
+	                <div class="col-sm-1" style="padding:5px;"><b>첨부</b></div>
+	                <div class="col-sm-1"></div>
+	                <div class="col-sm-10">
+	                  <div class="col">
+	                    <input type="file" class="form-control mb-3" placeholder="첨부">
+	                  </div>
+	                </div>
+	
+	          </div>
 
-                <div class="col-sm-1 mt-3" style="padding:5px;"><b>거래처</b></div>
-                <div class="col-sm-1"></div>
-                <div class="col-sm-4">                  
-                  <div class="input-group col mt-3">
-                    <input type="text" class="form-control" id="clientText" placeholder="거래처">
-                    <button class="input-group-text" onclick="goPopup()"><i class="bi bi-search"></i></button>
-                    <input type="text" class="form-control" id="client" name="client" readonly>
-                    <input type="hidden" id="clientNo" name="cNo">
-                  </div>
-                </div>
-                <div class="col-sm-1" style="padding:5px;"><b>담당자</b></div>
-                <div class="col-sm-1"></div>
-                <div class="col-sm-4">
-                  <div class="input-group col mb-3">
-                    <input type="text" class="form-control" placeholder="담당자" id="ownerText">
-                    <button class="input-group-text" onclick="changeOwner()"><i class="bi bi-arrow-right"></i></button>
-                    <input type="text" class="form-control" name="onwer" id="owner" readonly>
-                  </div>
-                </div>
-
-                <div class="col-sm-1" style="padding:5px;"><b>출하창고</b>
-                </div><div class="col-sm-1"></div>
-                <div class="col-sm-4">
-                  <div class="input-group col">
-                    <input type="text" class="form-control" placeholder="출하창고" id="wareText">
-                    <button class="input-group-text" onclick="changeWare()"><i class="bi bi-arrow-right"></i></button>
-                    <input type="text" class="form-control" name="warehouse" id="ware" readonly>
-                  </div>
-                </div>
-
-                <div class="col-sm-1" style="padding:5px;"><b>거래유형</b></div>
-                <div class="col-sm-1"></div>
-                <div class="col-sm-4">
-                  <div class="col">
-                    <select class="form-control mb-3" onchange="selectVat()" id="vat">
-                      <option>부가세미적용</option>
-                      <option>부가세적용</option>
-                    </select>
-                  </div>
-                </div>
-
-                <div class="col-sm-1" style="padding:5px;"><b>여신기한</b></div>
-                <div class="col-sm-1"></div>
-                <div class="col-sm-4">
-                  <div class="col">
-                    <input type="date" class="form-control mb-3" id="creditDate" readonly>
-                  </div>
-                </div>
-
-                <div class="col-sm-1" style="padding:5px;"><b>첨부</b></div>
-                <div class="col-sm-1"></div>
-                <div class="col-sm-10">
-                  <div class="col">
-                    <input type="file" class="form-control mb-3" placeholder="첨부">
-                  </div>
-                </div>
-
-          </div>
-
-          <div style="margin: 10px;">
-            <button type="button">찾기</button>
-            <button type="button">거래내역보기</button>
-            <button type="button">My품목</button>
-            <button type="button">견적</button>
-            <button type="button">할인</button>
-            <button type="button">재고불러오기</button>
-            <button type="button">생성한전표</button>
-            <button type="button">이익계산</button>
-          </div>
-
-          <table class="table table-bordered projects">
-              <thead>
-                  <tr>
-                      <th style="width: 3%">
-                        <input type="checkbox">
-                      </th>
-                      <th style="width: 3%" class="text-center">
-                        <i class="bi bi-arrow-bar-down"></i>
-                      </th>
-                      <th style="width: 10%" class="text-center">
-                          품목코드
-                      </th>
-                      <th style="width: 15%" class="text-center">
-                          품목명
-                      </th>
-                      <th style="width: 9%" class="text-center">
-                        수량
-                      </th>
-                      <th style="width: 13%" class="text-center">
-                          단가
-                      </th>
-                      <th style="width: 14%" class="text-center">
-                        공급가액
-                      </th>
-                      <th style="width: 13%" class="text-center">
-                        부가세
-                      </th>
-                      <th style="width: 20%" class="text-center">
-                        납기일자
-                      </th>
-                  </tr>
-              </thead>
-              <tbody>
-                  <tr>
-                      <td>
-                        <input type="checkbox">
-                      </td>
-                      <td>
-                              <a href="#"><i class="bi bi-arrow-bar-down"></i></a>
-                      </td>
-                      <td>
-                        <input type="text" class="form-control" placeholder="AA00">
-                      </td>
-                      <td class="project_progress">
-                        <input type="text" class="form-control" placeholder="단단한돌">
-                      </td>
-                      <td>
-                        <input type="text" class="form-control" placeholder="1000">
-                      </td>
-                      <td>
-                        <input type="text" class="form-control" placeholder="3000원">
-                      </td>
-                      <td>
-                        <input type="text" class="form-control" placeholder="100원" id="supplyPrice">
-                      </td>
-                      <td>
-                        <input type="text" class="form-control" placeholder="0원" id="vatText" value="0" readonly>
-                      </td>
-                      <td>
-                        <input type="date" class="form-control">
-                      </td>
-                  </tr>
-
-            </tbody>
-          </table>
-
-          <div style="margin: 10px;">
-            <button type="button" class="btn btn-secondary btn-sm">저장</button>
-            <button type="button" class="btn btn-secondary btn-sm">저장/전표</button>
-            <button type="button" class="btn btn-secondary btn-sm">다시작성</button>
-            <button type="button" class="btn btn-secondary btn-sm">리스트</button>
-          </div>
-
+	          <div style="margin: 10px;">
+	            <button type="button">찾기</button>
+	            <button type="button">거래내역보기</button>
+	            <button type="button">My품목</button>
+	            <button type="button">견적</button>
+	            <button type="button">할인</button>
+	            <button type="button">재고불러오기</button>
+	            <button type="button">생성한전표</button>
+	            <button type="button">이익계산</button>
+		        <a href="javascript:" style="float:right;"><i class="bi bi-plus-square"></i></a>
+	          </div>
+	          
+	
+	          <table class="table table-bordered projects">
+	              <thead>
+	                  <tr>
+	                      <th style="width: 3%">
+	                        <input type="checkbox">
+	                      </th>
+	                      <th style="width: 3%" class="text-center">
+	                        <i class="bi bi-arrow-bar-down"></i>
+	                      </th>
+	                      <th style="width: 10%" class="text-center">
+	                          품목코드
+	                      </th>
+	                      <th style="width: 15%" class="text-center">
+	                          품목명
+	                      </th>
+	                      <th style="width: 9%" class="text-center">
+	                        수량
+	                      </th>
+	                      <th style="width: 13%" class="text-center">
+	                          단가
+	                      </th>
+	                      <th style="width: 14%" class="text-center">
+	                        공급가액
+	                      </th>
+	                      <th style="width: 13%" class="text-center">
+	                        부가세
+	                      </th>
+	                      <th style="width: 20%" class="text-center">
+	                        납기일자
+	                      </th>
+	                  </tr>
+	              </thead>
+	              <tbody>
+	                  <tr>
+	                      <td>
+	                        <input type="checkbox">
+	                      </td>
+	                      <td>
+	                        <a href="#"><i class="bi bi-arrow-bar-down"></i></a>
+	                      </td>
+	                      <td>
+	                        <input type="text" class="form-control" placeholder="AA00">
+	                      </td>
+	                      <td class="project_progress">
+	                        <input type="text" class="form-control" placeholder="단단한돌">
+	                      </td>
+	                      <td>
+	                        <input type="text" class="form-control" placeholder="1000">
+	                      </td>
+	                      <td>
+	                        <input type="text" class="form-control" placeholder="3000원">
+	                      </td>
+	                      <td>
+	                        <input type="text" class="form-control" placeholder="100원" id="supplyPrice">
+	                      </td>
+	                      <td>
+	                        <input type="text" class="form-control" placeholder="0원" id="vatText" value="0" readonly>
+	                      </td>
+	                      <td>
+	                        <input type="date" class="form-control">
+	                      </td>
+	                  </tr>
+	
+	            </tbody>
+	          </table>
+	
+	          <div style="margin: 10px;">
+	            <button type="button" class="btn btn-secondary btn-sm">저장</button>
+	            <button type="button" class="btn btn-secondary btn-sm">저장/전표</button>
+	            <button type="button" class="btn btn-secondary btn-sm">다시작성</button>
+	            <button type="button" class="btn btn-secondary btn-sm">리스트</button>
+	          </div>
         </div>
         <!-- /.card-body -->
     </section>

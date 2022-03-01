@@ -5195,4 +5195,4 @@ uPlot.orient   = orient;
 	(paths.spline  = monotoneCubic);
 }
 
-module.exports = uPlot;
+export default uPlot;

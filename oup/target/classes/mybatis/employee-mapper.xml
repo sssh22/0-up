@@ -11,4 +11,9 @@
 		FROM EMPLOYEE
 		WHERE EMPLOYEE_ID = #{employeeId}
  	</select>
+ 	<select id="getEmployeeList" resultType="employeeVo">
+ 		SELECT * 
+ 		FROM EMPLOYEE
+ 		WHERE ENT_YN = 'N'
+ 	</select>
  </mapper>

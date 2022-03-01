@@ -88,7 +88,7 @@
 	              </div>
 	              <div class="form-group">
 	                <label>여신기한 (월/일)</label><br>
-	                <select name="cCreditDateMonth" class="form-control col-md-3" >
+	                <select name="cCreditMonth" class="form-control col-md-3" >
 	                  <option>0</option>
 	                  <option>1</option>
 	                  <option>2</option>
@@ -103,7 +103,7 @@
 	                  <option>11</option>
 	                  <option>12</option>
 	                </select>
-	                <select name="cCreditDateDay" class="form-control col-md-3">
+	                <select name="cCreditDay" class="form-control col-md-3">
 	                  <option>0</option>
 	                  <option>1</option>
 	                  <option>2</option>
