@@ -289,6 +289,12 @@
                   <p style="color: #ebe7f1">거래처조회</p>
                 </a>
               </li>
+              <li class="nav-item">
+                <a href="javascript:addClientPop();" class="nav-link">
+                  <i class="far fa-circle nav-icon"></i>
+                  <p style="color: #ebe7f1">거래처 등록</p>
+                </a>
+              </li>
             </ul>
           </li>
           <li class="nav-item">
@@ -307,7 +313,7 @@
                 </a>
               </li>
               <li class="nav-item">
-                <a href="./index2.html" class="nav-link">
+                <a href="${path}/order/addOrder" class="nav-link">
                   <i class="far fa-circle nav-icon"></i>
                   <p style="color: #ebe7f1">주문서 입력</p>
                 </a>
@@ -408,3 +414,8 @@
     </div>
     <!-- /.sidebar -->
   </aside>
+ <script>
+ 	var addClientPop = function(){ 
+		var addClient = window.open("${path}/client/addList","addClient","width=570,height=420, location=yes, menubar=yes, resizable=no, status=no, toolbar=no, scrollbas=yes, fullscreen=no"); 
+	} 
+ </script>

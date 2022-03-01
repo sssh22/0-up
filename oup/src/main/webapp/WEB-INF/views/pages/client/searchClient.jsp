@@ -65,7 +65,7 @@
                   <tbody>
                   <c:forEach items="${list}" var="l">				
                     <tr>
-                      <td><button onclick="returnCNo(${l.CNo},${l.CName},${l.COwner},${l.CCreditMonth},${l.CCreditDay})">${l.CNo}</button></td>
+                      <td><a href="javascript:returnCNo(${l.CNo},${l.CName},${l.COwner},${l.CCreditMonth},${l.CCreditDay});">${l.CNo}</a></td>
                       <td>${l.CName}</td>
                       <td>${l.COwner}</td>
                       <td>${l.BNo}</td>
