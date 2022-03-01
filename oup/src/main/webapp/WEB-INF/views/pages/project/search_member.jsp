@@ -14,22 +14,17 @@
 
 
 
-<form>
+<form action="/oup/project/search_m">
       부서명: 
-      <select name="dept_name" id="dept_name" onchange="getTeam(this.value);">
+      <select name="dept_code" id="dept_code" onchange="getTeam(this.value);">
       	<option value="">선택</option>
         <c:forEach items="${dlist}" var="d"> 
        	 <option value="${d.departCode}">${d.departName}</option>
         </c:forEach>
       </select>
       팀명: 
-      <select name="team_name" id="team_name">
+      <select name="team_code" id="team_code">
       <option value="">선택</option>
-      <%-- <c:if test="${!empty tlist}">
-	      <c:forEach items="${tlist}" var="t"> 
-	       	 <option value="${t.teamCode}">${t.teamName}</option>
-	        </c:forEach>
-      </c:if> --%>
       </select>
       
       <input type="submit" value="검색">
@@ -50,19 +45,21 @@
 <script type="text/javascript">
 
 function getTeam(param){
-
+	$("#team_code").empty();
 	
-	alert("onchange작동"+param);
-
 		$.ajax({
-			url:"/oup/search_member.do",
+			url:"/oup/project/search_member.do",
 			type:"POST",
 			data:{departCode : param},
 			success: function(data){
-					alert("성공");
+					
 					console.log(data);
 					console.log(data[0].teamName);
 					
+					$(data).each(function(i){
+						$("#team_code").append("<option value=\""+data[i].teamCode+"\">"+data[i].teamName+"</option>")
+					});//each
+
 					},
 			error: function(){
 					alert("에러");

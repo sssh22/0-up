@@ -12,7 +12,7 @@ import org.springframework.web.bind.annotation.ResponseBody;
 
 import com.kh.oup.project.service.ProjectService;
 import com.kh.oup.project.vo.DeptVo;
-import com.kh.oup.project.vo.MemberSearchVo;
+import com.kh.oup.project.vo.ProjectGroupVo;
 import com.kh.oup.project.vo.TeamVo;
 
 @Controller
@@ -51,11 +51,10 @@ public class ProjectController {
 	public String search_member(Model model) {
 		
 		List<DeptVo> dlist = service.selectDeptList();
-		System.out.println(dlist);
+//		System.out.println(dlist);
 		model.addAttribute("dlist",dlist);
 		return "pages/project/search_member";
-	}
-	
+	}	
 	
 	@PostMapping("search_member.do")
 	@ResponseBody
@@ -63,12 +62,28 @@ public class ProjectController {
 		System.out.println(departCode);
 		
 		List<TeamVo> tlist = service.selectTeamList(departCode);
-		System.out.println(tlist);
+//		System.out.println(tlist);
 		model.addAttribute("tlist",tlist);
-		//tlist -> json Object 
 		return tlist;
 	}
 	
+	
+	@GetMapping("search_m")
+	public String search_m(String deptCode,String teamCode,Model model) {
+		
+		if(deptCode==null || teamCode==null) {
+			System.out.println(deptCode+"//"+teamCode);
+			return "redirect:search_member";
+		}else {
+			List<ProjectGroupVo> elist = service.selectEmpList(teamCode);
+			
+			return "redirect:search_member";
+//			List<DeptVo> dlist = service.selectDeptList();
+//			model.addAttribute("dlist",dlist);
+		}
+		
+		
+	}
 	
 	
 }
