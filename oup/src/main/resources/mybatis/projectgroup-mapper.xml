@@ -23,7 +23,7 @@
  
  
  <!--  teamCode받아서 emp리스트 화면으로 -->
-<select id="getEmpList" resultType="MemberSearchVo">
+<select id="getEmpList">
 	SELECT  
 </select>
  
