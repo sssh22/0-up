@@ -19,7 +19,10 @@
  			c_email,
  			c_creditlimit,
  			c_credit_month,
- 			c_credit_day
+ 			c_credit_day,
+ 			c_umony,
+ 			c_date,
+            c_delete_YN
  		)
  		values
  		(
@@ -35,7 +38,10 @@
  			#{cEmail},
  			${cCreditLimit},
  			${cCreditMonth},
- 			${cCreditDay}
+ 			${cCreditDay},
+ 			0,
+ 			SYSDATE,
+ 			'N'
  		)
  	</insert>
  	

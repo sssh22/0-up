@@ -59,7 +59,7 @@
                 <div class="col-sm-1"></div>
                 <div class="col-sm-4">  
                   <div class="col">
-                    <input type="date" name="saleDate" class="form-control mb-3 mt-3" placeholder="기한">
+                    <input type="date" id="saleDate" name="saleDate" class="form-control mb-3 mt-3" placeholder="기한">
                   </div>
                 </div>
 

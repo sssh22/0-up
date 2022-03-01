@@ -13,7 +13,7 @@ public class saleVo {
 	private long projectNo;
 	private long oNo;
 	private long saleSum;
-	private Date saleDate;
+	private String saleDate;
 	private long sUmony;
 	private char vatYN;
 }
