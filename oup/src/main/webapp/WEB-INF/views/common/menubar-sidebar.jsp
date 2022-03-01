@@ -365,7 +365,7 @@
                 </a>
               </li>
               <li class="nav-item">
-                <a href="./index2.html" class="nav-link">
+                <a href="${path}/sale/enter" class="nav-link">
                   <i class="far fa-circle nav-icon"></i>
                   <p style="color: #ebe7f1">판매 입력</p>
                 </a>

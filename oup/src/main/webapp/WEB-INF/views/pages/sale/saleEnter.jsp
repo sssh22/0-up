@@ -3,7 +3,7 @@
 <%@ taglib prefix="c" uri="http://java.sun.com/jsp/jstl/core" %>
 <c:set var="path" value="${pageContext.request.contextPath}"></c:set>
 <!DOCTYPE html>
-<html lang="en">
+<html lang="ko">
 <head>
   <meta charset="utf-8">
   <meta name="viewport" content="width=device-width, initial-scale=1">
@@ -53,13 +53,13 @@
       <!-- Default box -->
       <div class="card"></div>
         <div class="card-body p-0">
-
+		<form action="" method="post"> <!-- cbj -->
           <div class="row" style="background-color: rgb(196, 194, 194); margin: 20px; padding: 6px;">
                 <div class="col-sm-1 mt-3" style="padding:5px;"><b>일자</b></div>
                 <div class="col-sm-1"></div>
                 <div class="col-sm-4">  
                   <div class="col">
-                    <input type="text" class="form-control mb-3 mt-3" placeholder="기한">
+                    <input type="date" name="saleDate" class="form-control mb-3 mt-3" placeholder="기한">
                   </div>
                 </div>
 
@@ -67,8 +67,8 @@
                 <div class="col-sm-1"></div>
                 <div class="col-sm-4">                  
                   <div class="input-group col mt-3">
-                    <input type="text" class="form-control" placeholder="거래처">
-                    <span class="input-group-text"><i class="bi bi-search"></i></span>
+                    <input type="text" name="cNo" class="form-control" placeholder="거래처">
+                    <button class="input-group-text" onclick="goPopup()"><i class="bi bi-search"></i></button>
                     <input type="text" class="form-control" readonly>
                   </div>
                 </div>
@@ -77,9 +77,9 @@
                 <div class="col-sm-1"></div>
                 <div class="col-sm-4">
                   <div class="input-group col mb-3">
-                    <input type="text" class="form-control" placeholder="담당자">
-                    <button class="input-group-text" onclick="goPopup()"><i class="bi bi-search"></i></button>
-                    <input type="text" class="form-control" readonly id="id">
+                    <input type="text" id="employeeNo" name="employeeNo" class="form-control" placeholder="담당자">
+                    <button type="button" class="input-group-text" onclick="employeePopup()"><i class="bi bi-search"></i></button>
+                    <input type="text" id="employeeName" class="form-control" readonly id="id">
                   </div>
                 </div>
 
@@ -87,7 +87,7 @@
                 </div><div class="col-sm-1"></div>
                 <div class="col-sm-4">
                   <div class="input-group col">
-                    <input type="text" class="form-control" placeholder="출하창고">
+                    <input type="text" name="wareHouseNo" id="wareHouseNo" class="form-control" placeholder="출하창고">
                     <span class="input-group-text"><i class="bi bi-search"></i></span>
                     <input type="text" class="form-control" readonly>
                   </div>
@@ -108,7 +108,7 @@
                 <div class="col-sm-1"></div>
                 <div class="col-sm-4">
                   <div class="input-group col mb-3">
-                    <input type="text" class="form-control" placeholder="프로젝트">
+                    <input type="text" name="projectNo" id="projectNo" class="form-control" placeholder="프로젝트">
                     <span class="input-group-text"><i class="bi bi-search"></i></span>
                     <input type="text" class="form-control" readonly>
                   </div>
@@ -127,11 +127,12 @@
                 <div class="col-sm-4">
                   <div class="col">
                     <input type="text" class="form-control mb-3" placeholder="미수금액" readonly>
+                    <input type="hidden" id="sUmony" value="10000" name="sUmony">
                   </div>
                 </div>
-				
           </div>
-
+          <input type="submit" value="제출">
+		</form> <!-- cbj -->
           <div style="margin: 10px;">
             <button type="button">찾기</button>
             <button type="button">거래내역보기</button>
@@ -244,12 +245,16 @@
 <!-- AdminLTE App -->
 <script src="${path}/resources/dist/js/adminlte.min.js"></script>
 <script type="text/javascript">
-	var goPopup = function(){ 
-		var url = "${path}/sale/test";
+	var employeePopup = function(){ 
+		var url = "${path}/popup";
 		var windowTargetName = "employee";
-		var features = "width=570,height=420, scrollbars=no, resizable=no";
-		var search = window.open(url, windowTargetName, features);	
+		var features = "width=720,height=500, scrollbars=no, resizable=no";
+		var search = window.open(url, windowTargetName, features);
+		alert(document.getElementById("saleDate").value);
 	} 
+	var goPopup = function(){
+        var search = window.open("${path}/client/searchClient","search","width=570,height=420, scrollbars=yes, resizable=no"); 
+    }
 </script>
 </body>
 </html>
