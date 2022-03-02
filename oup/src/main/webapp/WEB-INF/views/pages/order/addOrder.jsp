@@ -89,7 +89,7 @@
 	                  <div class="input-group col">
 	                    <input type="text" class="form-control" placeholder="출하창고" id="wareText">
 	                    <button class="input-group-text" onclick="changeWare()"><i class="bi bi-arrow-right"></i></button>
-	                    <input type="text" class="form-control" name="warehouse" id="ware" readonly>
+	                    <input type="number" class="form-control" name="warehouseNo" id="ware" readonly>
 	                  </div>
 	                </div>
 	

@@ -6,28 +6,27 @@
  
 <mapper namespace="projectgroup">
  
- <select id="getDeptList" resultType="com.kh.oup.project.vo.DeptVo">
  
- SELECT DISTINCT * FROM DEPARTMENT <!-- detp만 화면으로.. -->
- 
- </select>
- 
- <select id="getTeamList" parameterType="string" resultType="com.kh.oup.project.vo.TeamVo">
- 
- <!-- detp받아서 team만 화면으로 -->
- 
- SELECT DISTINCT T.TEAM_CODE, T.TEAM_NAME, T.DEPART_CODE 
- FROM TEAM T
- JOIN DEPARTMENT D ON (D.DEPART_CODE = T.DEPART_CODE)
- WHERE T.DEPART_CODE = #{deptCode}
- </select>
- 
-  <select id="getEmpList" resultType="MemberSearchVo">
- 
- <!--  team받아서 emp리스트 화면으로 -->
- 
- </select>
+<!-- detp만 화면으로.. -->
+<select id="getDeptList" resultType="com.kh.oup.project.vo.DeptVo">
+	 SELECT DISTINCT * FROM DEPARTMENT 
+</select>
+
+
+<!-- detpCode받아서 team만 화면으로 -->
+<select id="getTeamList" parameterType="string" resultType="com.kh.oup.project.vo.TeamVo">
+	 SELECT DISTINCT T.TEAM_CODE, T.TEAM_NAME, T.DEPART_CODE 
+	 FROM TEAM T
+	 JOIN DEPARTMENT D ON (D.DEPART_CODE = T.DEPART_CODE)
+	 WHERE T.DEPART_CODE = #{deptCode}
+</select>
  
  
- 	
+ <!--  teamCode받아서 emp리스트 화면으로 -->
+<select id="getEmpList">
+	SELECT  
+</select>
+ 
+ 
+ 
 </mapper>
