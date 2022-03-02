@@ -197,4 +197,10 @@
   			ON M.MAIL_NO = F.MAIL_NO
   		WHERE M.MAIL_NO = #{mailno}
   	</select>
+  	
+  	<update id="mailRead">
+  		UPDATE MAIL
+  		SET READ_YN = 'Y'
+  		WHERE MAIL_NO = #{mailNo}
+  	</update>
  </mapper>

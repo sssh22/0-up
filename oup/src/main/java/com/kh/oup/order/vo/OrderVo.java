@@ -8,7 +8,7 @@ import lombok.Data;
 public class OrderVo {
 	private int oNo;			// 주문서번호
 	private int cNo;			// 거래처번호
-	private int projectNo;		// 프로젝트번
+	private int projectNo;		// 프로젝트번호
 	private int warehouseNo;	// 창고번호
 	private Date oDate;			// 주문일
 	private Date creditDate; 	// 여신기한
