@@ -139,7 +139,7 @@
             <button type="button">주문</button>
             <button onclick="addProduct()" type="button">+</button>
 	       </div>
-			<div id="app"> <!-- vue사용목적 -->
+			<input id="index" type="hidden" value="2">
 			<table class="table table-bordered projects">
 				<thead>
 					<tr>
@@ -154,24 +154,37 @@
 				</thead>
 				<tbody id="product">
 					<tr>
-						<td><input name="pNo" type="number" class="form-control"
-							placeholder="AA00"></td>
-						<td class="project_progress"><input type="text"
-							class="form-control" placeholder="단단한돌"></td>
-						<td><input name="sQnt" type="number" class="form-control"
-							placeholder="1000" v-model="num1" v-on:change="calcSum"></td>
-						<td><input type="number" class="form-control"
-							placeholder="3000원" v-model="num2" v-on:change="calcSum"></td>
-						<td><input name="sPrice" v-model="num3" type="number" class="form-control"
-							readonly="readonly"></td>
-						<td><input type="number" class="form-control"
-							placeholder="0원"></td>
-						<td><input name="sDeliberyDate" type="date" class="form-control"
-							placeholder="2022-04-18"></td>
+						<td>
+							<input name="pNo" type="number" class="form-control"
+							placeholder="AA00">
+						</td>
+						<td class="project_progress">
+							<input type="text"
+							class="form-control" placeholder="단단한돌">
+						</td>
+						<td>
+							<input onchange="calcResult()" id="count1" name="sQnt" type="number" class="form-control"
+							placeholder="1000">
+						</td>
+						<td>
+						<input onchange="calcResult()" id="price1" type="number" class="form-control"
+							placeholder="3000원">
+						</td>
+						<td>
+						<input id="result1" name="sPrice" class="form-control"
+							readonly="readonly" value="0">
+						</td>
+						<td>
+						<input id="buga1" type="number" class="form-control"
+							value="0">
+						</td>
+						<td>
+						<input name="sDeliberyDate" type="date" class="form-control"
+							placeholder="2022-04-18">
+						</td>
 					</tr>
 				</tbody>
 			</table>
-			</div>
 			<div style="margin: 10px;">
             <button type="submit" class="btn btn-secondary btn-sm">저장</button>
             <button type="button" class="btn btn-secondary btn-sm">저장/전표</button>
@@ -213,27 +226,28 @@
     }
 	
 	var addProduct = function() {
-		var tag = "<tr><td><input name='pNo' type='number' class='form-control'placeholder='AA00'></td><td class='project_progress'><input type='text'class='form-control' placeholder='단단한돌'></td><td><input name='sQnt' type='number' class='form-control'placeholder='1000' v-model='num1' v-on:change='calcSum'></td><td><input type='number' class='form-control'placeholder='3000원' v-model='num2' v-on:change='calcSum'></td><td><input name='sPrice' v-model='num3' type='number' class='form-control'readonly='readonly'></td><td><input type='number' class='form-control'placeholder='0원'></td><td><input name='sDeliberyDate' type='date' class='form-control'placeholder='2022-04-18'></td></tr>";
-		
+		var indexdoc = document.getElementById('index')
+		var index =  parseInt(indexdoc.value);
+		var tag = "<tr><td><input name='pNo' type='number' class='form-control'placeholder='AA00'></td><td class='project_progress'><input type='text'class='form-control' placeholder='단단한돌'></td><td><input onchange='calcResult()' id='count" + index + "' name='sQnt' type='number' class='form-control'placeholder='1000'></td><td><input onchange='calcResult()' id='price" + index + "' type='number' class='form-control'placeholder='3000'></td><td><input id='result" + index + "' name='sPrice' class='form-control'readonly='readonly' value='0'></td><td><input id='buga" + index + "' type='number' class='form-control' value='0'></td><td><input name='sDeliberyDate' type='date' class='form-control'placeholder='2022-04-18'></td></tr>";
+		indexdoc.value = index + 1;
 		$('#product').append(tag);
 	}
-</script>
-<!-- vue.js -->
-<script src="https://cdn.jsdelivr.net/npm/vue/dist/vue.js"></script>
-<script>
-	var vm = new Vue({
-	  el: '#app',
-	  data: {
-	    num1: 0,
-	    num2: 0,
-	    num3: 0
-	  },
-	  methods:{
-		  calcSum() {
-	        this.num3 = parseFloat(this.num1) * parseFloat(this.num2);
-	    }
-	  }
-	})
+	
+	var calcResult = function() {
+		var indexdoc = document.getElementById('index')
+		var index =  parseInt(indexdoc.value);
+		for(let i = 1; i < index; i++) {
+			var count = document.getElementById('count' + i).value;
+			var price = document.getElementById('price' + i).value;
+			var result = document.getElementById('result' + i);
+			var buga = document.getElementById('buga' + i);
+			
+			var result1 = count * price;
+			result.value = result1;
+			var result2 = result1 * 0.1;
+			buga.value = result2;
+		}
+	}
 </script>
 </body>
 </html>
