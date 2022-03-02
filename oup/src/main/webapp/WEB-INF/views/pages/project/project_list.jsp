@@ -1,3 +1,5 @@
+<%@page import="java.util.List"%>
+
 <%@ page language="java" contentType="text/html; charset=UTF-8"
     pageEncoding="UTF-8"%>
 <%@ taglib prefix="c" uri="http://java.sun.com/jsp/jstl/core" %>
@@ -78,41 +80,29 @@
                           Payment Status
                       </th>
                       <th style="width: 8%" class="text-center">
-                          Approval Status
+                          Approval
                       </th>
                       <th style="width: 20%">
                       </th>
                   </tr>
               </thead>
               <tbody>
+              <c:forEach items="${plist}" var="p">
                   <tr>
                       <td>
-                          #
+                          ${p.projectNo}
                       </td>
                       <td>
                           <a>
-                              프로젝트명
+                            ${p.projectName}
                           </a>
                           <br/>
                           <small>
-                              작성일 2022-02-05
+                              시작일 ${p.projectStart}
                           </small>
                       </td>
                       <td>
-                          <ul class="list-inline">
-                              <li class="list-inline-item">
-                                  <img alt="Avatar" class="table-avatar" src="../../dist/img/avatar.png">
-                              </li>
-                              <li class="list-inline-item">
-                                  <img alt="Avatar" class="table-avatar" src="../../dist/img/avatar2.png">
-                              </li>
-                              <li class="list-inline-item">
-                                  <img alt="Avatar" class="table-avatar" src="../../dist/img/avatar3.png">
-                              </li>
-                              <li class="list-inline-item">
-                                  <img alt="Avatar" class="table-avatar" src="../../dist/img/avatar4.png">
-                              </li>
-                          </ul>
+                         그룹원들..
                       </td>
                       <td class="project_progress">
                           <div class="progress progress-sm">
@@ -124,10 +114,15 @@
                           </small>
                       </td>
                       <td class="project-state">
-                          <span class="badge badge-secondary">승인 대기</span>
+                    	<c:if test="${p.AStatement eq '승인'}">
+                          <span class="badge badge-secondary" id="approvalBadge">${p.AStatement}</span>
+                      	</c:if>
+                      	<c:if test="${p.AStatement ne '승인'}">
+                          <span class="badge badge-secondary">${p.AStatement}</span>
+                      	</c:if>
                       </td>
                       <td class="project-actions text-right">
-                          <a class="btn btn-info btn-sm" href="#">
+                          <a class="btn btn-info btn-sm" href="${path}/project/project_edit/#{p.projectNo}">
                               <i class="fas fa-pencil-alt">
                               </i>
                               수정
@@ -139,222 +134,9 @@
                           </a>
                       </td>
                   </tr>
-                  <tr>
-                    <td>
-                        #
-                    </td>
-                    <td>
-                        <a>
-                            프로젝트명
-                        </a>
-                        <br/>
-                        <small>
-                            작성일 2022-02-05
-                        </small>
-                    </td>
-                    <td>
-                        <ul class="list-inline">
-                            <li class="list-inline-item">
-                                <img alt="Avatar" class="table-avatar" src="../../dist/img/avatar.png">
-                            </li>
-                            <li class="list-inline-item">
-                                <img alt="Avatar" class="table-avatar" src="../../dist/img/avatar2.png">
-                            </li>
-                            <li class="list-inline-item">
-                                <img alt="Avatar" class="table-avatar" src="../../dist/img/avatar3.png">
-                            </li>
-                            <li class="list-inline-item">
-                                <img alt="Avatar" class="table-avatar" src="../../dist/img/avatar4.png">
-                            </li>
-                        </ul>
-                    </td>
-                    <td class="project_progress">
-                        <div class="progress progress-sm">
-                            <div class="progress-bar" role="progressbar" aria-valuenow="57" aria-valuemin="0" aria-valuemax="100" style="width: 57%">
-                            </div>
-                        </div>
-                        <small>
-                            57% Complete
-                        </small>
-                    </td>
-                    <td class="project-state">
-                        <span id="approvalBadge" class="badge">승인</span>
-                    </td>
-                    <td class="project-actions text-right">
-                        <a class="btn btn-info btn-sm" href="#">
-                            <i class="fas fa-pencil-alt">
-                            </i>
-                            수정
-                        </a>
-                        <a class="btn btn-danger btn-sm" href="#">
-                            <i class="fas fa-trash">
-                            </i>
-                            삭제
-                        </a>
-                    </td>
-                </tr>
-                <tr>
-                  <td>
-                      #
-                  </td>
-                  <td>
-                      <a>
-                          프로젝트명
-                      </a>
-                      <br/>
-                      <small>
-                          작성일 2022-02-05
-                      </small>
-                  </td>
-                  <td>
-                      <ul class="list-inline">
-                          <li class="list-inline-item">
-                              <img alt="Avatar" class="table-avatar" src="../../dist/img/avatar.png">
-                          </li>
-                          <li class="list-inline-item">
-                              <img alt="Avatar" class="table-avatar" src="../../dist/img/avatar2.png">
-                          </li>
-                          <li class="list-inline-item">
-                              <img alt="Avatar" class="table-avatar" src="../../dist/img/avatar3.png">
-                          </li>
-                          <li class="list-inline-item">
-                              <img alt="Avatar" class="table-avatar" src="../../dist/img/avatar4.png">
-                          </li>
-                      </ul>
-                  </td>
-                  <td class="project_progress">
-                      <div class="progress progress-sm">
-                          <div class="progress-bar" role="progressbar" aria-valuenow="57" aria-valuemin="0" aria-valuemax="100" style="width: 57%">
-                          </div>
-                      </div>
-                      <small>
-                          57% Complete
-                      </small>
-                  </td>
-                  <td class="project-state">
-                      <span class="badge badge-secondary">승인 대기</span>
-                  </td>
-                  <td class="project-actions text-right">
-                      <a class="btn btn-info btn-sm" href="#">
-                          <i class="fas fa-pencil-alt">
-                          </i>
-                          수정
-                      </a>
-                      <a class="btn btn-danger btn-sm" href="#">
-                          <i class="fas fa-trash">
-                          </i>
-                          삭제
-                      </a>
-                  </td>
-              </tr>
-              <tr>
-                <td>
-                    #
-                </td>
-                <td>
-                    <a>
-                        프로젝트명
-                    </a>
-                    <br/>
-                    <small>
-                        작성일 2022-02-05
-                    </small>
-                </td>
-                <td>
-                    <ul class="list-inline">
-                        <li class="list-inline-item">
-                            <img alt="Avatar" class="table-avatar" src="../../dist/img/avatar.png">
-                        </li>
-                        <li class="list-inline-item">
-                            <img alt="Avatar" class="table-avatar" src="../../dist/img/avatar2.png">
-                        </li>
-                        <li class="list-inline-item">
-                            <img alt="Avatar" class="table-avatar" src="../../dist/img/avatar3.png">
-                        </li>
-                        <li class="list-inline-item">
-                            <img alt="Avatar" class="table-avatar" src="../../dist/img/avatar4.png">
-                        </li>
-                    </ul>
-                </td>
-                <td class="project_progress">
-                    <div class="progress progress-sm">
-                        <div class="progress-bar" role="progressbar" aria-valuenow="57" aria-valuemin="0" aria-valuemax="100" style="width: 57%">
-                        </div>
-                    </div>
-                    <small>
-                        57% Complete
-                    </small>
-                </td>
-                <td class="project-state">
-                    <span class="badge badge-secondary">승인 대기</span>
-                </td>
-                <td class="project-actions text-right">
-                    <a class="btn btn-info btn-sm" href="#">
-                        <i class="fas fa-pencil-alt">
-                        </i>
-                        수정
-                    </a>
-                    <a class="btn btn-danger btn-sm" href="#">
-                        <i class="fas fa-trash">
-                        </i>
-                        삭제
-                    </a>
-                </td>
-            </tr>
-            <tr>
-              <td>
-                  #
-              </td>
-              <td>
-                  <a>
-                      프로젝트명
-                  </a>
-                  <br/>
-                  <small>
-                      작성일 2022-02-05
-                  </small>
-              </td>
-              <td>
-                  <ul class="list-inline">
-                      <li class="list-inline-item">
-                          <img alt="Avatar" class="table-avatar" src="../../dist/img/avatar.png">
-                      </li>
-                      <li class="list-inline-item">
-                          <img alt="Avatar" class="table-avatar" src="../../dist/img/avatar2.png">
-                      </li>
-                      <li class="list-inline-item">
-                          <img alt="Avatar" class="table-avatar" src="../../dist/img/avatar3.png">
-                      </li>
-                      <li class="list-inline-item">
-                          <img alt="Avatar" class="table-avatar" src="../../dist/img/avatar4.png">
-                      </li>
-                  </ul>
-              </td>
-              <td class="project_progress">
-                  <div class="progress progress-sm">
-                      <div class="progress-bar" role="progressbar" aria-valuenow="57" aria-valuemin="0" aria-valuemax="100" style="width: 57%">
-                      </div>
-                  </div>
-                  <small>
-                      57% Complete
-                  </small>
-              </td>
-              <td class="project-state">
-                  <span class="badge badge-secondary">승인 대기</span>
-              </td>
-              <td class="project-actions text-right">
-                  <a class="btn btn-info btn-sm" href="#">
-                      <i class="fas fa-pencil-alt">
-                      </i>
-                      수정
-                  </a>
-                  <a class="btn btn-danger btn-sm" href="#">
-                      <i class="fas fa-trash">
-                      </i>
-                      삭제
-                  </a>
-              </td>
-          </tr>
+              
+              </c:forEach>
+                 
             
               </tbody>
           </table>
@@ -367,6 +149,7 @@
     <!-- /.content -->
   </div>
   <!-- /.content-wrapper -->
+  
 
 
  <%@ include file="/WEB-INF/views/common/footer.jsp" %>
@@ -379,8 +162,7 @@
 <script src="${path}/resources/plugins/bootstrap/js/bootstrap.bundle.min.js"></script>
 <!-- AdminLTE App -->
 <script src="${path}/resources/dist/js/adminlte.min.js"></script>
-<!-- AdminLTE for demo purposes -->
-<script src="${path}/resources/dist/js/demo.js"></script>
+
 
 
 </body>

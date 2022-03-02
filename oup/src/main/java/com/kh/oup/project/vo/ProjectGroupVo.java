@@ -5,10 +5,12 @@ import lombok.Data;
 @Data
 public class ProjectGroupVo {
 
-	private long employeeNo; //EMPLOYEE
+	private int employeeNo; //EMPLOYEE
 	private String employeeName; //EMPLOYEE
 	private String teamCode; //EMPLOYEE
-	private char entYN; //EMPLOYEE
+	private String entYN; //EMPLOYEE
+	private String jobPosition; //EMPLOYEE
+	
 	private String teamName; //TEAM
 	private String departName; //DEPARTMENT
 	

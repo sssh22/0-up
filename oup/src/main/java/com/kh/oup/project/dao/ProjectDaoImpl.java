@@ -6,8 +6,10 @@ import org.apache.ibatis.session.SqlSession;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Repository;
 
+import com.kh.oup.common.PageVo;
 import com.kh.oup.project.vo.DeptVo;
 import com.kh.oup.project.vo.ProjectGroupVo;
+import com.kh.oup.project.vo.ProjectVo;
 import com.kh.oup.project.vo.TeamVo;
 
 @Repository
@@ -32,6 +34,20 @@ public class ProjectDaoImpl implements ProjectDao {
 	public List<ProjectGroupVo> getEmpList(String teamCode) {
 		
 		return ss.selectList("projectgroup.getEmpList",teamCode);
+	}
+
+	//페이징
+	@Override
+	public int getPrjCnt() {
+		
+		return ss.selectOne("project.getPrjCnt");
+	}
+
+	//조회
+	@Override
+	public List<ProjectVo> getPrjList(PageVo pvo) {
+		
+		return ss.selectList("project.getPrjList",pvo);
 	}
 
 }
