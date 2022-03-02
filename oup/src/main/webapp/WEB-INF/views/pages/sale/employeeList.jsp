@@ -28,7 +28,7 @@
       <div class="row">
         <div class="col-md">
             <div class="card-header">
-              <h3>회원 조회</h3>
+              <h2>회원 조회</h3>
               <div class="card-tools">
                 <button type="button" class="btn btn-tool" data-card-widget="collapse" title="Collapse">
                 </button>
@@ -43,10 +43,10 @@
 	                <table class="table table-bordered projects">
 	                  <thead>
 	                      <tr>
-	                          <th style="width: 50%" class="text-center">
+	                          <th style="width: 50%; font-size: 150%" class="text-center">
 	                              사원코드
 	                          </th>
-	                          <th style="width: 50%" class="text-center">
+	                          <th style="width: 50%; font-size: 150%" class="text-center">
 	                              사원명
 	                          </th>
 	                      </tr>
@@ -54,8 +54,8 @@
 	                  <tbody>
 		                  <c:forEach items="${list}" var="l">				
 		                    <tr>
-		                      <td><span id="confirm_id" onclick="employeeList('${l.employeeNo}','${l.employeeName}')">${l.employeeNo}</span></td>
-		                      <td>${l.employeeName}</td>
+		                      <td style="color:blue; font-size: 150%"><span style="text-decoration: underline; cursor: pointer;" id="confirm_id" onclick="employeeList('${l.employeeNo}','${l.employeeName}')">${l.employeeNo}</span></td>
+		                      <td style="font-size: 150%">${l.employeeName}</td>
 		                    </tr>
 		                  </c:forEach>
 	                  </tbody>

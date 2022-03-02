@@ -68,7 +68,7 @@
                 <div class="col-sm-4">                  
                   <div class="input-group col mt-3">
                     <input type="text" name="cNo" class="form-control" placeholder="거래처">
-                    <button class="input-group-text" onclick="goPopup()"><i class="bi bi-search"></i></button>
+                    <button type="button" class="input-group-text" onclick="goPopup()"><i class="bi bi-search"></i></button>
                     <input type="text" class="form-control" readonly>
                   </div>
                 </div>
@@ -250,7 +250,6 @@
 		var windowTargetName = "employee";
 		var features = "width=720,height=500, scrollbars=no, resizable=no";
 		var search = window.open(url, windowTargetName, features);
-		alert(document.getElementById("saleDate").value);
 	} 
 	var goPopup = function(){
         var search = window.open("${path}/client/searchClient","search","width=570,height=420, scrollbars=yes, resizable=no"); 
