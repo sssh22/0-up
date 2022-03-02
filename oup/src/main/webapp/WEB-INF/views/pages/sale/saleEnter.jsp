@@ -131,21 +131,18 @@
                   </div>
                 </div>
           </div>
-          <input type="submit" value="제출">
-		</form> <!-- cbj -->
+		
           <div style="margin: 10px;">
             <button type="button">찾기</button>
             <button type="button">거래내역보기</button>
             <button type="button">My품목</button>
             <button type="button">주문</button>
+            <button onclick="addProduct()" type="button">+</button>
 	       </div>
-	
+			<div id="app"> <!-- vue사용목적 -->
 			<table class="table table-bordered projects">
 				<thead>
 					<tr>
-						<th style="width: 3%"><input type="checkbox"></th>
-						<th style="width: 3%" class="text-center"><i
-							class="bi bi-arrow-bar-down"></i></th>
 						<th style="width: 10%" class="text-center">품목코드</th>
 						<th style="width: 15%" class="text-center">품목명</th>
 						<th style="width: 9%" class="text-center">수량</th>
@@ -155,73 +152,33 @@
 						<th style="width: 20%" class="text-center">납기일자</th>
 					</tr>
 				</thead>
-				<tbody>
+				<tbody id="product">
 					<tr>
-						<td><input type="checkbox"></td>
-						<td><a href="#"><i class="bi bi-arrow-bar-down"></i></a></td>
-						<td><input type="text" class="form-control"
+						<td><input name="pNo" type="number" class="form-control"
 							placeholder="AA00"></td>
 						<td class="project_progress"><input type="text"
 							class="form-control" placeholder="단단한돌"></td>
-						<td><input type="text" class="form-control"
-							placeholder="1000"></td>
-						<td><input type="text" class="form-control"
-							placeholder="3000원"></td>
-						<td><input type="text" class="form-control"
-							placeholder="100원"></td>
-						<td><input type="text" class="form-control"
+						<td><input name="sQnt" type="number" class="form-control"
+							placeholder="1000" v-model="num1" v-on:change="calcSum"></td>
+						<td><input type="number" class="form-control"
+							placeholder="3000원" v-model="num2" v-on:change="calcSum"></td>
+						<td><input name="sPrice" v-model="num3" type="number" class="form-control"
+							readonly="readonly"></td>
+						<td><input type="number" class="form-control"
 							placeholder="0원"></td>
-						<td><input type="text" class="form-control"
-							placeholder="2022-04-18"></td>
-					</tr>
-	
-					<tr>
-						<td><input type="checkbox"></td>
-						<td><a href="#"><i class="bi bi-arrow-bar-down"></i></a></td>
-						<td><input type="text" class="form-control"
-							placeholder="AA00"></td>
-						<td class="project_progress"><input type="text"
-							class="form-control" placeholder="단단한돌"></td>
-						<td><input type="text" class="form-control"
-							placeholder="1000"></td>
-						<td><input type="text" class="form-control"
-							placeholder="3000원"></td>
-						<td><input type="text" class="form-control"
-							placeholder="100원"></td>
-						<td><input type="text" class="form-control"
-							placeholder="0원"></td>
-						<td><input type="text" class="form-control"
-							placeholder="2022-04-18"></td>
-					</tr>
-	
-					<tr>
-						<td><input type="checkbox"></td>
-						<td><a href="#"><i class="bi bi-arrow-bar-down"></i></a></td>
-						<td><input type="text" class="form-control"
-							placeholder="AA00"></td>
-						<td class="project_progress"><input type="text"
-							class="form-control" placeholder="단단한돌"></td>
-						<td><input type="text" class="form-control"
-							placeholder="1000"></td>
-						<td><input type="text" class="form-control"
-							placeholder="3000원"></td>
-						<td><input type="text" class="form-control"
-							placeholder="100원"></td>
-						<td><input type="text" class="form-control"
-							placeholder="0원"></td>
-						<td><input type="text" class="form-control"
+						<td><input name="sDeliberyDate" type="date" class="form-control"
 							placeholder="2022-04-18"></td>
 					</tr>
 				</tbody>
 			</table>
-	
+			</div>
 			<div style="margin: 10px;">
-            <button type="button" class="btn btn-secondary btn-sm">저장</button>
+            <button type="submit" class="btn btn-secondary btn-sm">저장</button>
             <button type="button" class="btn btn-secondary btn-sm">저장/전표</button>
             <button type="button" class="btn btn-secondary btn-sm">다시작성</button>
             <button type="button" class="btn btn-secondary btn-sm">리스트</button>
           </div>
-
+		</form> <!-- cbj -->
         </div>
         <!-- /.card-body -->
     </section>
@@ -245,15 +202,38 @@
 <!-- AdminLTE App -->
 <script src="${path}/resources/dist/js/adminlte.min.js"></script>
 <script type="text/javascript">
-	var employeePopup = function(){ 
+	var employeePopup = function() { 
 		var url = "${path}/popup";
 		var windowTargetName = "employee";
 		var features = "width=720,height=500, scrollbars=no, resizable=no";
 		var search = window.open(url, windowTargetName, features);
 	} 
-	var goPopup = function(){
+	var goPopup = function() {
         var search = window.open("${path}/client/searchClient","search","width=570,height=420, scrollbars=yes, resizable=no"); 
     }
+	
+	var addProduct = function() {
+		var tag = "<tr><td><input name='pNo' type='number' class='form-control'placeholder='AA00'></td><td class='project_progress'><input type='text'class='form-control' placeholder='단단한돌'></td><td><input name='sQnt' type='number' class='form-control'placeholder='1000' v-model='num1' v-on:change='calcSum'></td><td><input type='number' class='form-control'placeholder='3000원' v-model='num2' v-on:change='calcSum'></td><td><input name='sPrice' v-model='num3' type='number' class='form-control'readonly='readonly'></td><td><input type='number' class='form-control'placeholder='0원'></td><td><input name='sDeliberyDate' type='date' class='form-control'placeholder='2022-04-18'></td></tr>";
+		
+		$('#product').append(tag);
+	}
+</script>
+<!-- vue.js -->
+<script src="https://cdn.jsdelivr.net/npm/vue/dist/vue.js"></script>
+<script>
+	var vm = new Vue({
+	  el: '#app',
+	  data: {
+	    num1: 0,
+	    num2: 0,
+	    num3: 0
+	  },
+	  methods:{
+		  calcSum() {
+	        this.num3 = parseFloat(this.num1) * parseFloat(this.num2);
+	    }
+	  }
+	})
 </script>
 </body>
 </html>
