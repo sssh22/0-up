@@ -2,8 +2,10 @@ package com.kh.oup.project.dao;
 
 import java.util.List;
 
+import com.kh.oup.common.PageVo;
 import com.kh.oup.project.vo.DeptVo;
 import com.kh.oup.project.vo.ProjectGroupVo;
+import com.kh.oup.project.vo.ProjectVo;
 import com.kh.oup.project.vo.TeamVo;
 
 public interface ProjectDao {
@@ -13,4 +15,8 @@ public interface ProjectDao {
 	List<TeamVo> getTeamList(String departCode);
 
 	List<ProjectGroupVo> getEmpList(String teamCode);
+
+	int getPrjCnt();
+
+	List<ProjectVo> getPrjList(PageVo pvo);
 }

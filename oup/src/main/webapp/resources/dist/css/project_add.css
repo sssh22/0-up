@@ -16,7 +16,28 @@
 }
 
 
-/* project edit */
+/* project group */
+table td:nth-child(2){
+	width:300px
+}
+
+input{
+	width:100% !important;
+}
 #bntbottom{
     margin-left: 3px !important;
+}
+#empNo{
+	border:none;
+	background-color: transparent !important;
+}
+#empNo:focus{
+	outline:none;
+}
+
+#submitbtn{
+	width:150px !important;
+}
+#startDate, #endDate{
+	width:150px !important;
 }

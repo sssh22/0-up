@@ -5,9 +5,11 @@ import java.util.List;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Service;
 
+import com.kh.oup.common.PageVo;
 import com.kh.oup.project.dao.ProjectDao;
 import com.kh.oup.project.vo.DeptVo;
 import com.kh.oup.project.vo.ProjectGroupVo;
+import com.kh.oup.project.vo.ProjectVo;
 import com.kh.oup.project.vo.TeamVo;
 
 @Service
@@ -35,6 +37,19 @@ public class ProjectServiceImpl implements ProjectService{
 	public List<ProjectGroupVo> selectEmpList(String teamCode) {
 		
 		return dao.getEmpList(teamCode);
+	}
+
+//페이징
+	@Override 
+	public int getPrjCnt() {
+		
+		return dao.getPrjCnt();
+	}
+
+//조회
+	@Override
+	public List<ProjectVo> getPrjList(PageVo pvo) {
+		return dao.getPrjList(pvo);
 	}
 
 }

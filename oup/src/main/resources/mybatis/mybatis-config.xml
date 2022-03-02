@@ -13,7 +13,6 @@
   		<typeAlias type="com.kh.oup.employee.vo.EmployeeVo" alias="employeeVo"/>
   		<typeAlias type="com.kh.oup.client.vo.ClientVo" alias="clientVo"/>
   		<typeAlias type="com.kh.oup.mail.vo.MailVo" alias="mailVo"/>
-
   	</typeAliases>
   
   </configuration>
