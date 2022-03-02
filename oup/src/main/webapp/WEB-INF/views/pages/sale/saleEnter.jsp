@@ -68,7 +68,7 @@
                 <div class="col-sm-4">                  
                   <div class="input-group col mt-3">
                     <input type="text" name="cNo" class="form-control" placeholder="거래처">
-                    <button class="input-group-text" onclick="goPopup()"><i class="bi bi-search"></i></button>
+                    <button type="button" class="input-group-text" onclick="goPopup()"><i class="bi bi-search"></i></button>
                     <input type="text" class="form-control" readonly>
                   </div>
                 </div>
@@ -131,21 +131,18 @@
                   </div>
                 </div>
           </div>
-          <input type="submit" value="제출">
-		</form> <!-- cbj -->
+		
           <div style="margin: 10px;">
             <button type="button">찾기</button>
             <button type="button">거래내역보기</button>
             <button type="button">My품목</button>
             <button type="button">주문</button>
+            <button onclick="addProduct()" type="button">+</button>
 	       </div>
-	
+			<input id="index" type="hidden" value="2">
 			<table class="table table-bordered projects">
 				<thead>
 					<tr>
-						<th style="width: 3%"><input type="checkbox"></th>
-						<th style="width: 3%" class="text-center"><i
-							class="bi bi-arrow-bar-down"></i></th>
 						<th style="width: 10%" class="text-center">품목코드</th>
 						<th style="width: 15%" class="text-center">품목명</th>
 						<th style="width: 9%" class="text-center">수량</th>
@@ -155,73 +152,46 @@
 						<th style="width: 20%" class="text-center">납기일자</th>
 					</tr>
 				</thead>
-				<tbody>
+				<tbody id="product">
 					<tr>
-						<td><input type="checkbox"></td>
-						<td><a href="#"><i class="bi bi-arrow-bar-down"></i></a></td>
-						<td><input type="text" class="form-control"
-							placeholder="AA00"></td>
-						<td class="project_progress"><input type="text"
-							class="form-control" placeholder="단단한돌"></td>
-						<td><input type="text" class="form-control"
-							placeholder="1000"></td>
-						<td><input type="text" class="form-control"
-							placeholder="3000원"></td>
-						<td><input type="text" class="form-control"
-							placeholder="100원"></td>
-						<td><input type="text" class="form-control"
-							placeholder="0원"></td>
-						<td><input type="text" class="form-control"
-							placeholder="2022-04-18"></td>
-					</tr>
-	
-					<tr>
-						<td><input type="checkbox"></td>
-						<td><a href="#"><i class="bi bi-arrow-bar-down"></i></a></td>
-						<td><input type="text" class="form-control"
-							placeholder="AA00"></td>
-						<td class="project_progress"><input type="text"
-							class="form-control" placeholder="단단한돌"></td>
-						<td><input type="text" class="form-control"
-							placeholder="1000"></td>
-						<td><input type="text" class="form-control"
-							placeholder="3000원"></td>
-						<td><input type="text" class="form-control"
-							placeholder="100원"></td>
-						<td><input type="text" class="form-control"
-							placeholder="0원"></td>
-						<td><input type="text" class="form-control"
-							placeholder="2022-04-18"></td>
-					</tr>
-	
-					<tr>
-						<td><input type="checkbox"></td>
-						<td><a href="#"><i class="bi bi-arrow-bar-down"></i></a></td>
-						<td><input type="text" class="form-control"
-							placeholder="AA00"></td>
-						<td class="project_progress"><input type="text"
-							class="form-control" placeholder="단단한돌"></td>
-						<td><input type="text" class="form-control"
-							placeholder="1000"></td>
-						<td><input type="text" class="form-control"
-							placeholder="3000원"></td>
-						<td><input type="text" class="form-control"
-							placeholder="100원"></td>
-						<td><input type="text" class="form-control"
-							placeholder="0원"></td>
-						<td><input type="text" class="form-control"
-							placeholder="2022-04-18"></td>
+						<td>
+							<input name="pNo" type="number" class="form-control"
+							placeholder="AA00">
+						</td>
+						<td class="project_progress">
+							<input type="text"
+							class="form-control" placeholder="단단한돌">
+						</td>
+						<td>
+							<input onchange="calcResult()" id="count1" name="sQnt" type="number" class="form-control"
+							placeholder="1000">
+						</td>
+						<td>
+						<input onchange="calcResult()" id="price1" type="number" class="form-control"
+							placeholder="3000원">
+						</td>
+						<td>
+						<input id="result1" name="sPrice" class="form-control"
+							readonly="readonly" value="0">
+						</td>
+						<td>
+						<input id="buga1" type="number" class="form-control"
+							value="0">
+						</td>
+						<td>
+						<input name="sDeliberyDate" type="date" class="form-control"
+							placeholder="2022-04-18">
+						</td>
 					</tr>
 				</tbody>
 			</table>
-	
 			<div style="margin: 10px;">
-            <button type="button" class="btn btn-secondary btn-sm">저장</button>
+            <button type="submit" class="btn btn-secondary btn-sm">저장</button>
             <button type="button" class="btn btn-secondary btn-sm">저장/전표</button>
             <button type="button" class="btn btn-secondary btn-sm">다시작성</button>
             <button type="button" class="btn btn-secondary btn-sm">리스트</button>
           </div>
-
+		</form> <!-- cbj -->
         </div>
         <!-- /.card-body -->
     </section>
@@ -245,16 +215,39 @@
 <!-- AdminLTE App -->
 <script src="${path}/resources/dist/js/adminlte.min.js"></script>
 <script type="text/javascript">
-	var employeePopup = function(){ 
+	var employeePopup = function() { 
 		var url = "${path}/popup";
 		var windowTargetName = "employee";
 		var features = "width=720,height=500, scrollbars=no, resizable=no";
 		var search = window.open(url, windowTargetName, features);
-		alert(document.getElementById("saleDate").value);
 	} 
-	var goPopup = function(){
+	var goPopup = function() {
         var search = window.open("${path}/client/searchClient","search","width=570,height=420, scrollbars=yes, resizable=no"); 
     }
+	
+	var addProduct = function() {
+		var indexdoc = document.getElementById('index')
+		var index =  parseInt(indexdoc.value);
+		var tag = "<tr><td><input name='pNo' type='number' class='form-control'placeholder='AA00'></td><td class='project_progress'><input type='text'class='form-control' placeholder='단단한돌'></td><td><input onchange='calcResult()' id='count" + index + "' name='sQnt' type='number' class='form-control'placeholder='1000'></td><td><input onchange='calcResult()' id='price" + index + "' type='number' class='form-control'placeholder='3000'></td><td><input id='result" + index + "' name='sPrice' class='form-control'readonly='readonly' value='0'></td><td><input id='buga" + index + "' type='number' class='form-control' value='0'></td><td><input name='sDeliberyDate' type='date' class='form-control'placeholder='2022-04-18'></td></tr>";
+		indexdoc.value = index + 1;
+		$('#product').append(tag);
+	}
+	
+	var calcResult = function() {
+		var indexdoc = document.getElementById('index')
+		var index =  parseInt(indexdoc.value);
+		for(let i = 1; i < index; i++) {
+			var count = document.getElementById('count' + i).value;
+			var price = document.getElementById('price' + i).value;
+			var result = document.getElementById('result' + i);
+			var buga = document.getElementById('buga' + i);
+			
+			var result1 = count * price;
+			result.value = result1;
+			var result2 = result1 * 0.1;
+			buga.value = result2;
+		}
+	}
 </script>
 </body>
 </html>

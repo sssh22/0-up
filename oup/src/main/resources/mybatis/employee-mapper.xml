@@ -5,15 +5,15 @@
  
  <!-- 파일이름 바꾸기 -->
  
- <mapper namespace="employee">
- 	<select id="getEmployee" parameterType="employeeVo" resultType="employeeVo">
- 		SELECT *
+<mapper namespace="employee">
+	<select id="getEmployee" parameterType="employeeVo" resultType="employeeVo">
+		SELECT *
 		FROM EMPLOYEE
 		WHERE EMPLOYEE_ID = #{employeeId}
- 	</select>
- 	<select id="getEmployeeList" resultType="employeeVo">
+	</select>
+	<select id="getEmployeeList" resultType="employeeVo">
  		SELECT * 
  		FROM EMPLOYEE
  		WHERE ENT_YN = 'N'
- 	</select>
- </mapper>
+	</select>
+</mapper>
