@@ -28,7 +28,7 @@
       <div class="row">
         <div class="col-md">
             <div class="card-header">
-              <h2>회원 조회</h2>
+              <h2>창고 조회</h2>
               <div class="card-tools">
                 <button type="button" class="btn btn-tool" data-card-widget="collapse" title="Collapse">
                 </button>
@@ -43,19 +43,18 @@
 	                <table class="table table-bordered projects">
 	                  <thead>
 	                      <tr>
-	                          <th style="width: 50%; font-size: 150%" class="text-center">
-	                              사원코드
+	                          <th style="font-size: 150%" class="text-center">
+	                              프로젝트번호
 	                          </th>
-	                          <th style="width: 50%; font-size: 150%" class="text-center">
-	                              사원명
-	                          </th>
+	                          <th style="font-size: 150%" class="text-center">
+	                              프로젝트명
 	                      </tr>
 	                  </thead>
 	                  <tbody>
 		                  <c:forEach items="${list}" var="l">				
 		                    <tr>
-		                      <td style="color:blue; font-size: 150%"><span style="text-decoration: underline; cursor: pointer;" id="confirm_id" onclick="employeeList('${l.employeeNo}','${l.employeeName}')">${l.employeeNo}</span></td>
-		                      <td style="font-size: 150%">${l.employeeName}</td>
+		                      <td style="color:blue; font-size: 150%"><span style="text-decoration: underline; cursor: pointer;" id="confirm_id" onclick="projectList('${l.projectNo}','${l.projectName}')">${l.projectNo}</span></td>
+		                      <td style="font-size: 150%">${l.projectName}</td>
 		                    </tr>
 		                  </c:forEach>
 	                  </tbody>
@@ -81,9 +80,9 @@
 		document.searchform.submit(search);
 	}	
 	
-	function employeeList(employeeNo,employeeName) { 
-			opener.document.getElementById("employeeNo").value = employeeNo;
-			opener.document.getElementById("employeeName").value = employeeName;
+	function projectList(projectNo, projectName) { 
+			opener.document.getElementById("projectNo").value = projectNo;
+			opener.document.getElementById("projectName").value = projectName;
 			self.close();
 	}
 

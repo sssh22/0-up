@@ -67,9 +67,9 @@
                 <div class="col-sm-1"></div>
                 <div class="col-sm-4">                  
                   <div class="input-group col mt-3">
-                    <input type="text" name="cNo" class="form-control" placeholder="거래처">
+                    <input id="cNo" type="text" name="cNo" class="form-control" placeholder="거래처">
                     <button type="button" class="input-group-text" onclick="goPopup()"><i class="bi bi-search"></i></button>
-                    <input type="text" class="form-control" readonly>
+                    <input id="cName" type="text" class="form-control" readonly>
                   </div>
                 </div>
 
@@ -87,9 +87,9 @@
                 </div><div class="col-sm-1"></div>
                 <div class="col-sm-4">
                   <div class="input-group col">
-                    <input type="text" name="wareHouseNo" id="wareHouseNo" class="form-control" placeholder="출하창고">
-                    <span class="input-group-text"><i class="bi bi-search"></i></span>
-                    <input type="text" class="form-control" readonly>
+                    <input type="text" name="wareHouseNo" id="warehouseNo" class="form-control" placeholder="출하창고">
+                    <button onclick="warehousePopup()" type="button" class="input-group-text"><i class="bi bi-search"></i></button>
+                    <input id="warehouseName" type="text" class="form-control" readonly>
                   </div>
                 </div>
 
@@ -109,8 +109,8 @@
                 <div class="col-sm-4">
                   <div class="input-group col mb-3">
                     <input type="text" name="projectNo" id="projectNo" class="form-control" placeholder="프로젝트">
-                    <span class="input-group-text"><i class="bi bi-search"></i></span>
-                    <input type="text" class="form-control" readonly>
+                    <button type="button" onclick="projectPopup()" class="input-group-text"><i class="bi bi-search"></i></button>
+                    <input type="text" id="projectName" class="form-control" readonly>
                   </div>
                 </div>
                 
@@ -140,6 +140,7 @@
             <button onclick="addProduct()" type="button">+</button>
 	       </div>
 			<input id="index" type="hidden" value="2">
+			<input id="index2" type="hidden" value="1">
 			<table class="table table-bordered projects">
 				<thead>
 					<tr>
@@ -155,7 +156,7 @@
 				<tbody id="product">
 					<tr>
 						<td>
-							<input name="pNo" type="number" class="form-control"
+							<input name="voList[0].pNo" type="number" class="form-control"
 							placeholder="AA00">
 						</td>
 						<td class="project_progress">
@@ -163,7 +164,7 @@
 							class="form-control" placeholder="단단한돌">
 						</td>
 						<td>
-							<input onchange="calcResult()" id="count1" name="sQnt" type="number" class="form-control"
+							<input onchange="calcResult()" id="count1" name="voList[0].sQnt" type="number" class="form-control"
 							placeholder="1000">
 						</td>
 						<td>
@@ -171,7 +172,7 @@
 							placeholder="3000원">
 						</td>
 						<td>
-						<input id="result1" name="sPrice" class="form-control"
+						<input id="result1" name="voList[0].sPrice" class="form-control"
 							readonly="readonly" value="0">
 						</td>
 						<td>
@@ -179,10 +180,10 @@
 							value="0">
 						</td>
 						<td>
-						<input name="sDeliberyDate" type="date" class="form-control"
+						<input name="voList[0].sDeliberyDate" type="date" class="form-control"
 							placeholder="2022-04-18">
 						</td>
-					</tr>
+					
 				</tbody>
 			</table>
 			<div style="margin: 10px;">
@@ -222,14 +223,30 @@
 		var search = window.open(url, windowTargetName, features);
 	} 
 	var goPopup = function() {
-        var search = window.open("${path}/client/searchClient","search","width=570,height=420, scrollbars=yes, resizable=no"); 
+        var search = window.open("${path}/popup/searchClient?search=","search","width=800,height=420, scrollbars=yes, resizable=no"); 
     }
+	var warehousePopup = function() {
+		var url = "${path}/popup/warehouseList";
+		var windowTargetName = "warehouse";
+		var features = "width=720,height=500, scrollbars=no, resizable=no";
+		var search = window.open(url, windowTargetName, features);
+	}
+	var projectPopup = function() {
+		var url = "${path}/popup/projectList";
+		var windowTargetName = "project";
+		var features = "width=720,height=500, scrollbars=no, resizable=no";
+		var search = window.open(url, windowTargetName, features);
+	}
 	
+	/* product */
 	var addProduct = function() {
 		var indexdoc = document.getElementById('index')
 		var index =  parseInt(indexdoc.value);
-		var tag = "<tr><td><input name='pNo' type='number' class='form-control'placeholder='AA00'></td><td class='project_progress'><input type='text'class='form-control' placeholder='단단한돌'></td><td><input onchange='calcResult()' id='count" + index + "' name='sQnt' type='number' class='form-control'placeholder='1000'></td><td><input onchange='calcResult()' id='price" + index + "' type='number' class='form-control'placeholder='3000'></td><td><input id='result" + index + "' name='sPrice' class='form-control'readonly='readonly' value='0'></td><td><input id='buga" + index + "' type='number' class='form-control' value='0'></td><td><input name='sDeliberyDate' type='date' class='form-control'placeholder='2022-04-18'></td></tr>";
+		var indexdoc2 = document.getElementById('index2')
+		var index2 = parseInt(indexdoc2.value);
+		var tag = "<tr><td><input name='voList[" + index2 + "].pNo' type='number' class='form-control'placeholder='AA00'></td><td class='project_progress'><input type='text'class='form-control' placeholder='단단한돌'></td><td><input onchange='calcResult()' id='count" + index + "' name='voList[" + index2 + "].sQnt' type='number' class='form-control'placeholder='1000'></td><td><input onchange='calcResult()' id='price" + index + "' type='number' class='form-control'placeholder='3000'></td><td><input id='result" + index + "' name='voList[" + index2 + "].sPrice' class='form-control'readonly='readonly' value='0'></td><td><input id='buga" + index + "' type='number' class='form-control' value='0'></td><td><input name='voList[" + index2 + "].sDeliberyDate' type='date' class='form-control'placeholder='2022-04-18'></td></tr>";
 		indexdoc.value = index + 1;
+		indexdoc2.value = index2 + 1;
 		$('#product').append(tag);
 	}
 	
