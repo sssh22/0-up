@@ -36,10 +36,11 @@ public class SaleController {
 //			System.out.println(saleListVo.getVoList().get(i));
 //		}
 		
-		
 		long saleNo = service.getSeq();
 		saleVo.setSaleNo(saleNo);
-		
+		System.out.println("controller.saleListVo.getVoList().get(0) ::: " + saleListVo.getVoList().get(0));
+		System.out.println("controller.saleListVo.getVoList().get(1) ::: " + saleListVo.getVoList().get(1));
+		System.out.println("controller.saleListVo.getVoList().get(2) ::: " + saleListVo.getVoList().get(2));
 		for(int i = 0; i < saleListVo.getVoList().size(); i++) {
 			saleListVo.getVoList().get(i).setSaleNo(saleNo);
 		}
