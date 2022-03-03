@@ -6,13 +6,14 @@
  
 <mapper namespace="project">
  
+ <!-- 페이징 totalrows 카운트 -->
  <select id="getPrjCnt" resultType="int">
  SELECT COUNT(PROJECT_NO) 
 	FROM PROJECT
  </select>
  	
- <select id="getPrjList" resultType="com.kh.oup.project.vo.ProjectVo">
- 
+ <!-- 리스트 조회 -->	
+ <select id="getPrjList" parameterType="pageVo" resultType="com.kh.oup.project.vo.ProjectVo">
  SELECT * FROM
  	(
  		SELECT ROWNUM RN, J.* 
@@ -28,4 +29,57 @@
 	WHERE RN BETWEEN #{startRow} AND #{endRow}
  
  </select>
+ 
+ 
+ <!--검색 페이징 totalrows 카운트 -->
+ <select id="getSearchPrjCnt" parameterType="String" resultType="int">
+ SELECT COUNT(PROJECT_NO) 
+	FROM PROJECT
+	WHERE PROJECT_NAME LIKE '%${search}%'
+ </select>
+ 
+ 
+ 
+ <!--검색 리스트 조회 -->	
+ <select id="getSearchPrjList" parameterType="pageVo" resultType="com.kh.oup.project.vo.ProjectVo">
+ 
+	 SELECT * 
+	 FROM ( 
+    	SELECT ROWNUM RN, J.* 
+    	FROM ( 
+        	SELECT * 
+        	FROM PROJECT P 
+        	JOIN SALE S ON(P.PROJECT_NO = S.PROJECT_NO)
+        	WHERE P.PROJECT_NAME LIKE '%${search}%' 
+        	ORDER BY P.PROJECT_NO DESC 
+        	) J 
+    	) WHERE RN BETWEEN #{startRow} AND #{endRow}
+ 
+ 
+ </select>
+ 
+ 
+ <!--삭제 =============================== -->
+ <delete id="getDelPrj" parameterType="int">
+ 	DELETE 
+ 	FROM PROJECT
+ 	WHERE PROJECT_NO = #{projectNo}
+ </delete>
+ 
+ <!--prj 조회  -->
+ <select id="getPrj" parameterType="int" resultType="com.kh.oup.project.vo.ProjectVo">
+ SELECT * 
+ FROM PROJECT
+ WHERE PROJECT_NO = #{projectNo}
+ </select>
+
+<!--prjGroup 조회 projectNo  -->
+<select id="getPrjGroup" parameterType="int" resultType="com.kh.oup.project.vo.ProjectGroupVo">
+ SELECT * 
+ FROM GROUP1
+ WHERE PROJECT_NO = #{projectNo}
+</select>
+
+
+
 </mapper>

@@ -22,7 +22,7 @@ table td:nth-child(2){
 }
 
 input{
-	width:100% !important;
+	width:100%;
 }
 #bntbottom{
     margin-left: 3px !important;
@@ -37,7 +37,26 @@ input{
 
 #submitbtn{
 	width:150px !important;
+	margin-right:3px !important;
 }
 #startDate, #endDate{
 	width:150px !important;
 }
+
+
+
+/* project edit */
+#projectNo{
+	border:none;
+	background-color: transparent !important;
+	color: wite !important;
+}
+#projectNo:focus{
+	outline:none;
+}
+#searchM{
+	width:50px !important;
+}
+
+
+

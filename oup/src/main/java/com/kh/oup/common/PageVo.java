@@ -4,18 +4,18 @@ import lombok.Data;
 
 @Data
 public class PageVo { 
-	private String search;	// °Ë»ö³»¿ë ÆäÀÌÂ¡ ½Ã »ç¿ë
+	private String search;	// ï¿½Ë»ï¿½ï¿½ï¿½ï¿½ï¿½ ï¿½ï¿½ï¿½ï¿½Â¡ ï¿½ï¿½ ï¿½ï¿½ï¿½
 	
-	private int currentPage;	// ÇöÀç ÆäÀÌÁö
-	private int cntPerPage;	// ÆäÀÌÁö ÇÏ³ª´ç º¸¿©ÁÙ row °¹¼ö
-	private int pageBtnCnt;	// ÆäÀÌÁö ¹öÆ° ¸î°³ º¸¿©ÁÙÁö
-	private int totalRow;	// Å×ÀÌºíÀÇ ÀüÃ¼ row °³¼ö
+	private int currentPage;	// ï¿½ï¿½ï¿½ï¿½ ï¿½ï¿½ï¿½ï¿½ï¿½ï¿½
+	private int cntPerPage;	// ï¿½ï¿½ï¿½ï¿½ï¿½ï¿½ ï¿½Ï³ï¿½ï¿½ï¿½ ï¿½ï¿½ï¿½ï¿½ï¿½ï¿½ row ï¿½ï¿½ï¿½ï¿½
+	private int pageBtnCnt;	// ï¿½ï¿½ï¿½ï¿½ï¿½ï¿½ ï¿½ï¿½Æ° ï¿½î°³ ï¿½ï¿½ï¿½ï¿½ï¿½ï¿½ï¿½ï¿½
+	private int totalRow;	// ï¿½ï¿½ï¿½Ìºï¿½ï¿½ï¿½ ï¿½ï¿½Ã¼ row ï¿½ï¿½ï¿½ï¿½
 	
-	private int startRow; // db°¡¼­ Á¶È¸ÇÒ rownum
-	private int endRow;	// db°¡¼­ Á¶È¸ÇÒ rownum
-	private int startPage;	// ½ÃÀÛÆäÀÌÁö
-	private int endPage;	// ¸¶Áö¸· ÆäÀÌÁö
-	private int lastPage;	// dbÀÇ row ±âÁØÀ¸·Î ¸¶Áö¸· ÆäÀÌÁö´Â ¸îÀÎÁö
+	private int startRow; // dbï¿½ï¿½ï¿½ï¿½ ï¿½ï¿½È¸ï¿½ï¿½ rownum
+	private int endRow;	// dbï¿½ï¿½ï¿½ï¿½ ï¿½ï¿½È¸ï¿½ï¿½ rownum
+	private int startPage;	// ï¿½ï¿½ï¿½ï¿½ï¿½ï¿½ï¿½ï¿½ï¿½ï¿½
+	private int endPage;	// ï¿½ï¿½ï¿½ï¿½ï¿½ï¿½ ï¿½ï¿½ï¿½ï¿½ï¿½ï¿½
+	private int lastPage;	// dbï¿½ï¿½ row ï¿½ï¿½ï¿½ï¿½ï¿½ï¿½ï¿½ï¿½ ï¿½ï¿½ï¿½ï¿½ï¿½ï¿½ ï¿½ï¿½ï¿½ï¿½ï¿½ï¿½ï¿½ï¿½ ï¿½ï¿½ï¿½ï¿½ï¿½ï¿½
 	
 	public PageVo(String currentPage, int cntPerPage, int pageBtnCnt, int totalRow) {
 		this.currentPage = Integer.parseInt(currentPage);
@@ -41,6 +41,19 @@ public class PageVo {
 		this.totalRow = totalRow;
 		calc(this.currentPage, cntPerPage, pageBtnCnt, totalRow);
 	}
+	
+	
+	//sssh pageVo
+	public PageVo(String currentPage, int cntPerPage, int pageBtnCnt, int totalRow, String search) {
+		this.search = search;
+		this.currentPage = Integer.parseInt(currentPage);
+		this.cntPerPage = cntPerPage;
+		this.pageBtnCnt = pageBtnCnt;
+		this.totalRow = totalRow;
+		calc(this.currentPage, cntPerPage, pageBtnCnt, totalRow);
+	}
+	
+	
 	
 	private void calc(int currentPage, int cntPerPage, int pageBtnCnt, int totalRow) {
 		this.setEndRow(this.getCurrentPage() * this.getCntPerPage());

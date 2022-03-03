@@ -1,5 +1,7 @@
 package com.kh.oup.project.vo;
 
+import java.util.Date;
+
 import lombok.Data;
 
 @Data
@@ -11,8 +13,8 @@ public class ProjectVo {
 	private String projectContents2;
 	private String projectContents3;
 	private String projectContents4;
-	private String projectStart; //기한 시작
-	private String projectEnd;  //기한 마감
+	private Date projectStart; //기한 시작
+	private Date projectEnd;  //기한 마감
 	private String projectColor;
 	private String dCCode; //문서종류 코드 ,, 4
 	private String aStatement; //결재상태

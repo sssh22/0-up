@@ -1,11 +1,16 @@
+body{
+	overflow-x: hidden !important;
+}
 .content-wrapper {
     background-color: white;
-    padding-left: 50px;
-    padding-right: 50px;
 }
 .card{
+	width:70% !important;
     padding: 100px;
     background-color: #ebe7f1;
+}
+#btb{
+	margin:150px;
 }
 #btb th{
     background-color: #d7d0e3;

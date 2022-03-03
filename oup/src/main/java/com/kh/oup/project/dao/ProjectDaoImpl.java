@@ -36,18 +36,46 @@ public class ProjectDaoImpl implements ProjectDao {
 		return ss.selectList("projectgroup.getEmpList",teamCode);
 	}
 
+	
+	
+	
+	//조회==============================================================
+	
 	//페이징
 	@Override
 	public int getPrjCnt() {
-		
 		return ss.selectOne("project.getPrjCnt");
 	}
-
 	//조회
 	@Override
 	public List<ProjectVo> getPrjList(PageVo pvo) {
-		
 		return ss.selectList("project.getPrjList",pvo);
+	}
+	//검색 페이징
+	@Override
+	public int getSearchPrjCnt(String search) {
+		return ss.selectOne("project.getSearchPrjCnt",search);
+	}
+	//검색 조회
+	@Override
+	public List<ProjectVo> getSearchPrjList(PageVo pvo) {
+		return ss.selectList("project.getSearchPrjList",pvo);
+	}
+
+	//삭제-------------------------------------------
+	@Override
+	public int getDelPrj(int projectNo) {
+		return ss.delete("project.getDelPrj",projectNo);
+	}
+
+	@Override
+	public ProjectVo getPrj(int projectNo) {
+		return ss.selectOne("project.getPrj",projectNo);
+	}
+	//그룹 prjNo
+	@Override
+	public List<ProjectGroupVo> getPrjGroup(int projectNo) {
+		return ss.selectList("projectgroup.getPrjGroup", projectNo);
 	}
 
 }

@@ -2,6 +2,8 @@ package com.kh.oup.project.controller;
 
 import java.util.List;
 
+import javax.servlet.http.HttpServletRequest;
+
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Controller;
 import org.springframework.ui.Model;
@@ -39,29 +41,65 @@ public class ProjectController {
 		return "pages/project/project_detail";
 	}
 	
-	@GetMapping("project_edit")
-	public String project_edit() {
+	//수정
+	@GetMapping(value={"project_edit/{projectNo}"})
+	public String project_edit(Model model, @PathVariable(required=false) int projectNo) {
+		
+
+		ProjectVo prjVo = service.selectPrj(projectNo);
+		List<ProjectGroupVo> glist = service.selectPrjgroup(projectNo);
+		model.addAttribute("prjVo",prjVo);
+		model.addAttribute("glist",glist);
 		return "pages/project/project_edit";
 	}
 	
-	//공지사항 화면 보여주기
+	
+	
+	
+	
+	//삭제 =====================================
+	@PostMapping("project_del")
+	public String project_del(int projectNo) {
+		
+		int result = service.delPrj(projectNo);
+		return "pages/project/project_list";
+	}
+	
+	
+	
+	
+	
+	//조회 ============================================
 	@GetMapping(value = {"/project_list/{page}","/project_list"})
-	public String project_list(Model model, @PathVariable(required=false) String page) throws Exception {
+	public String project_list(Model model, @PathVariable(required=false) String page, HttpServletRequest req) throws Exception {
+		
+		String search = req.getParameter("search");
+		
+		
 		if(page == null) { page="1"; }
 		
-		//페이지pvo 객체 생성
-		int cntPerPage = 10; //한페이지당 10개씩 row보여줌
-		int pageBtnCnt = 3; // 보여줄 페이지버튼 갯수
-		int totalRow = service.getPrjCnt();
-		PageVo pvo = new PageVo(page, cntPerPage, pageBtnCnt, totalRow);
+		if(search == null) {
+			int cntPerPage = 10; //10 rows
+			int pageBtnCnt = 3; 
+			int totalRow = service.getPrjCnt();
+			PageVo pvo = new PageVo(page, cntPerPage, pageBtnCnt, totalRow);
 
-		System.out.println(pvo);
-		//리스트조회
-		List<ProjectVo> plist = service.getPrjList(pvo);
-		//System.out.println(plist);
-
-		model.addAttribute("plist",plist);
-		model.addAttribute("page",pvo);
+			//리스트조회
+			List<ProjectVo> plist = service.getPrjList(pvo);
+			model.addAttribute("plist",plist);
+			model.addAttribute("page",pvo);
+		}
+		if(search != null) {
+			int cntPerPage = 10; //10 rows
+			int pageBtnCnt = 3; 
+			int totalRow = service.getSearchPrjCnt(search);
+			PageVo pvo = new PageVo(page, cntPerPage, pageBtnCnt, totalRow, search);
+			
+			List<ProjectVo> plist = service.getSearchPrjList(pvo);
+			model.addAttribute("plist",plist);
+			model.addAttribute("page",pvo);
+		}
+		
 		
 		return "pages/project/project_list";
 	}
