@@ -39,17 +39,48 @@ public class ProjectServiceImpl implements ProjectService{
 		return dao.getEmpList(teamCode);
 	}
 
-//페이징
+	
+	//조회-----------------------------------
+	//페이징
 	@Override 
 	public int getPrjCnt() {
-		
 		return dao.getPrjCnt();
 	}
-
-//조회
+	//조회
 	@Override
 	public List<ProjectVo> getPrjList(PageVo pvo) {
 		return dao.getPrjList(pvo);
+	}
+	//검색 페이징
+	@Override
+	public int getSearchPrjCnt(String search) {
+		return dao.getSearchPrjCnt(search);
+	}
+	//검색 조회
+	@Override
+	public List<ProjectVo> getSearchPrjList(PageVo pvo) {
+		return dao.getSearchPrjList(pvo);
+	}
+
+	
+	
+	//삭제------------------------------------
+	@Override
+	public int delPrj(int projectNo) {
+		return dao.getDelPrj(projectNo);
+	}
+
+	//특정 prj 가져오기
+	@Override
+	public ProjectVo selectPrj(int projectNo) {
+		return dao.getPrj(projectNo);
+	}
+
+	//그룹가져오기(projecNo)
+	@Override
+	public List<ProjectGroupVo> selectPrjgroup(int projectNo) {
+		return dao.getPrjGroup(projectNo);
+	
 	}
 
 }

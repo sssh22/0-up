@@ -19,5 +19,15 @@ public interface ProjectService {
 	int getPrjCnt();
 
 	List<ProjectVo> getPrjList(PageVo pvo);
+
+	int getSearchPrjCnt(String search);
+
+	List<ProjectVo> getSearchPrjList(PageVo pvo);
+
+	int delPrj(int projectNo);
+
+	ProjectVo selectPrj(int projectNo);
+
+	List<ProjectGroupVo> selectPrjgroup(int projectNo);
 	
 }

@@ -19,4 +19,14 @@ public interface ProjectDao {
 	int getPrjCnt();
 
 	List<ProjectVo> getPrjList(PageVo pvo);
+
+	int getSearchPrjCnt(String search);
+
+	List<ProjectVo> getSearchPrjList(PageVo pvo);
+
+	int getDelPrj(int projectNo);
+
+	ProjectVo getPrj(int projectNo);
+
+	List<ProjectGroupVo> getPrjGroup(int projectNo);
 }
