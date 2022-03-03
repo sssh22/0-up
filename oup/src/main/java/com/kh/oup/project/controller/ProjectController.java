@@ -36,8 +36,13 @@ public class ProjectController {
 	 * "pages/project/project_add"; }
 	 */
 	
-	@GetMapping("project_detail")
-	public String project_detail() {
+	//자세히보기
+	@GetMapping(value={"project_detail/{projectNo}"})
+	public String project_detail(Model model, @PathVariable(required=false) int projectNo) {
+		ProjectVo prjVo = service.selectPrj(projectNo);
+		List<ProjectGroupVo> glist = service.selectPrjgroup(projectNo);
+		model.addAttribute("prjVo",prjVo);
+		model.addAttribute("glist",glist);
 		return "pages/project/project_detail";
 	}
 	

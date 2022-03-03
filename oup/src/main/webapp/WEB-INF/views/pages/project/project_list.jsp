@@ -99,7 +99,7 @@
                           ${p.projectNo}
                       </td>
                       <td>
-                          <a>
+                          <a href="${path}/project/project_detail/${p.projectNo}">
                             ${p.projectName}
                           </a>
                           <br/>
@@ -224,7 +224,10 @@ function delprj(param) {
 	 $.ajax({
 		 url:"/oup/project/project_del",
 		 type:"post",
-		 data:{projectNo:param}
+		 data:{projectNo:param},
+		 success: function (data) {
+             location.reload();
+        }
 	 });//ajax
  }else{
 	 alert("삭제가 취소되었습니다.")

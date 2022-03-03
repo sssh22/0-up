@@ -149,3 +149,4 @@ $RECYCLE.BIN/
 *.lnk
 
 # End of https://www.toptal.com/developers/gitignore/api/windows,macos,eclipse,java
+oup/target/classes/mybatis/sale-mapper.xml
