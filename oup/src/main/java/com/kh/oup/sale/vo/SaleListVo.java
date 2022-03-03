@@ -9,9 +9,10 @@ import lombok.Data;
 public class SaleListVo {
 	private long saleListNo;
 	private long saleNo;
-	private ArrayList<Product> list;
-//	private List<Integer> pNo;
-//	private List<Integer> sQnt;
-//	private List<Integer> sPrice;
-//	private List<String> sDeliberyDate;
+	private int pNo;
+	private int sQnt;
+	private int sPrice;
+	private String sDeliberyDate;
+	
+	private List<SaleListVo> voList;
 }

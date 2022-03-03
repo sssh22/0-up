@@ -24,8 +24,12 @@ public class SaleDaoImpl implements SaleDao{
 	}
 
 	@Override
-	public int saleListEnter(SaleListVo vo2) throws Exception {
-		return ss.insert("sale.saleListEnter", vo2);
+	public int saleListEnter(SaleListVo saleListVo) throws Exception {
+		for(int i = 0; i < saleListVo.getVoList().size(); i++) {
+			System.out.println(saleListVo.getVoList().get(i));
+		}
+		System.out.println("dao.SaleListVo :::" + saleListVo);
+		return ss.insert("sale.saleListEnter", saleListVo);
 	}
 
 }

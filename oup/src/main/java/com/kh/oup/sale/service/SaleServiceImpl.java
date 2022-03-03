@@ -19,10 +19,12 @@ public class SaleServiceImpl implements SaleService{
 	private SaleDao dao;
 	
 	@Override
-	public int saleEnter(SaleVo vo, SaleListVo vo2) throws Exception {
-		System.out.println("vo2:::" + vo2);
-		int result = dao.saleEnter(vo);
-		int result2 = dao.saleListEnter(vo2);
+	public int saleEnter(SaleVo saleVo, SaleListVo saleListVo) throws Exception {
+		int result = dao.saleEnter(saleVo);
+		
+		for(int i = 0; i < saleListVo.getVoList().size(); i++) {
+			dao.saleListEnter(saleListVo.getVoList().get(i));
+		}
 
 		return result;
 	}
