@@ -19,6 +19,7 @@
   <link href="https://cdn.jsdelivr.net/npm/bootstrap@5.1.3/dist/css/bootstrap.min.css" rel="stylesheet">
   <script src="https://cdn.jsdelivr.net/npm/bootstrap@5.1.3/dist/js/bootstrap.bundle.min.js"></script>
   <script src="https://maxcdn.bootstrapcdn.com/bootstrap/3.3.2/js/bootstrap.min.js"></script>
+  <script src="https://ajax.googleapis.com/ajax/libs/jquery/3.6.0/jquery.min.js"></script>
   <link rel="stylesheet" href="https://cdn.jsdelivr.net/npm/bootstrap-icons@1.8.0/font/bootstrap-icons.css" integrity="sha384-ejwKkLla8gPP8t2u0eQyL0Q/4ItcnyveF505U0NIobD/SMsNyXrLti6CWaD0L52l" crossorigin="anonymous">
   <style>
     @import url('https://fonts.googleapis.com/css2?family=Nanum+Gothic:wght@400;700&display=swap');
@@ -53,7 +54,7 @@
       <!-- Default box -->
       <div class="card"></div>
         <div class="card-body p-0">
-
+			
 	          <div class="row" style="background-color: rgb(196, 194, 194); margin: 20px; padding: 6px;">
 	                <div class="col-sm-1 mt-3" style="padding:5px;"><b>일자</b></div>
 	                <div class="col-sm-1"></div>
@@ -131,11 +132,11 @@
 	            <button type="button">재고불러오기</button>
 	            <button type="button">생성한전표</button>
 	            <button type="button">이익계산</button>
-		        <a href="javascript:" style="float:right;"><i class="bi bi-plus-square"></i></a>
+		        <a href="javascript:orderPlus();" style="float:right;"><i class="bi bi-plus-square"></i></a>
 	          </div>
 	          
 	
-	          <table class="table table-bordered projects">
+	          <table class="table table-bordered projects" id="orderTable">
 	              <thead>
 	                  <tr>
 	                      <th style="width: 3%">
@@ -147,19 +148,16 @@
 	                      <th style="width: 10%" class="text-center">
 	                          품목코드
 	                      </th>
-	                      <th style="width: 15%" class="text-center">
+	                      <th style="width: 16%" class="text-center">
 	                          품목명
 	                      </th>
-	                      <th style="width: 9%" class="text-center">
+	                      <th style="width: 16%" class="text-center">
 	                        수량
 	                      </th>
-	                      <th style="width: 13%" class="text-center">
+	                      <th style="width: 16%" class="text-center">
 	                          단가
 	                      </th>
-	                      <th style="width: 14%" class="text-center">
-	                        공급가액
-	                      </th>
-	                      <th style="width: 13%" class="text-center">
+	                      <th style="width: 16%" class="text-center">
 	                        부가세
 	                      </th>
 	                      <th style="width: 20%" class="text-center">
@@ -167,34 +165,31 @@
 	                      </th>
 	                  </tr>
 	              </thead>
-	              <tbody>
+	              <tbody id="tbody">
 	                  <tr>
 	                      <td>
-	                        <input type="checkbox">
+	                        <input type="checkbox" class="orderCheckBox">
+	                      </td>
+	                      <td class="text-center">
+	                        <a href="#"><i class="bi bi-arrow-bar-down" ></i></a>
 	                      </td>
 	                      <td>
-	                        <a href="#"><i class="bi bi-arrow-bar-down"></i></a>
-	                      </td>
-	                      <td>
-	                        <input type="text" class="form-control" placeholder="AA00">
+	                        <input type="text" class="form-control" name="pNo">
 	                      </td>
 	                      <td class="project_progress">
-	                        <input type="text" class="form-control" placeholder="단단한돌">
+	                        <input type="text" class="form-control" name="pName">
 	                      </td>
 	                      <td>
-	                        <input type="text" class="form-control" placeholder="1000">
+	                        <input type="text" class="form-control" name="oNum">
 	                      </td>
 	                      <td>
-	                        <input type="text" class="form-control" placeholder="3000원">
+	                        <input type="text" class="form-control" name="oPrice">
 	                      </td>
 	                      <td>
-	                        <input type="text" class="form-control" placeholder="100원" id="supplyPrice">
+	                        <input type="text" class="form-control" id="vatText" value="0" readonly>
 	                      </td>
 	                      <td>
-	                        <input type="text" class="form-control" placeholder="0원" id="vatText" value="0" readonly>
-	                      </td>
-	                      <td>
-	                        <input type="date" class="form-control">
+	                        <input type="date" class="form-control" name="oDeliberyDate">
 	                      </td>
 	                  </tr>
 	
@@ -202,12 +197,12 @@
 	          </table>
 	
 	          <div style="margin: 10px;">
-	            <button type="button" class="btn btn-secondary btn-sm">저장</button>
+	            <button type="button" class="btn btn-secondary btn-sm" onclick="insertOrder();">저장</button>
 	            <button type="button" class="btn btn-secondary btn-sm">저장/전표</button>
 	            <button type="button" class="btn btn-secondary btn-sm">다시작성</button>
 	            <button type="button" class="btn btn-secondary btn-sm">리스트</button>
 	          </div>
-        </div>
+	       </div>
         <!-- /.card-body -->
     </section>
     <!-- /.content -->
@@ -244,15 +239,38 @@
 		let wareText = document.getElementById("wareText").value;
 		document.getElementById("ware").value = wareText;
 	}
+	function orderPlus(){
+		let table = document.getElementById('orderTable');
+		  const newRow = table.insertRow();
+		  
+		  const newCell1 = newRow.insertCell(0);
+		  const newCell2 = newRow.insertCell(1);
+		  const newCell3 = newRow.insertCell(2);
+		  const newCell4 = newRow.insertCell(3);
+		  const newCell5 = newRow.insertCell(4);
+		  const newCell6 = newRow.insertCell(5);
+		  const newCell7 = newRow.insertCell(6);
+		  const newCell8 = newRow.insertCell(7);
+
+		  newCell2.className = "text-center";
+		  newCell1.innerHTML = '<input type="checkbox" class="orderCheckBox">';
+		  newCell2.innerHTML = '<a href="#"><i class="bi bi-arrow-bar-down"></i></a>';
+		  newCell3.innerHTML = '<input type="text" class="form-control" name="pNo">';
+		  newCell4.innerHTML = '<input type="text" class="form-control" name="pName">';
+		  newCell5.innerHTML = '<input type="text" class="form-control" name="oNum">';
+		  newCell6.innerHTML = '<input type="text" class="form-control" name="oPrice">';
+		  newCell7.innerHTML = '<input type="text" class="form-control" id="vatText" value="0" readonly>';
+		  newCell8.innerHTML = '<input type="date" class="form-control" name="oDeliberyDate">';
+	}
 	
 
-	function selectVat(){
-		let Vat = document.getElementById("vat").value;
-		if(Vat == "부가세적용"){
-			document.getElementById("vatText").value = document.getElementById("supplyPrice").value / 10;
+	function selectVat(){	// 현재 oPrice 값을 못가져오는듯
+		let vat = document.getElementById("vat").value;
+		if(vat == "Y"){
+			document.getElementById("vatText").value = document.getElementByName("oPrice").get(0).value / 10;
 		}
-		if(Vat == "부가세미적용"){
-			document.getElementById("vatText").value=0;
+		if(vat == "N"){
+			document.getElementsById("vatText").value=0;
 		}
 	}
 	
@@ -266,6 +284,31 @@
 		var search = window.open("${path}/client/searchClient?search="+clientText,"search","width=570,height=420, scrollbars=yes, resizable=no"); 
 		} 
 
+	function insertOrder(){
+		let oDate = document.getElementById("orderDate").value;
+		let cNo = document.getElementById("clientNo").value;
+		let owner = document.getElementById("owner").value;
+		let warehouseNo = document.getElementById("ware").value;
+		let vatYn = document.getElementById("vat").value;
+		let creditDate = new Date(document.getElementById("creditDate").value);
+		let pNo = document.getElementsByName("pNo").value;
+		let pName = document.getElementsByName("pName").value;
+		let oNum = document.getElementsByName("oNum").value;
+		let oPrice = document.getElementsByName("oPrice").value;
+		let oDeliberyDate = document.getElementsByName("oDeliberyDate").value;
+		// 현재 변수들을 order/addOrder post로 보내면 됨, 현재 품목 배열의 값 들어가지 않음
+		$.ajax({
+			url : "${path}/order/addOrder",
+			data : {"vo" : oDate, cNo, owner, warehouseNo, vatYn, creditDate, pNo, pName, oNum, oPrice, oDeliberyDate},
+			type : 'post',
+			success : function(data){
+				console.log(data);
+			},
+			error : function(e){
+				console.log(e);
+			}
+		});
+	}
 </script>
 
 </body>

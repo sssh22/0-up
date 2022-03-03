@@ -6,5 +6,26 @@
  
 <mapper namespace="project">
  
+ <select id="getPrjCnt" resultType="int">
+ SELECT COUNT(PROJECT_NO) 
+	FROM PROJECT
+ </select>
  	
+ <select id="getPrjList" resultType="com.kh.oup.project.vo.ProjectVo">
+ 
+ SELECT * FROM
+ 	(
+ 		SELECT ROWNUM RN, J.* 
+ 		FROM
+	 	(
+		 	SELECT * 
+		 	FROM PROJECT P
+		 	JOIN SALE S
+		 	ON P.PROJECT_NO = S.PROJECT_NO
+		 	ORDER BY P.PROJECT_NO DESC
+	 	) J
+ 	) 	
+	WHERE RN BETWEEN #{startRow} AND #{endRow}
+ 
+ </select>
 </mapper>

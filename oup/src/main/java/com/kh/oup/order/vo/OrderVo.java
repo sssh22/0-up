@@ -16,5 +16,10 @@ public class OrderVo {
 	private String owner;		// 거래처 대표, 담당자
 	private String vatYn;		// 부가세 여부
 	private int dCCode;			// 문서종류코드
-	
+	private int[] pNo;			// 품목 번호
+	private String[] pName;		// 품목 이름
+	private int[] oNum;			// 품목 개수
+	private int[] oPrice;			// 품목 가격
+	private Date[] oDeliberyDate;	// 납기일자
+	private int orderRowNum;		// 주문한 품목 row
 }
