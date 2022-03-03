@@ -89,7 +89,7 @@
 	              </div>
 	              <div class="form-group">
 	                <label>여신기한 (월/일)</label><br>
-	                <select name="cCreditDateMonth" class="form-control col-md-3" value="${client.CCreditMonth}">
+	                <select name="cCreditMonth" class="form-control col-md-3">
 	                  <option>0</option>
 	                  <option>1</option>
 	                  <option>2</option>
@@ -104,7 +104,7 @@
 	                  <option>11</option>
 	                  <option>12</option>
 	                </select>
-	                <select name="cCreditDateDay" class="form-control col-md-3"  value="${client.CCreditDay}">
+	                <select name="cCreditDay" class="form-control col-md-3">
 	                  <option>0</option>
 	                  <option>1</option>
 	                  <option>2</option>
@@ -140,7 +140,7 @@
 	              </div>
 	              <br><br>
 	              <div class="form-group" style="float: right; margin-right: 20px;">
-	                <button type="submit" class="btn btn-outline-primary btn-lg" >등록</button>
+	                <button type="submit" class="btn btn-outline-primary btn-lg" >변경</button>
 	                <button type="button" class="btn btn-outline-primary btn-lg" onclick="window.close()">취소</button>
 	              </div>
               </form>

@@ -1,0 +1,19 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<!DOCTYPE mapper
+  PUBLIC "-//mybatis.org//DTD Mapper 3.0//EN"
+  "http://mybatis.org/dtd/mybatis-3-mapper.dtd">
+ 
+ <!-- 파일이름 바꾸기 -->
+ 
+ <mapper namespace="popup">
+ 	<select id="getHouseList" resultType="com.kh.oup.sale.vo.WarehouseVo">
+ 		SELECT * FROM 
+ 		WAREHOUSE
+ 		ORDER BY WAREHOUSE_NO
+ 	</select>
+ 	<select id="getProjectList" resultType="com.kh.oup.sale.vo.ProjectVo">
+ 		SELECT * FROM 
+ 		PROJECT
+ 		ORDER BY PROJECT_NO
+ 	</select>
+ </mapper>
