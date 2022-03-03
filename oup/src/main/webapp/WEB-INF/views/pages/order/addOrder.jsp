@@ -291,15 +291,25 @@
 		let warehouseNo = document.getElementById("ware").value;
 		let vatYn = document.getElementById("vat").value;
 		let creditDate = new Date(document.getElementById("creditDate").value);
-		let pNo = document.getElementsByName("pNo").value;
-		let pName = document.getElementsByName("pName").value;
-		let oNum = document.getElementsByName("oNum").value;
-		let oPrice = document.getElementsByName("oPrice").value;
-		let oDeliberyDate = document.getElementsByName("oDeliberyDate").value;
-		// 현재 변수들을 order/addOrder post로 보내면 됨, 현재 품목 배열의 값 들어가지 않음
+		
+		let selSize = document.getElementsByName("pNo").length;
+		var pNo = new Array(selSize);
+		var pName = new Array(selSize);
+		var oNum = new Array(selSize);
+		var oPrice = new Array(selSize);
+		var oDeliberyDate = new Array(selSize);
+		
+		for(let i=0; i < selSize;i++){
+			pNo[i] = document.getElementsByName("pNo")[i].value;
+			pName[i] = document.getElementsByName("pName")[i].value;
+			oNum[i] = document.getElementsByName("oNum")[i].value;
+			oPrice[i] = document.getElementsByName("oPrice")[i].value;
+			oDeliberyDate[i] = new Date(document.getElementsByName("oDeliberyDate")[i].value);
+		}
+		// 현재 배열이 pNo {a, b, c} 로 들어가 있어 문자열이 포함되어 있음
 		$.ajax({
 			url : "${path}/order/addOrder",
-			data : {"vo" : oDate, cNo, owner, warehouseNo, vatYn, creditDate, pNo, pName, oNum, oPrice, oDeliberyDate},
+			data : {"vo" : oDate, cNo, owner, warehouseNo, vatYn, creditDate},
 			type : 'post',
 			success : function(data){
 				console.log(data);
