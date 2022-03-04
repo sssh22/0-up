@@ -194,8 +194,8 @@
 <script src="${path}/resources/plugins/chart.js/Chart.min.js"></script>
 <!-- AdminLTE App -->
 <script src="${path}/resources/dist/js/adminlte.min.js"></script>
-<!-- AdminLTE for demo purposes -->
-<script src="${path}/resources/dist/js/demo.js"></script>
+
+
 <!-- Page specific script -->
 <script>
   $(function () {

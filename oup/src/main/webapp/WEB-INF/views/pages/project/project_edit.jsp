@@ -41,6 +41,7 @@
 
     <!-- Main content -->
     <section class="content">
+          <form action="/oup/project/project_edit" method="post">
       
         <div class="col-md-12" id="miandiv">
           <div class="card card-primary">
@@ -115,7 +116,7 @@
             <div class="row">
               <div class="col-12">
                 <a href="${path}/project/project_list" class="btn btn-secondary">취소</a>
-                <input type="button" id="submitbtn" value="프로젝트 삭제" class="btn btn-secondary float-right">
+                <input type="button" id="submitbtn" value="프로젝트 삭제" class="btn btn-secondary float-right" onclick="delprj(${prjVo.projectNo});">
                 <input type="submit" id="submitbtn" value="변경사항 수정" class="btn btn-secondary float-right"> 
               </div>
               <br><br><br><br>
@@ -124,10 +125,36 @@
         </div>
         </div>
       
+              </form>
     </section>
     <!-- /.content -->
   </div>
   <!-- /.content-wrapper -->
+
+<script type="text/javascript">
+function delprj(param) {
+ var chk = confirm(param+"번 프로젝트를 삭제하시겠습니까?");
+ if(chk){
+	 $.ajax({
+		 url:"/oup/project/project_del",
+		 type:"post",
+		 data:{projectNo:param},
+		 success: function (data) {
+             location.href="/oup/project/project_list"
+        }
+	 });//ajax
+ }else{
+	 alert("삭제가 취소되었습니다.")
+ }
+ 
+ 
+}
+</script>
+
+
+
+
+
 
  <%@ include file="/WEB-INF/views/common/footer.jsp" %>
 </div>

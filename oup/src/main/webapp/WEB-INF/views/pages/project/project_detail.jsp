@@ -1,6 +1,7 @@
 <%@ page language="java" contentType="text/html; charset=UTF-8"
     pageEncoding="UTF-8"%>
 <%@ taglib prefix="c" uri="http://java.sun.com/jsp/jstl/core" %>
+<%@ taglib uri="http://java.sun.com/jsp/jstl/fmt" prefix="fmt" %>
 <c:set var="path" value="${pageContext.request.contextPath}"></c:set>
 
 <!DOCTYPE html>
@@ -51,12 +52,9 @@
       <!-- Default box -->
       <div class="card">
         <div class="card-header">
-          <h3 class="card-title">Project NO 1</h3>
+          <h3 class="card-title">${prjVo.projectName}</h3>
 
           <div class="card-tools">
-            <button type="button" class="btn btn-tool" data-card-widget="collapse" title="Collapse">
-              <i class="fas fa-minus"></i>
-            </button>
             <button type="button" class="btn btn-tool" data-card-widget="remove" title="Remove">
               <i class="fas fa-times"></i>
             </button>
@@ -70,7 +68,9 @@
                   <div class="info-box ">
                     <div class="info-box-content">
                       <span id="box1" class="info-box-text text-center text-muted">Project Period</span>
-                      <span id="box2" class="info-box-number text-center text-muted mb-0">2022-01-02 ~ 2022-02-01</span>
+                      <span id="box2" class="info-box-number text-center text-muted mb-0">
+                      <fmt:formatDate value ="${prjVo.projectStart}" type="date"/> ~ <fmt:formatDate value ="${prjVo.projectEnd}" type="date"/>
+                      </span>
                     </div>
                   </div>
                 </div>
@@ -78,7 +78,7 @@
                   <div class="info-box ">
                     <div class="info-box-content">
                       <span id="box1" class="info-box-text text-center text-muted">Unpaied Amount</span>
-                      <span id="box2" class="info-box-number text-center text-muted mb-0">20,000,000</span>
+                      <span id="box2" class="info-box-number text-center text-muted mb-0">${prjVo.SUmoney}</span>
                     </div>
                   </div>
                 </div>
@@ -86,7 +86,7 @@
                   <div class="info-box ">
                     <div class="info-box-content">
                       <span id="box1" class="info-box-text text-center text-muted">Approval Status</span>
-                      <span id="box2" class="info-box-number text-center text-muted mb-0">N</span>
+                      <span id="box2" class="info-box-number text-center text-muted mb-0">${prjVo.AStatement}</span>
                     </div>
                   </div>
                 </div>
@@ -100,9 +100,7 @@
                       <div id="con-title">1. 프로제트 시행 목적</div><br>
                       
                       <p>
-                        Lorem ipsum represents a long-held tradition for designers,
-                        typographers and the like. Some people hate it and argue for
-                        its demise, but others ignore.
+                        ${prjVo.projectContents1}
                       </p>
 
                     </div>
@@ -112,13 +110,7 @@
                       <div id="con-title">2. 프로젝트 개요 및 추진 방향</div><br>
 
                       <p>
-                        Lorem ipsum represents a long-held tradition for designers,
-                        typographers and the like. Some people hate it and argue for
-                        its demise, but others ignore.Lorem ipsum represents a long-held tradition for designers,
-                        typographers and the like. Some people hate it and argue for
-                        its demise, but others ignore.Lorem ipsum represents a long-held tradition for designers,
-                        typographers and the like. Some people hate it and argue for
-                        its demise, but others ignore.
+                        ${prjVo.projectContents2}
                       </p>
                      
                       
@@ -129,13 +121,7 @@
                       <div id="con-title">3. 프로젝트 시행 효과</div><br>
 
                       <p>
-                        Lorem ipsum represents a long-held tradition for designers,
-                        typographers and the like. Some people hate it and argue for
-                        its demise, but others ignore.Lorem ipsum represents a long-held tradition for designers,
-                        typographers and the like. Some people hate it and argue for
-                        its demise, but others ignore.Lorem ipsum represents a long-held tradition for designers,
-                        typographers and the like. Some people hate it and argue for
-                        its demise, but others ignore.
+                       ${prjVo.projectContents3}
                       </p>
                      
                       
@@ -146,9 +132,7 @@
                       <div id="con-title">4. 제안 및 요구사항 </div><br>
 
                       <p>
-                        Lorem ipsum represents a long-held tradition for designers,
-                        typographers and the like. Some people hate it and argue for
-                        its demise, but others ignore.
+                        ${prjVo.projectContents4}
                       </p>
                       
                     </div>
@@ -160,12 +144,18 @@
               <br>
               <div class="text-muted">
                 <p>Project Leader
-                  <b class="d-block">김철수</b>
+                	<c:forEach items="${glist}" var="g">
+	                  <c:if test="${g.groupPosition eq 'L'}">
+		                  <b class="d-block">${g.employeeName}</b>
+	                  </c:if>
+                 	</c:forEach>
                 </p>
                 <p>members
-                  <b class="d-block">김영희</b>
-                  <b class="d-block">이민수</b>
-                  <b class="d-block">최유리</b>
+                	<c:forEach items="${glist}" var="g">
+	                  <c:if test="${g.groupPosition ne 'L'}">
+		                  <b class="d-block">${g.employeeName}</b>
+	                  </c:if>
+                 	</c:forEach>
                 </p>
               </div>
 
@@ -188,8 +178,8 @@
                 </li>
               </ul>
               <div class="text-center mt-5 mb-3">
-                <a href="#" class="btn btn-sm btn-secondary">수정</a>
-                <a href="#" class="btn btn-sm btn-secondary">목록으로</a>
+                <a href="${path}/project/project_edit/${prjVo.projectNo}" class="btn btn-sm btn-secondary">수정</a>
+                <a href="${path}/project/project_list" class="btn btn-sm btn-secondary">목록으로</a>
               </div>
             </div>
           </div>
@@ -214,8 +204,6 @@
 <script src="${path}/resources/plugins/bootstrap/js/bootstrap.bundle.min.js"></script>
 <!-- AdminLTE App -->
 <script src="${path}/resources/dist/js/adminlte.min.js"></script>
-<!-- AdminLTE for demo purposes -->
-<script src="${path}/resources/dist/js/demo.js"></script>
 
 
 </body>

@@ -2,6 +2,8 @@ package com.kh.oup.project.vo;
 
 import java.util.Date;
 
+import org.springframework.format.annotation.DateTimeFormat;
+
 import lombok.Data;
 
 @Data
@@ -13,7 +15,9 @@ public class ProjectVo {
 	private String projectContents2;
 	private String projectContents3;
 	private String projectContents4;
+	@DateTimeFormat(pattern = "yyyy-MM-dd")
 	private Date projectStart; //기한 시작
+	@DateTimeFormat(pattern = "yyyy-MM-dd")
 	private Date projectEnd;  //기한 마감
 	private String projectColor;
 	private String dCCode; //문서종류 코드 ,, 4
