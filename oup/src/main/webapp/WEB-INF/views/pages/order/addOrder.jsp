@@ -78,8 +78,8 @@
 	                <div class="col-sm-1"></div>
 	                <div class="col-sm-4">
 	                  <div class="input-group col mb-3">
-	                    <input type="text" class="form-control" placeholder="거래처담당자" id="ownerText">
-	                    <button class="input-group-text" onclick="changeOwner()"><i class="bi bi-arrow-right"></i></button>
+	                    <input type="text" class="form-control" id="ownerText"  placeholder="거래처담당자">
+	                    <button class="input-group-text" onclick="changeOwner();"><i class="bi bi-arrow-right"></i></button>
 	                    <input type="text" class="form-control" name="onwer" id="owner" readonly>
 	                  </div>
 	                </div>
@@ -89,8 +89,8 @@
 	                <div class="col-sm-4">
 	                  <div class="input-group col">
 	                    <input type="text" class="form-control" placeholder="출하창고" id="wareText">
-	                    <button class="input-group-text" onclick="changeWare()"><i class="bi bi-arrow-right"></i></button>
-	                    <input type="number" class="form-control" name="warehouseNo" id="ware" readonly>
+	                    <button class="input-group-text" onclick="changeWare();"><i class="bi bi-arrow-right"></i></button>
+	                    <input type="text" class="form-control" name="warehouseNo" id="ware" readonly>
 	                  </div>
 	                </div>
 	
@@ -98,7 +98,7 @@
 	                <div class="col-sm-1"></div>
 	                <div class="col-sm-4">
 	                  <div class="col">
-	                    <select class="form-control mb-3" onchange="selectVat()" id="vat" name="vatYn">
+	                    <select class="form-control mb-3" onchange="selectVat();" id="vat" name="vatYn">
 	                      <option value="N">부가세미적용</option>
 	                      <option value="Y">부가세적용</option>
 	                    </select>
@@ -232,12 +232,10 @@
 
 <script>
 	function changeOwner(){
-		let ownerText = document.getElementById("ownerText").value;
-		document.getElementById("owner").value = ownerText;
+		document.getElementById("owner").value = document.getElementById("ownerText").value;
 	}
 	function changeWare(){
-		let wareText = document.getElementById("wareText").value;
-		document.getElementById("ware").value = wareText;
+		document.getElementById("ware").value = document.getElementById("wareText").value;
 	}
 	function orderPlus(){
 		let table = document.getElementById('orderTable');
@@ -282,7 +280,7 @@
 		let clientText = document.getElementById("clientText").value;
 		
 		var search = window.open("${path}/client/searchClient?search="+clientText,"search","width=570,height=420, scrollbars=yes, resizable=no"); 
-		} 
+	} 
 
 	function insertOrder(){
 		let oDate = document.getElementById("orderDate").value;

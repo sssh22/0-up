@@ -115,7 +115,6 @@ public class ClientController {
 	@GetMapping("searchClient")
 	public String searchClient(HttpServletRequest req, Model model) throws Exception {
 		String search = req.getParameter("search");
-		System.out.println(search);
 		
 		if(search == null) {
 			return "pages/client/searchClient";

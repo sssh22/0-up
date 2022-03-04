@@ -28,9 +28,9 @@
 		<!-- cbj -->
 			#{saleNo},
 			#{cNo},
-			NULL, <!-- #{wareHouseNo} -->
+			#{wareHouseNo},
 			#{employeeNo},
-			NULL, <!-- #{projectNo} -->
+			#{projectNo},
 			NULL, <!-- #{oNo} -->
 			#{saleSum},
 			#{saleDate},
@@ -43,12 +43,19 @@
 		INSERT INTO SALE_LIST (
 			SALE_LIST_NO,
 			SALE_NO,
+			P_NO,
 			S_QNT,
 			S_PRICE,
 			S_DELIBERY_DATE
 		)
-		<foreach collection="pNo">
-			
-		</foreach>
+		VALUES
+		(
+			SEQ_SALE_LIST.NEXTVAL,
+			#{saleNo},
+			NULL, <!-- cbj 추후수정 -->
+			#{sQnt},
+			#{sPrice},
+			#{sDeliberyDate}
+		)
 	</insert>
 </mapper>
