@@ -55,7 +55,7 @@ function popup(){
 
     <!-- Main content -->
     <section class="content">
-      <form>
+      <form action="project_add" method="post" >
         <div class="col-md-12" id="miandiv">
           <div class="card card-primary">
             <div class="card-header">
@@ -92,19 +92,19 @@ function popup(){
               <br><hr>
               <div class="group">
                 <label for="inputClientCompany">- 프로젝트 기간</label>
-                <input type="date" id="startDate" name="startDate"> ~ <input type="date" id="endDate" name="endDate">
+                <input type="date" id="startDate" name="projectStart"> ~ <input type="date" id="endDate" name="projectEnd">
               </div>
               <hr>
               
-                <div class="group">
+<!--                 <div class="group">
 
                   <h5> 프로젝트 그룹 </h5><br>
                   <table>
                     <tr>
-                      <th>- 프로젝트 책임자</th>
-                      <td><input type="text" name="gLeader" id="search"></td>
+                      <th>- 프로젝트 그룹장</th>
+                      <td><input type="text" id="search"></td>
                       <td><input type="button" value="검색" onclick="popup();"></td>
-                      <td><input type="text" name="empNo" id="empNo" readonly></td>
+                      <td><input type="text" name="employeeNo" id="empNo" readonly></td>
                     </tr>
                     <tr>
                       <td>&nbsp;</td>
@@ -112,30 +112,23 @@ function popup(){
                       <td></td>
                       <td></td>
                     </tr>
-                    <tr>
-                      <th>- 프로젝트 그룹원</th>
-                      <td><input type="text" name="gMember" id="search"></td>
-                      <td><input type="button" value="검색" onclick="popup();"></td>
-                      <td></td>
-                    </tr>
-                    <tr>
-                      <td></td>
-                      <td><input type="text" name="gMember" id="search"></td>
-                      <td><input type="button" value="검색" onclick="popup();"></td>
-                    </tr>
-                    <tr>
-                      <td></td>
-                      <td><input type="text" name="gMember" id="search"></td>
-                      <td><input type="button" value="검색" onclick="popup();"></td>
-                    </tr>
-                    <tr>
-                      <td></td>
-                      <td><input type="text" name="gMember" id="search"></td>
-                      <td><input type="button" value="검색" onclick="popup();"></td>
-                    </tr>
+	               <tr>
+	                   	<th>- 프로젝트 그룹원</th>
+	                   	<td><input type="text"></td>
+	                   	<td><input type="button" value="검색" onclick="popup();"></td>
+	                   	<td><input type='button' value='삭제' onclick='remove(this);'>
+	                   	</td>
+                   	</tr>
+                   
                   </table>
-                
-                </div>
+                  - 프로젝트 그룹원
+                  	<input type="button" value="검색" onclick="popup();" style="width:50px !important;">
+                   <div id="box">
+        			<input type="text" style="width:150px !important;">
+        			<input type="button" value="추가" onclick="add_textbox()"style="width:50px !important;">
+    			  </div>
+                </div> -->
+                <!-- /group -->
               </div><!-- /.card-body -->
             </div>
 
@@ -143,7 +136,7 @@ function popup(){
 
             <div class="row">
               <div class="col-12">
-                <a href="#" class="btn btn-secondary">취소</a>
+                <a href="${path}/project/project_list" class="btn btn-secondary">취소</a>
                 <input id="submitbtn" type="submit" value="프로젝트 생성" class="btn btn-secondary float-right">
               </div>
             </div>
@@ -157,6 +150,20 @@ function popup(){
     <!-- /.content -->
   </div>
   <!-- /.content-wrapper -->
+  
+ <script>
+        const add_textbox = () => {
+            const box = document.getElementById("box");
+            const newP = document.createElement('p');
+            newP.innerHTML = "<input type='text' style='width:150px !important;'> <input type='button' value='삭제' onclick='remove(this)' style='width:50px !important;'>";
+            box.appendChild(newP);
+        }
+        const remove = (obj) => {
+            document.getElementById('box').removeChild(obj.parentNode);
+        }
+    </script>
+  
+  
 
  <%@ include file="/WEB-INF/views/common/footer.jsp" %>
 </div>
@@ -173,4 +180,5 @@ function popup(){
 
 
 </body>
-</html>
+
+</html>                 

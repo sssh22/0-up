@@ -83,4 +83,16 @@ public class ProjectServiceImpl implements ProjectService{
 	
 	}
 
+	//프로젝트 등록
+	@Override
+	public int enrollPrj(ProjectVo vo) {
+		return dao.enrollPrj(vo);
+	}
+
+	//프로젝트 수정
+	@Override
+	public int editPrj(ProjectVo vo) {
+		return dao.editPrj(vo);
+	}
+
 }

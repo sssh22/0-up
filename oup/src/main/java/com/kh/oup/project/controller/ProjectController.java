@@ -27,14 +27,26 @@ public class ProjectController {
 	@Autowired
 	private ProjectService service;
 	
+	//등록 화면
 	@GetMapping("project_add")
 	public String project_add() {
 		return "pages/project/project_add";
 	}
-	/*
-	 * @PostMapping("project_add") public String project_add() { return
-	 * "pages/project/project_add"; }
-	 */
+	
+	//등록 처리
+	@PostMapping("project_add")
+	public String project_add(ProjectVo vo) { 
+		
+		
+		int result = service.enrollPrj(vo);
+		if(result>0) {
+			return "redirect:/project/project_list"; 
+		}else {
+			return "redirect:/project/project_add";
+		}
+	
+	}
+
 	
 	//자세히보기
 	@GetMapping(value={"project_detail/{projectNo}"})
@@ -46,7 +58,7 @@ public class ProjectController {
 		return "pages/project/project_detail";
 	}
 	
-	//수정
+	//수정 페이지로 이동
 	@GetMapping(value={"project_edit/{projectNo}"})
 	public String project_edit(Model model, @PathVariable(required=false) int projectNo) {
 		
@@ -57,7 +69,18 @@ public class ProjectController {
 		model.addAttribute("glist",glist);
 		return "pages/project/project_edit";
 	}
-	
+	//수정 처리
+	@PostMapping("project_edit")
+	public String project_editt(ProjectVo vo) { 
+			
+		int result = service.editPrj(vo);
+		if(result>0) {
+			return "redirect:/project/project_list"; 
+		}else {
+			return "redirect:/project/project_edit";
+		}
+		
+	}
 	
 	
 	
@@ -83,7 +106,7 @@ public class ProjectController {
 		
 		if(page == null) { page="1"; }
 		
-		if(search == null) {
+		if(search == null) { //검색없이..
 			int cntPerPage = 10; //10 rows
 			int pageBtnCnt = 3; 
 			int totalRow = service.getPrjCnt();

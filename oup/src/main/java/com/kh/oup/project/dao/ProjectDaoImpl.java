@@ -77,5 +77,15 @@ public class ProjectDaoImpl implements ProjectDao {
 	public List<ProjectGroupVo> getPrjGroup(int projectNo) {
 		return ss.selectList("projectgroup.getPrjGroup", projectNo);
 	}
+	//prj 등록
+	@Override
+	public int enrollPrj(ProjectVo vo) {
+		return ss.insert("project.enrollPrj",vo);
+	}
+	//prj 수정
+	@Override
+	public int editPrj(ProjectVo vo) {
+		return ss.update("project.editPrj",vo);
+	}
 
 }

@@ -29,5 +29,9 @@ public interface ProjectService {
 	ProjectVo selectPrj(int projectNo);
 
 	List<ProjectGroupVo> selectPrjgroup(int projectNo);
+
+	int enrollPrj(ProjectVo vo);
+
+	int editPrj(ProjectVo vo);
 	
 }
