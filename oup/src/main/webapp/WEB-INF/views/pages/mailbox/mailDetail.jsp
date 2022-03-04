@@ -44,7 +44,7 @@
       <div class="container-fluid">
         <div class="row">
           <div class="col-md-2">
-            <a href="mailbox.html" class="btn btn-primary btn-block mb-3">받은 메일함</a>
+            <a href="${path}/mail/send" class="btn btn-primary btn-block mb-3">메일쓰기</a>
 
             <div class="card">
               <div class="card-header">

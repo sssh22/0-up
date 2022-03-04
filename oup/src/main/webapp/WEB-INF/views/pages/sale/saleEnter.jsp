@@ -41,7 +41,7 @@
       <div class="container-fluid">
         <div class="row mb-2">
           <div class="col-sm-6">
-            <h1>판매등록</h1>
+            <h1>판매입력</h1>
           </div>
         </div>
       </div><!-- /.container-fluid -->
@@ -156,11 +156,14 @@
 				<tbody id="product">
 					<tr>
 						<td>
-							<input name="voList[0].pNo" type="number" class="form-control"
-							placeholder="AA00">
+							<div class="input-group" style="margin: 0px">
+							<input id="productNo1" name="voList[0].pNo" type="number" class="form-control"
+							placeholder="100">
+							<button type="button" class="input-group-text" onclick="productPopup('1')"><i class="bi bi-search"></i></button>
+							</div>
 						</td>
 						<td class="project_progress">
-							<input type="text"
+							<input id="productName1" type="text"
 							class="form-control" placeholder="단단한돌">
 						</td>
 						<td>
@@ -244,10 +247,17 @@
 		var index =  parseInt(indexdoc.value);
 		var indexdoc2 = document.getElementById('index2')
 		var index2 = parseInt(indexdoc2.value);
-		var tag = "<tr><td><input name='voList[" + index2 + "].pNo' type='number' class='form-control'placeholder='AA00'></td><td class='project_progress'><input type='text'class='form-control' placeholder='단단한돌'></td><td><input onchange='calcResult()' id='count" + index + "' name='voList[" + index2 + "].sQnt' type='number' class='form-control'placeholder='1000'></td><td><input onchange='calcResult()' id='price" + index + "' type='number' class='form-control'placeholder='3000'></td><td><input id='result" + index + "' name='voList[" + index2 + "].sPrice' class='form-control'readonly='readonly' value='0'></td><td><input id='buga" + index + "' type='number' class='form-control' value='0'></td><td><input name='voList[" + index2 + "].sDeliberyDate' type='date' class='form-control'placeholder='2022-04-18'></td></tr>";
+		var tag = "<tr><td><div class='input-group' style='margin: 0px'><input id='productNo" + index + "' name='voList[" + index2 + "].pNo' type='number' class='form-control'placeholder='100'><button type='button' class='input-group-text' onclick=\"productPopup('" + index + "')\"><i class='bi bi-search'></i></button></div></td><td class='project_progress'><input id='productName" + index + "' type='text'class='form-control' placeholder='단단한돌'></td><td><input onchange='calcResult()' id='count" + index + "' name='voList[" + index2 + "].sQnt' type='number' class='form-control'placeholder='1000'></td><td><input onchange='calcResult()' id='price" + index + "' type='number' class='form-control'placeholder='3000'></td><td><input id='result" + index + "' name='voList[" + index2 + "].sPrice' class='form-control'readonly='readonly' value='0'></td><td><input id='buga" + index + "' type='number' class='form-control' value='0'></td><td><input name='voList[" + index2 + "].sDeliberyDate' type='date' class='form-control'placeholder='2022-04-18'></td></tr>";
 		indexdoc.value = index + 1;
 		indexdoc2.value = index2 + 1;
 		$('#product').append(tag);
+	}
+	
+	var productPopup = function(index) {
+		var url = "${path}/popup/productList/" + index;
+		var windowTargetName = "product";
+		var features = "width=720,height=500, scrollbars=no, resizable=no";
+		var search = window.open(url, windowTargetName, features);
 	}
 	
 	var calcResult = function() {
