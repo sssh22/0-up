@@ -8,10 +8,12 @@ import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Controller;
 import org.springframework.ui.Model;
 import org.springframework.web.bind.annotation.GetMapping;
+import org.springframework.web.bind.annotation.PathVariable;
 import org.springframework.web.bind.annotation.RequestMapping;
 
 import com.kh.oup.client.service.ClientService;
 import com.kh.oup.client.vo.ClientVo;
+import com.kh.oup.product.vo.ProductVo;
 import com.kh.oup.project.vo.ProjectVo;
 import com.kh.oup.sale.service.PopUpService;
 import com.kh.oup.sale.vo.WarehouseVo;
@@ -54,10 +56,19 @@ public class PopUpController {
 	
 	@GetMapping("projectList")
 	public String projectList(Model model) throws Exception {
-		List<ProjectVo> list = pservice.getprojectList();
+		List<ProjectVo> list = pservice.getProjectList();
 		
 		model.addAttribute("list", list);
 		
 		return "pages/sale/projectList";
+	}
+	
+	@GetMapping(value = {"/productList/{index}", "/productList"})
+	public String productList(Model model, @PathVariable(required = false)String index) throws Exception {
+		List<ProductVo> list = pservice.getProductList();
+		model.addAttribute("list", list);
+		model.addAttribute("index", index);
+		
+		return "pages/sale/productList";
 	}
 }

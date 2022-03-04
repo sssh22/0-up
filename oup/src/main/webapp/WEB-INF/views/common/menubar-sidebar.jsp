@@ -161,8 +161,9 @@
         <%-- <div class="image">
           <img src="${path}/resources/dist/img/user2-160x160.jpg" class="img-circle elevation-2" alt="User Image">
         </div> --%>
-        <div class="info">
-          <a href="#" class="d-block" style="color: #ebe7f1">${loginEmployee.employeeName}</a>
+        <div class="info" style="width: 100%">
+          <a href="#" style="color: #ebe7f1; display: inline-block">${loginEmployee.employeeName}</a>
+          <a href="${path}/logout" style="color: #ebe7f1; float: right;">로그아웃</a>
         </div>
       </div>
 
@@ -251,13 +252,13 @@
             </a>
             <ul class="nav nav-treeview">
               <li class="nav-item">
-                <a href="./index.html" class="nav-link">
+                <a href="${path}/approval/receivebox" class="nav-link">
                   <i class="far fa-circle nav-icon"></i>
                   <p style="color: #ebe7f1">결재조회</p>
                 </a>
               </li>
               <li class="nav-item">
-                <a href="./index2.html" class="nav-link">
+                <a href="${path}/approval/send" class="nav-link">
                   <i class="far fa-circle nav-icon"></i>
                   <p style="color: #ebe7f1">결재등록</p>
                 </a>

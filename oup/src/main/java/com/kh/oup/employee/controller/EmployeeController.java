@@ -31,10 +31,16 @@ public class EmployeeController {
 		
 		if(loginEmployee != null) {
 			session.setAttribute("loginEmployee", loginEmployee);
-			return "redirect:/";
+			return "pages/charts/charts";
 		}else {
 			return "pages/member/login";
 		}
+	}
+	
+	@GetMapping("/logout")
+	public String logout(HttpSession session) throws Exception {
+		session.invalidate();
+		return "redirect:/login";
 	}
 	
 	@GetMapping("/popup")

@@ -88,21 +88,18 @@
                     </div>
                   </div>
                   <div class="form-group row">
-                    <label for="inputPassword3" class="col-sm-1 col-form-label">문서</label>
+                    <label for="inputPassword3" class="col-sm-1 col-form-label">결재문서</label>
                     <div class="col-sm-8">
-                      <div class="custom-file">
-                        <input type="file" class="custom-file-input" id="exampleInputFile">
-                        <label class="custom-file-label" for="exampleInputFile">문서파일을 첨부해주세요.</label>
-                      </div>
+                    	<a href="">전표</a>
+						<input type="hidden" name="docNo" class="form-control" id="inputPassword3" placeholder="제목을 입력해주세요.">
                     </div>
                   </div>
                   <div class="form-group row">
-                    <label for="inputPassword3" class="col-sm-1 col-form-label">미리보기</label>
+                    <label for="inputPassword3" class="col-sm-1 col-form-label">첨부</label>
                     <div class="col-sm-8">
                       <div class="custom-file">
-                        <input type="file" class="custom-file-input" id="exampleInputFile" accept=".jpg, .png">
-                        <label class="custom-file-label" for="exampleInputFile">이미지파일을 첨부해주세요.</label>
-                        <img id="미리보기">
+                        <input type="file" class="custom-file-input" id="exampleInputFile">
+                        <label class="custom-file-label" for="exampleInputFile">첨부파일을 첨부해주세요.</label>
                       </div>
                     </div>
                   </div>
