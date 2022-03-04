@@ -6,6 +6,7 @@ import org.apache.ibatis.session.SqlSession;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Repository;
 
+import com.kh.oup.product.vo.ProductVo;
 import com.kh.oup.project.vo.ProjectVo;
 import com.kh.oup.sale.vo.WarehouseVo;
 
@@ -23,6 +24,11 @@ public class PopUpDaoImpl implements PopUpDao {
 	@Override
 	public List<ProjectVo> getProjectList() throws Exception {
 		return ss.selectList("popup.getProjectList");
+	}
+
+	@Override
+	public List<ProductVo> getProductList() throws Exception {
+		return ss.selectList("popup.getProductList");
 	}
 
 }
