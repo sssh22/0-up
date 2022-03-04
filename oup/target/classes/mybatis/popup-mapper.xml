@@ -16,4 +16,9 @@
  		PROJECT
  		ORDER BY PROJECT_NO
  	</select>
+ 	<select id="getProductList" resultType="com.kh.oup.product.vo.ProductVo">
+ 		SELECT * FROM 
+ 		PRODUCT
+ 		ORDER BY P_NO
+ 	</select>
  </mapper>
