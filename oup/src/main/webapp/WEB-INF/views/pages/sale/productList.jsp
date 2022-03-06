@@ -65,7 +65,7 @@
                   <tbody>
                   <c:forEach items="${list}" var="l">				
                     <tr>
-                      <td><span style="color:blue; font-size: 150%"><span style="text-decoration: underline; cursor: pointer;" onclick="returnCNo('${l.PNo}','${l.PName}','${l.PUnitPrice}');">${l.PNo}</span></td>
+                      <td><span style="color:blue; font-size: 150%; text-decoration: underline; cursor: pointer;" onclick="returnCNo('${l.PNo}','${l.PName}','${l.PUnitPrice}');">${l.PNo}</span></td>
                       <td style="font-size: 150%">${l.PName}</td>
                       <td style="font-size: 150%">${l.PUnitPrice}</td>
                       <td style="font-size: 150%">${l.PCount}</td>
@@ -75,15 +75,13 @@
                 </tbody>
               </table>
 
-                </form>
-	            </div>
-              </form>
+             </form>
+             <input type="button" class="btn btn-secondary btn-sm" style="width: 44.33px; height: 31px; font-size: 150%" value="신규" onclick="location.href='${path}/popup/addproduct'">
+	        </div>
           </div>
-      </div>
-    </div>
-        
+     </div> 
   </section>
-  </div>
+ </div>
 
 <!-- jQuery -->
 <script src="${path}/resources/plugins/jquery/jquery.min.js"></script>
