@@ -97,7 +97,7 @@ public class ProjectController {
 	
 	
 	
-	//조회 ============================================
+	//조회 ============================================//수정해야함
 	@GetMapping(value = {"/project_list/{page}","/project_list"})
 	public String project_list(Model model, @PathVariable(required=false) String page, HttpServletRequest req) throws Exception {
 		

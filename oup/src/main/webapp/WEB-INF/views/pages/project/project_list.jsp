@@ -86,7 +86,7 @@
                           Payment Status
                       </th>
                       <th style="width: 8%" class="text-center">
-                          Approval
+                          Approval Status
                       </th>
                       <th style="width: 20%">
                       </th>
