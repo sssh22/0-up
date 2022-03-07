@@ -5,6 +5,8 @@ import com.kh.oup.order.vo.OrderVo;
 
 public interface OrderDao {
 
-	int insertOrder(OrderVo vo, OrderProductVo pVo) throws Exception;
+	int insertOrder(OrderVo vo) throws Exception;
+	
+	int insertOrderProduct(OrderProductVo pVo) throws Exception;
  
 }

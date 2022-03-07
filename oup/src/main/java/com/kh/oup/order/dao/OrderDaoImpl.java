@@ -15,11 +15,13 @@ public class OrderDaoImpl implements OrderDao{
 	private SqlSession session;
 
 	@Override
-	@Transactional(rollbackFor = Exception.class) 
-	public int insertOrder(OrderVo vo, OrderProductVo pVo) throws Exception {
-		int order1 = session.insert("order.insertOrder", vo);
-		int order2 = session.insert("order.insertOrderProduct", pVo);
-		return order1 + order2;
+	public int insertOrder(OrderVo vo) throws Exception {
+		return session.insert("order.insertOrder", vo);
+	}
+
+	@Override
+	public int insertOrderProduct(OrderProductVo pVo) throws Exception {
+		return session.insert("order.insertOrderProduct", pVo);
 	}
 
 }
