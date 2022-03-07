@@ -16,4 +16,6 @@ public class OrderVo {
 	private int employeeNo;		// 거래처 대표, 담당자
 	private String vatYn;		// 부가세 여부
 	
+	private String oDateStr;	
+	private String creditDateStr; 
 }

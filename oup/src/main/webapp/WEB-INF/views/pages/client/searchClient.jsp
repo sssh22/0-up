@@ -65,7 +65,7 @@
                   <tbody>
                   <c:forEach items="${list}" var="l">				
                     <tr>
-                      <td><a href="javascript:returnCNo('${l.CNo}','${l.CName}','${l.CCreditMonth}','${l.CCreditDay}');">${l.CNo}</a></td>
+                      <td><a href="javascript:returnCNo(${l.CNo},'${l.CName}',${l.CCreditMonth},${l.CCreditDay});">${l.CNo}</a></td>
                       <td>${l.CName}</td>
                       <td>${l.COwner}</td>
                       <td>${l.BNo}</td>
@@ -99,8 +99,9 @@
 			let orderDate = new Date(opener.document.getElementById("orderDate").value);
 			orderDate.setMonth(orderDate.getMonth() + creditMonth);
 			orderDate.setDate(orderDate.getDate() + creditDay);
-			let returnDate = new Date(+orderDate + 3240 * 10000).toISOString().split("T")[0];
-			
+			let returnDate = new Date(orderDate + 3240 * 10000).toISOString().split("T")[0];
+
+					
 			opener.document.getElementById("clientNo").value = cNo;
 			opener.document.getElementById("client").value = cName;
 			opener.document.getElementById("creditDate").value = returnDate; 

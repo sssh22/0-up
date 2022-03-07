@@ -54,13 +54,13 @@
       <!-- Default box -->
       <div class="card"></div>
         <div class="card-body p-0">
-			<form action="${path}/order/addOrder" method="post"> <!-- ij -->
+			<form action="${path}/order/addOrder" method="post" name="addOrder">
 	          <div class="row" style="background-color: rgb(196, 194, 194); margin: 20px; padding: 6px;">
 	                <div class="col-sm-1 mt-3" style="padding:5px;"><b>일자</b></div>
 	                <div class="col-sm-1"></div>
 	                <div class="col-sm-4">  
 	                  <div class="col">
-	                    <input type="date" class="form-control mb-3 mt-3" id="orderDate" name="oDate" required>
+	                    <input type="date" class="form-control mb-3 mt-3" id="orderDate" name="oDateStr" required>
 	                  </div>
 	                </div>
 	
@@ -110,7 +110,7 @@
 	                <div class="col-sm-1"></div>
 	                <div class="col-sm-4">
 	                  <div class="col">
-	                    <input type="date" class="form-control mb-3" id="creditDate" name="creditDate" readonly>
+	                    <input type="date" class="form-control mb-3" id="creditDate" name="creditDateStr" readonly>
 	                  </div>
 	                </div>
 	
@@ -187,10 +187,10 @@
 	                        <input type="text" class="form-control" name="oPrice">
 	                      </td>
 	                      <td>
-	                        <input type="text" class="form-control" id="vatText" value="0" readonly>
+	                        <input type="text" class="form-control" name="vatText" value="0" readonly>
 	                      </td>
 	                      <td>
-	                        <input type="date" class="form-control" name="oDeliberyDate">
+	                        <input type="date" class="form-control" name="oDeliberyDateStr">
 	                      </td>
 	                  </tr>
 	
@@ -198,7 +198,7 @@
 	          </table>
 	
 	          <div style="margin: 10px;">
-	            <button type="button" class="btn btn-secondary btn-sm" onclick="insertOrder();">저장</button>
+	            <button class="btn btn-secondary btn-sm">저장</button>
 	            <button type="button" class="btn btn-secondary btn-sm">저장/전표</button>
 	            <button type="button" class="btn btn-secondary btn-sm">다시작성</button>
 	            <button type="button" class="btn btn-secondary btn-sm">리스트</button>
@@ -259,18 +259,23 @@
 		  newCell4.innerHTML = '<input type="text" class="form-control" name="pName">';
 		  newCell5.innerHTML = '<input type="text" class="form-control" name="oNum">';
 		  newCell6.innerHTML = '<input type="text" class="form-control" name="oPrice">';
-		  newCell7.innerHTML = '<input type="text" class="form-control" id="vatText" value="0" readonly>';
-		  newCell8.innerHTML = '<input type="date" class="form-control" name="oDeliberyDate">';
+		  newCell7.innerHTML = '<input type="text" class="form-control" name="vatText" value="0" readonly>';
+		  newCell8.innerHTML = '<input type="date" class="form-control" name="oDeliberyDateStr">';
 	}
 	
 
 	function selectVat(){	// 현재 oPrice 값을 못가져오는듯
 		let vat = document.getElementById("vat").value;
+		var pNoArr = document.getElementsByName("pNo").length;
 		if(vat == "Y"){
-			document.getElementById("vatText").value = document.getElementByName("oPrice").get(0).value / 10;
+			for(let i=0; i< pNoArr; i++){
+				document.getElementsByName("vatText")[i].value = document.getElementsByName("oPrice")[i].value / 10;
+			}
 		}
 		if(vat == "N"){
-			document.getElementsById("vatText").value=0;
+			for(let i=0; i< pNoArr; i++){
+				document.getElementsByName("vatText")[i].value=0;
+			}
 		}
 	}
 	
@@ -281,7 +286,7 @@
 		}
 		let clientText = document.getElementById("clientText").value;
 		
-		var search = window.open("${path}/client/searchClient?search="+clientText,"search","width=570,height=420, scrollbars=yes, resizable=no"); 
+		var search = window.open("${path}/client/searchClient?search="+clientText,"search","width=720,height=500, scrollbars=no, resizable=no"); 
 	} 
 	
 	var employeePopup = function() { 
@@ -298,54 +303,7 @@
 		var search = window.open(url, windowTargetName, features);
 	}
 
-	function insertOrder(){
-		let oDate = document.getElementById("orderDate").value;
-		let cNo = document.getElementById("clientNo").value;
-		let owner = document.getElementById("owner").value;
-		let warehouseNo = document.getElementById("ware").value;
-		let vatYn = document.getElementById("vat").value;
-		let creditDate = new Date(document.getElementById("creditDate").value);
-		
-		let selSize = document.getElementsByName("pNo").length;
-		var pNo,pName,oNum,oPrice,oDeliberyDate = new Array(selSize);
-		
-		for(let i=0; i < selSize;i++){
-			pNo[i] = document.getElementsByName("pNo")[i].value;
-			pName[i] = document.getElementsByName("pName")[i].value;
-			oNum[i] = document.getElementsByName("oNum")[i].value;
-			oPrice[i] = document.getElementsByName("oPrice")[i].value;
-			oDeliberyDate[i] = new Date(document.getElementsByName("oDeliberyDate")[i].value);
-		}
-		// 현재 배열이 pNo {a, b, c} 로 들어가 있어 문자열이 포함되어 있음
-		/*
-		
-		$.ajax({
-			url : "${path}/order/addOrder",
-			data : {"vo" : oDate, cNo, owner, warehouseNo, vatYn, creditDate
-			},
-			type : 'post',
-			success : function(data){
-				console.log(data);
-			},
-			error : function(e){
-				console.log(e);
-			}
-		});
-		
-		$.ajax({
-			url : "${path}/order/addOrder",
-			data : {"pVo" : pNo, pName, oNum, oPrice, oDeliberyDate
-			},
-			type : 'post',
-			success : function(data){
-				console.log(data);
-			},
-			error : function(e){
-				console.log(e);
-			}
-		});
-		*/
-	}
+	
 </script>
 
 </body>
