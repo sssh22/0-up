@@ -54,7 +54,7 @@
       <!-- Default box -->
       <div class="card"></div>
         <div class="card-body p-0">
-			
+			<form action="${path}/order/addOrder" method="post"> <!-- ij -->
 	          <div class="row" style="background-color: rgb(196, 194, 194); margin: 20px; padding: 6px;">
 	                <div class="col-sm-1 mt-3" style="padding:5px;"><b>일자</b></div>
 	                <div class="col-sm-1"></div>
@@ -69,7 +69,7 @@
 	                <div class="col-sm-4">                  
 	                  <div class="input-group col mt-3">
 	                    <input type="text" class="form-control" id="clientText" placeholder="거래처">
-	                    <button class="input-group-text" onclick="goPopup()"><i class="bi bi-search"></i></button>
+	                    <button type="button" class="input-group-text" onclick="goPopup()"><i class="bi bi-search"></i></button>
 	                    <input type="text" class="form-control" id="client" name="client" readonly>
 	                    <input type="hidden" id="clientNo" name="cNo">
 	                  </div>
@@ -79,7 +79,7 @@
 	                <div class="col-sm-4">
 	                  <div class="input-group col mb-3">
 	                    <input type="text" class="form-control" id="ownerText"  placeholder="담당자">
-	                    <button class="input-group-text" onclick="employeePopup();"><i class="bi bi-search"></i></button>
+	                    <button type="button" class="input-group-text" onclick="employeePopup();"><i class="bi bi-search"></i></button>
 	                    <input type="text" class="form-control" id="employeeName" readonly>
 	                    <input type="hidden" id="employeeNo" name="employeeNo">
 	                  </div>
@@ -90,7 +90,7 @@
 	                <div class="col-sm-4">
 	                  <div class="input-group col">
 	                    <input type="text" class="form-control" placeholder="출하창고" id="wareText">
-	                    <button class="input-group-text" onclick="warehousePopup();"><i class="bi bi-search"></i></button>
+	                    <button type="button" class="input-group-text" onclick="warehousePopup();"><i class="bi bi-search"></i></button>
 	                    <input type="text" class="form-control" name="warehouseNo" id="ware" value="0" readonly>
 	                  </div>
 	                </div>
@@ -203,7 +203,8 @@
 	            <button type="button" class="btn btn-secondary btn-sm">다시작성</button>
 	            <button type="button" class="btn btn-secondary btn-sm">리스트</button>
 	          </div>
-	       </div>
+	        </form>
+	    </div>
         <!-- /.card-body -->
     </section>
     <!-- /.content -->
