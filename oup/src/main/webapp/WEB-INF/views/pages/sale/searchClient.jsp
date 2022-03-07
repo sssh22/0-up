@@ -65,7 +65,7 @@
                   <tbody>
                   <c:forEach items="${list}" var="l">				
                     <tr>
-                      <td><span style="color:blue; font-size: 150%"><span style="text-decoration: underline; cursor: pointer;" onclick="returnCNo('${l.CNo}','${l.CName}');">${l.CNo}</span></td>
+                      <td><span style="color:blue; font-size: 150%"><span style="text-decoration: underline; cursor: pointer;" onclick="returnCNo('${l.CNo}','${l.CName}', '${l.CUmony} }');">${l.CNo}</span></td>
                       <td style="font-size: 150%">${l.CName}</td>
                       <td style="font-size: 150%">${l.COwner}</td>
                       <td style="font-size: 150%">${l.BNo}</td>
@@ -98,9 +98,11 @@
 		document.searchform.submit(search);
 	}	
 	
-	function returnCNo(cNo,cName) {
+	function returnCNo(cNo,cName, cUmony) {
 			opener.document.getElementById("cNo").value = cNo;
 			opener.document.getElementById("cName").value = cName;
+			opener.document.getElementById("aUmony").value = cUmony;
+			opener.document.getElementById("sUmony").value = cUmony;
 			self.close();
 	}
 

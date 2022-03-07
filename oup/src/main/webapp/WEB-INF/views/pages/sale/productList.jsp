@@ -48,7 +48,7 @@
                           <th style="width: 20%; font-size: 150%" class="text-center">
                               품목코드
                           </th>
-                          <th style="width: 30%; font-size: 150%" class="text-center">
+                          <th style="width: 20%; font-size: 150%" class="text-center">
                               품목명
                           </th>
                           <th style="width: 20%; font-size: 150%" class="text-center">

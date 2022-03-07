@@ -35,7 +35,7 @@
 			#{saleSum},
 			#{saleDate},
 			#{sUmony},
-			'N'
+			#{vatYN}
 		)
 	</insert>
 	
