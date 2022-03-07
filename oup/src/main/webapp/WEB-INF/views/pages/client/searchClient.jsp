@@ -95,7 +95,7 @@
 		document.searchform.submit(search);
 	}	
 	
-	function returnCNo(cNo,cName,creditMonth,creditDay) { 
+	function returnCNo(cNo,cName,creditMonth,creditDay) {
 			let orderDate = new Date(opener.document.getElementById("orderDate").value);
 			orderDate.setMonth(orderDate.getMonth() + creditMonth);
 			orderDate.setDate(orderDate.getDate() + creditDay);

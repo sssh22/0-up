@@ -78,9 +78,10 @@
 	                <div class="col-sm-1"></div>
 	                <div class="col-sm-4">
 	                  <div class="input-group col mb-3">
-	                    <input type="text" class="form-control" id="ownerText"  placeholder="거래처담당자">
-	                    <button class="input-group-text" onclick="changeOwner();"><i class="bi bi-arrow-right"></i></button>
-	                    <input type="text" class="form-control" name="onwer" id="owner" readonly>
+	                    <input type="text" class="form-control" id="ownerText"  placeholder="담당자">
+	                    <button class="input-group-text" onclick="employeePopup();"><i class="bi bi-search"></i></button>
+	                    <input type="text" class="form-control" id="employeeName" readonly>
+	                    <input type="hidden" id="employeeNo" name="employeeNo">
 	                  </div>
 	                </div>
 	
@@ -89,8 +90,8 @@
 	                <div class="col-sm-4">
 	                  <div class="input-group col">
 	                    <input type="text" class="form-control" placeholder="출하창고" id="wareText">
-	                    <button class="input-group-text" onclick="changeWare();"><i class="bi bi-arrow-right"></i></button>
-	                    <input type="text" class="form-control" name="warehouseNo" id="ware" readonly>
+	                    <button class="input-group-text" onclick="warehousePopup();"><i class="bi bi-search"></i></button>
+	                    <input type="text" class="form-control" name="warehouseNo" id="ware" value="0" readonly>
 	                  </div>
 	                </div>
 	
@@ -281,6 +282,20 @@
 		
 		var search = window.open("${path}/client/searchClient?search="+clientText,"search","width=570,height=420, scrollbars=yes, resizable=no"); 
 	} 
+	
+	var employeePopup = function() { 
+		var url = "${path}/popup";
+		var windowTargetName = "employee";
+		var features = "width=720,height=500, scrollbars=no, resizable=no";
+		var search = window.open(url, windowTargetName, features);
+	} 
+	
+	var warehousePopup = function() {
+		var url = "${path}/popup/warehouseList";
+		var windowTargetName = "warehouse";
+		var features = "width=720,height=500, scrollbars=no, resizable=no";
+		var search = window.open(url, windowTargetName, features);
+	}
 
 	function insertOrder(){
 		let oDate = document.getElementById("orderDate").value;
@@ -291,11 +306,7 @@
 		let creditDate = new Date(document.getElementById("creditDate").value);
 		
 		let selSize = document.getElementsByName("pNo").length;
-		var pNo = new Array(selSize);
-		var pName = new Array(selSize);
-		var oNum = new Array(selSize);
-		var oPrice = new Array(selSize);
-		var oDeliberyDate = new Array(selSize);
+		var pNo,pName,oNum,oPrice,oDeliberyDate = new Array(selSize);
 		
 		for(let i=0; i < selSize;i++){
 			pNo[i] = document.getElementsByName("pNo")[i].value;
@@ -307,7 +318,21 @@
 		// 현재 배열이 pNo {a, b, c} 로 들어가 있어 문자열이 포함되어 있음
 		$.ajax({
 			url : "${path}/order/addOrder",
-			data : {"vo" : oDate, cNo, owner, warehouseNo, vatYn, creditDate},
+			data : {"vo" : oDate, cNo, owner, warehouseNo, vatYn, creditDate
+			},
+			type : 'post',
+			success : function(data){
+				console.log(data);
+			},
+			error : function(e){
+				console.log(e);
+			}
+		});
+		
+		$.ajax({
+			url : "${path}/order/addOrder",
+			data : {"pVo" : pNo, pName, oNum, oPrice, oDeliberyDate
+			},
 			type : 'post',
 			success : function(data){
 				console.log(data);

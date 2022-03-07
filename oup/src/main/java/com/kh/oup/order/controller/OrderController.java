@@ -8,6 +8,7 @@ import org.springframework.web.bind.annotation.RequestMapping;
 import org.springframework.web.bind.annotation.ResponseBody;
 
 import com.kh.oup.order.service.OrderService;
+import com.kh.oup.order.vo.OrderProductVo;
 import com.kh.oup.order.vo.OrderVo;
 
 import lombok.extern.slf4j.Slf4j;
@@ -27,8 +28,9 @@ public class OrderController {
 
 	@PostMapping("addOrder")
 	@ResponseBody
-	public String addOrder(OrderVo vo) throws Exception {
+	public String addOrder(OrderVo vo, OrderProductVo pVo) throws Exception {
 		System.out.println(vo);
+		System.out.println(pVo);
 //		int result = service.insertOrder(vo);
 //		if(result >0)
 //			return "success";

@@ -42,5 +42,28 @@
 </select>
  
  
+ <!--  prjectNo받아서 그룹원리스트 화면으로 -->
+<select id="getPrjGroup" parameterType="int" resultType="com.kh.oup.project.vo.ProjectGroupVo">
+	SELECT  
+	
+	E.EMPLOYEE_NO,
+	E.EMPLOYEE_NAME,
+	E.TEAM_CODE,
+	E.ENT_YN,
+	E.JOB_POSITION,
+	T.TEAM_NAME,
+	D.DEPART_NAME,
+	G.PROJECT_NO,
+	G.GROUP_POSITION
+	
+	FROM EMPLOYEE E
+	JOIN TEAM T ON(E.TEAM_CODE = T.TEAM_CODE)
+	JOIN DEPARTMENT D ON(T.DEPART_CODE = D.DEPART_CODE)
+	JOIN GROUP1 G ON(E.EMPLOYEE_NO = G.EMPLOYEE_NO)
+	WHERE E.ENT_YN='Y'AND G.PROJECT_NO = #{projectNo}
+	
+</select>
+ 
+ 
  
 </mapper>

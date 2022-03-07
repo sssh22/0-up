@@ -15,5 +15,6 @@
  		SELECT * 
  		FROM EMPLOYEE
  		WHERE ENT_YN = 'N'
+ 		ORDER BY EMPLOYEE_NO
 	</select>
 </mapper>
