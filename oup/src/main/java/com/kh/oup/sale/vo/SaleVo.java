@@ -16,4 +16,10 @@ public class SaleVo {
 	private String saleDate;
 	private long sUmony;
 	private char vatYN;
+	private String cName;
+	private String employeeName;
+	private String productNo;
+	private String productName;
+	private int productCnt;
+	private String wareHouseName;
 }

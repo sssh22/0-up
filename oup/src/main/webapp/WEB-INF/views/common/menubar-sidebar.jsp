@@ -366,7 +366,7 @@
             </a>
             <ul class="nav nav-treeview">
               <li class="nav-item">
-                <a href="./index.html" class="nav-link">
+                <a href="${path}/sale/list" class="nav-link">
                   <i class="far fa-circle nav-icon"></i>
                   <p style="color: #ebe7f1">판매 조회</p>
                 </a>
