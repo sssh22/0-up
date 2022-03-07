@@ -87,5 +87,10 @@ public class ProjectDaoImpl implements ProjectDao {
 	public int editPrj(ProjectVo vo) {
 		return ss.update("project.editPrj",vo);
 	}
+	// 프로젝트 구룹 전체 조회
+	@Override
+	public List<ProjectGroupVo> getGroupList() {
+		return ss.selectList("projectgroup.getGroupList");
+	}
 
 }

@@ -15,7 +15,7 @@ public class ProjectGroupVo {
 	private String departName; //DEPARTMENT
 	
 	
-	private String projectNo; //GROUP
+	private int projectNo; //GROUP
 	private String groupPosition; //GROUP
 	
 }

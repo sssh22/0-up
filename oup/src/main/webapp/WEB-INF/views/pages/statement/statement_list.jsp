@@ -54,7 +54,7 @@
 
 
       <!-- Default box -->
-      <div class="card">
+      <div class="card" id="cardss">
 
 
         <table class="atb1">
@@ -71,7 +71,8 @@
               <select name="category" id="cate">
                 <option value="거래처명">거래처명</option>
                 <option value="거래처코드">거래처코드</option>
-                <option value="일련번호">일련번호</option>
+                <option value="일련번호">주문서번호</option>
+                <option value="일련번호">프로젝트명</option>
               </select>
             </td>
             <td><input type="text"></td>
@@ -86,7 +87,9 @@
           <table class="table" id="btb">
             <thead>
               <tr>
-                <th>작성일자</th>
+                <th>선택</th>
+                <th>주문서번호</th>
+                <th>명세서번호</th><!-- 번호/미발급 (발급버튼) -->
                 <th>거래처코드</th>
                 <th>거래처명</th>
                 <th>사업자번호</th>
@@ -94,12 +97,12 @@
                 <th>공급가액</th>
                 <th>세액</th>
                 <th>합계금액</th>
-                <th>출고</th>
-                <th>자료번호</th>
+                <th>수정</th>
               </tr>
             </thead>
             <tbody>
               <tr>
+                <td><input type="checkbox"></td>
                 <td>0</td>
                 <td>0</td>
                 <td>0</td>
@@ -109,55 +112,7 @@
                 <td>0</td>
                 <td>0</td>
                 <td>0</td>
-                <td>0</td>
-              </tr>
-              <tr>
-                <td>0</td>
-                <td>0</td>
-                <td>0</td>
-                <td>0</td>
-                <td>0</td>
-                <td>0</td>
-                <td>0</td>
-                <td>0</td>
-                <td>0</td>
-                <td>0</td>
-              </tr>
-              <tr>
-                <td>0</td>
-                <td>0</td>
-                <td>0</td>
-                <td>0</td>
-                <td>0</td>
-                <td>0</td>
-                <td>0</td>
-                <td>0</td>
-                <td>0</td>
-                <td>0</td>
-              </tr>
-              <tr>
-                <td>0</td>
-                <td>0</td>
-                <td>0</td>
-                <td>0</td>
-                <td>0</td>
-                <td>0</td>
-                <td>0</td>
-                <td>0</td>
-                <td>0</td>
-                <td>0</td>
-              </tr>
-              <tr>
-                <td>0</td>
-                <td>0</td>
-                <td>0</td>
-                <td>0</td>
-                <td>0</td>
-                <td>0</td>
-                <td>0</td>
-                <td>0</td>
-                <td>0</td>
-                <td>0</td>
+                <td><button id="btn1">수정</button></td>
               </tr>
             </tbody>
           </table>
@@ -207,8 +162,6 @@
 <script src="${path}/resources/plugins/bootstrap/js/bootstrap.bundle.min.js"></script>
 <!-- AdminLTE App -->
 <script src="${path}/resources/dist/js/adminlte.min.js"></script>
-<!-- AdminLTE for demo purposes -->
-<script src="${path}/resources/dist/js/demo.js"></script>
 
 
 </body>

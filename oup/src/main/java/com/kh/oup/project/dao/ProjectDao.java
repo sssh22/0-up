@@ -33,4 +33,6 @@ public interface ProjectDao {
 	int enrollPrj(ProjectVo vo);
 
 	int editPrj(ProjectVo vo);
+
+	List<ProjectGroupVo>  getGroupList();
 }
