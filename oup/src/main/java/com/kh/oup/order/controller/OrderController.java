@@ -29,11 +29,9 @@ public class OrderController {
 	@PostMapping("addOrder")
 	@ResponseBody
 	public String addOrder(OrderVo vo, OrderProductVo pVo) throws Exception {
-		System.out.println(vo);
-		System.out.println(pVo);
-//		int result = service.insertOrder(vo);
-//		if(result >0)
-//			return "success";
+		int result = service.insertOrder(vo, pVo);
+		if(result >0)
+			return "success";
 		return "fail";
 	}
 	
