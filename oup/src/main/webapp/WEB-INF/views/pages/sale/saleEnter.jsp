@@ -97,9 +97,9 @@
                 <div class="col-sm-1"></div>
                 <div class="col-sm-4">
                   <div class="col">
-                    <select class="form-control mb-3">
-                      <option>부가세적용</option>
-                      <option>부가세미적용</option>
+                    <select id="bugaYN" name="vatYN" class="form-control mb-3">
+                      <option value="Y">부가세적용</option>
+                      <option value="N">부가세미적용</option>
                     </select>
                   </div>
                 </div>
@@ -118,7 +118,7 @@
                 <div class="col-sm-1"></div>
                 <div class="col-sm-4">
                   <div class="col">
-                    <input type="text" class="form-control mb-3" placeholder="미수금액" readonly>
+                    <input type="text" id="aUmony" class="form-control mb-3" placeholder="미수금액" readonly>
                   </div>
                 </div>
                 
@@ -126,8 +126,7 @@
                 <div class="col-sm-1"></div>
                 <div class="col-sm-4">
                   <div class="col">
-                    <input type="text" class="form-control mb-3" placeholder="미수금액" readonly>
-                    <input type="hidden" id="sUmony" value="10000" name="sUmony">
+                    <input type="text" id="sUmony" name="sUmony" class="form-control mb-3" placeholder="미수금액" readonly>
                   </div>
                 </div>
           </div>
@@ -135,7 +134,7 @@
           <div style="margin: 10px;">
             <button type="button">찾기</button>
             <button type="button">거래내역보기</button>
-            <button type="button">My품목</button>
+            <button type="button" onclick="productPopup()">My품목</button>
             <button type="button">주문</button>
             <button onclick="addProduct()" type="button">+</button>
 	       </div>
@@ -263,6 +262,12 @@
 	var calcResult = function() {
 		var indexdoc = document.getElementById('index')
 		var index =  parseInt(indexdoc.value);
+		var bugaYN = document.getElementById('bugaYN');
+		var bugaValue = bugaYN.options[bugaYN.selectedIndex].text;
+		var sUmony = document.getElementById('sUmony');
+		var aUmony = document.getElementById('aUmony');
+		var sumPrice = parseInt(aUmony.value);
+		
 		for(let i = 1; i < index; i++) {
 			var count = document.getElementById('count' + i).value;
 			var price = document.getElementById('price' + i).value;
@@ -271,9 +276,22 @@
 			
 			var result1 = count * price;
 			result.value = result1;
-			var result2 = result1 * 0.1;
-			buga.value = result2;
+			
+			if(bugaValue == '부가세적용'){
+				var result2 = result1 * 0.1;
+				buga.value = result2;
+			}else {
+				buga.value = 0;
+			}
+			
+			if(i == index) {
+				break;
+			}
+			sumPrice += result1;
+					
 		}
+		
+		sUmony.value = sumPrice;
 	}
 </script>
 </body>

@@ -1,14 +1,22 @@
 package com.kh.oup.sale.controller;
 
-import java.util.ArrayList;
+import java.util.List;
+
+import javax.servlet.http.HttpServletRequest;
+import javax.servlet.http.HttpSession;
 
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Controller;
+import org.springframework.ui.Model;
 import org.springframework.web.bind.annotation.GetMapping;
 import org.springframework.web.bind.annotation.ModelAttribute;
+import org.springframework.web.bind.annotation.PathVariable;
 import org.springframework.web.bind.annotation.PostMapping;
 import org.springframework.web.bind.annotation.RequestMapping;
 
+import com.kh.oup.common.PageVo;
+import com.kh.oup.employee.vo.EmployeeVo;
+import com.kh.oup.mail.vo.MailVo;
 import com.kh.oup.sale.service.SaleService;
 import com.kh.oup.sale.vo.SaleListVo;
 import com.kh.oup.sale.vo.SaleVo;
@@ -36,15 +44,32 @@ public class SaleController {
 		
 		long saleNo = service.getSeq();
 		saleVo.setSaleNo(saleNo);
-		System.out.println("controller.saleListVo.getVoList().get(0) ::: " + saleListVo.getVoList().get(0));
-		System.out.println("controller.saleListVo.getVoList().get(1) ::: " + saleListVo.getVoList().get(1));
-		System.out.println("controller.saleListVo.getVoList().get(2) ::: " + saleListVo.getVoList().get(2));
 		for(int i = 0; i < saleListVo.getVoList().size(); i++) {
 			saleListVo.getVoList().get(i).setSaleNo(saleNo);
 		}
 		
 		int result = service.saleEnter(saleVo, saleListVo);
 		
+		int result2 = service.clientAddUmony(saleVo.getCNo(), saleVo.getSUmony());
+		
 		return "redirect:/sale/enter";
 	}
+	
+	@GetMapping(value = {"/list/{page}", "/list"})
+	public String saleList(Model model, @PathVariable(required = false)String page, HttpServletRequest request) throws Exception {
+		if(page == null || Integer.parseInt(page) <= 0 )
+			page = "1";
+		
+		int totalRow = service.getSaleCnt();
+		PageVo vo = new PageVo(page, totalRow);
+		vo.setCntPerPage(10);
+		
+		//판매번호(O), 거래처, 담당자명, 품목이름, 폼목개수, 창고이름
+		List<SaleVo> list = service.getSaleList(vo);
+		
+		model.addAttribute("list",list);
+		model.addAttribute("page", vo);
+		return "pages/sale/saleList";
+	}
+	
 }

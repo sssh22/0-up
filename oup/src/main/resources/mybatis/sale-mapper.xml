@@ -32,10 +32,10 @@
 			#{employeeNo},
 			#{projectNo},
 			NULL, <!-- #{oNo} -->
-			#{saleSum},
+			#{sUmony},
 			#{saleDate},
 			#{sUmony},
-			'N'
+			#{vatYN}
 		)
 	</insert>
 	
@@ -52,10 +52,79 @@
 		(
 			SEQ_SALE_LIST.NEXTVAL,
 			#{saleNo},
-			NULL, <!-- cbj 추후수정 -->
+			#{pNo},
 			#{sQnt},
 			#{sPrice},
 			#{sDeliberyDate}
 		)
 	</insert>
+	
+	<update id="clientAddUmony" parameterType="HashMap">
+		UPDATE CLIENT
+		SET
+		C_UMONY = #{sUmony}
+		WHERE
+		C_NO = #{cNo}
+	</update>
+	
+	<select id="getSaleCnt" resultType="int">
+		SELECT COUNT(SALE_NO)
+		FROM SALE
+	</select>
+	
+	<select id="getSaleList" resultType="saleVo">
+		SELECT * FROM 
+  		(
+	  		SELECT ROWNUM RN, R.* 
+	  		 FROM(
+                SELECT *
+                FROM SALE S
+                ORDER BY SALE_NO DESC
+            ) R
+  		)
+  		WHERE RN BETWEEN #{startRow} AND #{endRow}
+	</select>
+	
+	<select id="getCName" resultType="String">
+		SELECT C_NAME 
+		FROM CLIENT 
+		WHERE C_NO = #{cNo}
+	</select>
+	
+	<select id="getEmployeeName" resultType="String">
+		SELECT EMPLOYEE_NAME 
+		FROM EMPLOYEE 
+		WHERE EMPLOYEE_NO = #{employeeNo}
+	</select>
+	
+	<select id="getProductNo" resultType="String">
+		SELECT P_NO FROM 
+  		(
+	  		SELECT ROWNUM RN, R.* 
+	  		 FROM(
+                SELECT P_NO 
+                FROM SALE_LIST 
+                WHERE SALE_NO = #{saleNo}
+            ) R
+  		)
+  		WHERE RN BETWEEN 1 AND 1
+	</select>
+	
+	<select id="getProductName" resultType="String">
+		SELECT P_NAME
+		FROM PRODUCT
+		WHERE P_NO = #{pNo}
+	</select>
+	
+	<select id="getProductCnt" resultType="String">
+		SELECT COUNT(SALE_LIST_NO)
+		FROM SALE_LIST
+		WHERE SALE_NO = #{saleNo}
+	</select>
+	
+	<select id="getWareHouseName" resultType="String">
+		SELECT WAREHOUSE_NAME 
+		FROM WAREHOUSE
+		WHERE WAREHOUSE_NO = #{wareHouseNo}
+	</select>
 </mapper>
