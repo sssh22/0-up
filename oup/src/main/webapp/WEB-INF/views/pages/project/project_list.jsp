@@ -86,7 +86,7 @@
                           Payment Status
                       </th>
                       <th style="width: 8%" class="text-center">
-                          Approval
+                          Approval Status
                       </th>
                       <th style="width: 20%">
                       </th>
@@ -108,15 +108,16 @@
                           </small>
                       </td>
                       <td>
-                         그룹원들..
+                         	${p.groupMembers}
                       </td>
                       <td class="project_progress">
+                      <c:set var="payment" value="${(1-(p.SUmoney/p.saleSum))*100}"></c:set>
                           <div class="progress progress-sm">
-                              <div class="progress-bar" role="progressbar" aria-valuenow="57" aria-valuemin="0" aria-valuemax="100" style="width: 57%">
+                              <div class="progress-bar" role="progressbar" aria-valuenow="" aria-valuemin="0" aria-valuemax="100" style="width: payment%">
                               </div>
                           </div>
                           <small>
-                              57% Complete
+                            <c:out value="${payment}"></c:out> % Complete
                           </small>
                       </td>
                       <td class="project-state">

@@ -97,7 +97,7 @@ public class ProjectController {
 	
 	
 	
-	//조회 ============================================
+	//조회 ============================================//수정해야함
 	@GetMapping(value = {"/project_list/{page}","/project_list"})
 	public String project_list(Model model, @PathVariable(required=false) String page, HttpServletRequest req) throws Exception {
 		
@@ -106,24 +106,49 @@ public class ProjectController {
 		
 		if(page == null) { page="1"; }
 		
-		if(search == null) { //검색없이..
+		if(search == null) { //검색없이 조회 ===============================================================
 			int cntPerPage = 10; //10 rows
 			int pageBtnCnt = 3; 
 			int totalRow = service.getPrjCnt();
 			PageVo pvo = new PageVo(page, cntPerPage, pageBtnCnt, totalRow);
-
+			
 			//리스트조회
 			List<ProjectVo> plist = service.getPrjList(pvo);
+			List<ProjectGroupVo> glist = service.getGroupList();
+			
+			for(int i=0;i<plist.size();i++) {
+				String members = "";
+				for(int j=0; j< glist.size();j++) {
+					if(plist.get(i).getProjectNo() == glist.get(j).getProjectNo()) {
+						members += glist.get(j).getEmployeeName() +"  ";
+					}
+				}
+				plist.get(i).setGroupMembers(members);
+			}
+			
 			model.addAttribute("plist",plist);
 			model.addAttribute("page",pvo);
 		}
-		if(search != null) {
+		if(search != null) { //검색 조회 ===============================================================
 			int cntPerPage = 10; //10 rows
 			int pageBtnCnt = 3; 
 			int totalRow = service.getSearchPrjCnt(search);
 			PageVo pvo = new PageVo(page, cntPerPage, pageBtnCnt, totalRow, search);
 			
 			List<ProjectVo> plist = service.getSearchPrjList(pvo);
+			List<ProjectGroupVo> glist = service.getGroupList();
+			
+			for(int i=0;i<plist.size();i++) {
+				String members = "";
+				for(int j=0; j< glist.size();j++) {
+					if(plist.get(i).getProjectNo() == glist.get(j).getProjectNo()) {
+						members += glist.get(j).getEmployeeName() +"  ";
+					}
+				}
+				plist.get(i).setGroupMembers(members);
+			}
+			
+			
 			model.addAttribute("plist",plist);
 			model.addAttribute("page",pvo);
 		}

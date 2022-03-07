@@ -4,14 +4,13 @@ body{
 .content-wrapper {
     background-color: white;
 }
-.card{
-	width:70% !important;
-    padding: 100px;
+#cardss{
+	width:90% !important;
+	margin-left: 5%;
+    padding: 5%;
     background-color: #ebe7f1;
 }
-#btb{
-	margin:150px;
-}
+
 #btb th{
     background-color: #d7d0e3;
     text-align: center;
@@ -47,4 +46,16 @@ input, select{
     height: 35px;
     border: 1px solid #d7d0e3;
     border-radius: 3px;
+}
+
+#btn1{
+	background-color: #d7d0e3;
+	border: 0;
+	border-radius: 3px;
+}
+#btn1:hover{
+	background-color: #8977ad;
+	color: white;
+	border: 0;
+	border-radius: 3px;
 }

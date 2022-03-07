@@ -34,7 +34,7 @@
       <div class="container-fluid">
         <div class="row mb-2">
           <div class="col-sm-6">
-            <h1 style="font-size: 40px;">거래 명세서 [저장]</h1>
+            <h1 style="font-size: 40px;">거래 명세서</h1>
           </div>
           <br><br><br>
 
@@ -50,21 +50,13 @@
       <tr>
         <td>프로젝트</td>
         <td>
-          <select>
-            <option>each</option>
-            <option></option>
-            <option></option>
-          </select>
+          {프로젝트 명/ 번호}
         </td>
       </tr>
       <tr>
         <td>주문서</td>
         <td>
-          <select>
-            <option></option>
-            <option></option>
-            <option></option>
-          </select>
+          {주문서 번호}
         </td>
       </tr>
     </table>
@@ -313,8 +305,7 @@
 <script src="${path}/resources/plugins/bootstrap/js/bootstrap.bundle.min.js"></script>
 <!-- AdminLTE App -->
 <script src="${path}/resources/dist/js/adminlte.min.js"></script>
-<!-- AdminLTE for demo purposes -->
-<script src="${path}/resources/dist/js/demo.js"></script>
+
 
 
 </body>

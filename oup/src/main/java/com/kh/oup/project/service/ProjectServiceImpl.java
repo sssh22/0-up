@@ -95,4 +95,10 @@ public class ProjectServiceImpl implements ProjectService{
 		return dao.editPrj(vo);
 	}
 
+	//그룹 전체 조회
+	@Override
+	public List<ProjectGroupVo> getGroupList() {
+		return dao.getGroupList();
+	}
+
 }
