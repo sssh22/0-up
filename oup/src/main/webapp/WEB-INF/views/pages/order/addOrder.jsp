@@ -316,6 +316,8 @@
 			oDeliberyDate[i] = new Date(document.getElementsByName("oDeliberyDate")[i].value);
 		}
 		// 현재 배열이 pNo {a, b, c} 로 들어가 있어 문자열이 포함되어 있음
+		/*
+		
 		$.ajax({
 			url : "${path}/order/addOrder",
 			data : {"vo" : oDate, cNo, owner, warehouseNo, vatYn, creditDate
@@ -341,6 +343,7 @@
 				console.log(e);
 			}
 		});
+		*/
 	}
 </script>
 
