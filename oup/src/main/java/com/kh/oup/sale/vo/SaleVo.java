@@ -22,4 +22,5 @@ public class SaleVo {
 	private String productName;
 	private int productCnt;
 	private String wareHouseName;
+	private String projectName;
 }

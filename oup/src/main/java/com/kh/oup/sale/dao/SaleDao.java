@@ -32,4 +32,8 @@ public interface SaleDao {
 
 	String getWareHouseName(long wareHouseNo) throws Exception;
 
+	SaleVo getSale(int saleNo) throws Exception;
+
+	String getProjectName(long projectNo) throws Exception;
+
 }

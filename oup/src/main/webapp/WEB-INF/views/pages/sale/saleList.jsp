@@ -122,7 +122,7 @@
 	                        <label for="check${status.count}"></label>
 	                  	</div>
 	                  </td>
-                      <td>${l.saleNo}</td>
+                      <td><span style="text-decoration: underline; color:blue; cursor: pointer;" id="confirm_id" onclick="salePopup(${l.saleNo})">${l.saleNo}</span></td>
                       <td>${l.CName}</td>
                       <td>${l.employeeName}</td>
                       <c:if test="${l.productCnt eq 0}">
@@ -281,6 +281,14 @@
 			}
 		});
 	}
+</script>
+<script type="text/javascript">
+	var salePopup = function(saleNo) {
+	var url = "${path}/sale/saleUpdate/" + saleNo;
+	var windowTargetName = "sale";
+	var features = "width=1300,height=800, scrollbars=no, resizable=no";
+	var search = window.open(url, windowTargetName, features);
+}
 </script>
 </body>
 </html>
