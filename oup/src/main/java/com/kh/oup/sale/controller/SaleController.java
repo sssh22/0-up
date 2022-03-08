@@ -72,4 +72,11 @@ public class SaleController {
 		return "pages/sale/saleList";
 	}
 	
+	@GetMapping("/saleUpdate/{saleNo}")
+	public String saleDetail(@PathVariable int saleNo, Model model) throws Exception {
+		SaleVo vo = service.getSale(saleNo);
+		model.addAttribute("sale", vo);
+		return "pages/sale/saleDetail";
+	}
+	
 }

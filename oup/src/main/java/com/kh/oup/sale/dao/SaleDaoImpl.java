@@ -83,4 +83,14 @@ public class SaleDaoImpl implements SaleDao{
 		return ss.selectOne("sale.getWareHouseName", wareHouseNo);
 	}
 
+	@Override
+	public SaleVo getSale(int saleNo) throws Exception {
+		return ss.selectOne("sale.getSale", saleNo);
+	}
+
+	@Override
+	public String getProjectName(long projectNo) throws Exception {
+		return ss.selectOne("sale.getProjectName", projectNo);
+	}
+
 }

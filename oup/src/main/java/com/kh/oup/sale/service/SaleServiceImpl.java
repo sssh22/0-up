@@ -67,7 +67,26 @@ public class SaleServiceImpl implements SaleService{
 			saleVo.get(i).setWareHouseName(dao.getWareHouseName(saleVo.get(i).getWareHouseNo()));
 		}
 		
-		
+		return saleVo;
+	}
+
+	@Override
+	public SaleVo getSale(int saleNo) throws Exception {
+		SaleVo saleVo = dao.getSale(saleNo);
+		//거래처명
+		saleVo.setCName(dao.getCName(saleVo.getCNo()));
+		//담당자명
+		saleVo.setEmployeeName(dao.getEmployeeName(saleVo.getEmployeeNo()));
+		//품목번호
+		saleVo.setProductNo(dao.getProductNo(saleVo.getSaleNo()));
+		//품목명
+		saleVo.setProductName(dao.getProductName(saleVo.getProductNo()));
+		//품목갯수
+		saleVo.setProductCnt(Integer.parseInt(dao.getProductCnt(saleVo.getSaleNo()))-1);
+		//출하창고명
+		saleVo.setWareHouseName(dao.getWareHouseName(saleVo.getWareHouseNo()));
+		//프로젝트명
+		saleVo.setProjectName(dao.getProjectName(saleVo.getProjectNo()));
 		return saleVo;
 	}
 

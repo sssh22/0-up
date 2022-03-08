@@ -127,4 +127,16 @@
 		FROM WAREHOUSE
 		WHERE WAREHOUSE_NO = #{wareHouseNo}
 	</select>
+	
+	<select id="getProjectName" resultType="String">
+		SELECT PROJECT_NAME
+		FROM PROJECT
+		WHERE PROJECT_NO = #{projectNo}
+	</select>
+	
+	<select id="getSale" resultType="saleVo">
+		SELECT * 
+		FROM SALE
+		WHERE SALE_NO = #{saleNo}
+	</select>
 </mapper>

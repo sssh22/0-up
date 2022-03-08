@@ -18,4 +18,6 @@ public interface SaleService {
 
 	List<SaleVo> getSaleList(PageVo vo) throws Exception;
 
+	SaleVo getSale(int saleNo) throws Exception;
+
 }
