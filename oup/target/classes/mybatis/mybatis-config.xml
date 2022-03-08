@@ -15,6 +15,8 @@
   		<typeAlias type="com.kh.oup.mail.vo.MailVo" alias="mailVo"/>
   		<typeAlias type="com.kh.oup.sale.vo.SaleVo" alias="saleVo"/>
 		<typeAlias type="com.kh.oup.sale.vo.SaleListVo" alias="saleListVo"/>
+		<typeAlias type="com.kh.oup.order.vo.OrderVo" alias="orderVo"/>
+		<typeAlias type="com.kh.oup.order.vo.OrderProductVo" alias="orderProductVo"/>
   	</typeAliases>
   
   </configuration>

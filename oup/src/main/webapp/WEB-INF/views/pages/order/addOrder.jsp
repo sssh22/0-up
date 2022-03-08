@@ -74,6 +74,8 @@
 	                    <input type="hidden" id="clientNo" name="cNo">
 	                  </div>
 	                </div>
+	                
+	                
 	                <div class="col-sm-1" style="padding:5px;"><b>담당자</b></div>
 	                <div class="col-sm-1"></div>
 	                <div class="col-sm-4">
@@ -84,6 +86,25 @@
 	                    <input type="hidden" id="employeeNo" name="employeeNo">
 	                  </div>
 	                </div>
+	                
+	                <div class="col-sm-1" style="padding:5px;"><b>팀코드</b></div>
+	                <div class="col-sm-1"></div>
+	                <div class="col-sm-4">
+	                  <div class="input-group col mb-3">
+	                    <input type="text" class="form-control" id="teamCode" name="teamCode" readonly>
+	                  </div>
+	                </div>
+	                
+	                <div class="col-sm-1" style="padding:5px;"><b>프로젝트</b></div>
+		            <div class="col-sm-1"></div>
+		            <div class="col-sm-4">
+		               <div class="input-group col mb-3">
+		                  <input type="text" name="projectNo" id="projectNo" class="form-control" placeholder="프로젝트">
+		                   <button type="button" onclick="projectPopup()" class="input-group-text"><i class="bi bi-search"></i></button>
+		                   <input type="text" id="projectName" class="form-control" readonly>
+		                   <input type="hidden" id="projectNo" name="projectNo" class="form-control">
+		               </div>
+		            </div>
 	
 	                <div class="col-sm-1" style="padding:5px;"><b>출하창고</b>
 	                </div><div class="col-sm-1"></div>
@@ -113,15 +134,6 @@
 	                    <input type="date" class="form-control mb-3" id="creditDate" name="creditDateStr" readonly>
 	                  </div>
 	                </div>
-	
-	                <div class="col-sm-1" style="padding:5px;"><b>첨부</b></div>
-	                <div class="col-sm-1"></div>
-	                <div class="col-sm-10">
-	                  <div class="col">
-	                    <input type="file" class="form-control mb-3" placeholder="첨부">
-	                  </div>
-	                </div>
-	
 	          </div>
 
 	          <div style="margin: 10px;">
@@ -302,7 +314,13 @@
 		var features = "width=720,height=500, scrollbars=no, resizable=no";
 		var search = window.open(url, windowTargetName, features);
 	}
-
+	
+	var projectPopup = function() {
+		var url = "${path}/popup/projectList";
+		var windowTargetName = "project";
+		var features = "width=720,height=500, scrollbars=no, resizable=no";
+		var search = window.open(url, windowTargetName, features);
+	}
 	
 </script>
 
