@@ -36,4 +36,6 @@ public interface SaleDao {
 
 	String getProjectName(long projectNo) throws Exception;
 
+	List<SaleListVo> getSaleProductList(int saleNo) throws Exception;
+
 }

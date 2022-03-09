@@ -117,7 +117,7 @@
                 <div class="col-sm-1"></div>
                 <div class="col-sm-4">
                   <div class="col">
-                    <input type="text" id="aUmony" class="form-control mb-3" placeholder="미수금액" readonly>
+                    <input type="text" id="aUmony" class="form-control mb-3" value="${sale.SUmony}" placeholder="미수금액" readonly>
                   </div>
                 </div>
                 
@@ -125,7 +125,7 @@
                 <div class="col-sm-1"></div>
                 <div class="col-sm-4">
                   <div class="col">
-                    <input type="text" id="sUmony" name="sUmony" class="form-control mb-3" placeholder="미수금액" readonly>
+                    <input type="text" id="sUmony" name="sUmony" class="form-control mb-3"  value="${sale.SUmony}" placeholder="미수금액" readonly>
                   </div>
                 </div>
           </div>
@@ -152,11 +152,12 @@
 					</tr>
 				</thead>
 				<tbody id="product">
+				<c:forEach items="${saleList}" var="l" varStatus="status">
 					<tr>
 						<td>
 							<div class="input-group" style="margin: 0px">
 							<input id="productNo1" name="voList[0].pNo" type="number" class="form-control"
-							placeholder="100">
+							value="${l.PNo}" placeholder="100">
 							<button type="button" class="input-group-text" onclick="productPopup('1')"><i class="bi bi-search"></i></button>
 							</div>
 						</td>
@@ -184,7 +185,8 @@
 						<input name="voList[0].sDeliberyDate" type="date" class="form-control"
 							placeholder="2022-04-18">
 						</td>
-					
+					</tr>
+				</c:forEach>
 				</tbody>
 			</table>
 			<div style="margin: 10px;">
