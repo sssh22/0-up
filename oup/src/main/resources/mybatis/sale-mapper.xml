@@ -139,4 +139,10 @@
 		FROM SALE
 		WHERE SALE_NO = #{saleNo}
 	</select>
+	
+	<select id="getSaleProductList" resultType="saleListVo">
+		SELECT * 
+		FROM SALE_LIST
+		WHERE SALE_NO = #{saleNo}
+	</select>
 </mapper>

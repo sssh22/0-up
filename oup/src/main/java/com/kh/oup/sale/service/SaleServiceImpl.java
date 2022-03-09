@@ -90,4 +90,13 @@ public class SaleServiceImpl implements SaleService{
 		return saleVo;
 	}
 
+	@Override
+	public SaleListVo getSaleProductList(int saleNo) throws Exception {
+		SaleListVo vo = new SaleListVo();
+		vo.setSaleNo(saleNo);
+		vo.setVoList(dao.getSaleProductList(saleNo));
+		
+		return vo;
+	}
+
 }

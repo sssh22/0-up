@@ -20,4 +20,6 @@ public interface SaleService {
 
 	SaleVo getSale(int saleNo) throws Exception;
 
+	SaleListVo getSaleProductList(int saleNo) throws Exception;
+
 }

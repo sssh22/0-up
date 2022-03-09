@@ -74,8 +74,12 @@ public class SaleController {
 	
 	@GetMapping("/saleUpdate/{saleNo}")
 	public String saleDetail(@PathVariable int saleNo, Model model) throws Exception {
-		SaleVo vo = service.getSale(saleNo);
-		model.addAttribute("sale", vo);
+		SaleVo saleVo = service.getSale(saleNo);
+		model.addAttribute("sale", saleVo);
+		
+		SaleListVo saleListVo = service.getSaleProductList(saleNo);
+		model.addAttribute("saleList", saleListVo.getVoList());
+		
 		return "pages/sale/saleDetail";
 	}
 	
