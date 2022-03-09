@@ -15,6 +15,11 @@ public class OrderDaoImpl implements OrderDao{
 	private SqlSession session;
 
 	@Override
+	public int selectOrderSeq() throws Exception {
+		return session.selectOne("order.selectOrderSeq");
+	}
+
+	@Override
 	public int insertOrder(OrderVo vo) throws Exception {
 		return session.insert("order.insertOrder", vo);
 	}
@@ -23,5 +28,6 @@ public class OrderDaoImpl implements OrderDao{
 	public int insertOrderProduct(OrderProductVo pVo) throws Exception {
 		return session.insert("order.insertOrderProduct", pVo);
 	}
+
 
 }

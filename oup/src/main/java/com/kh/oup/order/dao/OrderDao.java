@@ -8,5 +8,7 @@ public interface OrderDao {
 	int insertOrder(OrderVo vo) throws Exception;
 	
 	int insertOrderProduct(OrderProductVo pVo) throws Exception;
+
+	int selectOrderSeq()throws Exception;
  
 }

@@ -91,7 +91,7 @@
 	                <div class="col-sm-1"></div>
 	                <div class="col-sm-4">
 	                  <div class="input-group col mb-3">
-	                    <input type="text" class="form-control" id="teamCode" name="teamCode" readonly>
+	                    <input type="text" class="form-control" id="teamCode" name="teamCode" value="abc" readonly>
 	                  </div>
 	                </div>
 	                
@@ -99,10 +99,10 @@
 		            <div class="col-sm-1"></div>
 		            <div class="col-sm-4">
 		               <div class="input-group col mb-3">
-		                  <input type="text" name="projectNo" id="projectNo" class="form-control" placeholder="프로젝트">
+		                  <input type="text" name="projectSearch" id="projectSearch" class="form-control" placeholder="프로젝트">
 		                   <button type="button" onclick="projectPopup()" class="input-group-text"><i class="bi bi-search"></i></button>
 		                   <input type="text" id="projectName" class="form-control" readonly>
-		                   <input type="hidden" id="projectNo" name="projectNo" class="form-control">
+		                   <input type="hidden" id="projectNo" name="projectNo" class="form-control" value="0">
 		               </div>
 		            </div>
 	

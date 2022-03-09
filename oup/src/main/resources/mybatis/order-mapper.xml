@@ -4,12 +4,36 @@
   "http://mybatis.org/dtd/mybatis-3-mapper.dtd">
  
  <mapper namespace="order">
+ 	<select id="selectOrderSeq" resultType="int">
+ 		select o_no_seq.nextval
+ 		from dual;
+ 	</select>
+ 
  	<insert id="insertOrder" parameterType="orderVo">
- 		insert into order
+ 		insert into order1(
+ 			o_no, c_no, project_no, employee_no, o_date, o_condition, team_code, vat_yn
+ 		)
+ 		values(
+ 			${oNo},
+ 			${cNo},
+ 			${projectNo},
+ 			${warehouseNo},
+ 			#{oDate},
+ 			#{creditDate},
+ 			#{teamCode},
+ 			${employeeNo},
+ 			#{vatYn}
+ 		)
  	</insert>
  	
  	<insert id="insertOrderProduct" parameterType="orderProductVo">
- 	
+
+ 			<foreach collection="orderProductVo" item="item" separator=" ">
+ 				 insert into order_list(o_list_no, o_no, p_no, o_num, o_price, o_delibery_date)
+ 					values(
+ 						 ${orderNo}, ${item.pNo}, #{item.pName}, ${item.oNum}, ${item.oPrice}, #{item.oDeliberyDate}
+ 					)
+ 			</foreach>
  	</insert>
  
  </mapper>
