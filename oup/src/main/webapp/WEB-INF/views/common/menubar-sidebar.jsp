@@ -385,6 +385,23 @@
               </li>
             </ul>
           </li>
+          <li class="nav-item"> <!-- ============================요기 -->
+            <a href="#" class="nav-link">
+              <i class="nav-icon fas fa-file"></i></i>
+              <p style="color: #ebe7f1">
+                거래명세서
+                <i class="right fas fa-angle-left"></i>
+              </p>
+            </a>
+            <ul class="nav nav-treeview">
+              <li class="nav-item">
+                <a href="${path}/statement/statement_list" class="nav-link">
+                  <i class="far fa-circle nav-icon"></i>
+                  <p style="color: #ebe7f1">명세서 조회</p>
+                </a>
+              </li>
+            </ul>
+          </li>
           <li class="nav-item">
             <a href="#" class="nav-link">
               <i class="nav-icon fas fa-chart-pie"></i>
