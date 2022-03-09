@@ -18,8 +18,12 @@ public class OrderServiceImpl implements OrderService{
 	private OrderDao dao;
 
 	@Override
-	@Transactional(rollbackFor = Exception.class) 
+//	@Transactional(rollbackFor = Exception.class) 
 	public int insertOrder(OrderVo vo, OrderProductVo pVo) throws Exception {	// string 으로 받아온 날짜포맷을 date형으로 변경
+		int orderNoSeq = dao.selectOrderSeq();
+		vo.setONo(orderNoSeq);
+		pVo.setOrderNo(orderNoSeq);
+		
 		int pVoNo = pVo.getPNo().length;
 		Date[] delDate = new Date[pVoNo];
 
