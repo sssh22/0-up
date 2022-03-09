@@ -104,7 +104,10 @@ public class ProjectController {
 		String search = req.getParameter("search");
 		
 		
-		if(page == null) { page="1"; }
+		if(page == null || Integer.parseInt(page) <= 0) {
+			page="1"; 
+			}
+		
 		
 		if(search == null) { //검색없이 조회 ===============================================================
 			int cntPerPage = 10; //10 rows

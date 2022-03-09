@@ -37,20 +37,13 @@
           </div>
           <br><br><br>
 
-          
-          
         </div>
       </div><!-- /.container-fluid -->
     </section>
 
     <!-- Main content -->
     
-    
       
-      
-      
-
-   
 
 
       <!-- Default box -->
@@ -72,7 +65,6 @@
                 <option value="거래처명">거래처명</option>
                 <option value="거래처코드">거래처코드</option>
                 <option value="일련번호">주문서번호</option>
-                <option value="일련번호">프로젝트명</option>
               </select>
             </td>
             <td><input type="text"></td>
@@ -96,7 +88,7 @@
                 <th>SKU</th>
                 <th>공급가액</th>
                 <th>세액</th>
-                <th>합계금액</th>
+                <th>합계금액</th><!--c set 계산  -->
                 <th>수정</th>
               </tr>
             </thead>
@@ -116,32 +108,63 @@
               </tr>
             </tbody>
           </table>
-
-         <!-- Pagination -->
-         <div><br>
-          <nav aria-label="Page navigation example">
-            <ul class="pagination nav justify-content-center">
-              <li class="page-item">
-                <a class="page-link" href="#" aria-label="Previous">
-                  <span aria-hidden="true">&laquo;</span>
-                </a>
-              </li>
-              <li class="page-item"><a class="page-link" href="#">1</a></li>
-              <li class="page-item"><a class="page-link" href="#">2</a></li>
-              <li class="page-item"><a class="page-link" href="#">3</a></li>
-              <li class="page-item">
-                <a class="page-link" href="#" aria-label="Next">
-                  <span aria-hidden="true">&raquo;</span>
-                </a>
-              </li>
-            </ul>
-          </nav>
-
-         </div><!-- /paging -->
-          
         </div><!-- table -->
        
-        
+        	<br>
+	<%-- 	<div class="row">
+
+          <div class="btn-group me-2" role="group" aria-label="First group" style="margin-left: 40%;">
+            	
+            		<c:if test="${empty search}">
+            			<c:if test="${page.startPage == 1}">  
+            			<button type="button" class="btn btn-secondary" onclick="location.href='${path}/project/project_list/1'">Prev</button>
+            			</c:if>
+            			<c:if test="${page.startPage gt 1}">  
+            			<button type="button" class="btn btn-secondary" onclick="location.href='${path}/project/project_list/${page.startPage - 1}'">Prev</button>
+            			</c:if>   
+            		
+            		
+			            <c:forEach var="i" begin="${page.startPage}" end="${page.endPage}">
+					        <c:if test="${page.currentPage != i and i <= page.lastPage}">                  
+					        	<button type="button" class="btn btn-secondary" onclick="location.href='${path}/project/project_list/${i}'">${i}</button>
+					      	</c:if>
+							<c:if test="${page.currentPage == i and i <= page.lastPage}">                  
+					        	<button type="button" class="btn btn-secondary active" onclick="location.href='${path}/project/project_list/${i}'">${i}</button>
+					        </c:if>
+						</c:forEach>
+			            <c:if test="${page.endPage < page.lastPage}">
+							<button type="button" class="btn btn-secondary" onclick="location.href='${path}/project/project_list/${page.endPage + 1}'">Next</button>
+						</c:if>
+						<c:if test="${page.endPage >= page.lastPage}">
+							<button type="button" class="btn btn-secondary" onclick="location.href='${path}/project/project_list/${page.lastPage}'">Next</button>
+						</c:if>
+            		</c:if>
+            		
+            		<c:if test="${not empty search}">
+	                	<c:if test="${page.startPage == 1}">  
+            			<button type="button" class="btn btn-secondary" onclick="location.href='${path}/project/project_list/1?search=${search}'">Prev</button>
+            			</c:if>
+            			<c:if test="${page.startPage gt 1}">  
+            			<button type="button" class="btn btn-secondary" onclick="location.href='${path}/project/project_list/${page.startPage - 1}?search=${search}'">Prev</button>
+            			</c:if>  
+			            <c:forEach var="i" begin="${page.startPage}" end="${page.endPage}">
+					        <c:if test="${page.currentPage != i and i <= page.lastPage}">                  
+					        	<button type="button" class="btn btn-secondary" onclick="location.href='${path}/project/project_list/${i}?search=${search}'">${i}</button>
+					      	</c:if>
+							<c:if test="${page.currentPage == i and i <= page.lastPage}">                  
+					        	<button type="button" class="btn btn-secondary active" onclick="location.href='${path}/project/project_list/${i}?search=${search}'">${i}</button>
+					        </c:if>
+						</c:forEach>
+			            <c:if test="${page.endPage < page.lastPage}">
+							<button type="button" class="btn btn-secondary" onclick="location.href='${path}/project/project_list/${page.endPage + 1}?search=${search}'">Next</button>
+						</c:if>
+						<c:if test="${page.endPage >= page.lastPage}">
+							<button type="button" class="btn btn-secondary" onclick="location.href='${path}/project/project_list/${page.lastPage}?search=${search}'">Next</button>
+						</c:if>
+            		</c:if>
+                </div><!--pager  -->
+		</div> --%>
+		<!-- /row -->
         
         
       </div>

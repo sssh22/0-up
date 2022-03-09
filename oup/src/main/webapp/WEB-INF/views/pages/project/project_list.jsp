@@ -46,7 +46,7 @@
           </div>
         </div>
         
-        <form action="${path}/project/project_list" method="get" id="searchform">
+        <form action="${path}/project/project_list/1" method="get" id="searchform">
 	            <div class="input-group mb-3">
 		               <input type="text" name="search" class="form-control col-sm-4" placeholder="프로젝트명 검색">
 	    	           <button class="btn btn-success" onclick="submit()" style="background-color:#443b53"><i class="fa fa-search"></i></button>
