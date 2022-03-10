@@ -9,6 +9,7 @@
 <!DOCTYPE html>
 <html>
 <head>
+<link rel="icon" href="data:,">
 <meta charset="UTF-8">
 <title>Insert title here</title>
 
@@ -21,7 +22,6 @@
 
 <!-- ssh CSS -->
  <link rel="stylesheet" href="${path}/resources/dist/css/project_list.css">
-
 
 </head>
 <body class="hold-transition sidebar-mini layout-fixed">

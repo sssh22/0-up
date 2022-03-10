@@ -5,9 +5,116 @@
  
  
 <mapper namespace="statement">
- <select id="getStCnt">
+ <select id="getStCnt" resultType="int">
 	SELECT COUNT(O_NO) 
 	FROM ORDER1
  </select>
+ 
+ 
+ <select id="getStList" parameterType="PageVo" resultType="com.kh.oup.statement.vo.StatementVo">
+ 	SELECT * FROM
+ 	(
+ 		SELECT ROWNUM RN, J.* 
+ 		FROM
+	 	(
+		 	SELECT 
+		 		T.*,
+		 		C.C_NAME,
+		 		C.B_NO,
+		 		C.C_OWNER,
+		 		C.C_ADDR,
+		 		C.C_PHONE,
+		 		C.C_FAX,
+		 		C.C_EMAIL
+		 	FROM (
+			 	SELECT 
+			 		O.O_NO, 
+			 		O.C_NO, 
+			 		O.PROJECT_NO, 
+			 		O.O_DATE, 
+			 		O.O_CONDITION, 
+			 		O.VAT_YN,
+			 		S.S_NO,
+			 		S.MANAGER,
+			 		S.S_TOTAL,
+			 		S.S_WDATE,
+			 		S.TEAM_CODE,
+			 		S.D_C_CODE,
+			 		S.APPROVAL
+				FROM ORDER1 O 
+				LEFT OUTER JOIN STATEMENT S ON (O.O_NO = S.O_NO)
+		 		) T
+		 	JOIN CLIENT C ON (T.C_NO = C.C_NO)
+		 	ORDER BY T.O_NO DESC
+	 	) J
+ 	) 	
+	WHERE RN BETWEEN #{startRow} AND #{endRow}
+ </select>
+ 
+ 
+ <select id="getSearchStList" parameterType="com.kh.oup.statement.vo.SearchPageVo" resultType="com.kh.oup.statement.vo.StatementVo">
+ 	SELECT * FROM
+ 	(
+ 		SELECT ROWNUM RN, J.* 
+ 		FROM
+	 	(
+		 	SELECT 
+		 		T.*,
+		 		C.C_NAME,
+		 		C.B_NO,
+		 		C.C_OWNER,
+		 		C.C_ADDR,
+		 		C.C_PHONE,
+		 		C.C_FAX,
+		 		C.C_EMAIL
+		 	FROM (
+			 	SELECT 
+			 		O.O_NO, 
+			 		O.C_NO, 
+			 		O.PROJECT_NO, 
+			 		O.O_DATE, 
+			 		O.O_CONDITION, 
+			 		O.VAT_YN,
+			 		S.S_NO,
+			 		S.MANAGER,
+			 		S.S_TOTAL,
+			 		S.S_WDATE,
+			 		S.TEAM_CODE,
+			 		S.D_C_CODE,
+			 		S.APPROVAL
+				FROM ORDER1 O 
+				LEFT OUTER JOIN STATEMENT S ON (O.O_NO = S.O_NO)
+		 		) T
+		 	JOIN CLIENT C ON (T.C_NO = C.C_NO)
+		 	WHERE 1=1
+		 	<if test="category == 'T.S_NO' and search != null and search != '' ">
+		 		AND ${category} = #{search} 
+		 	</if>
+		 	<if test="category == 'T.C_NO' and search != null and search != '' ">
+		 		AND ${category} = #{search} 
+		 	</if>
+		 	<if test="category == 'T.O_NO' and search != null and search != '' ">
+		 		AND ${category} = #{search}
+		 	</if>
+		 	
+		 	<if test="category == 'C.C_NAME' and search != null and search != '' ">
+		 		AND C.C_NAME LIKE '%${search}%'
+		 	</if>
+		 	
+		 	<if test="date1 != null and date2 != null">
+		 		AND T.O_DATE BETWEEN #{date1} AND #{date2}
+		 	</if>
+		 	<if test="date1 != null and date2 == null">
+		 		AND T.O_DATE <![CDATA[>]]> #{date1}
+		 	</if>
+		 	<if test="date1 == null and date2 != null">
+		 		AND T.O_DATE <![CDATA[<]]> #{date2}
+		 	</if>
+		 	ORDER BY T.O_NO DESC
+	 	) J
+ 	) 	
+	WHERE RN BETWEEN #{startRow} AND #{endRow}
+ </select>
+ 
  
 </mapper>

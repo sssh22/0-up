@@ -2,6 +2,8 @@ package com.kh.oup.statement.vo;
 
 import java.util.Date;
 
+import org.springframework.format.annotation.DateTimeFormat;
+
 import lombok.Data;
 @Data
 public class StProductsVo {
@@ -12,6 +14,8 @@ public class StProductsVo {
 	int pNo;				//품목코드
 	int oNum;				//품목 수량
 	int oPrice;				//품목 가격
+	
+	@DateTimeFormat(pattern = "yyyy-MM-dd")
 	Date oDeliberyDate;		//납품 일자
 
 }
