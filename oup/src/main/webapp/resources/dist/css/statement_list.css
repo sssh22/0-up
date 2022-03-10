@@ -11,6 +11,9 @@ body{
     background-color: #ebe7f1;
 }
 
+#btb>tr{
+	  height:20px !important;
+}
 #btb th{
     background-color: #d7d0e3;
     text-align: center;
@@ -18,11 +21,12 @@ body{
 
 #btb td{
     background-color: white !important;
+  
     text-align: right;
 }
 .atb1{width: 30%;}
-.atb1 td:nth-child(1){width: 15%;}
-.atb1 td:nth-child(3){width: 10%;}
+.atb1 td:nth-child(1){width: 35%;}
+.atb1 td:nth-child(3){width: 7%;}
 
 
 .atb2{width: 30%;}
@@ -54,8 +58,25 @@ input, select{
 	border-radius: 3px;
 }
 #btn1:hover{
+	background-color: red;
+	color: white;
+	border: 0;
+	border-radius: 3px;
+}
+
+#btn2{
+	background-color: #d7d0e3;
+	border: 0;
+	border-radius: 3px;
+}
+#btn2:hover{
 	background-color: #8977ad;
 	color: white;
 	border: 0;
 	border-radius: 3px;
 }
+
+
+
+
+

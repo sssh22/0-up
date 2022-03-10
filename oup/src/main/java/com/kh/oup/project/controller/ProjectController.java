@@ -101,10 +101,12 @@ public class ProjectController {
 	@GetMapping(value = {"/project_list/{page}","/project_list"})
 	public String project_list(Model model, @PathVariable(required=false) String page, HttpServletRequest req) throws Exception {
 		
+		System.out.println("called.............");
+		
 		String search = req.getParameter("search");
 		
-		
-		if(page == null || Integer.parseInt(page) <= 0) {
+		System.out.println("page ::: " + page + "<<<");
+		if(page == null || page == "" || Integer.parseInt(page) <= 0) {
 			page="1"; 
 			}
 		

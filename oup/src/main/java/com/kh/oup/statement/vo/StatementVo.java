@@ -2,33 +2,42 @@ package com.kh.oup.statement.vo;
 
 import java.util.Date;
 
+import org.springframework.format.annotation.DateTimeFormat;
+
 import lombok.Data;
 @Data
 public class StatementVo {
 	
 	
 	//ORDER -----------------------------------
-	int oNo;				//NUMBER
-	int cNo;			
-	int projectNo;		
-	int warehouse_no;		
+	int oNo;				//주문서번호
+	int cNo;				//거래처 코드
+	int projectNo;
+	
+	@DateTimeFormat(pattern = "yyyy-MM-dd")
 	Date oDate;		
-	Date creditDate;		
+	
 	String oCondition;		
 	String vatYn;		
+	//Date creditDate;		
+	//int warehouseNo;		
 	//String TEAM_CODE;		
 	
 	
 	//STATEMENT ---------------------------------------
-	//int O_NO; 			// 주문서 번호
 	int sNo;				//거래명세서 번호
 	int manager;			// 담당자 (사원번호)
 	int sTotal;				//총합
-	Date sValidity; 		//유효기간
+	
+	@DateTimeFormat(pattern = "yyyy-MM-dd")
 	Date sWdate; 			//작성날짜
+	
 	String teamCode;		// 팀코드
 	String dCCode;			//문서종류코드---------ST!!!!!
 	String approval;		//결재상태
+	
+	//int O_NO; 			//주문서 번호
+	//Date sValidity; 		//유효기간
 	//int C_NO; 			// 거래처 번호 -----client
 	//int PROJECT_NO;		// 프로젝트 번호
 

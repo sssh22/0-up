@@ -18,6 +18,7 @@
 
 <!-- ssh CSS -->
  <link rel="stylesheet" href="${path}/resources/dist/css/statement_list.css">
+ 
 
 
 </head>
@@ -49,28 +50,31 @@
       <!-- Default box -->
       <div class="card" id="cardss">
 
-
+		<form action="" >
         <table class="atb1">
           <tr>
-            <td>날짜 : </td>
-            <td><input type="date"></td>
+            <td> 주문 날짜 : </td>
+            <td><input type="date" name="date1" id="sdate" value="" onchange="setmin();"></td>
             <td> &nbsp; ~ &nbsp; </td>
-            <td><input type="date"></td>
+            <td><input type="date" name="date2" id="edate" value="" min="2022-02-03"></td>
           </tr>
         </table>
+        
+        
         <table class="atb2">
           <tr>
             <td>
               <select name="category" id="cate">
-                <option value="거래처명">거래처명</option>
-                <option value="거래처코드">거래처코드</option>
-                <option value="일련번호">주문서번호</option>
+                <option value="T.S_NO">명세서번호</option>
+                <option value="T.C_NO">거래처코드</option>
+                <option value="T.O_NO">주문서번호</option>
               </select>
             </td>
-            <td><input type="text"></td>
+            <td><input type="number" name="search"></td>
             <td><input type="submit" value="검색"></td>
           </tr>
         </table>
+        </form>
         <br>
 
 
@@ -87,58 +91,83 @@
                 <th>사업자번호</th>
                 <th>SKU</th>
                 <th>공급가액</th>
-                <th>세액</th>
+                <th>VAT</th>
                 <th>합계금액</th><!--c set 계산  -->
-                <th>수정</th>
+                <th>삭제</th>
               </tr>
             </thead>
             <tbody>
+            <c:forEach items="${slist}" var="s">
               <tr>
                 <td><input type="checkbox"></td>
-                <td>0</td>
-                <td>0</td>
-                <td>0</td>
-                <td>0</td>
-                <td>0</td>
-                <td>0</td>
-                <td>0</td>
-                <td>0</td>
-                <td>0</td>
-                <td><button id="btn1">수정</button></td>
+                <td>${s.ONo}</td>
+                <c:if test="${s.SNo eq 0 || s.SNo eq null}">
+                <td>미발급 <button id="btn2">발급</button></td>
+                </c:if>
+                <c:if test="${s.SNo ne 0 && s.SNo ne null}">
+                <td><a href="${path}/statement/statement_detail/${s.SNo}">
+               		 ${s.SNo}</a>
+                </td>
+                </c:if>
+                <td>${s.CNo}</td>
+                <td>${s.CName}</td>
+                <td>${s.BNo}</td>
+                <td>${s.sku}</td>
+                
+                <c:if test="${s.vatYn eq 'Y'}">
+                <td>${s.STotal}</td> 
+                <td>VAT포함</td>
+                </c:if>
+                <c:if test="${s.vatYn ne 'Y'}">
+                <td>${s.STotal}</td> 
+                <td>VAT미포함</td>
+                </c:if>
+                
+                
+                <td>${s.vatYn}</td> <!-- cif -->
+                
+                
+                
+                <td>${s.STotal}</td><!--c set 계산  -->
+                <td><button id="btn1">삭제</button></td>
               </tr>
+             </c:forEach>
             </tbody>
           </table>
         </div><!-- table -->
        
         	<br>
-	<%-- 	<div class="row">
+	<div class="row">
 
           <div class="btn-group me-2" role="group" aria-label="First group" style="margin-left: 40%;">
             	
             		<c:if test="${empty search}">
             			<c:if test="${page.startPage == 1}">  
-            			<button type="button" class="btn btn-secondary" onclick="location.href='${path}/project/project_list/1'">Prev</button>
+            			<button type="button" class="btn btn-secondary" onclick="location.href='${path}/statement/statement_list/1'">Prev</button>
             			</c:if>
             			<c:if test="${page.startPage gt 1}">  
-            			<button type="button" class="btn btn-secondary" onclick="location.href='${path}/project/project_list/${page.startPage - 1}'">Prev</button>
+            			<button type="button" class="btn btn-secondary" onclick="location.href='${path}/statement/statement_list/${page.startPage - 1}'">Prev</button>
             			</c:if>   
-            		
-            		
+			            
 			            <c:forEach var="i" begin="${page.startPage}" end="${page.endPage}">
 					        <c:if test="${page.currentPage != i and i <= page.lastPage}">                  
-					        	<button type="button" class="btn btn-secondary" onclick="location.href='${path}/project/project_list/${i}'">${i}</button>
+					        	<button type="button" class="btn btn-secondary" onclick="location.href='${path}/statement/statement_list/${i}'">${i}</button>
 					      	</c:if>
 							<c:if test="${page.currentPage == i and i <= page.lastPage}">                  
-					        	<button type="button" class="btn btn-secondary active" onclick="location.href='${path}/project/project_list/${i}'">${i}</button>
+					        	<button type="button" class="btn btn-secondary active" onclick="location.href='${path}/statement/statement_list/${i}'">${i}</button>
 					        </c:if>
 						</c:forEach>
+			           
 			            <c:if test="${page.endPage < page.lastPage}">
-							<button type="button" class="btn btn-secondary" onclick="location.href='${path}/project/project_list/${page.endPage + 1}'">Next</button>
+							<button type="button" class="btn btn-secondary" onclick="location.href='${path}/statement/statement_list/${page.endPage + 1}'">Next</button>
 						</c:if>
 						<c:if test="${page.endPage >= page.lastPage}">
-							<button type="button" class="btn btn-secondary" onclick="location.href='${path}/project/project_list/${page.lastPage}'">Next</button>
+							<button type="button" class="btn btn-secondary" onclick="location.href='${path}/statement/statement_list/${page.lastPage}'">Next</button>
 						</c:if>
             		</c:if>
+            		
+            		
+            		<!-- 검색 수정 ================ -->
             		
             		<c:if test="${not empty search}">
 	                	<c:if test="${page.startPage == 1}">  
@@ -147,6 +176,7 @@
             			<c:if test="${page.startPage gt 1}">  
             			<button type="button" class="btn btn-secondary" onclick="location.href='${path}/project/project_list/${page.startPage - 1}?search=${search}'">Prev</button>
             			</c:if>  
+			           
 			            <c:forEach var="i" begin="${page.startPage}" end="${page.endPage}">
 					        <c:if test="${page.currentPage != i and i <= page.lastPage}">                  
 					        	<button type="button" class="btn btn-secondary" onclick="location.href='${path}/project/project_list/${i}?search=${search}'">${i}</button>
@@ -155,6 +185,7 @@
 					        	<button type="button" class="btn btn-secondary active" onclick="location.href='${path}/project/project_list/${i}?search=${search}'">${i}</button>
 					        </c:if>
 						</c:forEach>
+			            
 			            <c:if test="${page.endPage < page.lastPage}">
 							<button type="button" class="btn btn-secondary" onclick="location.href='${path}/project/project_list/${page.endPage + 1}?search=${search}'">Next</button>
 						</c:if>
@@ -163,7 +194,7 @@
 						</c:if>
             		</c:if>
                 </div><!--pager  -->
-		</div> --%>
+		</div>
 		<!-- /row -->
         
         
@@ -174,17 +205,31 @@
   <!-- /.content-wrapper -->
 
 
+ <script>
+
+   function setmin(){
+	   console.log($("#sdate").val());
+	   $('#edate').attr("min",$("#sdate").val());
+   }
+
+</script>
+
+
 
  <%@ include file="/WEB-INF/views/common/footer.jsp" %>
 </div>
 <!-- ./wrapper -->
 
-<!-- jQuery -->
+ 
+ <!-- jQuery -->
 <script src="${path}/resources/plugins/jquery/jquery.min.js"></script>
+<!-- jquery  -->
+<script src="https://ajax.googleapis.com/ajax/libs/jquery/3.6.0/jquery.min.js"></script>
 <!-- Bootstrap 4 -->
 <script src="${path}/resources/plugins/bootstrap/js/bootstrap.bundle.min.js"></script>
 <!-- AdminLTE App -->
 <script src="${path}/resources/dist/js/adminlte.min.js"></script>
+ 
 
 
 </body>
