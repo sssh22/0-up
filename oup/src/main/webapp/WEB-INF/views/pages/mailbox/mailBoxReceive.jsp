@@ -47,9 +47,9 @@
     <section class="content">
       <div class="row">
         <div class="col-md-2">
-          <a href="${path}/mail/send" class="btn btn-primary btn-block mb-3">메일쓰기</a>
+          <a href="${path}/mail/send" class="btn btn-primary btn-block mb-3" style="background-color: #7b51c6; border-color: #7b51c6">메일쓰기</a>
 
-          <div class="card">
+          <div class="card card-purple card-outline">
             <div class="card-header">
               <h3 class="card-title">메일함</h3>
               <div class="card-tools">
@@ -63,7 +63,6 @@
                 <li class="nav-item active">
                   <a href="${path}/mail/rbox" class="nav-link">
                     <i class="fas fa-inbox"></i> 받은메일함
-                    <span class="badge bg-primary float-right">12</span>
                   </a>
                 </li>
                 <li class="nav-item">
@@ -84,7 +83,7 @@
         </div>
         <!-- /.col -->
         <div class="col-md-9">
-          <div class="card card-primary card-outline">
+          <div class="card card-purple card-outline">
             <div class="card-header">
               <h3 class="card-title">받은 메일함</h3>
 

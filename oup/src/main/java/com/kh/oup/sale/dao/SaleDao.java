@@ -38,4 +38,8 @@ public interface SaleDao {
 
 	List<SaleListVo> getSaleProductList(int saleNo) throws Exception;
 
+	long getProductUnitPrice(String pNo) throws Exception;
+
+	int saleUpdate(SaleVo saleVo) throws Exception;
+
 }

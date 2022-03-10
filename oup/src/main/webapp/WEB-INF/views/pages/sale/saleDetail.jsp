@@ -52,7 +52,7 @@
       <!-- Default box -->
       <div class="card"></div>
         <div class="card-body p-0">
-		<form action="" method="post"> <!-- cbj -->
+		<form action="${path}/sale/saleUpdate/${saleNo}" method="post"> <!-- cbj -->
           <div class="row" style="background-color: rgb(196, 194, 194); margin: 20px; padding: 6px;">
                 <div class="col-sm-1 mt-3" style="padding:5px;"><b>일자</b></div>
                 <div class="col-sm-1"></div>
@@ -137,8 +137,8 @@
             <button type="button">주문</button>
             <button onclick="addProduct()" type="button">+</button>
 	       </div>
-			<input id="index" type="hidden" value="2">
-			<input id="index2" type="hidden" value="1">
+			<input id="index" type="hidden" value="${cnt+1}">
+			<input id="index2" type="hidden" value="${cnt}">
 			<table class="table table-bordered projects">
 				<thead>
 					<tr>
@@ -156,34 +156,34 @@
 					<tr>
 						<td>
 							<div class="input-group" style="margin: 0px">
-							<input id="productNo1" name="voList[0].pNo" type="number" class="form-control"
+							<input id="productNo${status.count}" name="voList[${status.count-1}].pNo" type="number" class="form-control"
 							value="${l.PNo}" placeholder="100">
-							<button type="button" class="input-group-text" onclick="productPopup('1')"><i class="bi bi-search"></i></button>
+							<button type="button" class="input-group-text" onclick="productPopup('${status.count}')"><i class="bi bi-search"></i></button>
 							</div>
 						</td>
 						<td class="project_progress">
-							<input id="productName1" type="text"
-							class="form-control" placeholder="단단한돌">
+							<input id="productName${status.count}" type="text"
+							class="form-control" value="${l.PName}" placeholder="단단한돌">
 						</td>
 						<td>
-							<input onchange="calcResult()" id="count1" name="voList[0].sQnt" type="number" class="form-control"
-							placeholder="1000">
+							<input onchange="calcResult()" id="count${status.count}" name="voList[${status.count-1}].sQnt" type="number" class="form-control"
+							value="${l.SQnt}" placeholder="1000">
 						</td>
 						<td>
-						<input onchange="calcResult()" id="price1" type="number" class="form-control"
+						<input onchange="calcResult()" id="price${status.count}" type="number" value="${l.PUnitPrice}" class="form-control"
 							placeholder="3000원">
 						</td>
 						<td>
-						<input id="result1" name="voList[0].sPrice" class="form-control"
-							readonly="readonly" value="0">
+						<input id="result${status.count}" name="voList[${status.count-1}].sPrice" class="form-control"
+							value="${l.SPrice}" readonly="readonly" value="0">
 						</td>
 						<td>
-						<input id="buga1" type="number" class="form-control"
-							value="0">
+						<input id="buga${status.count}" type="number" class="form-control"
+							value="${l.buga}">
 						</td>
 						<td>
-						<input name="voList[0].sDeliberyDate" type="date" class="form-control"
-							placeholder="2022-04-18">
+						<input name="voList[${status.count-1}].sDeliberyDate" type="date" class="form-control"
+							value="${l.SDeliberyDate}" placeholder="2022-04-18">
 						</td>
 					</tr>
 				</c:forEach>
