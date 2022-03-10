@@ -13,7 +13,7 @@ public class OrderVo {
 	private Date oDate;			// 주문일
 	private Date creditDate; 	// 여신기한
 	private String teamCode;	// 팀코드
-	private int employeeNo;		// 거래처 대표, 담당자
+	private int employeeNo;		// 담당자
 	private String vatYn;		// 부가세 여부
 	
 	private String oDateStr;	

@@ -1,8 +1,12 @@
 package com.kh.oup.order.controller;
 
+import javax.servlet.http.HttpServletRequest;
+
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Controller;
+import org.springframework.ui.Model;
 import org.springframework.web.bind.annotation.GetMapping;
+import org.springframework.web.bind.annotation.PathVariable;
 import org.springframework.web.bind.annotation.PostMapping;
 import org.springframework.web.bind.annotation.RequestMapping;
 import org.springframework.web.bind.annotation.ResponseBody;
@@ -27,12 +31,17 @@ public class OrderController {
 	}
 
 	@PostMapping("addOrder")
-	@ResponseBody
 	public String addOrder(OrderVo vo, OrderProductVo pVo) throws Exception {
 		int result = service.insertOrder(vo, pVo);
 		if(result >0)
-			return "success";
-		return "fail";
+			return "pages/order/searchOrder";
+		return "pages/order/addOrder";
+	}
+	
+	@GetMapping(value = {"/list/{page}", "/list"})
+	public String orderList(Model model, @PathVariable(required = false)String page, HttpServletRequest httpServletRequest) throws Exception{
+		
+		return "pages/order/searchOrder";
 	}
 	
 }

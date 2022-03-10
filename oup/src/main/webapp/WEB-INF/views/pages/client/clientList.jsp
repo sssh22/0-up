@@ -184,7 +184,7 @@
 	}
 	
 	var addClientPop = function(){ 
-		var addClient = window.open("${path}/client/addList","addClient","width=570,height=420, location=yes, menubar=yes, resizable=no, status=no, toolbar=no, scrollbas=yes, fullscreen=no"); 
+		var addClient = window.open("${path}/client/addList","addClient","width=720,height=600, location=yes, menubar=yes, resizable=no, status=no, toolbar=no, scrollbas=no, fullscreen=no"); 
 	} 
 	
 	function delClient(){

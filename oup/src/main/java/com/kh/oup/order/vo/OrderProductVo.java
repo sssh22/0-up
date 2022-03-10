@@ -13,5 +13,12 @@ public class OrderProductVo {
 	private int[] oPrice;			// 품목 가격
 	private Date[] oDeliberyDate;	// 납기일자
 	
+	private int pIndex;				// 주문한 품목 종류수
 	private String[] oDeliberyDateStr;
+	
+	private int pNoStr;
+	private String pNameStr;
+	private int oNumStr;
+	private int oPriceStr;
+	private Date oDeliberyDateStrr;
 }

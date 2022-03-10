@@ -1,5 +1,6 @@
 package com.kh.oup.order.service;
 
+import java.text.ParseException;
 import java.text.SimpleDateFormat;
 import java.util.Date;
 
@@ -18,28 +19,42 @@ public class OrderServiceImpl implements OrderService{
 	private OrderDao dao;
 
 	@Override
-//	@Transactional(rollbackFor = Exception.class) 
-	public int insertOrder(OrderVo vo, OrderProductVo pVo) throws Exception {	// string 으로 받아온 날짜포맷을 date형으로 변경
+	@Transactional(rollbackFor = Exception.class) 
+	public int insertOrder(OrderVo vo, OrderProductVo pVo) throws Exception {	
 		int orderNoSeq = dao.selectOrderSeq();
 		vo.setONo(orderNoSeq);
 		pVo.setOrderNo(orderNoSeq);
 		
-		int pVoNo = pVo.getPNo().length;
-		Date[] delDate = new Date[pVoNo];
-
-		SimpleDateFormat transFormat = new SimpleDateFormat("yyyy-MM-dd");
-		vo.setODate(transFormat.parse(vo.getODateStr()));
-		vo.setCreditDate(transFormat.parse(vo.getCreditDateStr()));
-		
-		for(int i=0; i<pVoNo; i++) {
-			delDate[i] = transFormat.parse(pVo.getODeliberyDateStr()[i]);
-		}
-		pVo.setODeliberyDate(delDate);
+		vo.setODate(stringFormatToDate(vo.getODateStr()));
+		vo.setCreditDate(stringFormatToDate(vo.getCreditDateStr()));
 		
 		int orderResult = dao.insertOrder(vo);
-		int orderProductResult = dao.insertOrderProduct(pVo);
+		orderResult += orderProductInsert(pVo);
 
-		return orderResult + orderProductResult;
+		return orderResult;
+	}
+	
+	private Date stringFormatToDate(String date) throws ParseException {		// string 으로 받아온 날짜포맷을 date형으로 변경
+		SimpleDateFormat transFormat = new SimpleDateFormat("yyyy-MM-dd");
+		return transFormat.parse(date);
+	}
+	
+	private int orderProductInsert(OrderProductVo pVo) throws Exception {		// 배열에 들어가 있는 수만큼 insert 실행
+		int pVoNo = pVo.getPNo().length;
+		Date[] delDate = new Date[pVoNo];
+		pVo.setODeliberyDate(delDate);
+		int Insertresult = 0;
+		
+		for(int i=0; i< pVoNo; i++) {
+			pVo.setPNoStr(pVo.getPNo()[i]);
+			pVo.setPNameStr(pVo.getPName()[i]);
+			pVo.setONumStr(pVo.getONum()[i]);
+			pVo.setOPriceStr(pVo.getOPrice()[i]);
+			pVo.setODeliberyDateStrr(stringFormatToDate(pVo.getODeliberyDateStr()[i]));
+			pVo.setPIndex(i+1);
+			Insertresult += dao.insertOrderProduct(pVo);
+		}
+		return Insertresult;
 	}
 
 

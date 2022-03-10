@@ -308,15 +308,15 @@
             </a>
             <ul class="nav nav-treeview">
               <li class="nav-item">
-                <a href="./index.html" class="nav-link">
+                <a href="${path}/order/list" class="nav-link">
                   <i class="far fa-circle nav-icon"></i>
-                  <p style="color: #ebe7f1">주문서 조회</p>
+                  <p style="color: #ebe7f1">주문 조회</p>
                 </a>
               </li>
               <li class="nav-item">
                 <a href="${path}/order/addOrder" class="nav-link">
                   <i class="far fa-circle nav-icon"></i>
-                  <p style="color: #ebe7f1">주문서 입력</p>
+                  <p style="color: #ebe7f1">주문 입력</p>
                 </a>
               </li>
               <li class="nav-item">
@@ -434,6 +434,6 @@
   </aside>
  <script>
  	var addClientPop = function(){ 
-		var addClient = window.open("${path}/client/addList","addClient","width=570,height=420, location=yes, menubar=yes, resizable=no, status=no, toolbar=no, scrollbas=yes, fullscreen=no"); 
+		var addClient = window.open("${path}/client/addList","addClient","width=720,height=600, location=yes, menubar=yes, resizable=no, status=no, toolbar=no, scrollbas=no, fullscreen=no"); 
 	} 
  </script>
