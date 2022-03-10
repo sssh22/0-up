@@ -80,6 +80,7 @@
                     <input type="text" id="employeeNo" name="employeeNo" class="form-control" placeholder="담당자">
                     <button type="button" class="input-group-text" onclick="employeePopup()"><i class="bi bi-search"></i></button>
                     <input type="text" id="employeeName" class="form-control" readonly id="id">
+                    <input type="hidden" id="teamCode" class="form-control">
                   </div>
                 </div>
 

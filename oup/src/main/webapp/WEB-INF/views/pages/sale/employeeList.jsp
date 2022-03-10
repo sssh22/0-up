@@ -54,7 +54,7 @@
 	                  <tbody>
 		                  <c:forEach items="${list}" var="l">				
 		                    <tr>
-		                      <td style="color:blue; font-size: 150%"><span style="text-decoration: underline; cursor: pointer;" id="confirm_id" onclick="employeeList('${l.employeeNo}','${l.employeeName}')">${l.employeeNo}</span></td>
+		                      <td style="color:blue; font-size: 150%"><span style="text-decoration: underline; cursor: pointer;" id="confirm_id" onclick="employeeList('${l.employeeNo}','${l.employeeName}', '${l.teamCode}')">${l.employeeNo}</span></td>
 		                      <td style="font-size: 150%">${l.employeeName}</td>
 		                    </tr>
 		                  </c:forEach>
@@ -81,9 +81,10 @@
 		document.searchform.submit(search);
 	}	
 	
-	function employeeList(employeeNo,employeeName) { 
+	function employeeList(employeeNo,employeeName,teamCode) { 
 			opener.document.getElementById("employeeNo").value = employeeNo;
 			opener.document.getElementById("employeeName").value = employeeName;
+			opener.document.getElementById("teamCode").value= teamCode;
 			self.close();
 	}
 
