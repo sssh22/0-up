@@ -51,7 +51,7 @@
 	                  <option>사업자등록번호</option>
 	                  <option>비사업자</option>	<!-- 비사업자 선택 시 bNo에 999 값을 넣었음 -->
 	                </select>
-	                <input type="text" name="bNo" class="form-control col-md-3" placeholder="사업자 번호 10자리" id="bNoText">
+	                <input type="text" name="bNo" class="form-control col-md-9" placeholder="사업자 번호 10자리" id="bNoText">
 	              </div><br><br>
 	              <div class="form-group">
 	                <label>종사업장번호</label>
@@ -88,7 +88,7 @@
 	              </div>
 	              <div class="form-group">
 	                <label>여신기한 (월/일)</label><br>
-	                <select name="cCreditMonth" class="form-control col-md-3" >
+	                <select name="cCreditMonth" class="form-control col-md-4" >
 	                  <option>0</option>
 	                  <option>1</option>
 	                  <option>2</option>
@@ -103,7 +103,7 @@
 	                  <option>11</option>
 	                  <option>12</option>
 	                </select>
-	                <select name="cCreditDay" class="form-control col-md-3">
+	                <select name="cCreditDay" class="form-control col-md-4">
 	                  <option>0</option>
 	                  <option>1</option>
 	                  <option>2</option>

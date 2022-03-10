@@ -42,7 +42,7 @@
       <div class="container-fluid">
         <div class="row mb-2">
           <div class="col-sm-6">
-            <h1>주문서등록</h1>
+            <h1>주문조회</h1>
           </div>
         </div>
       </div><!-- /.container-fluid -->
@@ -54,9 +54,9 @@
       <!-- Default box -->
       <div class="card"></div>
         <div class="card-body p-0">
-			<form action="${path}/order/addOrder" method="post" name="addOrder">
-	          <div class="row" style="background-color: rgb(196, 194, 194); margin: 20px; padding: 6px;" class="well well-lg">
-	                <div class="col-sm-1 mt-3" style="padding:5px;"><b>일자</b></div>
+			<form action="${path}/order/list" method="get">
+	          <div class="row" style="background-color: rgb(204, 173, 173); margin: 20px; padding: 6px;" class="well well-lg">
+	                <div class="col-sm-1 mt-3" style="padding:5px;"><b>여신기간</b></div>
 	                <div class="col-sm-1"></div>
 	                <div class="col-sm-4">  
 	                  <div class="col">
@@ -64,7 +64,7 @@
 	                  </div>
 	                </div>
 	
-	                <div class="col-sm-1 mt-3" style="padding:5px;"><b>거래처</b></div>
+	               <div class="col-sm-1 mt-3" style="padding:5px;"><b>거래처</b></div>
 	                <div class="col-sm-1"></div>
 	                <div class="col-sm-4">                  
 	                  <div class="input-group col mt-3">
@@ -75,8 +75,7 @@
 	                  </div>
 	                </div>
 	                
-	                
-	                <div class="col-sm-1" style="padding:5px;"><b>담당자</b></div>
+	               <div class="col-sm-1" style="padding:5px;"><b>담당자</b></div>
 	                <div class="col-sm-1"></div>
 	                <div class="col-sm-4">
 	                  <div class="input-group col mb-3">
@@ -87,15 +86,18 @@
 	                  </div>
 	                </div>
 	                
-	                <div class="col-sm-1" style="padding:5px;"><b>팀코드</b></div>
+	                <div class="col-sm-1" style="padding:5px;"><b>제품명</b></div>
 	                <div class="col-sm-1"></div>
 	                <div class="col-sm-4">
 	                  <div class="input-group col mb-3">
-	                    <input type="text" class="form-control" id="teamCode" name="teamCode" value="abc" readonly>
+		                <input type="text" class="form-control" id="productNo1" placeholder="제품명">
+		                <button type="button" class="input-group-text" onclick="productPopup(1);"><i class="bi bi-search"></i></button>
+	                    <input type="text" class="form-control" name="pName" id="productName1" readonly>
+	                    <input type="hidden" id="productNo1" name="pNo">
 	                  </div>
 	                </div>
 	                
-	                <div class="col-sm-1" style="padding:5px;"><b>프로젝트</b></div>
+	               <div class="col-sm-1" style="padding:5px;"><b>프로젝트</b></div>
 		            <div class="col-sm-1"></div>
 		            <div class="col-sm-4">
 		               <div class="input-group col mb-3">
@@ -106,119 +108,67 @@
 		               </div>
 		            </div>
 	
-	                <div class="col-sm-1" style="padding:5px;"><b>출하창고</b>
+	                 <div class="col-sm-1" style="padding:5px;"><b>출하창고</b>
 	                </div><div class="col-sm-1"></div>
 	                <div class="col-sm-4">
 	                  <div class="input-group col">
 	                    <input type="text" class="form-control" placeholder="출하창고" id="wareText">
 	                    <button type="button" class="input-group-text" onclick="warehousePopup();"><i class="bi bi-search"></i></button>
 	                    <input type="text" class="form-control" id="warehouseName" readonly>
+	                    <input type="hidden" id="price1">
 	                    <input type="hidden" name="warehouseNo" id="warehouseNo">
 	                  </div>
 	                </div>
 	
-	                <div class="col-sm-1" style="padding:5px;"><b>거래유형</b></div>
-	                <div class="col-sm-1"></div>
-	                <div class="col-sm-4">
-	                  <div class="col">
-	                    <select class="form-control mb-3" onchange="selectVat();" id="vat" name="vatYn">
-	                      <option value="N">부가세미적용</option>
-	                      <option value="Y">부가세적용</option>
-	                    </select>
-	                  </div>
-	                </div>
-	
-	                <div class="col-sm-1" style="padding:5px;"><b>여신기한</b></div>
-	                <div class="col-sm-1"></div>
-	                <div class="col-sm-4">
-	                  <div class="col">
-	                    <input type="date" class="form-control mb-3" id="creditDate" name="creditDateStr" readonly>
-	                  </div>
-	                </div>
-	          </div>
-
-	          <div style="margin: 10px;">
-	            <button type="button" onclick="location.href='${path}/order/list'">찾기</button>
-	            <button type="button">거래내역보기</button>
-	            <button type="button">My품목</button>
-	            <button type="button">견적</button>
-	            <button type="button">할인</button>
-	            <button type="button">재고불러오기</button>
-	            <button type="button">생성한전표</button>
-	            <button type="button">이익계산</button>
-		        <a href="javascript:orderMinus();" style="float:right; margin-left:15px;"><i class="bi bi-dash-square"></i></a>
-		        <a href="javascript:orderPlus();" style="float:right;"><i class="bi bi-plus-square"></i></a>
+					<button type="button" class="btn-secondary input-group-text mb-2 mt-3" onclick="searchOrder();"><i class="bi bi-search" style="margin:auto;"></i></button>
 	          </div>
 	          
-	
-	          <table class="table table-bordered projects" id="orderTable">
+	          <table class="table table-bordered projects">
 	              <thead>
 	                  <tr>
-	                      <th style="width: 3%">
+	                      <th style="width: 2%">
 	                        <input type="checkbox">
 	                      </th>
-	                      <th style="width: 3%" class="text-center">
-	                        <i class="bi bi-arrow-bar-down"></i>
-	                      </th>
 	                      <th style="width: 10%" class="text-center">
-	                          품목코드
+	                          거래처코드
 	                      </th>
-	                      <th style="width: 16%" class="text-center">
-	                          품목명
+	                      <th style="width: 15%" class="text-center">
+	                          거래처명
 	                      </th>
-	                      <th style="width: 16%" class="text-center">
-	                        수량
-	                      </th>
-	                      <th style="width: 16%" class="text-center">
-	                          단가
-	                      </th>
-	                      <th style="width: 16%" class="text-center">
-	                        부가세
+	                      <th style="width: 8%" class="text-center">
+	                          담당자
 	                      </th>
 	                      <th style="width: 20%" class="text-center">
-	                        납기일자
+	                        프로젝트명
+	                      </th>
+	                      <th style="width: 10%" class="text-center">
+	                          출하창고
+	                      </th>
+	                      <th style="width: 35%" class="text-center">
+	                        일자
 	                      </th>
 	                  </tr>
 	              </thead>
-	              <tbody id="tbody">
-	                  <tr>
-	                      <td>
-	                        <input type="checkbox" class="orderCheckBox">
-	                      </td>
-	                      <td class="text-center">
-	                        <a href="#"><i class="bi bi-arrow-bar-down" ></i></a>
-	                      </td>
-	                      <td>
-	                       	<div class="input-group col">
-			                  <input type="text" class="form-control" name="pNo" id="productNo1" readonly>
-			                  <button type="button" class="input-group-text" onclick="productPopup(1);"><i class="bi bi-search"></i></button>
-			                </div>
-	                      </td>
-	                      <td class="project_progress">
-	                        <input type="text" class="form-control" name="pName" id="productName1" readonly>
-	                      </td>
-	                      <td>
-	                        <input type="text" class="form-control" name="oNum">
-	                      </td>
-	                      <td>
-	                        <input type="text" class="form-control" name="oPrice" id="price1" readonly>
-	                      </td>
-	                      <td>
-	                        <input type="text" class="form-control" name="vatText" value="0" readonly>
-	                      </td>
-	                      <td>
-	                        <input type="date" class="form-control" name="oDeliberyDateStr">
-	                      </td>
-	                  </tr>
-	
-	            </tbody>
-	          </table>
+	              <tbody>
+	              	<c:forEach items="${list}" var="l">				
+						<tr>
+							<td><input type="checkbox" class="checkbox-no" value="${l.CNo}"></td>
+							<td>${l.CNo}</td>
+							<td>${l.CName}</td>
+							<td>${l.COwner}</td>
+							<td>${l.BNo}</td>
+							<td>${l.CUmony}</td>
+							<td>${l.CAddr}</td>
+						</tr>
+					</c:forEach>
+	              </tbody>
+          	  </table>
 	
 	          <div style="margin: 10px;">
-	            <button class="btn btn-secondary btn-sm">저장</button>
-	            <button type="button" class="btn btn-secondary btn-sm">저장/전표</button>
+	            <button class="btn btn-secondary btn-sm">변경</button>
+	            <button type="button" class="btn btn-secondary btn-sm">결재신청</button>
 	            <button type="reset" class="btn btn-secondary btn-sm">다시작성</button>
-	            <button type="button" class="btn btn-secondary btn-sm">리스트</button>
+	            <button type="button" class="btn btn-secondary btn-sm">상세보기</button>
 	          </div>
 	        </form>
 	    </div>
@@ -252,68 +202,8 @@
 <script>
 	var index = 1;
 
-	function orderPlus(){
-		index +=1;
-		let table = document.getElementById('orderTable');
-		  const newRow = table.insertRow();
-		  
-		  const newCell1 = newRow.insertCell(0);
-		  const newCell2 = newRow.insertCell(1);
-		  const newCell3 = newRow.insertCell(2);
-		  const newCell4 = newRow.insertCell(3);
-		  const newCell5 = newRow.insertCell(4);
-		  const newCell6 = newRow.insertCell(5);
-		  const newCell7 = newRow.insertCell(6);
-		  const newCell8 = newRow.insertCell(7);
-
-		  newCell2.className = "text-center";
-		  newCell1.innerHTML = '<input type="checkbox" class="orderCheckBox">';
-		  newCell2.innerHTML = '<a href="#"><i class="bi bi-arrow-bar-down"></i></a>';
-		  newCell3.innerHTML = '<td>'
-             				 + 		'<div class="input-group col">'
-          					 + 			'<input type="text" class="form-control" name="pNo" id="productNo'+index+'" readonly>'
-          					 + 			'<button type="button" class="input-group-text" onclick="productPopup('+ index +');"><i class="bi bi-search"></i></button>'
-        					 + '	</div></td>';
-		  newCell4.innerHTML = '<input type="text" class="form-control" name="pName" id="productName'+index+'" readonly>';
-		  newCell5.innerHTML = '<input type="text" class="form-control" name="oNum">';
-		  newCell6.innerHTML = '<input type="text" class="form-control" name="oPrice" id="price'+index+'" readonly>';
-		  newCell7.innerHTML = '<input type="text" class="form-control" name="vatText" value="0" readonly>';
-		  newCell8.innerHTML = '<input type="date" class="form-control" name="oDeliberyDateStr">';
-	}
-	
-	function orderMinus(){
-		let table = document.getElementById('orderTable');
-		if(!(index <=1))
-			table.deleteRow(-1);
-		
-		index -= 1;
-		if(index <= 1){
-			index=1;
-		}
-	}
-
-	function selectVat(){
-		let vat = document.getElementById("vat").value;
-		var pNoArr = document.getElementsByName("pNo").length;
-		if(vat == "Y"){
-			for(let i=0; i< pNoArr; i++){
-				document.getElementsByName("vatText")[i].value = document.getElementsByName("oPrice")[i].value / 10;
-			}
-		}
-		if(vat == "N"){
-			for(let i=0; i< pNoArr; i++){
-				document.getElementsByName("vatText")[i].value=0;
-			}
-		}
-	}
-	
 	var goPopup = function(){ 
-		if(document.getElementById("orderDate").value == ""){
-			alert("주문일자를 입력해주세요");
-			return;
-		}
 		let clientText = document.getElementById("clientText").value;
-		
 		var search = window.open("${path}/client/searchClient?search="+clientText,"search","width=720,height=500, scrollbars=no, resizable=no"); 
 	} 
 	

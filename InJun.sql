@@ -8,7 +8,7 @@ DROP TABLE "CLIENT" CASCADE CONSTRAINTS;
 --DROP TABLE "DOCU_CATE" CASCADE CONSTRAINTS;
 --DROP TABLE "GROUP1" CASCADE CONSTRAINTS;
 
---DROP TABLE "ORDER1" CASCADE CONSTRAINTS;
+DROP TABLE "ORDER1" CASCADE CONSTRAINTS;
 --DROP TABLE "ORDER_LIST" CASCADE CONSTRAINTS;
 --DROP TABLE "TEAM" CASCADE CONSTRAINTS;
 --DROP TABLE "PROJECT" CASCADE CONSTRAINTS;
@@ -56,6 +56,26 @@ START WITH 1302000 INCREMENT BY 1;
 
 insert into client values ('123','123','123','123','123','123','123','123','123','123',0,'123','123','123',sysdate,'N');
 
+insert into warehouse values (11, '11', '11');
+insert into warehouse values (22, '22', '22');
+insert into warehouse values (33, '33', '33');
+
+insert into product values ( 11, '11', '11',11 ,11, 11, '11', 11 );
+insert into product values ( 22, '22', '22',22 ,22, 22, '22', 22 );
+insert into product values ( 33, '33', '33',33 ,33, 33, '33', 33 );
+
+insert into project values (1, '프로젝트1', 123, '2022-03-10', '2022-06-10', 'red', 11);
+insert into project values (2, '프로젝트2', 125, '2022-06-10', '2022-09-10', 'red', 12);
+
+commit;
+
+select * from order1;
+
+select * from order_list order by o_list_no;
+
+delete from order1;
+delete from order_list;
+
 CREATE TABLE CLIENT_LOG (
 	C_LOG_NO	NUMBER	NOT NULL,
 	C_NO	NUMBER	NULL,
@@ -91,10 +111,12 @@ CREATE TABLE ORDER1 (
 	EMPLOYEE_NO	NUMBER	NULL,
 	WAREHOUSE_NO	NUMBER	NULL,
 	O_DATE	DATE	NULL,
-	O_CONDITION	VARCHAR2(200)	NULL,
+	CREDIT_DATE DATE NULL,
 	TEAM_CODE	VARCHAR2(10)	NULL,
-	VAT_YN	CHAR(1)	NULL
+	VAT_YN	CHAR(1)	NULL,
+    O_STATEMENT VARCHAR2(100) default 'N'
 );
+
 
 
 CREATE TABLE ORDER_LIST (
@@ -106,10 +128,9 @@ CREATE TABLE ORDER_LIST (
 	O_DELIBERY_DATE	DATE	NULL
 );
 
-CREATE SEQUENCE O_NO_SEQ NOCACHE NOCYCLE
-START WITH 1502000 INCREMENT BY 1;
+drop sequence O_NO_SEQ;
 
-insert into order_list values ('order2', null, null, 4, 4, sysdate);
+CREATE SEQUENCE O_NO_SEQ NOCACHE NOCYCLE;
 
 CREATE TABLE TEAM (
 	TEAM_CODE	VARCHAR2(10)	NOT NULL,
@@ -293,8 +314,6 @@ ALTER TABLE TEAM ADD CONSTRAINT FK_DEPARTMENT_TO_TEAM_1 FOREIGN KEY (
 REFERENCES DEPARTMENT (
 	DEPART_CODE
 );
-
-
 
 -- 시퀀스
 --CREATE SEQUENCE SEQ_EMPLOYEE NOCYCLE NOCACHE;

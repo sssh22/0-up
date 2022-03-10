@@ -42,7 +42,7 @@
       <div class="container-fluid">
         <div class="row mb-2">
           <div class="col-sm-6">
-            <h1>주문서등록</h1>
+            <h1>주문변경</h1>
           </div>
         </div>
       </div><!-- /.container-fluid -->
@@ -55,7 +55,7 @@
       <div class="card"></div>
         <div class="card-body p-0">
 			<form action="${path}/order/addOrder" method="post" name="addOrder">
-	          <div class="row" style="background-color: rgb(196, 194, 194); margin: 20px; padding: 6px;" class="well well-lg">
+	          <div class="row" style="background-color: rgb(196, 194, 194); margin: 20px; padding: 6px;">
 	                <div class="col-sm-1 mt-3" style="padding:5px;"><b>일자</b></div>
 	                <div class="col-sm-1"></div>
 	                <div class="col-sm-4">  
@@ -138,7 +138,7 @@
 	          </div>
 
 	          <div style="margin: 10px;">
-	            <button type="button" onclick="location.href='${path}/order/list'">찾기</button>
+	            <button type="button">찾기</button>
 	            <button type="button">거래내역보기</button>
 	            <button type="button">My품목</button>
 	            <button type="button">견적</button>
@@ -215,7 +215,7 @@
 	          </table>
 	
 	          <div style="margin: 10px;">
-	            <button class="btn btn-secondary btn-sm">저장</button>
+	            <button class="btn btn-secondary btn-sm">변경</button>
 	            <button type="button" class="btn btn-secondary btn-sm">저장/전표</button>
 	            <button type="reset" class="btn btn-secondary btn-sm">다시작성</button>
 	            <button type="button" class="btn btn-secondary btn-sm">리스트</button>
@@ -279,6 +279,7 @@
 		  newCell6.innerHTML = '<input type="text" class="form-control" name="oPrice" id="price'+index+'" readonly>';
 		  newCell7.innerHTML = '<input type="text" class="form-control" name="vatText" value="0" readonly>';
 		  newCell8.innerHTML = '<input type="date" class="form-control" name="oDeliberyDateStr">';
+		  console.log(index);
 	}
 	
 	function orderMinus(){
@@ -290,6 +291,7 @@
 		if(index <= 1){
 			index=1;
 		}
+		console.log(index);
 	}
 
 	function selectVat(){
