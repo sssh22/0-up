@@ -35,8 +35,6 @@ public class SaleController {
 	
 	@PostMapping("/enter")
 	public String saleEnter(@ModelAttribute SaleVo saleVo, @ModelAttribute SaleListVo saleListVo) throws Exception {
-		System.out.println("saleVo ::: " + saleVo);
-		System.out.println("saleListVo ::: " + saleListVo);
 		
 //		for(int i = 0; i < saleListVo.getVoList().size(); i++) {
 //			System.out.println(saleListVo.getVoList().get(i));
@@ -72,7 +70,7 @@ public class SaleController {
 		return "pages/sale/saleList";
 	}
 	
-	@GetMapping("/saleUpdate/{saleNo}")
+	@GetMapping("/saleDetail/{saleNo}")
 	public String saleDetail(@PathVariable int saleNo, Model model) throws Exception {
 		SaleVo saleVo = service.getSale(saleNo);
 		model.addAttribute("sale", saleVo);
@@ -80,10 +78,25 @@ public class SaleController {
 		SaleListVo saleListVo = service.getSaleProductList(saleNo);
 		model.addAttribute("saleList", saleListVo.getVoList());
 		int cnt = saleListVo.getVoList().size();
-		System.out.println("controller.품목사이즈::: " + cnt);
 		model.addAttribute("cnt", cnt);
+		model.addAttribute("saleNo", saleNo);
 		
 		return "pages/sale/saleDetail";
+	}
+	
+	@PostMapping("/saleUpdate/{saleNo}")
+	public String saleUpdate(@PathVariable int saleNo, Model model, @ModelAttribute SaleVo saleVo, @ModelAttribute SaleListVo saleListVo) throws Exception {
+		
+		saleVo.setSaleNo(saleNo);
+		for(int i = 0; i < saleListVo.getVoList().size(); i++) {
+			saleListVo.getVoList().get(i).setSaleNo(saleNo);
+		}
+		
+		int result = service.saleUpdate(saleVo);
+		
+		int result2 = service.saleListUpdate(saleListVo);
+		
+		return "pages/sale/popupClose2";
 	}
 	
 }

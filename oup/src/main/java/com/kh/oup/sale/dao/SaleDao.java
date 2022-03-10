@@ -40,4 +40,6 @@ public interface SaleDao {
 
 	long getProductUnitPrice(String pNo) throws Exception;
 
+	int saleUpdate(SaleVo saleVo) throws Exception;
+
 }

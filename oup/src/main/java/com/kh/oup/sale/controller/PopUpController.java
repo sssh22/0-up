@@ -18,6 +18,9 @@ import com.kh.oup.product.service.ProductService;
 import com.kh.oup.product.vo.ProductVo;
 import com.kh.oup.project.vo.ProjectVo;
 import com.kh.oup.sale.service.PopUpService;
+import com.kh.oup.sale.service.SaleService;
+import com.kh.oup.sale.vo.SaleListVo;
+import com.kh.oup.sale.vo.SaleVo;
 import com.kh.oup.sale.vo.WarehouseVo;
 
 @Controller
@@ -30,6 +33,8 @@ public class PopUpController {
 	private PopUpService pservice;
 	@Autowired
 	private ProductService proservice;
+	@Autowired
+	private SaleService saleService;
 	
 	@GetMapping("searchClient")
 	public String searchClient(HttpServletRequest req, Model model) throws Exception {
@@ -97,7 +102,26 @@ public class PopUpController {
 			model.addAttribute("msg", "품목 등록 실패");
 			return "pages/sale/popupClose";
 		}
+	}
+	
+	@GetMapping("/print/{saleNo}")
+	public String print(@PathVariable int saleNo, Model model) throws Exception {
+		//판매정보
+		SaleVo saleVo = saleService.getSale(saleNo);
+		System.out.println("컨트롤러 세일vo ::: " + saleVo);
+		model.addAttribute("sale", saleVo);
 		
+		//판매품목정보
+		SaleListVo saleListVo = saleService.getSaleProductList(saleNo);
+		model.addAttribute("saleList", saleListVo.getVoList());
+		int cnt = saleListVo.getVoList().size();
+		model.addAttribute("cnt", cnt);
+		model.addAttribute("saleNo", saleNo);
 		
+		//거래처 정보
+		ClientVo cVo = cservice.selectClientOne(String.valueOf(saleVo.getCNo()));
+		model.addAttribute("client", cVo);
+		
+		return "pages/sale/printPopup";
 	}
 }

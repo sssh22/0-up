@@ -52,7 +52,7 @@
       <!-- Default box -->
       <div class="card"></div>
         <div class="card-body p-0">
-		<form action="" method="post"> <!-- cbj -->
+		<form action="${path}/sale/saleUpdate/${saleNo}" method="post"> <!-- cbj -->
           <div class="row" style="background-color: rgb(196, 194, 194); margin: 20px; padding: 6px;">
                 <div class="col-sm-1 mt-3" style="padding:5px;"><b>일자</b></div>
                 <div class="col-sm-1"></div>
@@ -137,8 +137,8 @@
             <button type="button">주문</button>
             <button onclick="addProduct()" type="button">+</button>
 	       </div>
-			<input id="index" type="text" value="${cnt}">
-			<input id="index2" type="text" value="${cnt-1}">
+			<input id="index" type="hidden" value="${cnt+1}">
+			<input id="index2" type="hidden" value="${cnt}">
 			<table class="table table-bordered projects">
 				<thead>
 					<tr>

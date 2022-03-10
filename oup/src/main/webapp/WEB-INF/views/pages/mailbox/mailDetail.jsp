@@ -44,9 +44,9 @@
       <div class="container-fluid">
         <div class="row">
           <div class="col-md-2">
-            <a href="${path}/mail/send" class="btn btn-primary btn-block mb-3">메일쓰기</a>
+            <a href="${path}/mail/send" class="btn btn-primary btn-block mb-3" style="background-color: #7b51c6; border-color: #7b51c6">메일쓰기</a>
 
-            <div class="card">
+            <div class="card card-purple card-outline">
               <div class="card-header">
                 <h3 class="card-title">메일함</h3>
 
@@ -81,7 +81,7 @@
           </div>
           <!-- /.col -->
         <div class="col-md-9">
-          <div class="card card-primary card-outline">
+          <div class="card card-purple card-outline">
             <div class="card-header">
               <h3 class="card-title">자세히보기</h3>
 

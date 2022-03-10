@@ -103,4 +103,9 @@ public class SaleDaoImpl implements SaleDao{
 		return ss.selectOne("sale.unitPrice", pNo);
 	}
 
+	@Override
+	public int saleUpdate(SaleVo saleVo) throws Exception {
+		return ss.update("sale.saleUpdate", saleVo);
+	}
+
 }

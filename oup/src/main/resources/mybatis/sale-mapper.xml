@@ -67,6 +67,20 @@
 		C_NO = #{cNo}
 	</update>
 	
+	<update id="saleUpdate" parameterType="saleVo">
+		UPDATE SALE
+		SET
+		C_NO = #{cNo},
+		WAREHOUSE_NO = #{wareHouseNo},  
+		EMPLOYEE_NO = #{employeeNo}, 
+		PROJECT_NO = #{projectNo},
+		SALE_SUM = #{saleSum},
+		SALE_DATE = #{saleDate},
+		S_UMONY = #{sUmony}
+		WHERE
+		SALE_NO = #{saleNo}
+	</update>
+	
 	<select id="getSaleCnt" resultType="int">
 		SELECT COUNT(SALE_NO)
 		FROM SALE

@@ -47,7 +47,7 @@
     
         <!-- /.col -->
         <div class="col-md-13">
-          <div class="card card-primary card-outline">
+          <div class="card card-purple card-outline">
             <div class="card-header">
               <h3 class="card-title">판매조회</h3>
 
@@ -139,7 +139,7 @@
                     	<td>부가세율 적용</td>	                    
                       </c:if>
                       <td>${l.wareHouseName}</td>
-                      <td><a href="">인쇄</a></td>
+                      <td><span style="text-decoration: underline; color:blue; cursor: pointer;" id="confirm_id" onclick="printPopup(${l.saleNo})">인쇄</span></td>
                     </tr>
                   </c:forEach>
                   </tbody>
@@ -284,11 +284,18 @@
 </script>
 <script type="text/javascript">
 	var salePopup = function(saleNo) {
-	var url = "${path}/sale/saleUpdate/" + saleNo;
+	var url = "${path}/sale/saleDetail/" + saleNo;
 	var windowTargetName = "sale";
 	var features = "width=1300,height=800, scrollbars=no, resizable=no";
 	var search = window.open(url, windowTargetName, features);
-}
+	}
+	
+	var printPopup = function(saleNo) {
+		var url = "${path}/popup/print/" + saleNo;
+		var windowTargetName = "print";
+		var features = "width=1160,height=800, scrollbars=no, resizable=no";
+		var search = window.open(url, windowTargetName, features);
+	}
 </script>
 </body>
 </html>

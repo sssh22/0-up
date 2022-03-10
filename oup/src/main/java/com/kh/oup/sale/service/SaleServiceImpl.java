@@ -99,11 +99,26 @@ public class SaleServiceImpl implements SaleService{
 		for(int i = 0; i < vo.getVoList().size(); i++) {
 			//품목명
 			vo.getVoList().get(i).setPName(dao.getProductName(vo.getVoList().get(i).getPNo()));
+			//단가
 			vo.getVoList().get(i).setPUnitPrice(dao.getProductUnitPrice(vo.getVoList().get(i).getPNo()));
+			//부가세
 			vo.getVoList().get(i).setBuga((long) (vo.getVoList().get(i).getSPrice() * 0.1));
+			//금액 = 공급가액 + 부가세
+			vo.getVoList().get(i).setResult((long) (vo.getVoList().get(i).getSPrice() + vo.getVoList().get(i).getBuga()));
 		}
 		
 		return vo;
+	}
+
+	@Override
+	public int saleUpdate(SaleVo saleVo) throws Exception {
+		return dao.saleUpdate(saleVo);
+	}
+
+	@Override
+	public int saleListUpdate(SaleListVo saleListVo) throws Exception {
+		// TODO Auto-generated method stub
+		return 0;
 	}
 
 }

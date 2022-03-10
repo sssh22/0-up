@@ -16,6 +16,7 @@ public class SaleListVo {
 	private String pName; //품목명
 	private long pUnitPrice; //단가
 	private long buga; //부가세
+	private long result; //금액 = 공급가액 + 부가세
 	
 	private List<SaleListVo> voList;
 }

@@ -68,7 +68,7 @@
           <div class="col-md-2">
             <a href="${path}/mail/rbox" class="btn btn-primary btn-block mb-3">받은 메일함</a>
 
-            <div class="card">
+            <div class="card card-purple card-outline">
               <div class="card-header">
                 <h3 class="card-title">메일함</h3>
 
@@ -83,7 +83,6 @@
                   <li class="nav-item active">
                     <a href="#" class="nav-link">
                       <i class="fas fa-inbox"></i> 받은메일함
-                      <span class="badge bg-primary float-right">12</span>
                     </a>
                   </li>
                   <li class="nav-item">
@@ -104,7 +103,7 @@
           </div>
           <!-- /.col -->
           <div class="col-md-9">
-            <div class="card card-primary card-outline">
+            <div class="card card-purple card-outline">
             <form action="" method="post" enctype="multipart/form-data">
               <div class="card-header">
                 <h3 class="card-title">새 메일 작성</h3>

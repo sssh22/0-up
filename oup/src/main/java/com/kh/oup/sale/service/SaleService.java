@@ -22,4 +22,8 @@ public interface SaleService {
 
 	SaleListVo getSaleProductList(int saleNo) throws Exception;
 
+	int saleUpdate(SaleVo saleVo)throws Exception;
+
+	int saleListUpdate(SaleListVo saleListVo)throws Exception;
+
 }
