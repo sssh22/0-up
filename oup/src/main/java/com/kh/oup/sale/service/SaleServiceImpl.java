@@ -96,6 +96,13 @@ public class SaleServiceImpl implements SaleService{
 		vo.setSaleNo(saleNo);
 		vo.setVoList(dao.getSaleProductList(saleNo));
 		
+		for(int i = 0; i < vo.getVoList().size(); i++) {
+			//품목명
+			vo.getVoList().get(i).setPName(dao.getProductName(vo.getVoList().get(i).getPNo()));
+			vo.getVoList().get(i).setPUnitPrice(dao.getProductUnitPrice(vo.getVoList().get(i).getPNo()));
+			vo.getVoList().get(i).setBuga((long) (vo.getVoList().get(i).getSPrice() * 0.1));
+		}
+		
 		return vo;
 	}
 

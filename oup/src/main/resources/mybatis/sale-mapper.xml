@@ -145,4 +145,10 @@
 		FROM SALE_LIST
 		WHERE SALE_NO = #{saleNo}
 	</select>
+	
+	<select id="unitPrice" resultType="long">
+		SELECT P_UNIT_PRICE
+		FROM PRODUCT
+		WHERE P_NO = #{pNo}
+	</select>
 </mapper>

@@ -9,10 +9,13 @@ import lombok.Data;
 public class SaleListVo {
 	private long saleListNo;
 	private long saleNo;
-	private int pNo;
-	private int sQnt;
-	private int sPrice;
+	private String pNo; //
+	private long sQnt; //개수
+	private long sPrice; //총액
 	private String sDeliberyDate;
+	private String pName; //품목명
+	private long pUnitPrice; //단가
+	private long buga; //부가세
 	
 	private List<SaleListVo> voList;
 }

@@ -79,6 +79,9 @@ public class SaleController {
 		
 		SaleListVo saleListVo = service.getSaleProductList(saleNo);
 		model.addAttribute("saleList", saleListVo.getVoList());
+		int cnt = saleListVo.getVoList().size();
+		System.out.println("controller.품목사이즈::: " + cnt);
+		model.addAttribute("cnt", cnt);
 		
 		return "pages/sale/saleDetail";
 	}
