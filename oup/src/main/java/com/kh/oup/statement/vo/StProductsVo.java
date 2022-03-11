@@ -15,6 +15,13 @@ public class StProductsVo {
 	int oNum;				//품목 수량
 	int oPrice;				//품목 가격
 	
+	//PRODUCT
+	String pName;			//품목명
+	String pStandard;		//규격
+	int pUnitPrice;			//단가
+	int pSupplyPrice;		//공급가액
+	String pNote;
+	
 	@DateTimeFormat(pattern = "yyyy-MM-dd")
 	Date oDeliberyDate;		//납품 일자
 

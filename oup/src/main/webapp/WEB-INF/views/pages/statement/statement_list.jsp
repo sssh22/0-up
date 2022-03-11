@@ -1,6 +1,7 @@
 <%@ page language="java" contentType="text/html; charset=UTF-8"
     pageEncoding="UTF-8"%>
 <%@ taglib prefix="c" uri="http://java.sun.com/jsp/jstl/core" %>
+<%@ taglib uri="http://java.sun.com/jsp/jstl/fmt" prefix="fmt" %>
 <c:set var="path" value="${pageContext.request.contextPath}"></c:set>
 
 <!DOCTYPE html>
@@ -102,7 +103,7 @@
                 <td><input type="checkbox"></td>
                 <td>${s.ONo}</td>
                 <c:if test="${s.SNo eq 0 || s.SNo eq null}">
-                <td>미발급 <button id="btn2">발급</button></td>
+                <td>미발급 <button id="btn2" onclick="add(${s.ONo});">발급</button></td>
                 </c:if>
                 <c:if test="${s.SNo ne 0 && s.SNo ne null}">
                 <td><a href="${path}/statement/statement_detail/${s.SNo}">
@@ -113,22 +114,18 @@
                 <td>${s.CName}</td>
                 <td>${s.BNo}</td>
                 <td>${s.sku}</td>
-                
+                <c:set var="total" value="${s.STotal*(10/11)}"></c:set>
                 <c:if test="${s.vatYn eq 'Y'}">
-                <td>${s.STotal}</td> 
+                <td><fmt:formatNumber type="number" maxFractionDigits="0" value="${s.STotal}"/></td> 
                 <td>VAT포함</td>
+                <td><fmt:formatNumber type="number" maxFractionDigits="0" value="${s.STotal}"/></td>
                 </c:if>
                 <c:if test="${s.vatYn ne 'Y'}">
-                <td>${s.STotal}</td> 
-                <td>VAT미포함</td>
+                <td><span style="color:blue;"><fmt:formatNumber type="number" maxFractionDigits="0" value="${total}"/></span></td>                 
+                <td><span style="color:red;">VAT미포함</span></td>
+                <td><span style="color:blue;"><fmt:formatNumber type="number" maxFractionDigits="0" value="${s.STotal}"/></span></td>
                 </c:if>
                 
-                
-                <td>${s.vatYn}</td> <!-- cif -->
-                
-                
-                
-                <td>${s.STotal}</td><!--c set 계산  -->
                 <td><button id="btn1">삭제</button></td>
               </tr>
              </c:forEach>
@@ -214,7 +211,12 @@
 
 </script>
 
+<script type="text/javascript">
+	function add(param){
+		window.location = '${path}/statement/statement_enroll/'+param;
+	}
 
+</script>
 
  <%@ include file="/WEB-INF/views/common/footer.jsp" %>
 </div>

@@ -53,13 +53,8 @@
       <div class="card">
         <div class="card-header">
           <h3 class="card-title">${prjVo.projectName}</h3>
-
-          <div class="card-tools">
-            <button type="button" class="btn btn-tool" data-card-widget="remove" title="Remove">
-              <i class="fas fa-times"></i>
-            </button>
-          </div>
         </div>
+        
         <div class="card-body">
           <div class="row">
             <div class="col-12 col-md-12 col-lg-8 order-2 order-md-1">
@@ -78,7 +73,7 @@
                   <div class="info-box ">
                     <div class="info-box-content">
                       <span id="box1" class="info-box-text text-center text-muted">Unpaied Amount</span>
-                      <span id="box2" class="info-box-number text-center text-muted mb-0">${prjVo.SUmoney}</span>
+                      <span id="box2" class="info-box-number text-center text-muted mb-0"><fmt:formatNumber type="number" maxFractionDigits="0" value="${prjVo.SUmoney}"/></span>
                     </div>
                   </div>
                 </div>

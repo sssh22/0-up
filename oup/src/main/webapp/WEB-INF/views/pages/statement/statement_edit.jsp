@@ -1,6 +1,7 @@
 <%@ page language="java" contentType="text/html; charset=UTF-8"
     pageEncoding="UTF-8"%>
 <%@ taglib prefix="c" uri="http://java.sun.com/jsp/jstl/core" %>
+<%@ taglib uri="http://java.sun.com/jsp/jstl/fmt" prefix="fmt" %>
 <c:set var="path" value="${pageContext.request.contextPath}"></c:set>
 
 <!DOCTYPE html>
@@ -79,62 +80,66 @@
         
         
        
-
+   <!-- 명세서 =========================  -->
    <table border="1" id="btb">
-          <tr>
+                  <tr>
             <td class="colName">일련번호</td>
-            <td colspan="9"><input type="text"></td>
+            <td colspan="9" ><input type="text" placeholder="미발급" readonly></td>
           </tr>
           <tr>
             <td class="colName">작성일자</td>
             <td rowspan="2" colspan="9" style="font-size: 50px; font-family: 궁서체;"> 거 래 명 세 서</td>
           </tr>
           <tr>
-            <td><input type="date"></td>
+            <td><input type='date' name="sWdate" id='currentDate' readonly /></td>
           </tr>
           <tr>
-            <td colspan="5" class="colName2"> 곻급 받는 자 <button id="search-client">검색</button></td>
+            <td colspan="5" class="colName2" id="wide2"> 곻급 받는 자 <button id="search-client">검색</button></td>
             <td colspan="5" class="colName3">공급자</td>
           </tr>
           <tr>
             <td class="colName">상호명</td>
-            <td colspan="2"><input type="text"></td>
+            <td colspan="2"><input type="text" name="cName" value="${stVo.CName}" readonly></td>
             <td class="colName">성명</td>
-            <td><input type="text"></td>
+            <td><input type="text" name="cOwner" value="${stVo.COwner}" readonly></td>
             <td class="colName">상호명</td>
-            <td colspan="2"><input type="text"></td>
+            <td id="wide" colspan="2">OUP</td>
             <td class="colName">성명</td>
-            <td><input type="text"></td>
+            <td><input type="text" id="emp" name="" value="" placeholder="담당자 입력" readonly><button id="search-client">검색</button></td>
           </tr>
           <tr>
             <td class="colName">등록번호</td>
-            <td colspan="4"><input type="text"></td>
+            <td colspan="4"><input type="text" name="bNo" value="${stVo.BNo}" readonly></td>
             <td class="colName">등록번호</td>
-            <td colspan="4"><input type="text"></td>
+            <td colspan="4">1234567890</td>
           </tr>
           <tr>
             <td class="colName">사업장 주소</td>
-            <td colspan="4"><input type="text"></td>
+            <td colspan="4"><input type="text" name="cAddr" value="${stVo.CAddr}" readonly></td>
             <td class="colName">사업장 주소</td>
-            <td colspan="4"><input type="text"></td>
+            <td colspan="4">서울특별시 강남구 테헤란로 1234</td>
           </tr>
           <tr>
             <td class="colName">전화번호</td>
-            <td colspan="2"><input type="text"></td>
+            <td colspan="2"><input type="text" name="cPhone" value="${stVo.CPhone}" readonly></td>
             <td class="colName">팩스</td>
-            <td><input type="text"></td>
+            <td><input type="text" name="cFax" value="${stVo.CFax}" readonly></td>
             <td class="colName">전화번호</td>
-            <td colspan="2"><input type="text"></td>
+            <td colspan="2">02-123-4567</td>
             <td class="colName">팩스</td>
-            <td><input type="text"></td>
+            <td>1588-0203</td>
           </tr>
           <tr>
             <td colspan="5" class="colName"> 거래일자 </td>
-            <td colspan="5"><input type="date"></td>
+			<fmt:formatDate var="dateFmt" pattern="yyyy-MM-dd" value="${stVo.ODate}"/>
+            <td colspan="5"><input type="date" name="oDate" value="${dateFmt}" readonly></td>
           </tr>
           <tr>
             <td colspan="5" class="colName"> 합계금액(VAT포함)</td>
-            <td colspan="5"><input type="text"></td>
+            <td colspan="5">
+            <input type="text" name="sTotal" value="${stVo.STotal}" hidden>
+            <fmt:formatNumber type="number" maxFractionDigits="0" value="${stVo.STotal}"/> 원
+            </td>
           </tr>
         </table>
 
@@ -149,137 +154,24 @@
             <th>수량</th>
             <th>단가</th>
             <th>공급가액</th>
-            <th>세액</th>
-            <th>금액</th>
+            <th>부가액</th>
             <th>비고</th>
           </tr>
+          <c:forEach items="${plist}" var="p" varStatus="status">
           <tr>
-            <td>1</td>
-            <td></td>
-            <td></td>
-            <td></td>
-            <td></td>
-            <td></td>
-            <td></td>
-            <td></td>
-            <td></td>
-            <td></td>
+            <td>${status.count}</td>
+            <td>${p.PNo}</td>
+            <td>${p.PName}</td>
+            <td>${p.PStandard}</td>
+            <td>${p.ONum}</td>
+            <td><fmt:formatNumber type="number" maxFractionDigits="0" value="${p.OPrice}"/></td>
+            <td><fmt:formatNumber type="number" maxFractionDigits="0" value="${p.PSupplyPrice}"/></td>
+            <c:set var="vat" value="${p.PSupplyPrice*(0.1)}"></c:set>
+            <td><fmt:formatNumber type="number" maxFractionDigits="0" value="${vat}"/>${vat}</td>
+            <td>${p.PNote}</td>
           </tr>
-          <tr>
-            <td>2</td>
-            <td></td>
-            <td></td>
-            <td></td>
-            <td></td>
-            <td></td>
-            <td></td>
-            <td></td>
-            <td></td>
-            <td></td>
-          </tr>
-          <tr>
-            <td>3</td>
-            <td></td>
-            <td></td>
-            <td></td>
-            <td></td>
-            <td></td>
-            <td></td>
-            <td></td>
-            <td></td>
-            <td></td>
-          </tr>
-          <tr>
-            <td>4</td>
-            <td></td>
-            <td></td>
-            <td></td>
-            <td></td>
-            <td></td>
-            <td></td>
-            <td></td>
-            <td></td>
-            <td></td>
-          </tr>
-          <tr>
-            <tr>
-              <td>4</td>
-              <td></td>
-              <td></td>
-              <td></td>
-              <td></td>
-              <td></td>
-              <td></td>
-              <td></td>
-              <td></td>
-              <td></td>
-            </tr>
-            <tr>
-              <tr>
-                <td>4</td>
-                <td></td>
-                <td></td>
-                <td></td>
-                <td></td>
-                <td></td>
-                <td></td>
-                <td></td>
-                <td></td>
-                <td></td>
-              </tr>
-              <tr>
-                <tr>
-                  <td>4</td>
-                  <td></td>
-                  <td></td>
-                  <td></td>
-                  <td></td>
-                  <td></td>
-                  <td></td>
-                  <td></td>
-                  <td></td>
-                  <td></td>
-                </tr>
-                <tr>
-                  <tr>
-                    <td>4</td>
-                    <td></td>
-                    <td></td>
-                    <td></td>
-                    <td></td>
-                    <td></td>
-                    <td></td>
-                    <td></td>
-                    <td></td>
-                    <td></td>
-                  </tr>
-                  <tr>
-                    <tr>
-                      <td>4</td>
-                      <td></td>
-                      <td></td>
-                      <td></td>
-                      <td></td>
-                      <td></td>
-                      <td></td>
-                      <td></td>
-                      <td></td>
-                      <td></td>
-                    </tr>
-                    <tr>
-                      <tr>
-                        <td>4</td>
-                        <td></td>
-                        <td></td>
-                        <td></td>
-                        <td></td>
-                        <td></td>
-                        <td></td>
-                        <td></td>
-                        <td></td>
-                        <td></td>
-                      </tr>
-                      <tr>
+          </c:forEach>
+          
             <td>비고</td>
             <td colspan="9"></td>
             
@@ -292,9 +184,11 @@
       <!-- /.card -->
       <br>
       <div id="btn2">
-        <input class="b2" type="button" value="수정">
-        <input class="b2" type="button" value="삭제">
+        <input class="b2" type="button" value="변경사항 저장">
+        <input class="b3" type="button" value="삭제">
+        <input class="b4" type="button" value="취소">
       </div>
+      <br><br>
 
       
     </div>

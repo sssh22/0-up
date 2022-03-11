@@ -15,14 +15,14 @@ public class StatementVo {
 	int projectNo;
 	
 	@DateTimeFormat(pattern = "yyyy-MM-dd")
-	Date oDate;		
+	Date oDate;				//주문일자
+	String vatYn;			//부가세
 	
-	String oCondition;		
-	String vatYn;		
-	//Date creditDate;		
+		//Date creditDate;		
 	//int warehouseNo;		
 	//String TEAM_CODE;		
 	
+	//String oCondition;	삭제됨	
 	
 	//STATEMENT ---------------------------------------
 	int sNo;				//거래명세서 번호
