@@ -120,7 +120,6 @@ public class SaleServiceImpl implements SaleService{
 		
 		int result = 0;
 		for(int i = 0; i < saleListVo.getVoList().size(); i++) {
-			System.out.println("service.saleListVo.getVoList().get("+ i + ") ::: " + saleListVo.getVoList().get(i));
 			if(saleListVo.getVoList().get(i).getSaleListNo() != 0) {
 				//saleListNo가 있다면 기존에 있던 품목
 				result = dao.saleListUpdate(saleListVo.getVoList().get(i));

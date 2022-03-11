@@ -45,7 +45,7 @@
     <section class="content">
       <div class="row">
         <div class="col-md-3">
-          <a href="compose.html" class="btn btn-primary btn-block mb-3">결재함</a>
+          <a href="compose.html" style="background-color: #7b51c6; border-color: #7b51c6" class="btn btn-primary btn-block mb-3">결재함</a>
 
           <div class="card">
             <div class="card-header">
@@ -62,7 +62,6 @@
                 <li class="nav-item active">
                   <a href="#" class="nav-link">
                     <i class="fas fa-inbox"></i> 진행중
-                    <span class="badge bg-primary float-right">12</span>
                   </a>
                 </li>
                 <li class="nav-item">
@@ -83,7 +82,7 @@
         </div>
         <!-- /.col -->
         <div class="col-md-9">
-          <div class="card card-primary card-outline">
+          <div class="card card-purple card-outline">
             <div class="card-header">
               <h3 class="card-title">진행중</h3>
 
@@ -138,7 +137,7 @@
                 <table class="table table-hover table-striped">
                   <thead>
                     <tr>
-                      <th class="mailbox-name" colspan="2"><a href="read-mail.html">기안자</a></th>
+                      <th class="mailbox-name" colspan="2">기안자</th>
                       <th class="mailbox-subject">구분</th>
                       <th class="mailbox-subject">제목</th>
                       <th class="mailbox-attachment">기안일자</th>
@@ -147,10 +146,11 @@
                   </thead>
                   <tbody>
                   <tr>
-                    <td class="mailbox-name" colspan="2"><a href="read-mail.html">홍길동</a></td>
-                    <td class="mailbox-subject" colspan="2">주문서</td>
-                    <td class="mailbox-attachment"></td>
-                    <td class="mailbox-date">5 mins ago</td>
+                    <td class="mailbox-name" colspan="2">홍길동</td>
+                    <td class="mailbox-subject">주문서</td>
+                    <td class="mailbox-subject">기안서 제목입니다잉</td>
+                    <td class="mailbox-attachment">2022-03-08</td>
+                    <td class="mailbox-date">2022-03-11</td>
                   </tr>
                   <tr>
                     <td>
@@ -422,8 +422,6 @@
 <script src="${path}/resources/plugins/bootstrap/js/bootstrap.bundle.min.js"></script>
 <!-- AdminLTE App -->
 <script src="${path}/resources/dist/js/adminlte.min.js"></script>
-<!-- AdminLTE for demo purposes -->
-<script src="${path}/resources/dist/js/demo.js"></script>
 <!-- Page specific script -->
 <script>
   $(function () {
