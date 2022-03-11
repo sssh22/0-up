@@ -104,7 +104,8 @@
 					
 			opener.document.getElementById("clientNo").value = cNo;
 			opener.document.getElementById("client").value = cName;
-			opener.document.getElementById("creditDate").value = returnDate; 
+			if(opener.document.getElementById("creditDate") != null)
+				opener.document.getElementById("creditDate").value = returnDate; 
 			window.close();
 	}
 
