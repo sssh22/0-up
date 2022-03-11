@@ -32,7 +32,6 @@
 			 		O.C_NO, 
 			 		O.PROJECT_NO, 
 			 		O.O_DATE, 
-			 		O.O_CONDITION, 
 			 		O.VAT_YN,
 			 		S.S_NO,
 			 		S.MANAGER,
@@ -73,7 +72,6 @@
 			 		O.C_NO, 
 			 		O.PROJECT_NO, 
 			 		O.O_DATE, 
-			 		O.O_CONDITION, 
 			 		O.VAT_YN,
 			 		S.S_NO,
 			 		S.MANAGER,
@@ -107,7 +105,7 @@
 		 	<if test="date1 != null and date2 == null">
 		 		AND T.O_DATE <![CDATA[>]]> #{date1}
 		 	</if>
-		 	<if test="date1 == null and date2 != null">
+		 	<if test="date1 == null and date2 != null"> 
 		 		AND T.O_DATE <![CDATA[<]]> #{date2}
 		 	</if>
 		 	ORDER BY T.O_NO DESC
@@ -116,5 +114,50 @@
 	WHERE RN BETWEEN #{startRow} AND #{endRow}
  </select>
  
+ 
+ <select id="getStProductsList" resultType="com.kh.oup.statement.vo.StProductsVo">
+ 	SELECT L.*, P.*
+ 	FROM ORDER_LIST L
+ 	JOIN PRODUCT P ON(P.P_NO = L.P_NO)
+ </select>
+ 
+ 
+ <select id="getStatement" parameterType="int" resultType="com.kh.oup.statement.vo.StatementVo">
+ 	SELECT 	
+ 		T.*,
+		C.C_NAME,
+		C.B_NO,
+ 		C.C_OWNER,
+ 		C.C_ADDR,
+ 		C.C_PHONE,
+ 		C.C_FAX,
+ 		C.C_EMAIL
+ 	FROM (
+	 	SELECT 
+	 		O.O_NO, 
+	 		O.C_NO, 
+	 		O.PROJECT_NO, 
+	 		O.O_DATE, 
+	 		O.VAT_YN,
+	 		S.S_NO,
+	 		S.MANAGER,
+	 		S.S_TOTAL,
+	 		S.S_WDATE,
+	 		S.TEAM_CODE,
+	 		S.D_C_CODE,
+	 		S.APPROVAL
+		FROM ORDER1 O 
+		LEFT OUTER JOIN STATEMENT S ON (O.O_NO = S.O_NO)
+ 		) T
+ 	JOIN CLIENT C ON (T.C_NO = C.C_NO)
+ 	WHERE T.O_NO = #{orderNo}
+ </select>
+ 
+ <select id="getStProductsListNo" parameterType="int" resultType="com.kh.oup.statement.vo.StProductsVo">
+ 	SELECT L.*, P.*
+ 	FROM ORDER_LIST L
+ 	JOIN PRODUCT P ON(P.P_NO = L.P_NO)
+ 	WHERE L.O_NO = #{orderNo}
+ </select>
  
 </mapper>

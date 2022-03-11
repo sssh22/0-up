@@ -13,7 +13,7 @@
 
 
 #atb{
-    width: 20%;
+    width: 30%;
 }
 #atb td{
     font-size: 20px;
@@ -29,8 +29,21 @@ input {
     height: 100%;
     margin: 0%;
     border: 0;
+    text-align: center;
     /* background-color: red; */
 }
+input:focus{
+	outline:0;
+}
+
+#emp{
+	width: 60% !important;
+	height: 100%;
+    margin: 0%;
+    border: 0;
+}
+
+
 #btb td,#ctb td,th{
     padding: 0%;
     margin: 0%;
@@ -58,18 +71,17 @@ input {
     border-right: 2px solid black;
 }
 
-.b1{
-    width: 50%;
-    height: 50px;
-    border: 0.2px solid black;
-}
+
 #search-client{
     float: right;
 }
 
+#search-emp{
+    float: right;
+}
 
 .colName{
-    width: 10%;
+    width: 10% !important;
     background-color: #d7d0e3 !important;
 }
 .colName2{
@@ -79,15 +91,69 @@ input {
 .colName3{
     background-color: #918e97 !important;
 }
+#wide{
+	width: 15%;
+}
+#wide2{
+	width: 50%;
+}
 
+
+
+/* 하단 버튼들 ====================================== */
 #btn2{
     text-align: center;
 }
 
+/* 발행 */
+.b1{
+    width: 400px;
+    height: 40px;
+    border: 1px solid #c3b9d6;
+    background-color: #b0a2c8;
+    margin: 3px;
+}
+.b1:hover{
+    background-color: #716094;
+    color: white;
+}
+
+/* 수정사항 저장 */
 .b2{
-    width: 500px;
+     width: 400px;
+    height: 40px;
+    border: 1px solid #c3b9d6;
+    background-color: #8065b6;
+    color: white;
+    margin: 3px;
+}
+.b2:hover{
+     background-color: #988aaa;
+     color: black;
+}
+/* 삭제 */
+.b3{
+    width: 400px;
     height: 40px;
     border: 1px solid #c3b9d6;
     background-color: #ebe7f1;
     margin: 3px;
 }
+.b3:hover{
+    background-color: #9e2942;
+    color: white;
+}
+/* 취소 */
+.b4{
+    width: 400px;
+    height: 40px;
+    border: 1px solid #c3b9d6;
+    background-color: #b0a2c8;
+    margin: 3px;
+}
+.b4:hover{
+    background-color: #987ebe;
+    color: white;
+}
+
+
