@@ -79,6 +79,7 @@
                     <input type="text" id="employeeNo" name="employeeNo" class="form-control" value="${sale.employeeNo}" placeholder="담당자">
                     <button type="button" class="input-group-text" onclick="employeePopup()"><i class="bi bi-search"></i></button>
                     <input type="text" id="employeeName" class="form-control" value="${sale.employeeName}" readonly id="id">
+                    <input type="hidden" id="teamCode" class="form-control">
                   </div>
                 </div>
 
@@ -155,6 +156,7 @@
 				<c:forEach items="${saleList}" var="l" varStatus="status">
 					<tr>
 						<td>
+							<input type="hidden" name="voList[${status.count-1}].saleListNo" value="${l.saleListNo}">
 							<div class="input-group" style="margin: 0px">
 							<input id="productNo${status.count}" name="voList[${status.count-1}].pNo" type="number" class="form-control"
 							value="${l.PNo}" placeholder="100">
@@ -163,14 +165,14 @@
 						</td>
 						<td class="project_progress">
 							<input id="productName${status.count}" type="text"
-							class="form-control" value="${l.PName}" placeholder="단단한돌">
+							class="form-control" name="voList[${status.count-1}].pName" value="${l.PName}" placeholder="단단한돌">
 						</td>
 						<td>
 							<input onchange="calcResult()" id="count${status.count}" name="voList[${status.count-1}].sQnt" type="number" class="form-control"
 							value="${l.SQnt}" placeholder="1000">
 						</td>
 						<td>
-						<input onchange="calcResult()" id="price${status.count}" type="number" value="${l.PUnitPrice}" class="form-control"
+						<input onchange="calcResult()" id="price${status.count}" name="voList[${status.count-1}].pUnitPrice" type="number" value="${l.PUnitPrice}" class="form-control"
 							placeholder="3000원">
 						</td>
 						<td>
@@ -178,7 +180,7 @@
 							value="${l.SPrice}" readonly="readonly" value="0">
 						</td>
 						<td>
-						<input id="buga${status.count}" type="number" class="form-control"
+						<input id="buga${status.count}" name="voList[${status.count-1}].buga" type="number" class="form-control"
 							value="${l.buga}">
 						</td>
 						<td>

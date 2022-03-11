@@ -42,4 +42,6 @@ public interface SaleDao {
 
 	int saleUpdate(SaleVo saleVo) throws Exception;
 
+	int saleListUpdate(SaleListVo saleListVo) throws Exception;
+
 }
