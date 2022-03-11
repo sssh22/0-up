@@ -85,7 +85,7 @@ public class SaleController {
 	}
 	
 	@PostMapping("/saleUpdate/{saleNo}")
-	public String saleUpdate(@PathVariable int saleNo, Model model, @ModelAttribute SaleVo saleVo, @ModelAttribute SaleListVo saleListVo) throws Exception {
+	public String saleUpdate(Model model, @PathVariable int saleNo, @ModelAttribute SaleVo saleVo, @ModelAttribute SaleListVo saleListVo) throws Exception {
 		
 		saleVo.setSaleNo(saleNo);
 		for(int i = 0; i < saleListVo.getVoList().size(); i++) {

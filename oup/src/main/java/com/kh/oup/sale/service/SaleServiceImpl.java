@@ -117,8 +117,20 @@ public class SaleServiceImpl implements SaleService{
 
 	@Override
 	public int saleListUpdate(SaleListVo saleListVo) throws Exception {
-		// TODO Auto-generated method stub
-		return 0;
+		
+		int result = 0;
+		for(int i = 0; i < saleListVo.getVoList().size(); i++) {
+			System.out.println("service.saleListVo.getVoList().get("+ i + ") ::: " + saleListVo.getVoList().get(i));
+			if(saleListVo.getVoList().get(i).getSaleListNo() != 0) {
+				//saleListNo가 있다면 기존에 있던 품목
+				result = dao.saleListUpdate(saleListVo.getVoList().get(i));
+			}else {
+				//saleListNo가 없다면 새로 추가된 품목
+				dao.saleListEnter(saleListVo.getVoList().get(i));
+			}
+		}
+		
+		return result;
 	}
 
 }

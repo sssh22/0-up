@@ -108,4 +108,8 @@ public class SaleDaoImpl implements SaleDao{
 		return ss.update("sale.saleUpdate", saleVo);
 	}
 
+	@Override
+	public int saleListUpdate(SaleListVo saleListVo) throws Exception {
+		return ss.update("sale.saleListUpdate", saleListVo);
+	}
 }

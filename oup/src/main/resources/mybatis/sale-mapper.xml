@@ -81,6 +81,17 @@
 		SALE_NO = #{saleNo}
 	</update>
 	
+	<update id="saleListUpdate" parameterType="saleListVo">
+		UPDATE SALE_LIST
+		SET
+		P_NO = #{pNo},
+		S_QNT = #{sQnt},
+		S_PRICE = #{sPrice},
+		S_DELIBERY_DATE = #{sDeliberyDate}
+		WHERE 
+		SALE_LIST_NO = #{saleListNo}
+	</update>
+	
 	<select id="getSaleCnt" resultType="int">
 		SELECT COUNT(SALE_NO)
 		FROM SALE
