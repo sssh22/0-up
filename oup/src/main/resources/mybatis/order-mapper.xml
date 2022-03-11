@@ -29,8 +29,22 @@
  	<insert id="insertOrderProduct" parameterType="orderProductVo">
 		 	insert into order_list(o_list_no, o_no, p_no, o_num, o_price, o_delibery_date)
  				values(
- 					'OD${orderNo}/${pIndex}', ${orderNo}, ${pNoStr}, ${oNumStr}, ${oPriceStr}, #{oDeliberyDateStrr}
+ 					o_list_seq.nextval, ${orderNo}, ${pNoStr}, ${oNumStr}, ${oPriceStr}, #{oDeliberyDateStrr}
 				)
  	</insert>
+ 
+ 	<select id="selectOrderCnt" parameterType="orderVo" resultType="int">
+ 		select count(distinct o.o_no)
+ 		from order1 o, order_list ol
+        where o.o_no = ol.o_no
+ 		<choose>
+ 			<when test="cNo !=null and cNo !=0"> and o.c_no = ${cNo}</when>
+ 			<when test="projectNo !=null and projectNo!=0"> and o.project_no = ${projectNo}</when>
+ 			<when test="warehouseNo !=null and warehouseNo!=0"> and o.warehouse_no = ${warehouseNo}</when>
+ 			<when test="employeeNo !=null and employeeNo!=0"> and o.employee_no = ${employeeNo}</when>
+ 			<when test="pNo !=null and pNo!=0"> and ol.p_no = ${pNo}</when>	
+ 			<when test="oDate !=null"> <![CDATA[ and o.o_date =< #{oDate} and #{oDate} =< o.credit_date]]></when>	<!-- oracledb에는 yyyy/mm/dd로 되어있음 -->
+ 		</choose>
+ 	</select>
  
  </mapper>

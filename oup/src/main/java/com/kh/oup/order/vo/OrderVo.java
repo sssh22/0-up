@@ -16,6 +16,7 @@ public class OrderVo {
 	private int employeeNo;		// 담당자
 	private String vatYn;		// 부가세 여부
 	
+	private int pNo;		// 품목 번호 검색용
 	private String oDateStr;	
 	private String creditDateStr; 
 }

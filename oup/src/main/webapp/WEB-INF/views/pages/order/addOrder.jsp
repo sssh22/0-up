@@ -91,7 +91,7 @@
 	                <div class="col-sm-1"></div>
 	                <div class="col-sm-4">
 	                  <div class="input-group col mb-3">
-	                    <input type="text" class="form-control" id="teamCode" name="teamCode" value="abc" readonly>
+	                    <input type="text" class="form-control" id="teamCode" name="teamCode" readonly>
 	                  </div>
 	                </div>
 	                

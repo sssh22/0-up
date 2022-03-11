@@ -4,18 +4,18 @@ import lombok.Data;
 
 @Data
 public class PageVo { 
-	private String search;	// �˻����� ����¡ �� ���
+	private String search;	// 占싯삼옙占쏙옙占쏙옙 占쏙옙占쏙옙징 占쏙옙 占쏙옙占�
 	
-	private int currentPage;	// ���� ������
-	private int cntPerPage;	// ������ �ϳ��� ������ row ����
-	private int pageBtnCnt;	// ������ ��ư � ��������
-	private int totalRow;	// ���̺��� ��ü row ����
+	private int currentPage;	// 占쏙옙占쏙옙 占쏙옙占쏙옙占쏙옙
+	private int cntPerPage;	// 占쏙옙占쏙옙占쏙옙 占싹놂옙占쏙옙 占쏙옙占쏙옙占쏙옙 row 占쏙옙占쏙옙
+	private int pageBtnCnt;	// 占쏙옙占쏙옙占쏙옙 占쏙옙튼 占쏘개 占쏙옙占쏙옙占쏙옙占쏙옙
+	private int totalRow;	// 占쏙옙占싱븝옙占쏙옙 占쏙옙체 row 占쏙옙占쏙옙
 	
-	private int startRow; // db���� ��ȸ�� rownum
-	private int endRow;	// db���� ��ȸ�� rownum
-	private int startPage;	// ����������
-	private int endPage;	// ������ ������
-	private int lastPage;	// db�� row �������� ������ �������� ������
+	private int startRow; // db占쏙옙占쏙옙 占쏙옙회占쏙옙 rownum
+	private int endRow;	// db占쏙옙占쏙옙 占쏙옙회占쏙옙 rownum
+	private int startPage;	// 占쏙옙占쏙옙占쏙옙占쏙옙占쏙옙
+	private int endPage;	// 占쏙옙占쏙옙占쏙옙 占쏙옙占쏙옙占쏙옙
+	private int lastPage;	// db占쏙옙 row 占쏙옙占쏙옙占쏙옙占쏙옙 占쏙옙占쏙옙占쏙옙 占쏙옙占쏙옙占쏙옙占쏙옙 占쏙옙占쏙옙占쏙옙
 	
 	public PageVo(String currentPage, int cntPerPage, int pageBtnCnt, int totalRow) {
 		this.currentPage = Integer.parseInt(currentPage);
@@ -53,8 +53,7 @@ public class PageVo {
 		calc(this.currentPage, cntPerPage, pageBtnCnt, totalRow);
 	}
 	
-	
-	
+
 	private void calc(int currentPage, int cntPerPage, int pageBtnCnt, int totalRow) {
 		this.setEndRow(this.getCurrentPage() * this.getCntPerPage());
 		this.setStartRow(this.getEndRow() - this.getCntPerPage() + 1 );

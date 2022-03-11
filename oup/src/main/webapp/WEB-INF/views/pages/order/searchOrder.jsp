@@ -54,13 +54,13 @@
       <!-- Default box -->
       <div class="card"></div>
         <div class="card-body p-0">
-			<form action="${path}/order/list" method="get">
+			<form action="${path}/order/list" method="post">
 	          <div class="row" style="background-color: rgb(204, 173, 173); margin: 20px; padding: 6px;" class="well well-lg">
 	                <div class="col-sm-1 mt-3" style="padding:5px;"><b>여신기간</b></div>
 	                <div class="col-sm-1"></div>
 	                <div class="col-sm-4">  
 	                  <div class="col">
-	                    <input type="date" class="form-control mb-3 mt-3" id="orderDate" name="oDateStr" required>
+	                    <input type="date" class="form-control mb-3 mt-3" id="orderDate" name="oDateStr">
 	                  </div>
 	                </div>
 	
@@ -71,7 +71,7 @@
 	                    <input type="text" class="form-control" id="clientText" placeholder="거래처">
 	                    <button type="button" class="input-group-text" onclick="goPopup()"><i class="bi bi-search"></i></button>
 	                    <input type="text" class="form-control" id="client" name="client" readonly>
-	                    <input type="hidden" id="clientNo" name="cNo">
+	                    <input type="hidden" id="clientNo" name="cNo" value="0">
 	                  </div>
 	                </div>
 	                
@@ -82,7 +82,8 @@
 	                    <input type="text" class="form-control" id="ownerText"  placeholder="담당자">
 	                    <button type="button" class="input-group-text" onclick="employeePopup();"><i class="bi bi-search"></i></button>
 	                    <input type="text" class="form-control" id="employeeName" readonly>
-	                    <input type="hidden" id="employeeNo" name="employeeNo">
+	                    <input type="hidden" id="employeeNo" name="employeeNo" value="0">
+	                    <input type="hidden" id="teamCode">
 	                  </div>
 	                </div>
 	                
@@ -90,10 +91,10 @@
 	                <div class="col-sm-1"></div>
 	                <div class="col-sm-4">
 	                  <div class="input-group col mb-3">
-		                <input type="text" class="form-control" id="productNo1" placeholder="제품명">
+		                <input type="text" class="form-control" id="productName" placeholder="제품명">
 		                <button type="button" class="input-group-text" onclick="productPopup(1);"><i class="bi bi-search"></i></button>
-	                    <input type="text" class="form-control" name="pName" id="productName1" readonly>
-	                    <input type="hidden" id="productNo1" name="pNo">
+	                    <input type="text" class="form-control" id="productName1" readonly>
+	                    <input type="hidden" id="productNo1" name="pNo" value="0">
 	                  </div>
 	                </div>
 	                
@@ -104,7 +105,7 @@
 		                  <input type="text" name="projectSearch" id="projectSearch" class="form-control" placeholder="프로젝트">
 		                   <button type="button" onclick="projectPopup()" class="input-group-text"><i class="bi bi-search"></i></button>
 		                   <input type="text" id="projectName" class="form-control" readonly>
-		                   <input type="hidden" id="projectNo" name="projectNo" class="form-control">
+		                   <input type="hidden" id="projectNo" name="projectNo" class="form-control" value="0">
 		               </div>
 		            </div>
 	
@@ -116,11 +117,11 @@
 	                    <button type="button" class="input-group-text" onclick="warehousePopup();"><i class="bi bi-search"></i></button>
 	                    <input type="text" class="form-control" id="warehouseName" readonly>
 	                    <input type="hidden" id="price1">
-	                    <input type="hidden" name="warehouseNo" id="warehouseNo">
+	                    <input type="hidden" name="warehouseNo" id="warehouseNo" value="0">
 	                  </div>
 	                </div>
 	
-					<button type="button" class="btn-secondary input-group-text mb-2 mt-3" onclick="searchOrder();"><i class="bi bi-search" style="margin:auto;"></i></button>
+					<button class="btn-secondary input-group-text mb-2 mt-3" onclick="searchOrder();"><i class="bi bi-search" style="margin:auto;"></i></button>
 	          </div>
 	          
 	          <table class="table table-bordered projects">

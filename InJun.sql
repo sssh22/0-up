@@ -9,10 +9,11 @@ DROP TABLE "CLIENT" CASCADE CONSTRAINTS;
 --DROP TABLE "GROUP1" CASCADE CONSTRAINTS;
 
 DROP TABLE "ORDER1" CASCADE CONSTRAINTS;
---DROP TABLE "ORDER_LIST" CASCADE CONSTRAINTS;
+DROP TABLE "ORDER_LIST" CASCADE CONSTRAINTS;
 --DROP TABLE "TEAM" CASCADE CONSTRAINTS;
 --DROP TABLE "PROJECT" CASCADE CONSTRAINTS;
 
+drop sequence o_list_seq;
 DROP SEQUENCE C_NO_SEQ;
 
 CREATE TABLE EMPLOYEE (
@@ -52,7 +53,7 @@ CREATE TABLE CLIENT (
 );
 
 CREATE SEQUENCE C_NO_SEQ NOCACHE NOCYCLE
-START WITH 1302000 INCREMENT BY 1;
+START WITH 1303000 INCREMENT BY 1;
 
 insert into client values ('123','123','123','123','123','123','123','123','123','123',0,'123','123','123',sysdate,'N');
 
@@ -66,6 +67,12 @@ insert into product values ( 33, '33', '33',33 ,33, 33, '33', 33 );
 
 insert into project values (1, '프로젝트1', 123, '2022-03-10', '2022-06-10', 'red', 11);
 insert into project values (2, '프로젝트2', 125, '2022-06-10', '2022-09-10', 'red', 12);
+
+insert into employee values(2, '인준', 'asd123', '인준', '22-02-22', '주소', '010-3021-1531', 'asd21@nav.s', '22-02-22', '22-02-22', '영업', 'SA', null, 'N');
+
+insert into team values ('SA','영업2팀', 1, 'AA');
+
+insert into department values ('AA', '영업부');
 
 commit;
 
@@ -120,7 +127,7 @@ CREATE TABLE ORDER1 (
 
 
 CREATE TABLE ORDER_LIST (
-	O_LIST_NO	VARCHAR(255)	NOT NULL,
+	O_LIST_NO	number	NOT NULL,
 	O_NO	NUMBER	NULL,
 	P_NO	NUMBER	NULL,
 	O_NUM	NUMBER	NULL,
@@ -128,9 +135,10 @@ CREATE TABLE ORDER_LIST (
 	O_DELIBERY_DATE	DATE	NULL
 );
 
-drop sequence O_NO_SEQ;
 
 CREATE SEQUENCE O_NO_SEQ NOCACHE NOCYCLE;
+
+CREATE SEQUENCE o_list_seq NOCACHE NOCYCLE;
 
 CREATE TABLE TEAM (
 	TEAM_CODE	VARCHAR2(10)	NOT NULL,

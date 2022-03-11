@@ -3,11 +3,14 @@ package com.kh.oup.order.service;
 import java.text.ParseException;
 import java.text.SimpleDateFormat;
 import java.util.Date;
+import java.util.List;
 
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Service;
 import org.springframework.transaction.annotation.Transactional;
 
+import com.kh.oup.client.vo.ClientVo;
+import com.kh.oup.common.PageVo;
 import com.kh.oup.order.dao.OrderDao;
 import com.kh.oup.order.vo.OrderProductVo;
 import com.kh.oup.order.vo.OrderVo;
@@ -36,7 +39,9 @@ public class OrderServiceImpl implements OrderService{
 	
 	private Date stringFormatToDate(String date) throws ParseException {		// string 으로 받아온 날짜포맷을 date형으로 변경
 		SimpleDateFormat transFormat = new SimpleDateFormat("yyyy-MM-dd");
-		return transFormat.parse(date);
+		if(date != "")
+			return transFormat.parse(date);
+		return null;
 	}
 	
 	private int orderProductInsert(OrderProductVo pVo) throws Exception {		// 배열에 들어가 있는 수만큼 insert 실행
@@ -55,6 +60,17 @@ public class OrderServiceImpl implements OrderService{
 			Insertresult += dao.insertOrderProduct(pVo);
 		}
 		return Insertresult;
+	}
+
+	@Override
+	public int getSearchOrderCnt(OrderVo vo) throws Exception {
+		vo.setODate(stringFormatToDate(vo.getODateStr()));
+		return dao.selectOrderCnt(vo);
+	}
+
+	@Override
+	public List<ClientVo> getSearchOrderList(PageVo paVo) throws Exception {
+		return dao.selectOrderList(paVo);
 	}
 
 
