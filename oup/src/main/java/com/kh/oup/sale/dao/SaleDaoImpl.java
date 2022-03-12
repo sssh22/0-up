@@ -112,4 +112,14 @@ public class SaleDaoImpl implements SaleDao{
 	public int saleListUpdate(SaleListVo saleListVo) throws Exception {
 		return ss.update("sale.saleListUpdate", saleListVo);
 	}
+
+	@Override
+	public int productCount(String pNo, long sQnt) throws Exception {
+		//맵 만들기
+		HashMap<String, Object> test = new HashMap<String, Object>();
+		test.put("pNo", pNo);
+		test.put("sQnt", sQnt);
+		
+		return ss.update("sale.productCount", test);
+	}
 }

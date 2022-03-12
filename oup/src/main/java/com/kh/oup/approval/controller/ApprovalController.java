@@ -13,14 +13,37 @@ public class ApprovalController {
 		return "pages/approval/approvalSend";
 	}
 	
-	@GetMapping("sendbox")
+	//거래명세서
+	@GetMapping("/SP")
+	public String getSPList() {
+		return "pages/approval/SPList";
+	}
+	
+	//주문서
+	@GetMapping("/OD")
+	public String getODList() {
+		return "pages/approval/ODList";
+	}
+	
+	//프로젝트
+	@GetMapping("/PJ")
+	public String getPJList() {
+		return "pages/approval/PJList";
+	}
+	
+	@GetMapping("/sendbox")
 	public String appBoxSend() {
 		return "pages/approval/approvalBoxSend";
 	}
 	
-	@GetMapping("receivebox")
+	@GetMapping("/receivebox")
 	public String appReceiveBox() {
 		return "pages/approval/approvalBoxReceive";
+	}
+	
+	@GetMapping("/complete")
+	public String completeBox() {
+		return "pages/approval/approvalComplete";
 	}
 	
 	@GetMapping("detail")

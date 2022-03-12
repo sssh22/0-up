@@ -29,12 +29,12 @@
       <div class="container-fluid">
         <div class="row mb-2">
           <div class="col-sm-6">
-            <h1>결재요청</h1>
+            <h1>보낸결재</h1>
           </div>
           <div class="col-sm-6">
             <ol class="breadcrumb float-sm-right">
               <li class="breadcrumb-item"><a href="#">Home</a></li>
-              <li class="breadcrumb-item active">진행중</li>
+              <li class="breadcrumb-item active">보낸결재</li>
             </ol>
           </div>
         </div>
@@ -44,12 +44,12 @@
     <!-- Main content -->
     <section class="content">
       <div class="row">
-        <div class="col-md-3">
-          <a href="compose.html" style="background-color: #7b51c6; border-color: #7b51c6" class="btn btn-primary btn-block mb-3">결재함</a>
+        <div class="col-md-2">
+          <a href="compose.html" style="background-color: #7b51c6; border-color: #7b51c6" class="btn btn-primary btn-block mb-3">받은결재함</a>
 
           <div class="card">
             <div class="card-header">
-              <h3 class="card-title">결재함</h3>
+              <h3 class="card-title">받은결재함</h3>
 
               <div class="card-tools">
                 <button type="button" class="btn btn-tool" data-card-widget="collapse">
@@ -60,18 +60,18 @@
             <div class="card-body p-0">
               <ul class="nav nav-pills flex-column">
                 <li class="nav-item active">
-                  <a href="#" class="nav-link">
-                    <i class="fas fa-inbox"></i> 진행중
+                  <a href="${path}/approval/receivebox" class="nav-link">
+                    <i class="fas fa-inbox"></i> 받은결재
                   </a>
                 </li>
                 <li class="nav-item">
-                  <a href="#" class="nav-link">
-                    <i class="far fa-envelope"></i> 반려
+                  <a href="${path}/approval/sendbox" class="nav-link">
+                    <i class="nav-icon fas fa-file"></i> 보낸결재
                   </a>
                 </li>
                 <li class="nav-item">
-                  <a href="#" class="nav-link">
-                    <i class="far fa-trash-alt"></i> 결재
+                  <a href="${path}/approval/complete" class="nav-link">
+                    <i class="nav-icon fas fa-edit"></i> 완료된결재
                   </a>
                 </li>
               </ul>

@@ -59,8 +59,8 @@
 	                <label>단가</label>
 	                <input type="number" name="pUnitPrice" class="form-control" placeholder="1500">
 	              </div>
-	              <!-- 공급가액 단가에서 부가세 10%를 뺀 금액 나중에 hidden으로 변경 cbj -->
-	                <input type="text" name="pSupplyPrice" class="form-control" value="0">
+	              <!-- 공급가액 단가에서 부가세 10%를 뺀 금액 -->
+	                <input type="hidden" name="pSupplyPrice" class="form-control" value="0">
 	              <div class="form-group">
 	                <label>적요</label>
 	                <input type="text" name="pNote" class="form-control" placeholder="~~~ 100개 구입">

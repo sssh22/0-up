@@ -128,6 +128,7 @@
 							<button type="button" class="btn btn-default btn-sm" onClick="location.href='${path}/mail/trash/${page.lastPage}'"><i class="fas fa-chevron-right"></i></button>
 						</c:if>
 	                </div>
+	               </div> 
                 <!-- /.float-right -->
               </div>
               <div class="table-responsive mailbox-messages">
@@ -151,7 +152,7 @@
 	                    <c:if test="${loginEmployee.employeeNo eq l.sender}">
 	                    	<td class="mailbox-subject"><a href="${path}/mail/detail/${l.mailNo}"><span style="border: 1px solid #d1d1d1; font-size: 12px">SENT</span> ${l.mailTitle}</a></td>
 	                    </c:if>
-	                    <c:if test="${loginEmployee.employeeNo eq l.recipient}">
+	                    <c:if test="${loginEmployee.employeeNo eq l.recipient and loginEmployee.employeeNo ne l.sender}">
 	                    	<td class="mailbox-subject" ><a href="${path}/mail/detail/${l.mailNo}">${l.mailTitle}</a></td>
 	                    </c:if>
 	                    <td class="mailbox-attachment"></td>

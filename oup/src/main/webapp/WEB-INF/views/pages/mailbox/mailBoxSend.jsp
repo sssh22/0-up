@@ -133,6 +133,7 @@
 							<button type="button" class="btn btn-default btn-sm" onClick="location.href='${path}/mail/sbox/${page.lastPage}'"><i class="fas fa-chevron-right"></i></button>
 						</c:if>
 	                </div>
+	               </div>
               </div>
               <div class="table-responsive mailbox-messages">
                 <table class="table table-hover table-striped">

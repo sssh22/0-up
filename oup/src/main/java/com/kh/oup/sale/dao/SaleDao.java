@@ -44,4 +44,6 @@ public interface SaleDao {
 
 	int saleListUpdate(SaleListVo saleListVo) throws Exception;
 
+	int productCount(String pNo, long sQnt) throws Exception;
+
 }

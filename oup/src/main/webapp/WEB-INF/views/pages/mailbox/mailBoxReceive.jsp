@@ -132,6 +132,7 @@
 							<button type="button" class="btn btn-default btn-sm" onClick="location.href='${path}/mail/rbox/${page.lastPage}'"><i class="fas fa-chevron-right"></i></button>
 						</c:if>
 	                </div>
+	               </div>
                 <!-- /.float-right -->
               </div>
               <div class="table-responsive mailbox-messages">

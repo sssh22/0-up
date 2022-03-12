@@ -62,7 +62,7 @@
           <!-- left column -->
           <div class="col-md-8">
             <!-- Horizontal Form -->
-            <div class="card card-info">
+            <div class="card card-purple">
               <div class="card-header">
                 <h3 class="card-title">기안서 / 지출보고서</h3>
               </div>
@@ -73,16 +73,17 @@
                   <div class="form-group row">
                     <label for="inputPassword3" class="col-sm-1 col-form-label">제목</label>
                     <div class="col-sm-8">
-                      <input type="text" class="form-control" id="inputPassword3" placeholder="제목을 입력해주세요.">
+                      <input type="text" class="form-control" id="aTitle" name="aTitle" placeholder="제목을 입력해주세요.">
                     </div>
                   </div>
                   <div class="form-group row">
                     <label for="inputPassword3" class="col-sm-1 col-form-label">문서종류</label>
                     <div class="col-sm-2">
-                      <select class="form-control">
-                        <option value="OD" selected>주문서</option>
-                        <option value="DF">견적서</option>
-                        <option value="SP">거래명세서</option>
+                      <select class="form-control" id="dCCode" name="dCCode">
+                        <option value="SP" selected>거래명세서</option>
+                        <option value="ES">견적서</option>
+                        <option value="DF">발주서</option>
+                        <option value="OD">주문서</option>
                         <option value="PJ">프로젝트</option>
                       </select>
                     </div>
@@ -90,8 +91,9 @@
                   <div class="form-group row">
                     <label for="inputPassword3" class="col-sm-1 col-form-label">결재문서</label>
                     <div class="col-sm-8">
-                    	<a href="">전표</a>
-						<input type="hidden" name="docNo" class="form-control" id="inputPassword3" placeholder="제목을 입력해주세요.">
+                    	<span style="text-decoration: underline; cursor: pointer; color: blue;" id="confirm_id" onclick="getDoc()">전표</span>
+                    	 &nbsp&nbsp <label id="docTitle"></label>
+						<input type="hidden" name="adocNo" class="form-control" id="adocNo">
                     </div>
                   </div>
                   <div class="form-group row">
@@ -106,8 +108,7 @@
                 </div>
                 <!-- /.card-body -->
                 <div class="card-footer">
-                  <button type="submit" class="btn btn-info">저장/결재</button>
-                  <button type="submit" class="btn btn-default float-right">취소</button>
+                  <button type="submit" class="btn btn-info" style="background-color: #6f42c1; border-color: #6f42c1">저장/결재</button>
                 </div>
                 <!-- /.card-footer -->
               </form>
@@ -170,84 +171,6 @@
 
 <!-- Page specific script -->
 <script>
-$(function () {
-  bsCustomFileInput.init();
-
-  //Initialize Select2 Elements
-  $('.select2').select2()
-
-  //Initialize Select2 Elements
-  $('.select2bs4').select2({
-    theme: 'bootstrap4'
-  })
-
-  //Datemask dd/mm/yyyy
-  $('#datemask').inputmask('dd/mm/yyyy', { 'placeholder': 'dd/mm/yyyy' })
-  //Datemask2 mm/dd/yyyy
-  $('#datemask2').inputmask('mm/dd/yyyy', { 'placeholder': 'mm/dd/yyyy' })
-  //Money Euro
-  $('[data-mask]').inputmask()
-
-  //Date picker
-  $('#reservationdate').datetimepicker({
-      format: 'L'
-  });
-
-  //Date and time picker
-  $('#reservationdatetime').datetimepicker({ icons: { time: 'far fa-clock' } });
-
-  //Date range picker
-  $('#reservation').daterangepicker()
-  //Date range picker with time picker
-  $('#reservationtime').daterangepicker({
-    timePicker: true,
-    timePickerIncrement: 30,
-    locale: {
-      format: 'MM/DD/YYYY hh:mm A'
-    }
-  })
-  //Date range as a button
-  $('#daterange-btn').daterangepicker(
-    {
-      ranges   : {
-        'Today'       : [moment(), moment()],
-        'Yesterday'   : [moment().subtract(1, 'days'), moment().subtract(1, 'days')],
-        'Last 7 Days' : [moment().subtract(6, 'days'), moment()],
-        'Last 30 Days': [moment().subtract(29, 'days'), moment()],
-        'This Month'  : [moment().startOf('month'), moment().endOf('month')],
-        'Last Month'  : [moment().subtract(1, 'month').startOf('month'), moment().subtract(1, 'month').endOf('month')]
-      },
-      startDate: moment().subtract(29, 'days'),
-      endDate  : moment()
-    },
-    function (start, end) {
-      $('#reportrange span').html(start.format('MMMM D, YYYY') + ' - ' + end.format('MMMM D, YYYY'))
-    }
-  )
-
-  //Timepicker
-  $('#timepicker').datetimepicker({
-    format: 'LT'
-  })
-
-  //Bootstrap Duallistbox
-  $('.duallistbox').bootstrapDualListbox()
-
-  //Colorpicker
-  $('.my-colorpicker1').colorpicker()
-  //color picker with addon
-  $('.my-colorpicker2').colorpicker()
-
-  $('.my-colorpicker2').on('colorpickerChange', function(event) {
-    $('.my-colorpicker2 .fa-square').css('color', event.color.toString());
-  })
-
-  $("input[data-bootstrap-switch]").each(function(){
-    $(this).bootstrapSwitch('state', $(this).prop('checked'));
-  })
-
-}) //원래 있던 거
-
 // BS-Stepper Init
 document.addEventListener('DOMContentLoaded', function () {
     window.stepper = new Stepper(document.querySelector('.bs-stepper'))
@@ -305,6 +228,16 @@ document.addEventListener('DOMContentLoaded', function () {
     myDropzone.removeAllFiles(true)
   }
   // DropzoneJS Demo Code End
+</script>
+<script type="text/javascript">
+	function getDoc() {
+		var docTypeEl = document.getElementById('dCCode');
+		var docType = docTypeEl.options[docTypeEl.selectedIndex].value;
+		var url = "${path}/approval/" + docType;
+		var windowTargetName = "warehouse";
+		var features = "width=720,height=500, scrollbars=no, resizable=no";
+		var search = window.open(url, windowTargetName, features);
+	}
 </script>
 </body>
 </html>
