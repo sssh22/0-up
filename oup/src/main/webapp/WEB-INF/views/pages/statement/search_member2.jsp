@@ -9,8 +9,13 @@
 <title>Insert title here</title>
 <script src="https://ajax.googleapis.com/ajax/libs/jquery/3.6.0/jquery.min.js"></script>
 <style>
+body{
+background-color: #ebe7f1;
+}
 table{
 border-collapse: collapse; 
+width: 530px;
+margin-left: 5px;
 }
 table th{
  border: 1px solid black;
@@ -29,7 +34,7 @@ table td{
 
 
 
-<form action="/oup/project/search_m">
+<form action="/oup/statement/search_m">
       부서명: 
       <select name="deptCode" id="dept_code" onchange="getTeam(this.value);">
       	<option value="">선택</option>
@@ -56,6 +61,7 @@ table td{
         <th>팀명</th>
         <th>부서명</th>
         <th>직급</th>
+        <th>팀코드</th>
       </tr>
       <c:forEach items="${elist}" var="e"> 
       <tr>
@@ -65,7 +71,7 @@ table td{
         <td id="teamName">${e.teamName}</td>
         <td id="departName">${e.departName}</td>
         <td>${e.jobPosition}</td>
-        <input id="teamCode" type="hidden" value="${e.teamCode}">
+        <td>${e.teamCode}</td>
 	  </tr>
       </c:forEach>
     </table>
@@ -78,7 +84,7 @@ function getTeam(param){
 	$("#team_code").empty();
 	
 		$.ajax({
-			url:"/oup/project/search_member.do",
+			url:"/oup/statement/search_member.do",
 			type:"POST",
 			data:{departCode : param},
 			success: function(data){
@@ -108,14 +114,12 @@ function toAdd(){
 	var empName = employeeNo.parent().parent().children().eq(2).text();
 	var teamName = employeeNo.parent().parent().children().eq(3).text();
 	var deptName = employeeNo.parent().parent().children().eq(4).text();
-	var teamCode = employeeNo.parent().parent().children().val();
+	var teamCode = employeeNo.parent().parent().children().eq(6).text();
 
-	//opener.document.getElementById("search").value= deptName +" "+ teamName +" "+empName;
-	//opener.document.getElementById("empNo").value= empNo;
-	
 	//statement
 	opener.document.getElementById("emp").value= empName;
 	opener.document.getElementById("tcode").value= teamCode;
+	opener.document.getElementById("manager").value= empNo;
 	
 	self.close();
 	

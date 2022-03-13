@@ -44,22 +44,22 @@
     </section>
 
     <!-- Main content -->
-    
-    <table id="atb">
-      <tr>
-        <td>프로젝트 번호</td>
-        <td>
-         <input type="text" name="projectNo" value="${stVo.projectNo}" readonly>
-        </td>
-      </tr>
-      <tr>
-        <td>주문서 번호</td>
-        <td>
-         <input type="text" name="oNo" value="${stVo.ONo}" readonly>
-        </td>
-      </tr>
-    </table>
-    <br>
+	<form action="/oup/statement/statement_enroll" method="post" onsubmit="return validate(this);">
+	    <table id="atb">
+	      <tr>
+	        <td>프로젝트 번호</td>
+	        <td>
+	         <input type="text" name="projectNo" value="${stVo.projectNo}" readonly>
+	        </td>
+	      </tr>
+	      <tr>
+	        <td>주문서 번호</td>
+	        <td>
+	         <input type="text" name="oNo" value="${stVo.ONo}" readonly>
+	        </td>
+	      </tr>
+	    </table>
+	    <br>
 
 
 
@@ -80,18 +80,26 @@
             <td><input type='date' name="sWdate" id='currentDate' readonly /></td>
           </tr>
           <tr>
-            <td colspan="5" class="colName2" id="wide2"> 곻급 받는 자 <button id="search-client">검색</button></td>
+            <td colspan="5" class="colName2" id="wide2"> 곻급 받는 자</td>
             <td colspan="5" class="colName3">공급자</td>
           </tr>
           <tr>
             <td class="colName">상호명</td>
-            <td colspan="2"><input type="text" name="cName" value="${stVo.CName}" readonly></td>
-            <td class="colName">성명</td>
+            <td colspan="2">
+            	<input type="text" name="cName" value="${stVo.CName}" readonly>
+            	<input type="hidden" name="cNo" value="${stVo.CNo}">
+            </td>
+            <td class="colName">대표자명</td>
             <td><input type="text" name="cOwner" value="${stVo.COwner}" readonly></td>
             <td class="colName">상호명</td>
             <td id="wide" colspan="2">OUP</td>
-            <td class="colName">성명</td>
-            <td><input type="text" id="emp" name="" value="" placeholder="담당자 입력" readonly><button id="search-client">검색</button></td>
+            <td class="colName">담당자명</td>
+            <td>
+            	<input type="text" id="emp" name="employeeName" placeholder="담당자 입력" readonly required>
+            	<input type="hidden" id="tcode" name="teamCode" required>
+            	<input type="hidden" id="manager" name="manager">
+            	<button type="button" onclick="popup();">검색</button>
+            </td>
           </tr>
           <tr>
             <td class="colName">등록번호</td>
@@ -141,6 +149,7 @@
             <th>단가</th>
             <th>공급가액</th>
             <th>부가액</th>
+            <th>금액</th>
             <th>비고</th>
           </tr>
           <c:forEach items="${plist}" var="p" varStatus="status">
@@ -150,17 +159,17 @@
             <td>${p.PName}</td>
             <td>${p.PStandard}</td>
             <td>${p.ONum}</td>
-            <td><fmt:formatNumber type="number" maxFractionDigits="0" value="${p.OPrice}"/></td>
+            <td><fmt:formatNumber type="number" maxFractionDigits="0" value="${p.PUnitPrice}"/></td>
             <td><fmt:formatNumber type="number" maxFractionDigits="0" value="${p.PSupplyPrice}"/></td>
             <c:set var="vat" value="${(p.PSupplyPrice)*(0.1)}"></c:set>
             <td><fmt:formatNumber type="number" maxFractionDigits="0" value="${vat}"/></td>
+            <td><fmt:formatNumber type="number" maxFractionDigits="0" value="${p.OPrice}"/></td>
             <td>${p.PNote}</td>
           </tr>
           </c:forEach>
-          
+          <tr>
             <td>비고</td>
             <td colspan="9"></td>
-            
           </tr>
         </table>
         
@@ -170,21 +179,49 @@
       <!-- /.card -->
       <br>
       <div id="btn2">
-        <input class="b1" type="button" value="발행">
-        <input class="b4" type="button" value="취소">
+        <input class="b1" type="submit" value="발행" >
+        <input class="b4" type="button" value="취소" onclick="golist();">
       </div>
 	<br><br>
-      
+  
+    </form>    
     </div>
   <!-- /.content-wrapper -->
   
   
   
 <script>
-  document.getElementById('currentDate').value = new Date().toISOString().substring(0, 10);;
+  document.getElementById('currentDate').value = new Date().toISOString().substring(0, 10);
+</script>
+
+<script type="text/javascript">
+
+function popup(){
+	var settings="width=560,height=470, scrollbars=yes, resizable=no";
+	popupWindow=window.open("${path}/statement/search_member","search",settings);
+}
+
+
+function golist(){
+	location.href="/oup/statement/statement_list";
+}
 </script>
 
 
+<script>
+function validate(form) {
+
+    var emp = $('#emp').val();
+
+    if(emp == null || emp == '') {
+        alert('담당자를 입력해 주세요!');
+        return false;
+    }
+    else {
+        return confirm('거래명세서를 발급하시겠습니까?');
+    }
+}
+</script>
 
 
  <%@ include file="/WEB-INF/views/common/footer.jsp" %>

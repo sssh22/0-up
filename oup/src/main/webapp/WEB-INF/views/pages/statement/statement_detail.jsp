@@ -35,7 +35,7 @@
       <div class="container-fluid">
         <div class="row mb-2">
           <div class="col-sm-6">
-            <h1 style="font-size: 40px;">거래 명세서</h1>
+            <h1 style="font-size: 40px;">거래 명세서 [보기]</h1>
           </div>
           <br><br><br>
 
@@ -49,15 +49,15 @@
     
     <table id="atb">
       <tr>
-        <td>프로젝트</td>
+        <td>프로젝트 번호</td>
         <td>
-          {프로젝트 명/ 번호}
+         <input type="text" name="projectNo" value="${stVo.projectNo}" readonly>
         </td>
       </tr>
       <tr>
-        <td>주문서</td>
+        <td>주문서 번호</td>
         <td>
-          {주문서 번호}
+         <input type="text" name="oNo" value="${stVo.ONo}" readonly>
         </td>
       </tr>
     </table>
@@ -73,28 +73,29 @@
         <table border="1" id="btb">
          <tr>
             <td class="colName">일련번호</td>
-            <td colspan="9" ><input type="text" placeholder="미발급" readonly></td>
+            <td colspan="9" ><input type="text" value="${stVo.SNo}" readonly></td>
           </tr>
           <tr>
             <td class="colName">작성일자</td>
             <td rowspan="2" colspan="9" style="font-size: 50px; font-family: 궁서체;"> 거 래 명 세 서</td>
           </tr>
           <tr>
-            <td><input type='date' name="sWdate" id='currentDate' readonly /></td>
+          	<fmt:formatDate var="wdate" pattern="yyyy-MM-dd" value="${stVo.SWdate}"/>
+            <td><input type='date' name="sWdate" value="${wdate}" readonly /></td>
           </tr>
           <tr>
-            <td colspan="5" class="colName2" id="wide2"> 곻급 받는 자 <button id="search-client">검색</button></td>
+            <td colspan="5" class="colName2" id="wide2"> 곻급 받는 자 </td>
             <td colspan="5" class="colName3">공급자</td>
           </tr>
           <tr>
             <td class="colName">상호명</td>
             <td colspan="2"><input type="text" name="cName" value="${stVo.CName}" readonly></td>
-            <td class="colName">성명</td>
+            <td class="colName">대표자명</td>
             <td><input type="text" name="cOwner" value="${stVo.COwner}" readonly></td>
             <td class="colName">상호명</td>
             <td id="wide" colspan="2">OUP</td>
-            <td class="colName">성명</td>
-            <td><input type="text" id="emp" name="" value="" placeholder="담당자 입력" readonly><button id="search-client">검색</button></td>
+            <td class="colName">담당자명</td>
+            <td><input type="text" id="emp" name="" value="${stVo.employeeName}" readonly></td>
           </tr>
           <tr>
             <td class="colName">등록번호</td>
@@ -144,6 +145,7 @@
             <th>단가</th>
             <th>공급가액</th>
             <th>부가액</th>
+            <th>금액</th>
             <th>비고</th>
           </tr>
           <c:forEach items="${plist}" var="p" varStatus="status">
@@ -153,10 +155,11 @@
             <td>${p.PName}</td>
             <td>${p.PStandard}</td>
             <td>${p.ONum}</td>
-            <td><fmt:formatNumber type="number" maxFractionDigits="0" value="${p.OPrice}"/></td>
+            <td><fmt:formatNumber type="number" maxFractionDigits="0" value="${p.PUnitPrice}"/></td>
             <td><fmt:formatNumber type="number" maxFractionDigits="0" value="${p.PSupplyPrice}"/></td>
-            <c:set var="vat" value="${p.PSupplyPrice*(0.1)}"></c:set>
-            <td><fmt:formatNumber type="number" maxFractionDigits="0" value="${vat}"/>${vat}</td>
+            <c:set var="vat" value="${(p.PSupplyPrice)*(0.1)}"></c:set>
+            <td><fmt:formatNumber type="number" maxFractionDigits="0" value="${vat}"/></td>
+            <td><fmt:formatNumber type="number" maxFractionDigits="0" value="${p.OPrice}"/></td>
             <td>${p.PNote}</td>
           </tr>
           </c:forEach>
@@ -173,15 +176,20 @@
       <!-- /.card -->
       <br>
       <div id="btn2">
-        <input class="b2" type="button" value="수정">
-        <input class="b3" type="button" value="삭제">
-        <input class="b4" type="button" value="목록으로">
+        <input class="b2" type="button" value="수정" onclick="goedit(${stVo.ONo});">
+        <input class="b3" type="button" value="삭제" onclick="deleteSt(${stVo.ONo});">
+        <input class="b4" type="button" value="목록으로" onclick="history.go(-1)">
       </div>
       <br><br>
 
       
     </div>
   <!-- /.content-wrapper -->
+<script type="text/javascript">
+ function goedit(param){
+	 location.href="${path}/statement/statement_edit/"+param;
+ }
+</script>
 
  <%@ include file="/WEB-INF/views/common/footer.jsp" %>
 

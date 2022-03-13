@@ -97,6 +97,12 @@ input:focus{
 #wide2{
 	width: 50%;
 }
+#emp::placeholder{
+	color: red;
+	font-weight: bold;
+  	font-size: 15px;
+}
+
 
 
 

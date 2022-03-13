@@ -37,16 +37,31 @@ public class StatementDaoImpl implements StatementDao{
 	public List<StProductsVo> getStProductsList() {
 		return ss.selectList("statement.getStProductsList");
 	}
-
+	//상세보기 _ 명세서
 	@Override
 	public StatementVo getStatement(int orderNo) {
 		return ss.selectOne("statement.getStatement",orderNo);
 	}
 
-	//상세보기용
+	//상세보기 _ 명세서 product list
 	@Override
 	public List<StProductsVo> getStProductsList(int orderNo) {
 		return ss.selectList("statement.getStProductsListNo",orderNo);
+	}
+
+	@Override
+	public int insertSt(StatementVo stVo) {
+		return ss.insert("statement.insertSt",stVo);
+	}
+	//명세서 수정
+	@Override
+	public int updateSt(StatementVo stVo) {
+		return ss.update("statement.updateSt",stVo);
+	}
+	//명세서 수정 - 주문정보 수정
+	@Override
+	public int updateOrder(StatementVo stVo) {
+		return ss.update("statement.updateOrder",stVo);
 	}
 
 }

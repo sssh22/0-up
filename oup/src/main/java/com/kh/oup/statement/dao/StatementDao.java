@@ -21,4 +21,10 @@ public interface StatementDao {
 
 	StatementVo getStatement(int orderNo);
 
+	int insertSt(StatementVo stVo);
+
+	int updateSt(StatementVo stVo);
+
+	int updateOrder(StatementVo stVo);
+
 }

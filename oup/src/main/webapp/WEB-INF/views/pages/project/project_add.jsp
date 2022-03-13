@@ -25,15 +25,6 @@
 </head>
 <body class="hold-transition sidebar-mini layout-fixed">
 
-<script type="text/javascript">
-
-function popup(){
-	//window.name="add";
-	var settings="width=570,height=420, scrollbars=yes, resizable=no";
-	popupWindow=window.open("${path}/project/search_member","search",settings);
-}
-
-</script>
 
 
 
@@ -162,6 +153,15 @@ function popup(){
             document.getElementById('box').removeChild(obj.parentNode);
         }
     </script>
+  
+ <script type="text/javascript">
+function popup(){
+	//window.name="add";
+	var settings="width=560,height=420, scrollbars=yes, resizable=no, left=700, top=200";
+	popupWindow=window.open("${path}/project/search_member","search",settings);
+}
+
+</script>
   
   
 

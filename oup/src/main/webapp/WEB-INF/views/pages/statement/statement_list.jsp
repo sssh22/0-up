@@ -51,7 +51,7 @@
       <!-- Default box -->
       <div class="card" id="cardss">
 
-		<form action="" >
+		<form action="${path}/statement/statement_list/1" method="get" id="search">
         <table class="atb1">
           <tr>
             <td> 주문 날짜 : </td>
@@ -94,7 +94,7 @@
                 <th>공급가액</th>
                 <th>VAT</th>
                 <th>합계금액</th><!--c set 계산  -->
-                <th>삭제</th>
+                <th></th>
               </tr>
             </thead>
             <tbody>
@@ -106,7 +106,7 @@
                 <td>미발급 <button id="btn2" onclick="add(${s.ONo});">발급</button></td>
                 </c:if>
                 <c:if test="${s.SNo ne 0 && s.SNo ne null}">
-                <td><a href="${path}/statement/statement_detail/${s.SNo}">
+                <td><a href="${path}/statement/statement_detail/${s.ONo}">
                		 ${s.SNo}</a>
                 </td>
                 </c:if>
@@ -126,7 +126,13 @@
                 <td><span style="color:blue;"><fmt:formatNumber type="number" maxFractionDigits="0" value="${s.STotal}"/></span></td>
                 </c:if>
                 
-                <td><button id="btn1">삭제</button></td>
+              	<c:if test="${s.SNo eq 0 || s.SNo eq null}">
+                <td>-</td>
+                </c:if>
+                <c:if test="${s.SNo ne 0 && s.SNo ne null}">
+                <td><button type="button" id="btn1" onclick="goedit(${s.ONo});">수정</button></td>
+                </c:if>
+              
               </tr>
              </c:forEach>
             </tbody>
@@ -166,7 +172,7 @@
             		
             		<!-- 검색 수정 ================ -->
             		
-            		<c:if test="${not empty search}">
+            		<c:if test="${not empty search || not empty date1 || not empty date2}">
 	                	<c:if test="${page.startPage == 1}">  
             			<button type="button" class="btn btn-secondary" onclick="location.href='${path}/project/project_list/1?search=${search}'">Prev</button>
             			</c:if>
@@ -216,6 +222,12 @@
 		window.location = '${path}/statement/statement_enroll/'+param;
 	}
 
+</script>
+
+<script type="text/javascript">
+ function goedit(param){
+	 location.href="${path}/statement/statement_edit/"+param;
+ }
 </script>
 
  <%@ include file="/WEB-INF/views/common/footer.jsp" %>
