@@ -26,8 +26,8 @@ public class SaleServiceImpl implements SaleService{
 		int result = dao.saleEnter(saleVo);
 		
 		for(int i = 0; i < saleListVo.getVoList().size(); i++) {
-			System.out.println("service.saleListVo.getVoList().get("+ i + ") ::: " + saleListVo.getVoList().get(i));
 			dao.saleListEnter(saleListVo.getVoList().get(i));
+			dao.productCount(saleListVo.getVoList().get(i).getPNo(), saleListVo.getVoList().get(i).getSQnt());
 		}
 
 		return result;
