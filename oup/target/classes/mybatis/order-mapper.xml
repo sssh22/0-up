@@ -43,7 +43,7 @@
  			<when test="warehouseNo !=null and warehouseNo!=0"> and o.warehouse_no = ${warehouseNo}</when>
  			<when test="employeeNo !=null and employeeNo!=0"> and o.employee_no = ${employeeNo}</when>
  			<when test="pNo !=null and pNo!=0"> and ol.p_no = ${pNo}</when>	
- 			<when test="oDate !=null"> <![CDATA[ and o.o_date =< #{oDate} and #{oDate} =< o.credit_date]]></when>	<!-- oracledb에는 yyyy/mm/dd로 되어있음 -->
+ 			<when test="oDate !=null"> <![CDATA[ and o.o_date <= #{oDate} and #{oDate} <= o.credit_date]]></when>	<!-- oracledb에는 yyyy/mm/dd로 되어있음 -->
  		</choose>
  	</select>
  
