@@ -191,11 +191,11 @@ public class ProjectController {
 		System.out.println(deptCode+"and"+teamCode);
 		
 		if(deptCode==null || teamCode==null) {
-			System.out.println(deptCode+"//"+teamCode);
+			//System.out.println(deptCode+"//"+teamCode);
 			return "redirect:search_member";
 		}else {
 			List<ProjectGroupVo> elist = service.selectEmpList(teamCode);
-			System.out.println(elist);
+			//System.out.println(elist);
 			model.addAttribute("elist",elist);
 
 			List<DeptVo> dlist = service.selectDeptList();

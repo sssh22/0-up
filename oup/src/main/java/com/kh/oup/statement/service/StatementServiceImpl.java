@@ -24,7 +24,6 @@ public class StatementServiceImpl implements StatementService {
 
 	@Override
 	public int getStCnt() {
-		
 		return dao.getStCnt();
 	}
 
@@ -46,6 +45,21 @@ public class StatementServiceImpl implements StatementService {
 	@Override
 	public List<StProductsVo> getStProductsList(int orderNo) {
 		return  dao.getStProductsList(orderNo);
+	}
+
+	@Override
+	public int insertSt(StatementVo stVo) {
+		return dao.insertSt(stVo);
+	}
+
+	@Override
+	public int updateSt(StatementVo stVo) {
+		return dao.updateSt(stVo);
+	}
+
+	@Override
+	public int updateOrder(StatementVo stVo) {
+		return dao.updateOrder(stVo);
 	}
 
 }

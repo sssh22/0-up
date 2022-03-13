@@ -48,82 +48,83 @@
     </section>
 
     <!-- Main content -->
-    
-    <table id="atb">
-      <tr>
-        <td>프로젝트</td>
-        <td>
-          <select>
-            <option>each</option>
-            <option></option>
-            <option></option>
-          </select>
-        </td>
-      </tr>
-      <tr>
-        <td>주문서</td>
-        <td>
-          <select>
-            <option></option>
-            <option></option>
-            <option></option>
-          </select>
-        </td>
-      </tr>
-    </table>
-    <br>
+   	<form action="/oup/statement/statement_edit" method="post" onsubmit="return formChk(this);">
+	    <table id="atb">
+	      <tr>
+	        <td>프로젝트 번호</td>
+	        <td>
+	         <input type="text" name="projectNo" value="${stVo.projectNo}" readonly>
+	        </td>
+	      </tr>
+	      <tr>
+	        <td>주문서 번호</td>
+	        <td>
+	         <input type="text" name="oNo" value="${stVo.ONo}" readonly>
+	        </td>
+	      </tr>
+	    </table>
+	    <br>
 
 
 
       <!-- Default box -->
       <div class="card">
         
-        
-       
-   <!-- 명세서 =========================  -->
-   <table border="1" id="btb">
-                  <tr>
+        <!-- 명세서 =========================  -->
+        <table border="1" id="btb">
+         <tr>
             <td class="colName">일련번호</td>
-            <td colspan="9" ><input type="text" placeholder="미발급" readonly></td>
+            <td colspan="9" ><input type="text"  value="${stVo.SNo}" readonly></td>
           </tr>
           <tr>
             <td class="colName">작성일자</td>
             <td rowspan="2" colspan="9" style="font-size: 50px; font-family: 궁서체;"> 거 래 명 세 서</td>
           </tr>
           <tr>
-            <td><input type='date' name="sWdate" id='currentDate' readonly /></td>
+            <td>
+            <fmt:formatDate var="wdate" pattern="yyyy-MM-dd" value="${stVo.SWdate}"/>
+            <input type="date" name="sWdate" value="${wdate}" readonly />
+            </td>
           </tr>
           <tr>
-            <td colspan="5" class="colName2" id="wide2"> 곻급 받는 자 <button id="search-client">검색</button></td>
+            <td colspan="5" class="colName2" id="wide2"> 곻급 받는 자 <input type="button" value="검색" onclick="serchClient();" style="float: right; width:50px;"></td>
             <td colspan="5" class="colName3">공급자</td>
           </tr>
           <tr>
             <td class="colName">상호명</td>
-            <td colspan="2"><input type="text" name="cName" value="${stVo.CName}" readonly></td>
-            <td class="colName">성명</td>
-            <td><input type="text" name="cOwner" value="${stVo.COwner}" readonly></td>
+            <td colspan="2" style="background-color:yellow !important;">
+	            <input type="text" id="cName" name="cName" value="${stVo.CName}" readonly style="background-color:yellow;">
+	            <input type="hidden" id="cNo" name="cNo" value="${stVo.CNo}">
+            </td>
+            <td class="colName">대표자명</td>
+            <td style="background-color:yellow !important;"><input type="text" id="cOwner" name="cOwner" value="${stVo.COwner}" readonly style="background-color:yellow;"></td>
             <td class="colName">상호명</td>
             <td id="wide" colspan="2">OUP</td>
-            <td class="colName">성명</td>
-            <td><input type="text" id="emp" name="" value="" placeholder="담당자 입력" readonly><button id="search-client">검색</button></td>
+            <td class="colName">담당자명</td>
+            <td style="background-color:yellow !important;">
+            	<input type="text" id="emp" name="employeeName" value="${stVo.employeeName}" placeholder="담당자 입력" readonly required style="background-color:yellow !important;">
+            	<input type="hidden" id="tcode" name="teamCode" value="${stVo.teamCode}">
+            	<input type="hidden" id="manager" name="manager" value="${stVo.manager}">
+            	<input type="button" onclick="popup();" value="검색" style="float: right; width:50px; border: 1px solid black;">
+            </td>
           </tr>
           <tr>
             <td class="colName">등록번호</td>
-            <td colspan="4"><input type="text" name="bNo" value="${stVo.BNo}" readonly></td>
+            <td colspan="4" style="background-color:yellow !important;"><input type="text" id="bNo" name="bNo" value="${stVo.BNo}" readonly style="background-color:yellow;"></td>
             <td class="colName">등록번호</td>
             <td colspan="4">1234567890</td>
           </tr>
           <tr>
             <td class="colName">사업장 주소</td>
-            <td colspan="4"><input type="text" name="cAddr" value="${stVo.CAddr}" readonly></td>
+            <td colspan="4" style="background-color:yellow !important;"><input type="text" id="cAddr" name="cAddr" value="${stVo.CAddr}" readonly style="background-color:yellow;"></td>
             <td class="colName">사업장 주소</td>
             <td colspan="4">서울특별시 강남구 테헤란로 1234</td>
           </tr>
           <tr>
             <td class="colName">전화번호</td>
-            <td colspan="2"><input type="text" name="cPhone" value="${stVo.CPhone}" readonly></td>
+            <td colspan="2" style="background-color:yellow !important;"><input type="text" id="cPhone" name="cPhone" value="${stVo.CPhone}" readonly style="background-color:yellow;"></td>
             <td class="colName">팩스</td>
-            <td><input type="text" name="cFax" value="${stVo.CFax}" readonly></td>
+            <td style="background-color:yellow !important;"><input type="text" id="cFax" name="cFax" value="${stVo.CFax}" readonly style="background-color:yellow;"></td>
             <td class="colName">전화번호</td>
             <td colspan="2">02-123-4567</td>
             <td class="colName">팩스</td>
@@ -155,6 +156,7 @@
             <th>단가</th>
             <th>공급가액</th>
             <th>부가액</th>
+            <th>금액</th>
             <th>비고</th>
           </tr>
           <c:forEach items="${plist}" var="p" varStatus="status">
@@ -164,17 +166,17 @@
             <td>${p.PName}</td>
             <td>${p.PStandard}</td>
             <td>${p.ONum}</td>
-            <td><fmt:formatNumber type="number" maxFractionDigits="0" value="${p.OPrice}"/></td>
+            <td><fmt:formatNumber type="number" maxFractionDigits="0" value="${p.PUnitPrice}"/></td>
             <td><fmt:formatNumber type="number" maxFractionDigits="0" value="${p.PSupplyPrice}"/></td>
-            <c:set var="vat" value="${p.PSupplyPrice*(0.1)}"></c:set>
-            <td><fmt:formatNumber type="number" maxFractionDigits="0" value="${vat}"/>${vat}</td>
+            <c:set var="vat" value="${(p.PSupplyPrice)*(0.1)}"></c:set>
+            <td><fmt:formatNumber type="number" maxFractionDigits="0" value="${vat}"/></td>
+            <td><fmt:formatNumber type="number" maxFractionDigits="0" value="${p.OPrice}"/></td>
             <td>${p.PNote}</td>
           </tr>
           </c:forEach>
-          
+          <tr>
             <td>비고</td>
             <td colspan="9"></td>
-            
           </tr>
         </table>
         
@@ -184,15 +186,55 @@
       <!-- /.card -->
       <br>
       <div id="btn2">
-        <input class="b2" type="button" value="변경사항 저장">
+        <input class="b2" type="submit" value="변경사항 저장">
         <input class="b3" type="button" value="삭제">
-        <input class="b4" type="button" value="취소">
+        <input class="b4" type="button" value="취소" onclick="history.go(-1)">
       </div>
-      <br><br>
-
+	<br><br>
+  
+    </form>    
       
     </div>
   <!-- /.content-wrapper -->
+  
+  <script type="text/javascript">
+
+function popup(){
+	var settings="width=560,height=470, scrollbars=yes, resizable=no, left=700, top=200";
+	popupWindow = window.open("${path}/statement/search_member","search",settings);
+}
+
+
+function golist(){
+	location.href="/oup/statement/statement_list";
+}
+
+
+function serchClient(){
+	var settings="width=660,height=470, scrollbars=yes, resizable=no, left=700, top=200";
+	var search = window.open("${path}/statement/searchClient?search=","search",settings); 
+}
+
+
+</script>
+
+
+<script>
+
+function formChk(form) {
+
+    var emp = $('#emp').val();
+
+    if(emp == null || emp == '') {
+        alert('담당자를 입력해 주세요!');
+        return false;
+    }
+    else {
+        return confirm('변경사항을 저장하시겠습니까?');
+    }
+}
+</script>
+  
   
  <%@ include file="/WEB-INF/views/common/footer.jsp" %>
 
