@@ -13,6 +13,6 @@ public interface OrderService {
 
 	int getSearchOrderCnt(OrderVo vo) throws Exception;
 
-	List<ClientVo> getSearchOrderList(PageVo paVo) throws Exception;
+	List<OrderVo> getSearchOrderList(PageVo paVo, OrderVo vo) throws Exception;
 	
 }
