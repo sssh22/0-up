@@ -68,7 +68,7 @@
               </div>
               <!-- /.card-header -->
               <!-- form start -->
-              <form class="form-horizontal">
+              <form action="" method="post" class="form-horizontal" enctype="multipart/form-data">
                 <div class="card-body">
                   <div class="form-group row">
                     <label for="inputPassword3" class="col-sm-1 col-form-label">제목</label>
@@ -79,7 +79,7 @@
                   <div class="form-group row">
                     <label for="inputPassword3" class="col-sm-1 col-form-label">문서종류</label>
                     <div class="col-sm-2">
-                      <select class="form-control" id="dCCode" name="dCCode">
+                      <select class="form-control" id="dcCode" name="dcCode">
                         <option value="SP" selected>거래명세서</option>
                         <option value="ES">견적서</option>
                         <option value="DF">발주서</option>
@@ -92,16 +92,15 @@
                     <label for="inputPassword3" class="col-sm-1 col-form-label">결재문서</label>
                     <div class="col-sm-8">
                     	<span style="text-decoration: underline; cursor: pointer; color: blue;" id="confirm_id" onclick="getDoc()">전표</span>
-                    	 &nbsp&nbsp <label id="docTitle"></label>
-						<input type="hidden" name="adocNo" class="form-control" id="adocNo">
+                    	 &nbsp&nbsp <span id="docTitle"></span>
+						<input type="hidden" name="aDocNo" class="form-control" id="adocNo">
                     </div>
                   </div>
                   <div class="form-group row">
                     <label for="inputPassword3" class="col-sm-1 col-form-label">첨부</label>
                     <div class="col-sm-8">
                       <div class="custom-file">
-                        <input type="file" class="custom-file-input" id="exampleInputFile">
-                        <label class="custom-file-label" for="exampleInputFile">첨부파일을 첨부해주세요.</label>
+                        <input type="file" name="attachment" id="exampleInputFile" >
                       </div>
                     </div>
                   </div>
@@ -231,7 +230,7 @@ document.addEventListener('DOMContentLoaded', function () {
 </script>
 <script type="text/javascript">
 	function getDoc() {
-		var docTypeEl = document.getElementById('dCCode');
+		var docTypeEl = document.getElementById('dcCode');
 		var docType = docTypeEl.options[docTypeEl.selectedIndex].value;
 		var url = "${path}/approval/" + docType;
 		var windowTargetName = "warehouse";
