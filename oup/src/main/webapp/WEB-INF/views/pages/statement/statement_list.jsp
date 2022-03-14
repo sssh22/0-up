@@ -69,9 +69,10 @@
                 <option value="T.S_NO">명세서번호</option>
                 <option value="T.C_NO">거래처코드</option>
                 <option value="T.O_NO">주문서번호</option>
+                <option value="C.C_NAME">거래처명</option>
               </select>
             </td>
-            <td><input type="number" name="search"></td>
+            <td><input type="text" name="search"></td>
             <td><input type="submit" value="검색"></td>
           </tr>
         </table>
@@ -84,7 +85,7 @@
           <table class="table" id="btb">
             <thead>
               <tr>
-                <th>선택</th>
+                <th><input type="checkbox"></th>
                 <th>주문서번호</th>
                 <th>명세서번호</th><!-- 번호/미발급 (발급버튼) -->
                 <th>거래처코드</th>
@@ -94,13 +95,18 @@
                 <th>공급가액</th>
                 <th>VAT</th>
                 <th>합계금액</th><!--c set 계산  -->
-                <th></th>
+                <th>명세서수정</th>
               </tr>
             </thead>
             <tbody>
             <c:forEach items="${slist}" var="s">
               <tr>
-                <td><input type="checkbox"></td>
+             	<c:if test="${s.SNo eq 0 || s.SNo eq null}">
+                <td>■</td>
+                </c:if>
+                <c:if test="${s.SNo ne 0 && s.SNo ne null}">
+                <td><input type="checkbox" class="checkbox-del" value="${s.SNo}"></td>
+                </c:if>
                 <td>${s.ONo}</td>
                 <c:if test="${s.SNo eq 0 || s.SNo eq null}">
                 <td>미발급 <button id="btn2" onclick="add(${s.ONo});">발급</button></td>
@@ -137,6 +143,7 @@
              </c:forEach>
             </tbody>
           </table>
+          <button id="ckdel" type="button" onclick="del();">선택 삭제</button>
         </div><!-- table -->
        
         	<br>
@@ -144,7 +151,7 @@
 
           <div class="btn-group me-2" role="group" aria-label="First group" style="margin-left: 40%;">
             	
-            		<c:if test="${empty search}">
+            		<c:if test="${empty search && empty date1 && empty date2}">
             			<c:if test="${page.startPage == 1}">  
             			<button type="button" class="btn btn-secondary" onclick="location.href='${path}/statement/statement_list/1'">Prev</button>
             			</c:if>
@@ -174,26 +181,26 @@
             		
             		<c:if test="${not empty search || not empty date1 || not empty date2}">
 	                	<c:if test="${page.startPage == 1}">  
-            			<button type="button" class="btn btn-secondary" onclick="location.href='${path}/project/project_list/1?search=${search}'">Prev</button>
+            			<button type="button" class="btn btn-secondary" onclick="location.href='${path}/project/project_list/1?date1=${date1}&date2=${date2}&category=C.C_NAME&search=${search}'">Prev</button>
             			</c:if>
             			<c:if test="${page.startPage gt 1}">  
-            			<button type="button" class="btn btn-secondary" onclick="location.href='${path}/project/project_list/${page.startPage - 1}?search=${search}'">Prev</button>
+            			<button type="button" class="btn btn-secondary" onclick="location.href='${path}/project/project_list/${page.startPage - 1}?date1=${date1}&date2=${date2}&category=C.C_NAME&search=${search}'">Prev</button>
             			</c:if>  
 			           
 			            <c:forEach var="i" begin="${page.startPage}" end="${page.endPage}">
 					        <c:if test="${page.currentPage != i and i <= page.lastPage}">                  
-					        	<button type="button" class="btn btn-secondary" onclick="location.href='${path}/project/project_list/${i}?search=${search}'">${i}</button>
+					        	<button type="button" class="btn btn-secondary" onclick="location.href='${path}/project/project_list/${i}?date1=${date1}&date2=${date2}&category=C.C_NAME&search=${search}'">${i}</button>
 					      	</c:if>
 							<c:if test="${page.currentPage == i and i <= page.lastPage}">                  
-					        	<button type="button" class="btn btn-secondary active" onclick="location.href='${path}/project/project_list/${i}?search=${search}'">${i}</button>
+					        	<button type="button" class="btn btn-secondary active" onclick="location.href='${path}/project/project_list/${i}?date1=${date1}&date2=${date2}&category=C.C_NAME&search=${search}'">${i}</button>
 					        </c:if>
 						</c:forEach>
 			            
 			            <c:if test="${page.endPage < page.lastPage}">
-							<button type="button" class="btn btn-secondary" onclick="location.href='${path}/project/project_list/${page.endPage + 1}?search=${search}'">Next</button>
+							<button type="button" class="btn btn-secondary" onclick="location.href='${path}/project/project_list/${page.endPage + 1}?date1=${date1}&date2=${date2}&category=C.C_NAME&search=${search}'">Next</button>
 						</c:if>
 						<c:if test="${page.endPage >= page.lastPage}">
-							<button type="button" class="btn btn-secondary" onclick="location.href='${path}/project/project_list/${page.lastPage}?search=${search}'">Next</button>
+							<button type="button" class="btn btn-secondary" onclick="location.href='${path}/project/project_list/${page.lastPage}?date1=${date1}&date2=${date2}&category=C.C_NAME&search=${search}'">Next</button>
 						</c:if>
             		</c:if>
                 </div><!--pager  -->
@@ -229,6 +236,64 @@
 	 location.href="${path}/statement/statement_edit/"+param;
  }
 </script>
+
+<script type="text/javascript">
+	//상단 체크박스 클릭
+	let topCheckBox = document.querySelector('thead input[type=checkbox]');
+	let delArr = document.getElementsByClassName('checkbox-del');
+	
+	topCheckBox.onchange = function(e){
+		if(this.checked){
+			for(let i =0; i < delArr.length; ++i){
+				delArr[i].checked= true;
+			}
+		}else{
+			for(let i =0; i<delArr.length; ++i){
+				delArr[i].checked= false;
+			}
+		}
+	}
+	
+	
+	//삭제하기 버튼
+	function del(){
+		let result =""; 
+		let delArr = document.getElementsByClassName('checkbox-del');
+		
+		for(let i =0; i< delArr.length; ++i){
+			let t = delArr[i];
+			if(t.checked){
+				result +=t.value + ',';
+				}
+			}
+
+
+		$.ajax({
+				url:"${path}/statement/delete_ck",
+				data:{"str": result},
+				type: 'post',
+				success:function(data){
+					//alert("통신성공");
+					console.log(data);
+				},
+				erorr:function(){
+					//alert("통신실패");
+					console.log(e);
+				},
+				complete:function(){
+					//삭제처리 후 새로고침 처리
+					window.location.reload();
+				}
+			});
+		
+		}//del()
+		
+	</script>
+
+
+
+
+
 
  <%@ include file="/WEB-INF/views/common/footer.jsp" %>
 </div>

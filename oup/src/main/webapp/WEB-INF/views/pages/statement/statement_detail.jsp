@@ -177,7 +177,7 @@
       <br>
       <div id="btn2">
         <input class="b2" type="button" value="수정" onclick="goedit(${stVo.ONo});">
-        <input class="b3" type="button" value="삭제" onclick="deleteSt(${stVo.ONo});">
+        <input class="b3" type="button" value="삭제" onclick="deleteSt(${stVo.SNo});">
         <input class="b4" type="button" value="목록으로" onclick="history.go(-1)">
       </div>
       <br><br>
@@ -189,6 +189,11 @@
  function goedit(param){
 	 location.href="${path}/statement/statement_edit/"+param;
  }
+ 
+ function deleteSt(param){
+	 location.href="${path}/statement/delete/"+param;
+ }
+ 
 </script>
 
  <%@ include file="/WEB-INF/views/common/footer.jsp" %>

@@ -87,7 +87,7 @@
               </div>
               <hr>
               
-<!--                 <div class="group">
+                <div class="group">
 
                   <h5> 프로젝트 그룹 </h5><br>
                   <table>
@@ -103,23 +103,26 @@
                       <td></td>
                       <td></td>
                     </tr>
-	               <tr>
-	                   	<th>- 프로젝트 그룹원</th>
-	                   	<td><input type="text"></td>
-	                   	<td><input type="button" value="검색" onclick="popup();"></td>
-	                   	<td><input type='button' value='삭제' onclick='remove(this);'>
-	                   	</td>
-                   	</tr>
                    
                   </table>
-                  - 프로젝트 그룹원
-                  	<input type="button" value="검색" onclick="popup();" style="width:50px !important;">
+                  
+                  
+                  
+                 - 프로젝트 그룹원
+                  	<input type="button" value="검색" onclick="popup2();" style="width:50px !important;">
                    <div id="box">
-        			<input type="text" style="width:150px !important;">
-        			<input type="button" value="추가" onclick="add_textbox()"style="width:50px !important;">
     			  </div>
-                </div> -->
-                <!-- /group -->
+    			  
+        		
+        			<!-- <input id="empNo2" name="employeeNo" type="text" style="width:50px !important;" readonly>
+        			<input id="empNo2" type="text" style="width:150px !important;" readonly>
+        			<input type='button' value='삭제' onclick='remove(this)' style='width:50px !important;'>
+        			<input type="button" value="추가" onclick="add_textbox()"style="width:50px !important;"> -->
+    			  
+    			  
+    			  
+    			  
+                </div><!-- /group -->
               </div><!-- /.card-body -->
             </div>
 
@@ -143,7 +146,7 @@
   <!-- /.content-wrapper -->
   
  <script>
-        const add_textbox = () => {
+       const add_textbox = () => {
             const box = document.getElementById("box");
             const newP = document.createElement('p');
             newP.innerHTML = "<input type='text' style='width:150px !important;'> <input type='button' value='삭제' onclick='remove(this)' style='width:50px !important;'>";
@@ -156,11 +159,14 @@
   
  <script type="text/javascript">
 function popup(){
-	//window.name="add";
 	var settings="width=560,height=420, scrollbars=yes, resizable=no, left=700, top=200";
 	popupWindow=window.open("${path}/project/search_member","search",settings);
 }
 
+function popup2(){
+	var settings="width=560,height=420, scrollbars=yes, resizable=no, left=700, top=200";
+	popupWindow=window.open("${path}/project/search_members","search",settings);
+}
 </script>
   
   

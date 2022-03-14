@@ -10,6 +10,61 @@
 	FROM ORDER1
  </select>
  
+ <select id="getSearchStCnt" parameterType="com.kh.oup.statement.vo.SearchPageVo" resultType="int">
+SELECT COUNT(J.O_NO)
+FROM (
+    SELECT 
+    	T.*, 
+    	C.C_NAME, 
+    	C.B_NO, 
+    	C.C_OWNER, 
+    	C.C_ADDR, 
+    	C.C_PHONE, 
+    	C.C_FAX, 
+    	C.C_EMAIL 
+    FROM ( 
+	    SELECT 
+	    	O.O_NO, 
+	    	O.C_NO, 
+	    	O.PROJECT_NO, 
+	    	O.O_DATE, 
+	    	O.VAT_YN, 
+	    	S.S_NO, 
+	    	S.MANAGER, 
+	    	S.S_TOTAL, 
+	    	S.S_WDATE, 
+	    	S.TEAM_CODE, 
+	    	S.D_C_CODE, 
+	    	S.APPROVAL 
+	    FROM ORDER1 O 
+	    LEFT OUTER JOIN STATEMENT S ON (O.O_NO = S.O_NO) ) T 
+	    JOIN CLIENT C ON (T.C_NO = C.C_NO)
+	    WHERE 1=1
+		 	<if test="category == 'T.S_NO' and search != null and search != '' ">
+		 		AND ${category} = #{search} 
+		 	</if>
+		 	<if test="category == 'T.C_NO' and search != null and search != '' ">
+		 		AND ${category} = #{search} 
+		 	</if>
+		 	<if test="category == 'T.O_NO' and search != null and search != '' ">
+		 		AND ${category} = #{search}
+		 	</if>
+		 	
+		 	<if test="category == 'C.C_NAME' and search != null and search != '' ">
+		 		AND C.C_NAME LIKE '%${search}%'
+		 	</if>
+		 	
+		 	<if test="date1 != null and date2 != null">
+		 		AND T.O_DATE BETWEEN #{date1} AND #{date2}
+		 	</if>
+		 	<if test="date1 != null and date2 == null">
+		 		AND T.O_DATE <![CDATA[>]]> #{date1}
+		 	</if>
+		 	<if test="date1 == null and date2 != null"> 
+		 		AND T.O_DATE <![CDATA[<]]> #{date2}
+			</if>
+	) J
+ </select>
  
  <select id="getStList" parameterType="PageVo" resultType="com.kh.oup.statement.vo.StatementVo">
  	SELECT * FROM
@@ -193,9 +248,6 @@
  		)
  </insert>
  
- 
- 
- 
  <update id="updateSt" parameterType="com.kh.oup.statement.vo.StatementVo">
  	UPDATE STATEMENT
  	SET
@@ -212,5 +264,19 @@
 		C_NO = #{cNo}
 	WHERE O_NO = #{oNo}
  </update>
+ 
+ <delete id="deleteCk">
+ 	DELETE FROM STATEMENT
+ 	WHERE S_NO IN
+ 	<foreach collection="array" item="n" open="(" close=")" separator=",">
+ 	#{n}
+ 	</foreach>	
+ </delete>
+ 
+ <delete id="deleteSt" parameterType="int">
+ 	DELETE FROM STATEMENT
+ 	WHERE S_NO = #{sNo}
+ </delete>
+ 
  
 </mapper>

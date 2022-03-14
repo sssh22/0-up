@@ -70,7 +70,7 @@ table td{
         <td id="empName">${e.employeeName}</td>
         <td id="teamName">${e.teamName}</td>
         <td id="departName">${e.departName}</td>
-        <td>${e.jobPosition}</td>
+        <td>${e.jobTitleName}</td>
         <td>${e.teamCode}</td>
 	  </tr>
       </c:forEach>

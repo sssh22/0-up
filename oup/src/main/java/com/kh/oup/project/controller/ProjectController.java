@@ -37,7 +37,6 @@ public class ProjectController {
 	@PostMapping("project_add")
 	public String project_add(ProjectVo vo) { 
 		
-		
 		int result = service.enrollPrj(vo);
 		if(result>0) {
 			return "redirect:/project/project_list"; 
@@ -61,7 +60,6 @@ public class ProjectController {
 	//수정 페이지로 이동
 	@GetMapping(value={"project_edit/{projectNo}"})
 	public String project_edit(Model model, @PathVariable(required=false) int projectNo) {
-		
 
 		ProjectVo prjVo = service.selectPrj(projectNo);
 		List<ProjectGroupVo> glist = service.selectPrjgroup(projectNo);
@@ -83,8 +81,6 @@ public class ProjectController {
 	}
 	
 	
-	
-	
 	//삭제 =====================================
 	@PostMapping("project_del")
 	public String project_del(int projectNo) {
@@ -92,10 +88,6 @@ public class ProjectController {
 		int result = service.delPrj(projectNo);
 		return "pages/project/project_list";
 	}
-	
-	
-	
-	
 	
 	//조회 ============================================//수정해야함
 	@GetMapping(value = {"/project_list/{page}","/project_list"})
@@ -149,13 +141,9 @@ public class ProjectController {
 				}
 				plist.get(i).setGroupMembers(members);
 			}
-			
-			
 			model.addAttribute("plist",plist);
 			model.addAttribute("page",pvo);
 		}
-		
-		
 		return "pages/project/project_list";
 	}
 	
@@ -169,7 +157,6 @@ public class ProjectController {
 	public String search_member(Model model) {
 		
 		List<DeptVo> dlist = service.selectDeptList();
-//		System.out.println(dlist);
 		model.addAttribute("dlist",dlist);
 		return "pages/project/search_member";
 	}	
@@ -177,10 +164,8 @@ public class ProjectController {
 	@PostMapping("search_member.do")
 	@ResponseBody
 	public List<TeamVo> search_team(String departCode,Model model) {
-//		System.out.println(departCode);
 		
 		List<TeamVo> tlist = service.selectTeamList(departCode);
-//		System.out.println(tlist);
 		model.addAttribute("tlist",tlist);
 		return tlist;
 	}
@@ -191,19 +176,39 @@ public class ProjectController {
 		System.out.println(deptCode+"and"+teamCode);
 		
 		if(deptCode==null || teamCode==null) {
-			//System.out.println(deptCode+"//"+teamCode);
 			return "redirect:search_member";
 		}else {
 			List<ProjectGroupVo> elist = service.selectEmpList(teamCode);
-			//System.out.println(elist);
 			model.addAttribute("elist",elist);
 
 			List<DeptVo> dlist = service.selectDeptList();
 			model.addAttribute("dlist",dlist);
 			return "pages/project/search_member";
 		}
+	}
+	
+	@GetMapping("search_members")
+	public String search_members(Model model) {
 		
+		List<DeptVo> dlist = service.selectDeptList();
+		model.addAttribute("dlist",dlist);
+		return "pages/project/search_members";
+	}
+	
+	@GetMapping("search_ms")
+	public String search_ms(String deptCode ,String teamCode ,Model model) {
+		System.out.println(deptCode+"and"+teamCode);
 		
+		if(deptCode==null || teamCode==null) {
+			return "redirect:search_members";
+		}else {
+			List<ProjectGroupVo> elist = service.selectEmpList(teamCode);
+			model.addAttribute("elist",elist);
+
+			List<DeptVo> dlist = service.selectDeptList();
+			model.addAttribute("dlist",dlist);
+			return "pages/project/search_members";
+		}
 	}
 	
 	

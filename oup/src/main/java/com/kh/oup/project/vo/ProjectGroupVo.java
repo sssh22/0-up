@@ -11,6 +11,8 @@ public class ProjectGroupVo {
 	private String entYN; //EMPLOYEE
 	private String jobPosition; //EMPLOYEE
 	
+	private String jobTitleName; //JOBTITLE
+	
 	private String teamName; //TEAM
 	private String departName; //DEPARTMENT
 	

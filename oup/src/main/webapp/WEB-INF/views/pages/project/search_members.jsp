@@ -9,7 +9,12 @@
 <title>Insert title here</title>
 <script src="https://ajax.googleapis.com/ajax/libs/jquery/3.6.0/jquery.min.js"></script>
 <style>
+body{
+ background-color : #ebe7f1;
+}
 table{
+width: 95% !important;
+margin:auto;
 border-collapse: collapse; 
 }
 table th{
@@ -21,6 +26,30 @@ table td{
  padding : 4px;
  
 }
+#btnL{
+ background-color:#443b53;
+ border: 1px solid #5a4e70;
+ border-radius: 3px;
+ color: white;
+ height: 25px;
+}
+#btnL:hover{
+ background-color:#ffffff;
+ color: #5a4e70;
+ border: 1px solid #5a4e70;
+}
+#btnF{
+ background-color:#929292;
+ border: 1px solid #5a4e70;
+ border-radius: 3px;
+ color: white;
+ height: 25px;
+}
+#btnF:hover{
+ background-color:#ffffff;
+ color: #5a4e70;
+ border: 1px solid #5a4e70;
+}
 
 </style>
 </head>
@@ -29,7 +58,7 @@ table td{
 
 
 
-<form action="/oup/project/search_m">
+<form action="/oup/project/search_ms">
       부서명: 
       <select name="deptCode" id="dept_code" onchange="getTeam(this.value);">
       	<option value="">선택</option>
@@ -59,18 +88,73 @@ table td{
       </tr>
       <c:forEach items="${elist}" var="e"> 
       <tr>
-     	<td><input type="radio" name="employeeNo" value="${e.employeeNo}"></td>
-     	<td id="empNo">${e.employeeNo}</td>
-        <td id="empName">${e.employeeName}</td>
-        <td id="teamName">${e.teamName}</td>
-        <td id="departName">${e.departName}</td>
+     	<td><input type="checkbox" class="checkEmp" value="${e.employeeNo}"></td>
+     	<td>${e.employeeNo}</td>
+        <td>${e.employeeName}</td>
+        <td>${e.teamName}</td>
+        <td>${e.departName}</td>
         <td>${e.jobTitleName}</td>
         <input id="teamCode" type="hidden" value="${e.teamCode}">
 	  </tr>
       </c:forEach>
     </table>
     <br>
-<button id="btn" onclick="toAdd();">선택</button>
+<button type="button" id="btnL" onclick=>그룹장 선택</button>
+<button type="button" id="btnF" onclick="members();">그룹원 선택</button>
+<div>그룹장 : <span></span></div>
+<div>그룹원 : <span id="empNo"></span><span id="empName"></span></div>
+
+
+
+
+<script type="text/javascript">
+//그룹원
+function members(){ 
+			
+			var checkbox = $("input[class=checkEmp]:checked");
+			
+			// 체크된 체크박스 값을 가져온다
+			checkbox.each(function(i) {
+	
+				var tr = checkbox.parent().parent().eq(i);
+				var td = tr.children();
+
+				// td.eq(0)은 체크박스 이므로  td.eq(1)의 값부터 가져온다.
+				var employeeNo = td.eq(1).text();
+				var empName = td.eq(2).text();
+
+			opener.document.getElementById("box").append("<button>삭제</button>");
+
+			});
+			
+};
+
+
+</script>
+
+
+<script type="text/javascript">
+function toAdd(){
+	 
+	var employeeNo = $("input[name=employeeNo]:checked");
+	var empNo = employeeNo.parent().parent().children().eq(1).text();
+	var empName = employeeNo.parent().parent().children().eq(2).text();
+	var teamName = employeeNo.parent().parent().children().eq(3).text();
+	var deptName = employeeNo.parent().parent().children().eq(4).text();
+	var teamCode = employeeNo.parent().parent().children().val();
+
+	//opener.document.getElementById("search").value= deptName +" "+ teamName +" "+empName;
+	//opener.document.getElementById("empNo").value= empNo;
+	
+	//statement
+	opener.document.getElementById("emp").value= empName;
+	opener.document.getElementById("tcode").value= teamCode;
+	
+	self.close();
+	
+}
+</script>
+
 
 <script type="text/javascript">
 
@@ -100,30 +184,6 @@ function getTeam(param){
 };
 
 </script>
-<script type="text/javascript">
-function toAdd(){
-	 
-	var employeeNo = $("input[name=employeeNo]:checked");
-	var empNo = employeeNo.parent().parent().children().eq(1).text();
-	var empName = employeeNo.parent().parent().children().eq(2).text();
-	var teamName = employeeNo.parent().parent().children().eq(3).text();
-	var deptName = employeeNo.parent().parent().children().eq(4).text();
-	var teamCode = employeeNo.parent().parent().children().val();
-
-	//opener.document.getElementById("search").value= deptName +" "+ teamName +" "+empName;
-	//opener.document.getElementById("empNo").value= empNo;
-	
-	//statement
-	opener.document.getElementById("emp").value= empName;
-	opener.document.getElementById("tcode").value= teamCode;
-	
-	self.close();
-	
-}
-</script>
-
-
-
 
 
 </body>
