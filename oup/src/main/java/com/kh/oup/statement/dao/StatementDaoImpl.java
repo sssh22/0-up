@@ -64,4 +64,19 @@ public class StatementDaoImpl implements StatementDao{
 		return ss.update("statement.updateOrder",stVo);
 	}
 
+	@Override
+	public int getSearchStCnt(SearchPageVo spv) {
+		return ss.selectOne("statement.getSearchStCnt",spv);
+	}
+
+	@Override
+	public int deleteCk(String[] delArr) {
+		return ss.delete("statement.deleteCk",delArr);
+	}
+
+	@Override
+	public int deleteSt(int sNo) {
+		return ss.delete("statement.deleteSt",sNo);
+	}
+
 }

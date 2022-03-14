@@ -62,4 +62,20 @@ public class StatementServiceImpl implements StatementService {
 		return dao.updateOrder(stVo);
 	}
 
+	@Override
+	public int getSearchStCnt(SearchPageVo spv) {
+		return dao.getSearchStCnt(spv);
+	}
+
+	@Override
+	public int deleteCk(String str) {
+		String[] delArr = str.split(",");
+		return dao.deleteCk(delArr);
+	}
+
+	@Override
+	public int deleteSt(int sNo) {
+		return dao.deleteSt(sNo);
+	}
+
 }

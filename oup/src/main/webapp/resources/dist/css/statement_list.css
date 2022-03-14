@@ -11,19 +11,26 @@ body{
     background-color: #ebe7f1;
 }
 
-#btb>tr{
+#btb tr{
 	  height:20px !important;
 }
+
 #btb th{
     background-color: #d7d0e3;
     text-align: center;
 }
 
 #btb td{
-    background-color: white !important;
+    background-color: white;
   
     text-align: right;
 }
+
+#btb tbody tr:hover td{
+	background-color: #ebe7f1;
+}
+
+
 .atb1{width: 30%;}
 .atb1 td:nth-child(1){width: 35%;}
 .atb1 td:nth-child(3){width: 7%;}
@@ -76,7 +83,17 @@ input, select{
 	border-radius: 3px;
 }
 
+#ckdel{
+	background-color: #d7d0e3;
+	border: 0;
+	border-radius: 3px;
+}
 
-
+#ckdel:hover{
+	background-color: #9e2942;
+	color: white;
+	border: 0;
+	border-radius: 3px;
+}
 
 

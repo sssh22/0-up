@@ -27,4 +27,10 @@ public interface StatementDao {
 
 	int updateOrder(StatementVo stVo);
 
+	int getSearchStCnt(SearchPageVo spv);
+
+	int deleteCk(String[] delArr);
+
+	int deleteSt(int sNo);
+
 }
