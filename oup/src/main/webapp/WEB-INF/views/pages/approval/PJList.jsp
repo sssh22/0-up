@@ -58,10 +58,10 @@
                   <tbody>
                   <c:forEach items="${list}" var="l">				
                     <tr>
-                      <td><span style="color:blue; font-size: 150%; text-decoration: underline; cursor: pointer;" onclick="returnCNo('${l.PNo}','${l.PName}','${l.PUnitPrice}');">${l.PNo}</span></td>
+                      <td><span style="color:blue; font-size: 150%; text-decoration: underline; cursor: pointer;" onclick="returnCNo('${l.projectNo}');">${l.projectNo}</span></td>
                       <td style="font-size: 150%">프로젝트</td>
-                      <td style="font-size: 150%">${l.PUnitPrice}</td>
-                      <td style="font-size: 150%">${l.PCount}</td>
+                      <td style="font-size: 150%">${l.projectStart}</td>
+                      <td style="font-size: 150%">${l.projectName}</td>
                     </tr>
                   </c:forEach>
                 </tbody>
@@ -87,9 +87,9 @@
 		document.searchform.submit(search);
 	}	
 	
-	function returnCNo(pNo,pName, pUnitPrice) {
-			opener.document.getElementById("docTitle").value = "[프로젝트] " + 거래명세서번호; //[거래명세서] 거래명세서번호
-			opener.document.getElementById("adocNo").value =  + 거래명세서번호;
+	function returnCNo(projectNo) {
+		opener.document.getElementById("docTitle").innerHTML = "[프로젝트] " + projectNo;
+		opener.document.getElementById("adocNo").value =  + projectNo;
 			
 			self.close();
 	}

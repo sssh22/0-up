@@ -9,16 +9,18 @@ import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Controller;
 import org.springframework.ui.Model;
 import org.springframework.web.bind.annotation.GetMapping;
+import org.springframework.web.bind.annotation.PathVariable;
 import org.springframework.web.bind.annotation.PostMapping;
 import org.springframework.web.bind.annotation.RequestMapping;
 
 import com.kh.oup.approval.service.ApprovalPopupService;
 import com.kh.oup.approval.service.ApprovalService;
 import com.kh.oup.approval.vo.ApprovalODVo;
+import com.kh.oup.approval.vo.ApprovalPJVo;
+import com.kh.oup.approval.vo.ApprovalSPVo;
 import com.kh.oup.approval.vo.ApprovalVo;
+import com.kh.oup.common.PageVo;
 import com.kh.oup.employee.vo.EmployeeVo;
-import com.kh.oup.order.service.OrderServiceImpl;
-import com.kh.oup.order.vo.OrderVo;
 
 @Controller
 @RequestMapping("/approval")
@@ -62,7 +64,11 @@ public class ApprovalController {
 	
 	//거래명세서
 	@GetMapping("/SP")
-	public String getSPList(Model model) {
+	public String getSPList(Model model) throws Exception {
+		List<ApprovalSPVo> list = popupservice.getSPList();
+		
+		model.addAttribute("list", list);
+		
 		return "pages/approval/SPList";
 	}
 	
@@ -78,12 +84,31 @@ public class ApprovalController {
 	
 	//프로젝트
 	@GetMapping("/PJ")
-	public String getPJList(Model model) {
+	public String getPJList(Model model) throws Exception {
+		List<ApprovalPJVo> list = popupservice.getPJList();
+		
+		model.addAttribute("list", list);
+		
 		return "pages/approval/PJList";
 	}
 	
-	@GetMapping("/sendbox")
-	public String appBoxSend() {
+	@GetMapping(value = {"/sendbox/{page}", "/sendbox"})
+	public String appBoxSend(Model model, @PathVariable(required = false)String page, HttpServletRequest request) throws Exception {
+		HttpSession session = request.getSession();
+		EmployeeVo loginEmployee = (EmployeeVo)session.getAttribute("loginEmployee");
+		String loginName = loginEmployee.getEmployeeName();
+		
+		if(page == null || Integer.parseInt(page) <= 0 )
+			page = "1";
+		
+		int totalRow = service.getSendAppCnt(loginName);
+		PageVo vo = new PageVo(page, totalRow);
+		vo.setCntPerPage(15);
+		
+		List<ApprovalVo> list = service.getSendApprovalList(vo, loginName);
+		model.addAttribute("list", list);
+		model.addAttribute("page", vo);
+		
 		return "pages/approval/approvalBoxSend";
 	}
 	
