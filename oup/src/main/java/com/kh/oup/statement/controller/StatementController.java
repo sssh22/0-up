@@ -153,8 +153,30 @@ public class StatementController {
 			}
 		}
 		
+	}
+	
+	
+	@PostMapping("delete_ck")
+	@ResponseBody
+	public String delete_ck(String str) throws Exception {
+		int result = service.deleteCk(str);
 		
+		if(result == str.length()/2) { 
+			return "ok";
+		}else {
+			return "fail_" + result;
+		}
+	}
+	
+	@GetMapping("delete/{sNo}")
+	public String delet(@PathVariable(required=false) int sNo) {
+		int result = service.deleteSt(sNo);
 		
+		if(result > 0) { 
+			return "redirect:/statement/statement_list";
+		}else {
+			return "redirect:/statement/statement_list";
+		}
 		
 	}
 	
@@ -176,6 +198,17 @@ public class StatementController {
 			
 			List<StatementVo> slist = service.getStatementList(pvo);
 			List<StProductsVo> plist = service.getStProductsList();
+			
+			spv.setCurrentPage(pvo.getCurrentPage());
+			spv.setCntPerPage(pvo.getCntPerPage());
+			spv.setPageBtnCnt(pvo.getPageBtnCnt());
+			spv.setTotalRow(pvo.getTotalRow());
+			spv.setStartRow(pvo.getStartRow());
+			spv.setEndRow(pvo.getEndRow());
+			spv.setStartPage(pvo.getStartPage());
+			spv.setEndPage(pvo.getEndPage());
+			spv.setLastPage(pvo.getLastPage());
+			
 			
 			//sku
 			for(int i = 0; i<slist.size(); i++) {
@@ -202,13 +235,13 @@ public class StatementController {
 			}
 			
 			model.addAttribute("slist",slist);
-			model.addAttribute("page",pvo);
+			model.addAttribute("page",spv);
 		}
 		if( (spv.getSearch() != null || !"".equals(spv.getSearch())) || spv.getDate1() != null || spv.getDate2() != null) {
 			
 			int cntPerPage = 10; //10 rows
 			int pageBtnCnt = 3; 
-			int totalRow = service.getStCnt();
+			int totalRow = service.getSearchStCnt(spv);
 			PageVo pvo = new PageVo(page, cntPerPage, pageBtnCnt, totalRow);
 			
 			spv.setCurrentPage(pvo.getCurrentPage());

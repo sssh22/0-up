@@ -187,7 +187,7 @@
       <br>
       <div id="btn2">
         <input class="b2" type="submit" value="변경사항 저장">
-        <input class="b3" type="button" value="삭제">
+        <input class="b3" type="button" value="삭제" onclick="deleteSt(${stVo.SNo});">
         <input class="b4" type="button" value="취소" onclick="history.go(-1)">
       </div>
 	<br><br>
@@ -233,6 +233,13 @@ function formChk(form) {
         return confirm('변경사항을 저장하시겠습니까?');
     }
 }
+
+
+
+function deleteSt(param){
+	 location.href="${path}/statement/delete/"+param;
+}
+
 </script>
   
   

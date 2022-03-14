@@ -32,17 +32,19 @@
 	E.ENT_YN,
 	E.JOB_POSITION,
 	T.TEAM_NAME,
-	D.DEPART_NAME
+	D.DEPART_NAME,
+	J.JOB_TITLE_NAME
 	
 	FROM EMPLOYEE E
 	JOIN TEAM T ON(E.TEAM_CODE = T.TEAM_CODE)
 	JOIN DEPARTMENT D ON(T.DEPART_CODE = D.DEPART_CODE)
-	WHERE T.TEAM_CODE = #{teamCode} AND E.ENT_YN='N'
+	JOIN JOBTITLE J ON(E.JOB_TITLE_CODE = J.JOB_TITLE_CODE)
+	WHERE T.TEAM_CODE = #{teamCode} AND E.ENT_YN='Y'
 	
 </select>
  
  
- <!--  prjectNo받아서 그룹원리스트 화면으로 -->
+ <!--detail페이지 >>   prjectNo받아서 그룹원리스트 화면으로 -->
 <select id="getPrjGroup" parameterType="int" resultType="com.kh.oup.project.vo.ProjectGroupVo">
 	SELECT  
 	

@@ -27,4 +27,10 @@ public interface StatementService {
 
 	int updateOrder(StatementVo stVo);
 
+	int getSearchStCnt(SearchPageVo spv);
+
+	int deleteCk(String str);
+
+	int deleteSt(int sNo);
+
 }

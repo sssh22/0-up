@@ -39,8 +39,8 @@ public class OrderDaoImpl implements OrderDao{
 	}
 
 	@Override
-	public List<ClientVo> selectOrderList(PageVo paVo) throws Exception {
-		return null;
+	public List<OrderVo> selectOrderList(OrderVo vo) throws Exception {
+		return session.selectList("order.selectOrderList", vo);
 	}
 
 
