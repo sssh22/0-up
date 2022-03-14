@@ -15,4 +15,6 @@ public interface ApprovalService {
 
 	List<ApprovalVo> getSendApprovalList(PageVo vo, String loginName) throws Exception;
 
+	List<ApprovalVo> getReceiveApprovalList(PageVo vo, String loginjobTitleCode) throws Exception;
+
 }

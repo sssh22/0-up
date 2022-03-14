@@ -112,8 +112,24 @@ public class ApprovalController {
 		return "pages/approval/approvalBoxSend";
 	}
 	
-	@GetMapping("/receivebox")
-	public String appReceiveBox() {
+	@GetMapping(value = {"/receivebox/{page}", "/receivebox"})
+	public String appReceiveBox(Model model, @PathVariable(required = false)String page, HttpServletRequest request) throws Exception {
+		HttpSession session = request.getSession();
+		EmployeeVo loginEmployee = (EmployeeVo)session.getAttribute("loginEmployee");
+		String loginName = loginEmployee.getEmployeeName();
+		String loginjobTitleCode = loginEmployee.getJobTitleCode();
+		
+		if(page == null || Integer.parseInt(page) <= 0 )
+			page = "1";
+		
+		int totalRow = service.getSendAppCnt(loginName);
+		PageVo vo = new PageVo(page, totalRow);
+		vo.setCntPerPage(15);
+		
+		List<ApprovalVo> list = service.getReceiveApprovalList(vo, loginjobTitleCode);
+		model.addAttribute("list", list);
+		model.addAttribute("page", vo);
+		
 		return "pages/approval/approvalBoxReceive";
 	}
 	

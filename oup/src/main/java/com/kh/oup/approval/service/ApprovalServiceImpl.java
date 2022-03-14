@@ -54,4 +54,11 @@ public class ApprovalServiceImpl implements ApprovalService{
 		return list;
 	}
 
+	@Override
+	public List<ApprovalVo> getReceiveApprovalList(PageVo vo, String loginjobTitleCode) throws Exception {
+		// TODO Auto-generated method stub
+		return null;
+	}
+
+
 }

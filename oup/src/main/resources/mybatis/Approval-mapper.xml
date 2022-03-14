@@ -64,7 +64,7 @@
  	<select id="getSendAppCnt" resultType="int">
  		SELECT COUNT(A_R_NO)
  		FROM APPR
- 		WHERE A_PIC_NAME = #{name}
+ 		WHERE A_PIC_NAME = #{name} AND A_STATEMENT = 'N'
  	</select>
  	
  	<select id="getSendApprovalList" parameterType="HashMap" resultType="com.kh.oup.approval.vo.ApprovalVo">
@@ -74,7 +74,7 @@
 	  		 FROM(
                 SELECT *
                 FROM APPR
-                WHERE A_PIC_NAME = #{loginName}
+                WHERE A_PIC_NAME = #{loginName} AND A_STATEMENT = 'N'
                 ORDER BY A_NO DESC
             ) R
   		)
