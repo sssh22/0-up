@@ -37,7 +37,7 @@
             </div>
             
             <div class="card-body">
-            	<form action="" method="get" name="searchform">
+            <form action="" method="post">
                 <table class="table table-bordered projects">
                   <thead>
                       <tr>
@@ -60,8 +60,8 @@
                     <tr>
                       <td><span style="color:blue; font-size: 150%; text-decoration: underline; cursor: pointer;" onclick="returnONo('${l.ONo}');">${l.ONo}</span></td>
                       <td style="font-size: 150%">주문서</td>
-                      <td style="font-size: 150%">${l.금액}</td>
-                      <td style="font-size: 150%">${l.거래처명}</td>
+                      <td style="font-size: 150%">${l.price}</td>
+                      <td style="font-size: 150%">${l.CName}</td>
                     </tr>
                   </c:forEach>
                 </tbody>
@@ -88,7 +88,7 @@
 	}	
 	
 	function returnONo(oNo) {
-			opener.document.getElementById("docTitle").value = "[주문서] " + oNo;
+			opener.document.getElementById("docTitle").innerHTML = "[주문서] " + oNo;
 			opener.document.getElementById("adocNo").value =  + oNo;
 			
 			self.close();
