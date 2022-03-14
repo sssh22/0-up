@@ -36,4 +36,34 @@ public class ApprovalDaoImpl implements ApprovalDao{
 		return ss.selectList("approval.getSendApprovalList", test);
 	}
 
+	@Override
+	public List<ApprovalVo> getReceiveApprovalList(PageVo vo, String loginjobTitleCode) throws Exception {
+		//맵 만들기
+		HashMap<String, Object> test = new HashMap<String, Object>();
+		test.put("page", vo);
+		test.put("loginjobTitleCode", loginjobTitleCode);
+				
+		return ss.selectList("approval.getReceiveApprovalList", test);
+	}
+
+	@Override
+	public int getCompleteAppCnt(String loginName) throws Exception {
+		return ss.selectOne("approval.getCompleteAppCnt", loginName);
+	}
+
+	@Override
+	public int getReceiveAppCnt(String loginjobTitleCode) throws Exception {
+		return ss.selectOne("approval.getReceiveAppCnt", loginjobTitleCode);
+	}
+
+	@Override
+	public List<ApprovalVo> getCompleteAppList(PageVo vo, String loginName) throws Exception {
+		//맵 만들기
+		HashMap<String, Object> test = new HashMap<String, Object>();
+		test.put("page", vo);
+		test.put("loginName", loginName);
+				
+		return ss.selectList("approval.getCompleteAppList", test);
+	}
+
 }

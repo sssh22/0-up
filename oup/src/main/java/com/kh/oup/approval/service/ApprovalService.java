@@ -17,4 +17,11 @@ public interface ApprovalService {
 
 	List<ApprovalVo> getReceiveApprovalList(PageVo vo, String loginjobTitleCode) throws Exception;
 
+	int getCompleteAppCnt(String loginName) throws Exception;
+
+	int getReceiveAppCnt(String loginjobTitleCode) throws Exception;
+
+	List<ApprovalVo> getCompleteApprovalList(PageVo vo, String loginName) throws Exception;
+
+
 }

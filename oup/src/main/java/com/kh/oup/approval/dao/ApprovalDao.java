@@ -13,4 +13,12 @@ public interface ApprovalDao {
 
 	List<ApprovalVo> getSendApprovalList(PageVo vo, String loginName) throws Exception;
 
+	List<ApprovalVo> getReceiveApprovalList(PageVo vo, String loginjobTitleCode) throws Exception;
+
+	int getCompleteAppCnt(String loginName) throws Exception;
+
+	int getReceiveAppCnt(String loginjobTitleCode) throws Exception;
+
+	List<ApprovalVo> getCompleteAppList(PageVo vo, String loginName) throws Exception;
+
 }

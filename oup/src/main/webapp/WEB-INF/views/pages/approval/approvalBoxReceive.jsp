@@ -148,7 +148,7 @@
 	                    <c:if test="${l.dcCode eq 'OD'}">
 	                    	<td class="mailbox-subject">주문서</td>
 	                    </c:if>
-	                    <td class="mailbox-subject">${l.ATitle}</td>
+	                    <td class="mailbox-subject"><a href="">${l.ATitle}</a></td>
 	                    <td class="mailbox-attachment"><fmt:formatDate value="${l.ADate}" pattern="yyyy-MM-dd"/></td>
 	                    <c:if test="${l.aeDate ne null}">
 		                    <td class="mailbox-date"><fmt:formatDate value="${l.aeDate}" pattern="yyyy-MM-dd"/></td>

@@ -62,9 +62,23 @@
  	</insert>
  	
  	<select id="getSendAppCnt" resultType="int">
- 		SELECT COUNT(A_R_NO)
+ 		SELECT COUNT(A_NO)
  		FROM APPR
  		WHERE A_PIC_NAME = #{name} AND A_STATEMENT = 'N'
+ 	</select>
+ 	
+ 	<select id="getReceiveAppCnt" resultType="int">
+ 		SELECT COUNT(A1.A_NO)
+				FROM APPR A1
+				JOIN APPR_REGUL A2
+				ON A1.A_R_NO = A2.A_R_NO
+				WHERE (A2.DECISION_CODE = #{loginjobTitleCode} OR A2.ALLDECISION_CODE = #{loginjobTitleCode}) AND A1.A_STATEMENT = 'N'
+ 	</select>
+ 	
+ 	<select id="getCompleteAppCnt" resultType="int">
+ 		SELECT COUNT(A_NO)
+ 		FROM APPR
+ 		WHERE A_PIC_NAME = #{name} AND A_STATEMENT = 'Y'
  	</select>
  	
  	<select id="getSendApprovalList" parameterType="HashMap" resultType="com.kh.oup.approval.vo.ApprovalVo">
@@ -76,6 +90,34 @@
                 FROM APPR
                 WHERE A_PIC_NAME = #{loginName} AND A_STATEMENT = 'N'
                 ORDER BY A_NO DESC
+            ) R
+  		)
+  		WHERE RN BETWEEN #{page.startRow} AND #{page.endRow}
+ 	</select>
+ 	
+ 	<select id="getReceiveApprovalList" parameterType="HashMap" resultType="com.kh.oup.approval.vo.ApprovalVo">
+ 		SELECT * FROM 
+  		(
+	  		SELECT ROWNUM RN, R.* 
+	  		 FROM(
+                SELECT *
+				FROM APPR A1
+				JOIN APPR_REGUL A2
+				ON A1.A_R_NO = A2.A_R_NO
+				WHERE (A2.DECISION_CODE = #{loginjobTitleCode} OR A2.ALLDECISION_CODE = #{loginjobTitleCode}) AND A1.A_STATEMENT = 'N'
+            ) R
+  		)
+  		WHERE RN BETWEEN #{page.startRow} AND #{page.endRow}
+ 	</select>
+ 	
+ 	<select id="getCompleteAppList" parameterType="HashMap" resultType="com.kh.oup.approval.vo.ApprovalVo">
+ 		SELECT * FROM 
+  		(
+	  		SELECT ROWNUM RN, R.* 
+	  		 FROM(
+                SELECT *
+		 		FROM APPR
+		 		WHERE A_PIC_NAME = #{loginName} AND A_STATEMENT = 'Y'
             ) R
   		)
   		WHERE RN BETWEEN #{page.startRow} AND #{page.endRow}

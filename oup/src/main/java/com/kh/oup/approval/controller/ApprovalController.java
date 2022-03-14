@@ -122,7 +122,7 @@ public class ApprovalController {
 		if(page == null || Integer.parseInt(page) <= 0 )
 			page = "1";
 		
-		int totalRow = service.getSendAppCnt(loginName);
+		int totalRow = service.getReceiveAppCnt(loginjobTitleCode);
 		PageVo vo = new PageVo(page, totalRow);
 		vo.setCntPerPage(15);
 		
@@ -133,8 +133,24 @@ public class ApprovalController {
 		return "pages/approval/approvalBoxReceive";
 	}
 	
-	@GetMapping("/complete")
-	public String completeBox() {
+	@GetMapping(value = {"/complete/{page}", "/complete"})
+	public String completeBox(Model model, @PathVariable(required = false)String page, HttpServletRequest request) throws Exception {
+		HttpSession session = request.getSession();
+		EmployeeVo loginEmployee = (EmployeeVo)session.getAttribute("loginEmployee");
+		String loginName = loginEmployee.getEmployeeName();
+		String loginjobTitleCode = loginEmployee.getJobTitleCode();
+		
+		if(page == null || Integer.parseInt(page) <= 0 )
+			page = "1";
+		
+		int totalRow = service.getCompleteAppCnt(loginName);
+		PageVo vo = new PageVo(page, totalRow);
+		vo.setCntPerPage(15);
+		
+		List<ApprovalVo> list = service.getCompleteApprovalList(vo, loginName);
+		model.addAttribute("list", list);
+		model.addAttribute("page", vo);
+		
 		return "pages/approval/approvalComplete";
 	}
 	

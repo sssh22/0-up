@@ -56,8 +56,26 @@ public class ApprovalServiceImpl implements ApprovalService{
 
 	@Override
 	public List<ApprovalVo> getReceiveApprovalList(PageVo vo, String loginjobTitleCode) throws Exception {
-		// TODO Auto-generated method stub
-		return null;
+		List<ApprovalVo> list = dao.getReceiveApprovalList(vo, loginjobTitleCode);
+		
+		return list;
+	}
+
+	@Override
+	public int getCompleteAppCnt(String loginName) throws Exception {
+		return dao.getCompleteAppCnt(loginName);
+	}
+
+	@Override
+	public int getReceiveAppCnt(String loginjobTitleCode) throws Exception {
+		return dao.getReceiveAppCnt(loginjobTitleCode);
+	}
+
+	@Override
+	public List<ApprovalVo> getCompleteApprovalList(PageVo vo, String loginName) throws Exception {
+		List<ApprovalVo> list = dao.getCompleteAppList(vo, loginName);
+		
+		return list;
 	}
 
 
