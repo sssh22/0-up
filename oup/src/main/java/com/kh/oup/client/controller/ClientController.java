@@ -30,7 +30,7 @@ public class ClientController {
 	
 	@GetMapping(value = {"/list/{page}", "/list"})
 	public String list(Model model, @PathVariable(required = false)String page, HttpServletRequest httpServletRequest) throws Exception {
-		String search = httpServletRequest.getParameter("search");
+		String search = httpServletRequest.getParameter("search");  
 		
 		if(page == null || Integer.parseInt(page) <= 0 )
 			page = "1";

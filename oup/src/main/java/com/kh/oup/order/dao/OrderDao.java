@@ -17,6 +17,6 @@ public interface OrderDao {
 
 	int selectOrderCnt(OrderVo vo)throws Exception;
 
-	List<ClientVo> selectOrderList(PageVo paVo)throws Exception;
+	List<OrderVo> selectOrderList(OrderVo vo)throws Exception;
  
 }

@@ -53,13 +53,13 @@ public class OrderController {
 			page = "1";
 		
 		int totalRow = service.getSearchOrderCnt(vo);	
-		System.out.println(totalRow);
-		//		PageVo paVo = new PageVo(page, totalRow);
-//			
-//		List<ClientVo> list = service.getSearchOrderList(paVo);
-//		model.addAttribute("list",list);
-//		model.addAttribute("page", paVo);
-//		model.addAttribute("vo", vo);
+		PageVo paVo = new PageVo(page, totalRow);
+			
+		List<OrderVo> list = service.getSearchOrderList(paVo, vo);
+		System.out.println(vo);
+		model.addAttribute("list",list);
+		model.addAttribute("page", paVo);
+		model.addAttribute("vo", vo);
 		
 		return "pages/order/searchOrder";
 	}

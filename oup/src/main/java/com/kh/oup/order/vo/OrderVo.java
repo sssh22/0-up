@@ -19,4 +19,6 @@ public class OrderVo {
 	private int pNo;		// 품목 번호 검색용
 	private String oDateStr;	
 	private String creditDateStr; 
+	private int startRow;
+	private int endRow;
 }

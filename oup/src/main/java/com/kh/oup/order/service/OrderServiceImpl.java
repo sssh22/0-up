@@ -69,8 +69,13 @@ public class OrderServiceImpl implements OrderService{
 	}
 
 	@Override
-	public List<ClientVo> getSearchOrderList(PageVo paVo) throws Exception {
-		return dao.selectOrderList(paVo);
+	public List<OrderVo> getSearchOrderList(PageVo paVo, OrderVo vo) throws Exception {
+		vo.setStartRow(paVo.getStartRow());
+		vo.setEndRow(paVo.getEndRow());
+
+		vo.setODate(stringFormatToDate(vo.getODateStr()));
+		System.out.println(vo);
+		return dao.selectOrderList(vo);
 	}
 
 
