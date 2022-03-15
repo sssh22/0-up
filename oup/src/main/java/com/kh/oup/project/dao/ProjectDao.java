@@ -35,4 +35,12 @@ public interface ProjectDao {
 	int editPrj(ProjectVo vo);
 
 	List<ProjectGroupVo>  getGroupList();
+
+	int enrollPg(List<ProjectGroupVo> glist);
+
+	int getPrjNo();
+
+	int delPg(int projectNo);
+
+	
 }

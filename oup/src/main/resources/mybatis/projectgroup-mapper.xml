@@ -62,7 +62,7 @@
 	JOIN TEAM T ON(E.TEAM_CODE = T.TEAM_CODE)
 	JOIN DEPARTMENT D ON(T.DEPART_CODE = D.DEPART_CODE)
 	JOIN GROUP1 G ON(E.EMPLOYEE_NO = G.EMPLOYEE_NO)
-	WHERE E.ENT_YN='Y'AND G.PROJECT_NO = #{projectNo}
+	WHERE E.ENT_YN='N'AND G.PROJECT_NO = #{projectNo}
 	
 </select>
 
@@ -85,6 +85,27 @@
 	JOIN TEAM T ON(E.TEAM_CODE = T.TEAM_CODE)
 	JOIN DEPARTMENT D ON(T.DEPART_CODE = D.DEPART_CODE)
 	JOIN GROUP1 G ON(E.EMPLOYEE_NO = G.EMPLOYEE_NO)
+	WHERE E.ENT_YN='N'
  </select>
+ 
+ <insert id="enrollPg" parameterType="java.util.List">
+
+    INSERT INTO GROUP1(GROUP_NO, PROJECT_NO, EMPLOYEE_NO, GROUP_POSITION)
+    SELECT SEQ_GROUP1.NEXTVAL, A.* FROM(
+    <foreach item="item" collection="list" separator="UNION ALL ">
+        select 
+        #{item.projectNo} AS PROJECT_NO, 
+	    #{item.employeeNo} AS EMPLOYEE_NO,
+	    #{item.groupPosition} AS GROUP_POSITION
+       	FROM DUAL
+    </foreach>) A
+
+ </insert>
+ 
+ <delete id="delPg" parameterType="int">
+ DELETE FROM GROUP1 
+ WHERE PROJECT_NO = #{projectNo}
+ </delete>
+ 
  
 </mapper>

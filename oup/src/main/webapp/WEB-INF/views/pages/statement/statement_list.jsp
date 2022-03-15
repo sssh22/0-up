@@ -57,7 +57,7 @@
             <td> 주문 날짜 : </td>
             <td><input type="date" name="date1" id="sdate" value="" onchange="setmin();"></td>
             <td> &nbsp; ~ &nbsp; </td>
-            <td><input type="date" name="date2" id="edate" value="" min="2022-02-03"></td>
+            <td><input type="date" name="date2" id="edate" value="" onchange="setmax();"></td>
           </tr>
         </table>
         
@@ -222,6 +222,12 @@
 	   $('#edate').attr("min",$("#sdate").val());
    }
 
+</script>
+<script type="text/javascript">
+	function setmax(){
+		console.log($("#edate").val());
+		$('#sdate').attr("max",$("#edate").val());
+	}
 </script>
 
 <script type="text/javascript">

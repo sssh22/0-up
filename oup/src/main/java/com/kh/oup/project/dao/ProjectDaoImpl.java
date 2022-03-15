@@ -82,6 +82,13 @@ public class ProjectDaoImpl implements ProjectDao {
 	public int enrollPrj(ProjectVo vo) {
 		return ss.insert("project.enrollPrj",vo);
 	}
+	//prj 그룹 등록
+	@Override
+	public int enrollPg(List<ProjectGroupVo> glist) {
+		return ss.insert("projectgroup.enrollPg",glist);
+	}
+	
+	
 	//prj 수정
 	@Override
 	public int editPrj(ProjectVo vo) {
@@ -92,5 +99,18 @@ public class ProjectDaoImpl implements ProjectDao {
 	public List<ProjectGroupVo> getGroupList() {
 		return ss.selectList("projectgroup.getGroupList");
 	}
+	//그룹 등록 _ prjNo 찾기
+	@Override
+	public int getPrjNo() {
+		return ss.selectOne("project.getPrjNo");
+	}
+
+	@Override
+	public int delPg(int projectNo) {
+		return ss.delete("projectgroup.delPg",projectNo);
+	}
+
+	
+	
 
 }

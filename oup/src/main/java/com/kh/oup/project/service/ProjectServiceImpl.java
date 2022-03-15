@@ -1,5 +1,6 @@
 package com.kh.oup.project.service;
 
+import java.util.ArrayList;
 import java.util.List;
 
 import org.springframework.beans.factory.annotation.Autowired;
@@ -86,13 +87,38 @@ public class ProjectServiceImpl implements ProjectService{
 	//프로젝트 등록
 	@Override
 	public int enrollPrj(ProjectVo vo) {
-		return dao.enrollPrj(vo);
+		
+		
+		String c1 = vo.getProjectContents1().replace("<br>", "\r\n");
+		String c2 = vo.getProjectContents2().replace("<br>", "\r\n");
+		String c3 = vo.getProjectContents3().replace("<br>", "\r\n");
+		String c4 = vo.getProjectContents4().replace("<br>", "\r\n");
+		
+		vo.setProjectContents1(c1);
+		vo.setProjectContents2(c2);
+		vo.setProjectContents3(c3);
+		vo.setProjectContents4(c4);
+		
+		int result = dao.enrollPrj(vo);
+		return result;
 	}
 
 	//프로젝트 수정
 	@Override
 	public int editPrj(ProjectVo vo) {
-		return dao.editPrj(vo);
+		int result = dao.editPrj(vo);
+		
+		String c1 = vo.getProjectContents1().replace("<br>", "\r\n");
+		String c2 = vo.getProjectContents2().replace("<br>", "\r\n");
+		String c3 = vo.getProjectContents3().replace("<br>", "\r\n");
+		String c4 = vo.getProjectContents4().replace("<br>", "\r\n");
+		
+		vo.setProjectContents1(c1);
+		vo.setProjectContents2(c2);
+		vo.setProjectContents3(c3);
+		vo.setProjectContents4(c4);
+		
+		return result;
 	}
 
 	//그룹 전체 조회
@@ -100,5 +126,47 @@ public class ProjectServiceImpl implements ProjectService{
 	public List<ProjectGroupVo> getGroupList() {
 		return dao.getGroupList();
 	}
+
+	//empNo[] -> 프로젝트 그룹 등록
+ 	@Override
+	public int enrollPg(int[] employeeNo, int projectNo) {
+
+		
+ 		List<ProjectGroupVo> glist = new ArrayList<ProjectGroupVo>();
+ 		ProjectGroupVo gvo = null;
+		for(int i = 0; i < employeeNo.length; i++) {
+			if(i==0) {
+				gvo = new ProjectGroupVo();
+				gvo.setEmployeeNo(employeeNo[i]);
+				gvo.setGroupPosition("L");
+				gvo.setProjectNo(projectNo);
+				
+				glist.add(gvo);
+				
+			}else if(i>0) {
+				gvo = new ProjectGroupVo();
+				gvo.setEmployeeNo(employeeNo[i]);
+				gvo.setGroupPosition("F");
+				gvo.setProjectNo(projectNo);
+				
+				glist.add(gvo);
+			}
+		}
+		
+		return dao.enrollPg(glist);
+	}
+
+
+	@Override
+	public int getPrjNo() {
+		return dao.getPrjNo();
+	}
+
+
+	@Override
+	public int delPg(int projectNo) {
+		return dao.delPg(projectNo);
+	}
+
 
 }
