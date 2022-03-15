@@ -52,9 +52,9 @@
   		(
 	  		select rownum rn, op.* 
 	  		from(
-		  		select * 
+		  		select distinct o.* 
 		  		from order1 o, order_list ol
-		  		where o.o_no = ol.o_no 
+		  		where o.o_no = ol.o_no
 		  		<choose>
 		 			<when test="cNo !=null and cNo !=0"> and o.c_no = ${cNo}</when>
 		 			<when test="projectNo !=null and projectNo!=0"> and o.project_no = ${projectNo}</when>

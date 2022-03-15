@@ -1,7 +1,9 @@
-<%@ page language="java" contentType="text/html; charset=UTF-8"
-    pageEncoding="UTF-8"%>
-<%@ taglib prefix="c" uri="http://java.sun.com/jsp/jstl/core" %>
+<%@ page language="java" contentType="text/html; charset=UTF-8" pageEncoding="UTF-8"%>
+<%@ taglib prefix="c" uri="http://java.sun.com/jsp/jstl/core"%>
+<%@ taglib uri="http://java.sun.com/jsp/jstl/fmt" prefix="fmt"%>
 <c:set var="path" value="${pageContext.request.contextPath}"></c:set>
+<fmt:formatDate var="startDate" value="${list.ODate}" pattern="yyyy-MM-dd"/>
+<fmt:formatDate var="endDate" value="${list.creditDate}" pattern="yyyy-MM-dd"/>
 <!DOCTYPE html>
 <html lang="en">
 <head>
@@ -133,17 +135,17 @@
 	                      <th style="width: 10%" class="text-center">
 	                          거래처코드
 	                      </th>
-	                      <th style="width: 15%" class="text-center">
-	                          거래처명
-	                      </th>
-	                      <th style="width: 8%" class="text-center">
+	                      <th style="width: 10%" class="text-center">
 	                          담당자
 	                      </th>
+	                      <th style="width: 13%" class="text-center">
+	                          출하창고
+	                      </th>
 	                      <th style="width: 20%" class="text-center">
-	                        프로젝트명
+	                        프로젝트번호
 	                      </th>
 	                      <th style="width: 10%" class="text-center">
-	                          출하창고
+	                         결재상태
 	                      </th>
 	                      <th style="width: 35%" class="text-center">
 	                        일자
@@ -153,13 +155,15 @@
 	              <tbody>
 	              	<c:forEach items="${list}" var="l">				
 						<tr>
-							<td><input type="checkbox" class="checkbox-no" value="${l.CNo}"></td>
+							<td><input type="checkbox" class="checkbox-no" value="${l.ONo}"></td>
 							<td>${l.CNo}</td>
-							<td>${l.CName}</td>
-							<td>${l.COwner}</td>
-							<td>${l.BNo}</td>
-							<td>${l.CUmony}</td>
-							<td>${l.CAddr}</td>
+							<td>${l.employeeNo}</td>
+							<td>${l.projectNo}</td>
+							<td>${l.warehouseNo}</td>
+							<td>${l.OStatement}</td>
+							<td>
+								${startDate} ~ ${endDate}
+							</td>
 						</tr>
 					</c:forEach>
 	              </tbody>
