@@ -35,15 +35,23 @@ public class ProjectController {
 	
 	//등록 처리
 	@PostMapping("project_add")
-	public String project_add(ProjectVo vo) { 
-		
-		int result = service.enrollPrj(vo);
-		if(result>0) {
-			return "redirect:/project/project_list"; 
-		}else {
-			return "redirect:/project/project_add";
-		}
-	
+	public String project_add(ProjectVo vo,int[] employeeNo) { 
+
+		 int resultPrj = service.enrollPrj(vo);
+		 int projectNo = service.getPrjNo();
+		 System.out.println(projectNo);
+		 
+		 if(employeeNo.length > 1) {
+			 int resultPg = service.enrollPg(employeeNo,projectNo); 
+		 }
+		 
+		 
+		 if(resultPrj>0) { 
+			 return "redirect:/project/project_list"; 
+		 }else { 
+			return "redirect:/project/project_add"; 
+		 }
+		 
 	}
 
 	
@@ -69,7 +77,13 @@ public class ProjectController {
 	}
 	//수정 처리
 	@PostMapping("project_edit")
-	public String project_editt(ProjectVo vo) { 
+	public String project_editt(ProjectVo vo, int[] employeeNo) { 
+		 int projectNo = vo.getProjectNo();
+		 
+		 if(employeeNo.length > 1) {
+			 int delPg = service.delPg(projectNo);
+			 int insertPg  = service.enrollPg(employeeNo,projectNo);
+		 }
 			
 		int result = service.editPrj(vo);
 		if(result>0) {
@@ -84,12 +98,12 @@ public class ProjectController {
 	//삭제 =====================================
 	@PostMapping("project_del")
 	public String project_del(int projectNo) {
-		
+		int delPg = service.delPg(projectNo);
 		int result = service.delPrj(projectNo);
 		return "pages/project/project_list";
 	}
 	
-	//조회 ============================================//수정해야함
+	//조회 ===========================================
 	@GetMapping(value = {"/project_list/{page}","/project_list"})
 	public String project_list(Model model, @PathVariable(required=false) String page, HttpServletRequest req) throws Exception {
 		

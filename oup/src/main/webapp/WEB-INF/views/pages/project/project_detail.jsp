@@ -93,43 +93,19 @@
                   <br>
                     <div class="post">
                       <div id="con-title">1. 프로제트 시행 목적</div><br>
-                      
-                      <p>
-                        ${prjVo.projectContents1}
-                      </p>
-
+                      <pre>${prjVo.projectContents1}</pre>
                     </div>
-
                     <div class="post clearfix">
-                     
                       <div id="con-title">2. 프로젝트 개요 및 추진 방향</div><br>
-
-                      <p>
-                        ${prjVo.projectContents2}
-                      </p>
-                     
-                      
+                      <pre>${prjVo.projectContents2}</pre>
                     </div>
-
                     <div class="post clearfix">
-                     
                       <div id="con-title">3. 프로젝트 시행 효과</div><br>
-
-                      <p>
-                       ${prjVo.projectContents3}
-                      </p>
-                     
-                      
+                      <pre>${prjVo.projectContents3}</pre>
                     </div>
-
                     <div class="post">
-
                       <div id="con-title">4. 제안 및 요구사항 </div><br>
-
-                      <p>
-                        ${prjVo.projectContents4}
-                      </p>
-                      
+                      <pre>${prjVo.projectContents4}</pre>
                     </div>
                 </div>
               </div>

@@ -35,5 +35,12 @@ public interface ProjectService {
 	int editPrj(ProjectVo vo);
 
 	List<ProjectGroupVo> getGroupList();
+
+	int enrollPg(int[] employeeNo, int projectNo);
+
+	int getPrjNo();
+
+	int delPg(int projectNo);
+
 	
 }

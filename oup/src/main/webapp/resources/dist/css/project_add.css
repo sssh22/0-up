@@ -59,3 +59,16 @@ input{
 }
 
 
+#searchEmp{
+ background-color:#443b53;
+ border: 1px solid #5a4e70;
+ border-radius: 3px;
+ color: white;
+ height: 30px;
+}
+#searchEmp:hover{
+ background-color:#ffffff;
+ color: #5a4e70;
+ border: 1px solid #5a4e70;
+}
+
