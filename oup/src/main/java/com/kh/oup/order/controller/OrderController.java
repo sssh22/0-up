@@ -47,7 +47,6 @@ public class OrderController {
 	
 	@PostMapping(value = {"/list/{page}", "/list"})
 	public String orderList(Model model, @PathVariable(required = false)String page, OrderVo vo) throws Exception{
-		System.out.println(vo);
 		
 		if(page == null || Integer.parseInt(page) <= 0 )
 			page = "1";
@@ -56,7 +55,6 @@ public class OrderController {
 		PageVo paVo = new PageVo(page, totalRow);
 			
 		List<OrderVo> list = service.getSearchOrderList(paVo, vo);
-		System.out.println(vo);
 		model.addAttribute("list",list);
 		model.addAttribute("page", paVo);
 		model.addAttribute("vo", vo);
