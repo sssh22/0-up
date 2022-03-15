@@ -21,6 +21,13 @@ import com.kh.oup.approval.vo.ApprovalSPVo;
 import com.kh.oup.approval.vo.ApprovalVo;
 import com.kh.oup.common.PageVo;
 import com.kh.oup.employee.vo.EmployeeVo;
+import com.kh.oup.mail.vo.MailVo;
+import com.kh.oup.project.service.ProjectService;
+import com.kh.oup.project.vo.ProjectGroupVo;
+import com.kh.oup.project.vo.ProjectVo;
+import com.kh.oup.statement.service.StatementService;
+import com.kh.oup.statement.vo.StProductsVo;
+import com.kh.oup.statement.vo.StatementVo;
 
 @Controller
 @RequestMapping("/approval")
@@ -30,6 +37,10 @@ public class ApprovalController {
 	private ApprovalPopupService popupservice;
 	@Autowired
 	private ApprovalService service;
+	@Autowired 
+	private StatementService sservice;
+	@Autowired
+	private ProjectService pservice;
 	
 	@GetMapping("/send")
 	public String appSend() {
@@ -58,7 +69,7 @@ public class ApprovalController {
 		System.out.println(vo);
 		int result = service.appSend(vo, req);
 		
-		return "pages/approval/approvalBoxSend";
+		return "redirect:/approval/sendbox/1";
 	}
 	
 	
@@ -122,7 +133,7 @@ public class ApprovalController {
 		if(page == null || Integer.parseInt(page) <= 0 )
 			page = "1";
 		
-		int totalRow = service.getSendAppCnt(loginName);
+		int totalRow = service.getReceiveAppCnt(loginjobTitleCode);
 		PageVo vo = new PageVo(page, totalRow);
 		vo.setCntPerPage(15);
 		
@@ -133,13 +144,57 @@ public class ApprovalController {
 		return "pages/approval/approvalBoxReceive";
 	}
 	
-	@GetMapping("/complete")
-	public String completeBox() {
+	@GetMapping(value = {"/complete/{page}", "/complete"})
+	public String completeBox(Model model, @PathVariable(required = false)String page, HttpServletRequest request) throws Exception {
+		HttpSession session = request.getSession();
+		EmployeeVo loginEmployee = (EmployeeVo)session.getAttribute("loginEmployee");
+		String loginName = loginEmployee.getEmployeeName();
+		String loginjobTitleCode = loginEmployee.getJobTitleCode();
+		
+		if(page == null || Integer.parseInt(page) <= 0 )
+			page = "1";
+		
+		int totalRow = service.getCompleteAppCnt(loginName);
+		PageVo vo = new PageVo(page, totalRow);
+		vo.setCntPerPage(15);
+		
+		List<ApprovalVo> list = service.getCompleteApprovalList(vo, loginName);
+		model.addAttribute("list", list);
+		model.addAttribute("page", vo);
+		
 		return "pages/approval/approvalComplete";
 	}
 	
-	@GetMapping("detail")
-	public String appDetail() {
+	@GetMapping(value = {"/detail/{ano}", "/detail"})
+	public String appDetail(Model model, @PathVariable(required = false)int ano, HttpServletRequest request) throws Exception {
+		ApprovalVo approval = service.getApproval(ano);
+		model.addAttribute("approval", approval);
+		//거래명세서
+		if(approval.getDcCode().equals("SP")) {
+			//주문서번호 가져오기
+			int orderNo = service.getorderNo(approval.getADocNo());
+			StatementVo stVo = sservice.getStatement(orderNo);
+			List<StProductsVo> plist = sservice.getStProductsList(orderNo);
+			
+			int total=0;
+			for(int i=0;i<plist.size();i++) {
+				total += ((plist.get(i).getONum())*(plist.get(i).getPUnitPrice()));
+			}
+			stVo.setSTotal(total);
+			
+			model.addAttribute("stVo",stVo);
+			model.addAttribute("plist",plist);
+		}
+		
+		//프로젝트
+		if(approval.getDcCode().equals("PJ")) {
+			int projectNo = service.getProjectNo(approval.getADocNo());
+			ProjectVo prjVo = pservice.selectPrj(projectNo);
+			List<ProjectGroupVo> glist = pservice.selectPrjgroup(projectNo);
+			model.addAttribute("prjVo",prjVo);
+			model.addAttribute("glist",glist);
+		}
+		
 		return "pages/approval/approvalDetail";
 	}
 

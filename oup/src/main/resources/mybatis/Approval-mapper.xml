@@ -33,7 +33,9 @@
  			A_DOC_NO,
  			A_TITLE,
 			A_DATE,
-			A_E_DATE,
+			A_E_DATE1,
+			A_E_DATE2,
+			A_E_DATE3,
 			A_PIC_NAME,
 			A_TEAM_NY,
 			A_DEC_NY,
@@ -51,6 +53,8 @@
  			#{aTitle},
  			SYSDATE,
  			NULL,
+ 			NULL,
+ 			NULL,
  			#{aPicName},
  			'N',
  			'N',
@@ -62,9 +66,23 @@
  	</insert>
  	
  	<select id="getSendAppCnt" resultType="int">
- 		SELECT COUNT(A_R_NO)
+ 		SELECT COUNT(A_NO)
  		FROM APPR
  		WHERE A_PIC_NAME = #{name} AND A_STATEMENT = 'N'
+ 	</select>
+ 	
+ 	<select id="getReceiveAppCnt" resultType="int">
+ 		SELECT COUNT(A1.A_NO)
+				FROM APPR A1
+				JOIN APPR_REGUL A2
+				ON A1.A_R_NO = A2.A_R_NO
+				WHERE (A2.DECISION_CODE = #{loginjobTitleCode} OR A2.ALLDECISION_CODE = #{loginjobTitleCode}) AND A1.A_STATEMENT = 'N'
+ 	</select>
+ 	
+ 	<select id="getCompleteAppCnt" resultType="int">
+ 		SELECT COUNT(A_NO)
+ 		FROM APPR
+ 		WHERE A_PIC_NAME = #{name} AND A_STATEMENT = 'Y'
  	</select>
  	
  	<select id="getSendApprovalList" parameterType="HashMap" resultType="com.kh.oup.approval.vo.ApprovalVo">
@@ -80,4 +98,51 @@
   		)
   		WHERE RN BETWEEN #{page.startRow} AND #{page.endRow}
  	</select>
+ 	
+ 	<select id="getReceiveApprovalList" parameterType="HashMap" resultType="com.kh.oup.approval.vo.ApprovalVo">
+ 		SELECT * FROM 
+  		(
+	  		SELECT ROWNUM RN, R.* 
+	  		 FROM(
+                SELECT *
+				FROM APPR A1
+				JOIN APPR_REGUL A2
+				ON A1.A_R_NO = A2.A_R_NO
+				WHERE (A2.DECISION_CODE = #{loginjobTitleCode} OR A2.ALLDECISION_CODE = #{loginjobTitleCode}) AND A1.A_STATEMENT = 'N'
+            ) R
+  		)
+  		WHERE RN BETWEEN #{page.startRow} AND #{page.endRow}
+ 	</select>
+ 	
+ 	<select id="getCompleteAppList" parameterType="HashMap" resultType="com.kh.oup.approval.vo.ApprovalVo">
+ 		SELECT * FROM 
+  		(
+	  		SELECT ROWNUM RN, R.* 
+	  		 FROM(
+                SELECT *
+		 		FROM APPR
+		 		WHERE A_PIC_NAME = #{loginName} AND A_STATEMENT = 'Y'
+            ) R
+  		)
+  		WHERE RN BETWEEN #{page.startRow} AND #{page.endRow}
+ 	</select>
+ 	
+ 	<select id="getApproval" resultType="com.kh.oup.approval.vo.ApprovalVo">
+ 		SELECT *
+ 		FROM APPR
+ 		WHERE A_NO = #{ano}
+ 	</select>
+ 	
+ 	<select id="getOrderNo" resultType="int">
+ 		SELECT O_NO
+ 		FROM STATEMENT
+ 		WHERE S_NO = #{ano}
+ 	</select>
+ 	
+ 	<select id="getProjectNo" resultType="int">
+ 		SELECT PROJECT_NO
+ 		FROM PROJECT
+ 		WHERE PROJECT_NO = #{aDocNo}
+ 	</select>
+ 	
  </mapper>
