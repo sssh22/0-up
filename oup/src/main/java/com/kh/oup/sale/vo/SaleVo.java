@@ -14,7 +14,7 @@ public class SaleVo {
 	private long oNo;
 	private long saleSum;
 	private String saleDate;
-	private long sUmony;
+	private long sUmoney;
 	private char vatYN;
 	private String cName;
 	private String employeeName;
