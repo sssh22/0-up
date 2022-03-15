@@ -16,11 +16,14 @@ public class ApprovalVo {
 	private String aTitle; //제목
 	@DateTimeFormat(pattern = "yyyy-MM-dd")
 	private Date aDate; //작성일
-	private Date aeDate; //결재일자
 	private String aPicName; //신청자명
 	private char aTeamNy; //팀장승인여부
 	private char aDecNy; //전결권자승인여부
 	private char aAllDecNy; //결정권자승인여부
+	private Date aeDate1; //팀장결재일자
+	private Date aeDate2; //전결권자결재일자
+	private Date aeDate3; //결정권자결재일자
+	private Date aeDate4; //최종결재일자
 	private char aStateMent; //결재상태
 	
 	private MultipartFile attachment; //첨부파일

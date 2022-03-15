@@ -21,4 +21,10 @@ public interface ApprovalDao {
 
 	List<ApprovalVo> getCompleteAppList(PageVo vo, String loginName) throws Exception;
 
+	ApprovalVo getApproval(int ano) throws Exception;
+
+	int getOrderNo(int ano) throws Exception;
+
+	int getProjectNo(int aDocNo) throws Exception;
+
 }

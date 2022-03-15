@@ -33,7 +33,9 @@
  			A_DOC_NO,
  			A_TITLE,
 			A_DATE,
-			A_E_DATE,
+			A_E_DATE1,
+			A_E_DATE2,
+			A_E_DATE3,
 			A_PIC_NAME,
 			A_TEAM_NY,
 			A_DEC_NY,
@@ -50,6 +52,8 @@
  			#{aDocNo},
  			#{aTitle},
  			SYSDATE,
+ 			NULL,
+ 			NULL,
  			NULL,
  			#{aPicName},
  			'N',
@@ -122,4 +126,23 @@
   		)
   		WHERE RN BETWEEN #{page.startRow} AND #{page.endRow}
  	</select>
+ 	
+ 	<select id="getApproval" resultType="com.kh.oup.approval.vo.ApprovalVo">
+ 		SELECT *
+ 		FROM APPR
+ 		WHERE A_NO = #{ano}
+ 	</select>
+ 	
+ 	<select id="getOrderNo" resultType="int">
+ 		SELECT O_NO
+ 		FROM STATEMENT
+ 		WHERE S_NO = #{ano}
+ 	</select>
+ 	
+ 	<select id="getProjectNo" resultType="int">
+ 		SELECT PROJECT_NO
+ 		FROM PROJECT
+ 		WHERE PROJECT_NO = #{aDocNo}
+ 	</select>
+ 	
  </mapper>

@@ -119,7 +119,7 @@
                 <div class="col-sm-1"></div>
                 <div class="col-sm-4">
                   <div class="col">
-                    <input type="text" id="aUmony" class="form-control mb-3" placeholder="미수금액" readonly>
+                    <input type="text" id="aUmoney" class="form-control mb-3" placeholder="미수금액" readonly>
                   </div>
                 </div>
                 
@@ -127,7 +127,7 @@
                 <div class="col-sm-1"></div>
                 <div class="col-sm-4">
                   <div class="col">
-                    <input type="text" id="sUmony" name="sUmony" class="form-control mb-3" placeholder="미수금액" readonly>
+                    <input type="text" id="sUmoney" name="sUmoney" class="form-control mb-3" placeholder="미수금액" readonly>
                   </div>
                 </div>
           </div>
@@ -265,9 +265,9 @@
 		var index =  parseInt(indexdoc.value);
 		var bugaYN = document.getElementById('bugaYN');
 		var bugaValue = bugaYN.options[bugaYN.selectedIndex].text;
-		var sUmony = document.getElementById('sUmony');
-		var aUmony = document.getElementById('aUmony');
-		var sumPrice = parseInt(aUmony.value);
+		var sUmoney = document.getElementById('sUmoney');
+		var aUmoney = document.getElementById('aUmoney');
+		var sumPrice = parseInt(aUmoney.value);
 		
 		for(let i = 1; i < index; i++) {
 			var count = document.getElementById('count' + i).value;
@@ -292,7 +292,7 @@
 					
 		}
 		
-		sUmony.value = sumPrice;
+		sUmoney.value = sumPrice;
 	}
 </script>
 </body>

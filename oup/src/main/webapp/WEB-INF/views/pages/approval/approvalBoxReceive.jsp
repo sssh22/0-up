@@ -148,12 +148,12 @@
 	                    <c:if test="${l.dcCode eq 'OD'}">
 	                    	<td class="mailbox-subject">주문서</td>
 	                    </c:if>
-	                    <td class="mailbox-subject"><a href="">${l.ATitle}</a></td>
+	                    <td class="mailbox-subject"><a href="${path}/approval/detail/${l.ANo}">${l.ATitle}</a></td>
 	                    <td class="mailbox-attachment"><fmt:formatDate value="${l.ADate}" pattern="yyyy-MM-dd"/></td>
-	                    <c:if test="${l.aeDate ne null}">
-		                    <td class="mailbox-date"><fmt:formatDate value="${l.aeDate}" pattern="yyyy-MM-dd"/></td>
+	                    <c:if test="${l.aeDate4 ne null}">
+		                    <td class="mailbox-date"><fmt:formatDate value="${l.aeDate4}" pattern="yyyy-MM-dd"/></td>
 	                    </c:if>
-	                     <c:if test="${l.aeDate eq null}">
+	                     <c:if test="${l.aeDate4 eq null}">
 		                    <td class="mailbox-date">대기중</td>
 	                    </c:if>
 	                  </tr>

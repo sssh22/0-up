@@ -20,7 +20,7 @@
 			O_NO,
 			SALE_SUM,
 			SALE_DATE,
-			S_UMONY,
+			S_UMONEY,
 			VAT_YN
 		)
 		VALUES
@@ -34,7 +34,7 @@
 			NULL, <!-- #{oNo} -->
 			#{sUmony},
 			#{saleDate},
-			#{sUmony},
+			#{sUmoney},
 			#{vatYN}
 		)
 	</insert>
@@ -62,7 +62,7 @@
 	<update id="clientAddUmony" parameterType="HashMap">
 		UPDATE CLIENT
 		SET
-		C_UMONY = #{sUmony}
+		C_UMONY = #{sUmoney}
 		WHERE
 		C_NO = #{cNo}
 	</update>
@@ -76,7 +76,7 @@
 		PROJECT_NO = #{projectNo},
 		SALE_SUM = #{saleSum},
 		SALE_DATE = #{saleDate},
-		S_UMONY = #{sUmony}
+		S_UMONEY = #{sUmoney}
 		WHERE
 		SALE_NO = #{saleNo}
 	</update>
