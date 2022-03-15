@@ -74,7 +74,6 @@ public class OrderServiceImpl implements OrderService{
 		vo.setEndRow(paVo.getEndRow());
 
 		vo.setODate(stringFormatToDate(vo.getODateStr()));
-		System.out.println(vo);
 		return dao.selectOrderList(vo);
 	}
 

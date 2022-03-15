@@ -15,6 +15,7 @@ public class OrderVo {
 	private String teamCode;	// 팀코드
 	private int employeeNo;		// 담당자
 	private String vatYn;		// 부가세 여부
+	private String oStatement;
 	
 	private int pNo;		// 품목 번호 검색용
 	private String oDateStr;	
