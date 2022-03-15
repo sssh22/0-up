@@ -23,5 +23,11 @@ public interface ApprovalService {
 
 	List<ApprovalVo> getCompleteApprovalList(PageVo vo, String loginName) throws Exception;
 
+	ApprovalVo getApproval(int ano) throws Exception;
+
+	int getorderNo(int ano) throws Exception;
+
+	int getProjectNo(int aDocNo) throws Exception;
+
 
 }

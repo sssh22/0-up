@@ -78,5 +78,22 @@ public class ApprovalServiceImpl implements ApprovalService{
 		return list;
 	}
 
+	@Override
+	public ApprovalVo getApproval(int ano) throws Exception {
+		ApprovalVo app = dao.getApproval(ano);
+		
+		return app;
+	}
+
+	@Override
+	public int getorderNo(int ano) throws Exception {
+		return dao.getOrderNo(ano);
+	}
+
+	@Override
+	public int getProjectNo(int aDocNo) throws Exception {
+		return dao.getProjectNo(aDocNo);
+	}
+
 
 }

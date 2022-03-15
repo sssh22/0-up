@@ -48,7 +48,7 @@ public class SaleController {
 		
 		int result = service.saleEnter(saleVo, saleListVo);
 		
-		int result2 = service.clientAddUmony(saleVo.getCNo(), saleVo.getSUmony());
+		int result2 = service.clientAddUmony(saleVo.getCNo(), saleVo.getSUmoney());
 		
 		return "redirect:/sale/enter";
 	}

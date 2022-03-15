@@ -66,4 +66,19 @@ public class ApprovalDaoImpl implements ApprovalDao{
 		return ss.selectList("approval.getCompleteAppList", test);
 	}
 
+	@Override
+	public ApprovalVo getApproval(int ano) throws Exception {
+		return ss.selectOne("approval.getApproval", ano);
+	}
+
+	@Override
+	public int getOrderNo(int ano) throws Exception {
+		return ss.selectOne("approval.getOrderNo", ano);
+	}
+
+	@Override
+	public int getProjectNo(int aDocNo) throws Exception {
+		return ss.selectOne("approval.getProjectNo", aDocNo);
+	}
+
 }
