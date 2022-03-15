@@ -99,36 +99,50 @@ table td{
       </c:forEach>
     </table>
     <br>
-<button type="button" id="btnL" onclick=>그룹장 선택</button>
+<button type="button" id="btnL" onclick="leader();">그룹장 선택</button>
 <button type="button" id="btnF" onclick="members();">그룹원 선택</button>
-<div>그룹장 : <span></span></div>
-<div>그룹원 : <span id="empNo"></span><span id="empName"></span></div>
 
+<script type="text/javascript">
+//그룹장
+function leader(){
+	var checkbox = $("input[class=checkEmp]:checked");
+	
+	if(checkbox.length > 1 || checkbox.lengt == 0){
+			alert("그룹장은 한 명만 선택할 수 있습니다.")
+	}else{			
+			checkbox.each(function(i) {
+			var tr = checkbox.parent().parent().eq(i);
+			var td = tr.children();
 
+			var employeeNo = td.eq(1).text();
+			var empName = td.eq(2).text();
+			
+			opener.document.getElementById("empNo").value= employeeNo;
+			opener.document.getElementById("empName").value= empName;
+			});
+		self.close();
+	}//else
+};
 
+</script>
 
 <script type="text/javascript">
 //그룹원
 function members(){ 
 			
-			var checkbox = $("input[class=checkEmp]:checked");
-			
-			// 체크된 체크박스 값을 가져온다
-			checkbox.each(function(i) {
+	var checkbox = $("input[class=checkEmp]:checked");
 	
-				var tr = checkbox.parent().parent().eq(i);
-				var td = tr.children();
+	checkbox.each(function(i) {
+		var tr = checkbox.parent().parent().eq(i);
+		var td = tr.children();
 
-				// td.eq(0)은 체크박스 이므로  td.eq(1)의 값부터 가져온다.
-				var employeeNo = td.eq(1).text();
-				var empName = td.eq(2).text();
-
-			opener.document.getElementById("box").append("<button>삭제</button>");
-
-			});
-			
+		var employeeNo = td.eq(1).text();
+		var empName = td.eq(2).text();
+	
+	opener.addEmpNo(employeeNo,empName);
+	});
+	self.close();
 };
-
 
 </script>
 
