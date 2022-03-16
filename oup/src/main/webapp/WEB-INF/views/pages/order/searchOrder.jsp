@@ -2,8 +2,6 @@
 <%@ taglib prefix="c" uri="http://java.sun.com/jsp/jstl/core"%>
 <%@ taglib uri="http://java.sun.com/jsp/jstl/fmt" prefix="fmt"%>
 <c:set var="path" value="${pageContext.request.contextPath}"></c:set>
-<fmt:formatDate var="startDate" value="${list.ODate}" pattern="yyyy-MM-dd"/>
-<fmt:formatDate var="endDate" value="${list.creditDate}" pattern="yyyy-MM-dd"/>
 <!DOCTYPE html>
 <html lang="en">
 <head>
@@ -130,13 +128,12 @@
 	              <thead>
 	                  <tr>
 	                      <th style="width: 2%">
-	                        <input type="checkbox">
 	                      </th>
 	                      <th style="width: 10%" class="text-center">
 	                          거래처코드
 	                      </th>
 	                      <th style="width: 10%" class="text-center">
-	                          담당자
+	                          담당자번호
 	                      </th>
 	                      <th style="width: 13%" class="text-center">
 	                          출하창고
@@ -148,7 +145,7 @@
 	                         결재상태
 	                      </th>
 	                      <th style="width: 35%" class="text-center">
-	                        일자
+	                        여신기한
 	                      </th>
 	                  </tr>
 	              </thead>
@@ -156,13 +153,13 @@
 	              	<c:forEach items="${list}" var="l">				
 						<tr>
 							<td><input type="checkbox" class="checkbox-no" value="${l.ONo}"></td>
-							<td>${l.CNo}</td>
-							<td>${l.employeeNo}</td>
-							<td>${l.projectNo}</td>
-							<td>${l.warehouseNo}</td>
-							<td>${l.OStatement}</td>
-							<td>
-								${startDate} ~ ${endDate}
+							<td class="text-center">${l.CNo}</td>
+							<td class="text-center">${l.employeeNo}</td>
+							<td class="text-center">${l.projectNo}</td>
+							<td class="text-center">${l.warehouseNo}</td>
+							<td class="text-center">${l.OStatement}</td>
+							<td class="text-center">
+								<fmt:formatDate value="${l.ODate}" pattern="yyyy-MM-dd"/> ~ <fmt:formatDate value="${l.creditDate}" pattern="yyyy-MM-dd"/>
 							</td>
 						</tr>
 					</c:forEach>
@@ -170,7 +167,7 @@
           	  </table>
 	
 	          <div style="margin: 10px;">
-	            <button class="btn btn-secondary btn-sm">변경</button>
+	            <button type="button" class="btn btn-secondary btn-sm" onclick="changeOrder()">변경</button>
 	            <button type="button" class="btn btn-secondary btn-sm">결재신청</button>
 	            <button type="reset" class="btn btn-secondary btn-sm">다시작성</button>
 	            <button type="button" class="btn btn-secondary btn-sm">상세보기</button>
@@ -239,6 +236,28 @@
 		var features = "width=720,height=500, scrollbars=no, resizable=no";
 		var search = window.open(url, windowTargetName, features);
 	}
+	
+	function changeOrder(){
+		let checkArr = document.getElementsByClassName('checkbox-no');
+		let checkNum=0;
+		let result="";
+		
+		for(let i=0; i<checkArr.length; ++i){
+			let t = checkArr[i];
+			if(t.checked){
+				checkNum++;
+				result = t.value;
+			}
+		}
+		
+		if(checkNum != 1){
+			alert("1개 선택이 아니면 변경이 불가능합니다 ");
+		}
+		
+		if(checkNum ==1){
+			location.href="${path}/order/change/"+ result; 
+			}
+		}
 	
 </script>
 

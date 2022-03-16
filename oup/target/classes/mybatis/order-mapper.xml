@@ -69,4 +69,21 @@
   		where rn between ${startRow} and ${endRow}
  	</select>
  
+ 	<select id="selectOrderNo" resultType="orderVo">
+ 		select * from order1 where o_no = ${oNo}
+ 	</select>
+ 
+ 	<select id="selectProductOrderNo" resultMap="orderProductMap">
+ 		select * from order_list where o_no = ${oNo}
+ 	</select>
+ 	
+ 	<resultMap type="orderProductVo" id="orderProductMap">
+ 		<result column="o_list_no" property="orderListNo"/>
+ 		<result column="o_no" property="orderNo"/>
+ 		<result column="p_no" property="pNoStr"/>
+ 		<result column="o_num" property="oNumStr"/>
+ 		<result column="o_price" property="oPriceStr"/>
+ 		<result column="o_delibery_date" property="oDeliberyDateStrr"/>
+ 	</resultMap>
+ 
  </mapper>

@@ -62,4 +62,14 @@ public class OrderController {
 		return "pages/order/searchOrder";
 	}
 	
+	@GetMapping(value = {"/change/{orderNo}"})
+	public String changeOrder(Model model, @PathVariable String orderNo)throws Exception{
+		OrderVo vo  = service.selectOrder(orderNo);
+		List<OrderProductVo> pVo = service.selectProductOrder(orderNo);
+		
+		model.addAttribute("vo",vo);
+		model.addAttribute("pvo", pVo);
+		
+		return "pages/order/changeOrder";
+	}
 }

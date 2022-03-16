@@ -14,5 +14,9 @@ public interface OrderService {
 	int getSearchOrderCnt(OrderVo vo) throws Exception;
 
 	List<OrderVo> getSearchOrderList(PageVo paVo, OrderVo vo) throws Exception;
+
+	OrderVo selectOrder(String orderNo) throws Exception;
+
+	List<OrderProductVo> selectProductOrder(String orderNo) throws Exception;
 	
 }

@@ -1,6 +1,7 @@
 <%@ page language="java" contentType="text/html; charset=UTF-8"
     pageEncoding="UTF-8"%>
 <%@ taglib prefix="c" uri="http://java.sun.com/jsp/jstl/core" %>
+<%@ taglib uri="http://java.sun.com/jsp/jstl/fmt" prefix="fmt"%>
 <c:set var="path" value="${pageContext.request.contextPath}"></c:set>
 <!DOCTYPE html>
 <html lang="en">
@@ -60,7 +61,7 @@
 	                <div class="col-sm-1"></div>
 	                <div class="col-sm-4">  
 	                  <div class="col">
-	                    <input type="date" class="form-control mb-3 mt-3" id="orderDate" name="oDateStr" required>
+	                    <input type="date" class="form-control mb-3 mt-3" id="orderDate" name="oDateStr" value="<fmt:formatDate value="${vo.ODate}" pattern="yyyy-MM-dd"/>" required>
 	                  </div>
 	                </div>
 	
@@ -68,10 +69,10 @@
 	                <div class="col-sm-1"></div>
 	                <div class="col-sm-4">                  
 	                  <div class="input-group col mt-3">
-	                    <input type="text" class="form-control" id="clientText" placeholder="거래처">
+	                    <input type="hidden" class="form-control" id="clientText" placeholder="거래처">
+	                    <input type="number" id="clientNo" name="cNo" value="${vo.CNo}" class="form-control" readonly>
 	                    <button type="button" class="input-group-text" onclick="goPopup()"><i class="bi bi-search"></i></button>
-	                    <input type="text" class="form-control" id="client" name="client" readonly>
-	                    <input type="hidden" id="clientNo" name="cNo">
+	                    <input type="text" class="form-control" id="client" name="client"  readonly>
 	                  </div>
 	                </div>
 	                
@@ -80,10 +81,10 @@
 	                <div class="col-sm-1"></div>
 	                <div class="col-sm-4">
 	                  <div class="input-group col mb-3">
-	                    <input type="text" class="form-control" id="ownerText"  placeholder="담당자">
+	                    <input type="hidden" class="form-control" id="ownerText"  placeholder="담당자">
+	                    <input type="number" id="employeeNo" name="employeeNo" class="form-control" value="${vo.employeeNo}" readonly>
 	                    <button type="button" class="input-group-text" onclick="employeePopup();"><i class="bi bi-search"></i></button>
 	                    <input type="text" class="form-control" id="employeeName" readonly>
-	                    <input type="hidden" id="employeeNo" name="employeeNo">
 	                  </div>
 	                </div>
 	                
@@ -91,7 +92,7 @@
 	                <div class="col-sm-1"></div>
 	                <div class="col-sm-4">
 	                  <div class="input-group col mb-3">
-	                    <input type="text" class="form-control" id="teamCode" name="teamCode" value="abc" readonly>
+	                    <input type="text" class="form-control" id="teamCode" name="teamCode" value="${vo.teamCode}" readonly>
 	                  </div>
 	                </div>
 	                
@@ -99,10 +100,10 @@
 		            <div class="col-sm-1"></div>
 		            <div class="col-sm-4">
 		               <div class="input-group col mb-3">
-		                  <input type="text" name="projectSearch" id="projectSearch" class="form-control" placeholder="프로젝트">
+		                  <input type="hidden" name="projectSearch" id="projectSearch" class="form-control" placeholder="프로젝트">
+		                   <input type="number" id="projectNo" name="projectNo" class="form-control" value="${vo.projectNo}" readonly>
 		                   <button type="button" onclick="projectPopup()" class="input-group-text"><i class="bi bi-search"></i></button>
 		                   <input type="text" id="projectName" class="form-control" readonly>
-		                   <input type="hidden" id="projectNo" name="projectNo" class="form-control">
 		               </div>
 		            </div>
 	
@@ -110,10 +111,10 @@
 	                </div><div class="col-sm-1"></div>
 	                <div class="col-sm-4">
 	                  <div class="input-group col">
-	                    <input type="text" class="form-control" placeholder="출하창고" id="wareText">
+	                    <input type="hidden" class="form-control" placeholder="출하창고" id="wareText">
+	                    <input type="number" name="warehouseNo" id="warehouseNo" class="form-control" value="${vo.warehouseNo}" readonly>
 	                    <button type="button" class="input-group-text" onclick="warehousePopup();"><i class="bi bi-search"></i></button>
 	                    <input type="text" class="form-control" id="warehouseName" readonly>
-	                    <input type="hidden" name="warehouseNo" id="warehouseNo">
 	                  </div>
 	                </div>
 	
@@ -122,8 +123,14 @@
 	                <div class="col-sm-4">
 	                  <div class="col">
 	                    <select class="form-control mb-3" onchange="selectVat();" id="vat" name="vatYn">
-	                      <option value="N">부가세미적용</option>
-	                      <option value="Y">부가세적용</option>
+	                    <c:if test="${vo.vatYn eq 'Y'}">
+	                    	<option value="N">부가세미적용</option>
+	                      	<option value="Y" selected>부가세적용</option>
+	                    </c:if>
+	                    <c:if test="${vo.vatYn eq 'N'}">
+	                    	<option value="N" selected>부가세미적용</option>
+	                      	<option value="Y">부가세적용</option>
+	                    </c:if>
 	                    </select>
 	                  </div>
 	                </div>
@@ -132,20 +139,12 @@
 	                <div class="col-sm-1"></div>
 	                <div class="col-sm-4">
 	                  <div class="col">
-	                    <input type="date" class="form-control mb-3" id="creditDate" name="creditDateStr" readonly>
+	                    <input type="date" class="form-control mb-3" id="creditDate" name="creditDateStr" value="<fmt:formatDate value="${vo.creditDate}" pattern="yyyy-MM-dd"/>" readonly>
 	                  </div>
 	                </div>
 	          </div>
 
 	          <div style="margin: 10px;">
-	            <button type="button">찾기</button>
-	            <button type="button">거래내역보기</button>
-	            <button type="button">My품목</button>
-	            <button type="button">견적</button>
-	            <button type="button">할인</button>
-	            <button type="button">재고불러오기</button>
-	            <button type="button">생성한전표</button>
-	            <button type="button">이익계산</button>
 		        <a href="javascript:orderMinus();" style="float:right; margin-left:15px;"><i class="bi bi-dash-square"></i></a>
 		        <a href="javascript:orderPlus();" style="float:right;"><i class="bi bi-plus-square"></i></a>
 	          </div>
