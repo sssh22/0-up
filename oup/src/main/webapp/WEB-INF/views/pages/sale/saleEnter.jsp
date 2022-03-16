@@ -136,7 +136,7 @@
             <button type="button">찾기</button>
             <button type="button">거래내역보기</button>
             <button type="button" onclick="productPopup()">My품목</button>
-            <button type="button">주문</button>
+            <button type="button" onclick="orderPopup()">주문</button>
             <button onclick="addProduct()" type="button">+</button>
 	       </div>
 			<input id="index" type="hidden" value="2">
@@ -256,6 +256,13 @@
 	var productPopup = function(index) {
 		var url = "${path}/popup/productList/" + index;
 		var windowTargetName = "product";
+		var features = "width=720,height=500, scrollbars=no, resizable=no";
+		var search = window.open(url, windowTargetName, features);
+	}
+	
+	var orderPopup = function() {
+		var url = "${path}/popup/orderList/";
+		var windowTargetName = "order";
 		var features = "width=720,height=500, scrollbars=no, resizable=no";
 		var search = window.open(url, windowTargetName, features);
 	}

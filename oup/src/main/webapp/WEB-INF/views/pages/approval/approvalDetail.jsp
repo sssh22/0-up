@@ -81,7 +81,7 @@
               </div>
               <!-- /.card-header -->
               <!-- form start -->
-              <form class="form-horizontal">
+              <form action="" method="post" class="form-horizontal">
                 <div class="card-body">
                   <h1 style="text-align: center;"><b>${approval.ATitle}</b></h1>
                   <br>

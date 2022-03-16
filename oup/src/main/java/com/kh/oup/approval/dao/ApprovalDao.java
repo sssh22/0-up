@@ -27,4 +27,20 @@ public interface ApprovalDao {
 
 	int getProjectNo(int aDocNo) throws Exception;
 
+	String getTeamCode(String aPicName) throws Exception;
+
+	String getTeamLeaderNo(String teamCode) throws Exception;
+
+	int appTeamY(ApprovalVo approval) throws Exception;
+
+	String getallCode(String dcCodeNo) throws Exception;
+
+	int appAllY(ApprovalVo approval) throws Exception;
+
+	String getDecCode(String dcCode) throws Exception;
+
+	int appDecY(ApprovalVo approval) throws Exception;
+
+	int statementY(ApprovalVo newApp) throws Exception;
+
 }

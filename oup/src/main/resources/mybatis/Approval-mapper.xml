@@ -92,7 +92,7 @@
 	  		 FROM(
                 SELECT *
                 FROM APPR
-                WHERE A_PIC_NAME = #{loginName} AND A_STATEMENT = 'N'
+                WHERE A_PIC_NAME = #{loginName}
                 ORDER BY A_NO DESC
             ) R
   		)
@@ -145,4 +145,70 @@
  		WHERE PROJECT_NO = #{aDocNo}
  	</select>
  	
+ 	<select id="getTeamCode" resultType="String">
+ 		SELECT TEAM_CODE
+		FROM EMPLOYEE
+		WHERE EMPLOYEE_NAME = #{name}
+ 	</select>
+ 	
+ 	<select id="getTeamLeaderNo" resultType="String">
+ 		SELECT TEAMREADER_NO 
+ 		FROM TEAM 
+ 		WHERE TEAM_CODE = #{teamCode}
+ 	</select>
+ 	
+ 	<update id="appTeamY">
+ 		UPDATE APPR
+  		SET A_TEAM_NY = 'Y', A_E_DATE1 = SYSDATE
+  		WHERE A_NO = #{aNo}
+ 	</update>
+ 	
+ 	<update id="appAllY">
+ 		UPDATE APPR
+  		SET A_ALLDEC_NY = 'Y', A_E_DATE3 = SYSDATE
+  		WHERE A_NO = #{aNo}
+ 	</update>
+ 	
+ 	<update id="appDecY">
+ 		UPDATE APPR
+  		SET A_DEC_NY = 'Y', A_E_DATE2 = SYSDATE
+  		WHERE A_NO = #{aNo}
+ 	</update>
+ 	
+ 	<select id="getAllCode" resultType="String">
+ 		SELECT ALLDECISION_CODE
+ 		FROM APPR_REGUL
+ 		WHERE D_C_CODE = #{dcCode}
+ 	</select>
+ 	
+ 	<select id="getDecCode" resultType="String">
+ 		SELECT DECISION_CODE
+ 		FROM APPR_REGUL
+ 		WHERE D_C_CODE = #{dcCode}
+ 	</select>
+ 	
+ 	<update id="statementY">
+ 		UPDATE APPR
+  		SET A_STATEMENT = 'Y', A_E_DATE4 = SYSDATE
+  		WHERE A_NO = #{aNo}
+ 	</update>
+ 	
+ 	<!-- 최종 결재 완료되면 실제 문서에서 결재완료 -->
+ 	<update id="docFinalY" parameterType="com.kh.oup.approval.vo.ApprovalVo">
+ 		UPDATE
+ 		<if test="dcCode == 'PJ'">
+ 			PROJECT
+ 			SET A_STATEMENT = '완료'
+ 			WHERE PROJECT_NO = #{aDocNo}
+ 		</if>
+ 		<if test="dcCode == 'SP'">
+  			SET APPROVAL = '완료'
+  			WHERE S_NO = #{aDocNo}
+  		</if>
+  		<if test="dcCode == 'OD'">
+  			SET O_STATEMENT = '완료'
+  			WHERE O_NO = #{aDocNo}
+  		</if>
+  		
+ 	</update>
  </mapper>

@@ -8,6 +8,7 @@ import org.springframework.stereotype.Repository;
 
 import com.kh.oup.product.vo.ProductVo;
 import com.kh.oup.project.vo.ProjectVo;
+import com.kh.oup.sale.vo.OrderVo;
 import com.kh.oup.sale.vo.WarehouseVo;
 
 @Repository
@@ -29,6 +30,11 @@ public class PopUpDaoImpl implements PopUpDao {
 	@Override
 	public List<ProductVo> getProductList() throws Exception {
 		return ss.selectList("popup.getProductList");
+	}
+
+	@Override
+	public List<OrderVo> getOrderList() throws Exception {
+		return ss.selectList("popup.getOrderList");
 	}
 
 }

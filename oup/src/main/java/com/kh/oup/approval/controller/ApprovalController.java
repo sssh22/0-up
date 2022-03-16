@@ -119,7 +119,7 @@ public class ApprovalController {
 		List<ApprovalVo> list = service.getSendApprovalList(vo, loginName);
 		model.addAttribute("list", list);
 		model.addAttribute("page", vo);
-		
+
 		return "pages/approval/approvalBoxSend";
 	}
 	
@@ -196,6 +196,24 @@ public class ApprovalController {
 		}
 		
 		return "pages/approval/approvalDetail";
+	}
+	
+	@PostMapping(value = {"/detail/{ano}", "/detail"})
+	public String appCheck(Model model, @PathVariable(required = false)int ano, HttpServletRequest request) throws Exception {
+		HttpSession session = request.getSession();
+		EmployeeVo loginEmployee = (EmployeeVo)session.getAttribute("loginEmployee");
+		String loginjobTitleCode = loginEmployee.getJobTitleCode();
+		
+		ApprovalVo approval = service.getApproval(ano);
+	
+		int result = service.appCheck(approval, loginEmployee);
+		
+		ApprovalVo newApp = service.getApproval(ano);
+		if(newApp.getATeamNy() == 'Y' && newApp.getADecNy() == 'Y' && newApp.getAAllDecNy() == 'Y') {
+			int finalResult = service.StatementY(newApp);
+		}
+		
+		return "redirect:/approval/receivebox/1";
 	}
 
 }
