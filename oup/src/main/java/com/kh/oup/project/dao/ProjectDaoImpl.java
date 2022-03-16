@@ -8,6 +8,7 @@ import org.springframework.stereotype.Repository;
 
 import com.kh.oup.common.PageVo;
 import com.kh.oup.project.vo.DeptVo;
+import com.kh.oup.project.vo.PrjOder;
 import com.kh.oup.project.vo.ProjectGroupVo;
 import com.kh.oup.project.vo.ProjectVo;
 import com.kh.oup.project.vo.TeamVo;
@@ -110,7 +111,15 @@ public class ProjectDaoImpl implements ProjectDao {
 		return ss.delete("projectgroup.delPg",projectNo);
 	}
 
-	
+	@Override
+	public List<PrjOder> selectOlist(int projectNo) {
+		return ss.selectList("project.getOlist",projectNo);
+	}
+
+	@Override
+	public List<Integer> selectSaleList(int projectNo) {
+		return ss.selectList("project.getSaleList",projectNo);
+	}
 	
 
 }

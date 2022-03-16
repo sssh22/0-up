@@ -20,7 +20,6 @@
 <!-- ssh CSS -->
  <link rel="stylesheet" href="${path}/resources/dist/css/project_detail.css">
 
-
 </head>
 <body class="hold-transition sidebar-mini layout-fixed">
 <div class = "wrapper"> 
@@ -50,7 +49,7 @@
     <section class="content">
 
       <!-- Default box -->
-      <div class="card">
+      <div id='card' class="card">
         <div class="card-header">
           <h3 class="card-title">${prjVo.projectName}</h3>
         </div>
@@ -73,7 +72,7 @@
                   <div class="info-box ">
                     <div class="info-box-content">
                       <span id="box1" class="info-box-text text-center text-muted">Unpaied Amount</span>
-                      <span id="box2" class="info-box-number text-center text-muted mb-0"><fmt:formatNumber type="number" maxFractionDigits="0" value="${prjVo.SUmoney}"/></span>
+                      <span id="box2" class="info-box-number text-center text-muted mb-0"><fmt:formatNumber type="number" maxFractionDigits="0" value="${prjVo.sumu}"/></span>
                     </div>
                   </div>
                 </div>
@@ -130,27 +129,53 @@
                 </p>
               </div>
 
-              <h5 class="mt-5 text-muted">Project files</h5>
+              <h5 class="mt-5 text-muted">Project documents</h5>
               <ul class="list-unstyled">
-                <li>
-                  <a href="" class="btn-link text-secondary"><i class="far fa-fw fa-file-word"></i> Functional-requirements.docx</a>
-                </li>
-                <li>
-                  <a href="" class="btn-link text-secondary"><i class="far fa-fw fa-file-pdf"></i> UAT.pdf</a>
-                </li>
-                <li>
-                  <a href="" class="btn-link text-secondary"><i class="far fa-fw fa-envelope"></i> Email-from-flatbal.mln</a>
-                </li>
-                <li>
-                  <a href="" class="btn-link text-secondary"><i class="far fa-fw fa-image "></i> Logo.png</a>
-                </li>
-                <li>
-                  <a href="" class="btn-link text-secondary"><i class="far fa-fw fa-file-word"></i> Contract-10_12_2014.docx</a>
-                </li>
+              <c:forEach items="${olist}" var="o">
+	                <c:if test="${o.ONo eq 0 || o.ONo eq null}">
+	                <li>
+	                  <a href="" class="btn-link text-secondary"><i class="far fa-fw fa-file-word"></i>주문서 (진행 건 없음)</a>
+	                </li>
+	                </c:if>
+	                <c:if test="${o.ONo ne 0}">
+	                <li>
+	                  <a href="" class="btn-link text-secondary"><i class="far fa-fw fa-file-word"></i>주문서 ${o.ONo} 보기</a>
+	                </li>
+	                </c:if>
+	                <c:if test="${o.SNo eq 0 || o.SNo eq null}">
+	                <li>
+	                  <a href="" class="btn-link text-secondary"><i class="far fa-fw fa-file-word"></i>거래명세서 (미발행)</a>
+	                </li>
+	                </c:if>
+	                <c:if test="${o.SNo ne 0}">
+	                <li>
+	                  <a href="${path}/statement/statement_detail/${o.ONo}" class="btn-link text-secondary"><i class="far fa-fw fa-file-word"></i>거래명세서 ${o.SNo} 보기</a>
+	                </li>
+	                </c:if>
+	                
+                </c:forEach>
+                <c:forEach items="${slist}" var="saleNo">
+	                <c:if test="${saleNo eq 0 || saleNo eq null}">
+	                <li>
+	                  <a href="${path}/statement/statement_detail/${saleNo}" class="btn-link text-secondary"><i class="far fa-fw fa-file-word"></i>주문서 (진행 건 없음)</a>
+	                </li>
+	                </c:if>
+	                <c:if test="${saleNo ne 0}">
+	                <li>
+	                <span id="sale" style="color:#6F6F6F; cursor: pointer;" id="confirm_id" onclick="salePopup(${saleNo})"><i class="far fa-fw fa-file-word"></i>판매(판매번호_${saleNo}) 보기</span>
+	                </li>
+	                </c:if> 
+                </c:forEach>
+                	<li>
+	                  <a href="" class="btn-link text-secondary"><i class="far fa-fw fa-file-word"></i>발주서 보기</a>
+	                </li>
+                
               </ul>
               <div class="text-center mt-5 mb-3">
-                <a href="${path}/project/project_edit/${prjVo.projectNo}" class="btn btn-sm btn-secondary">수정</a>
+                <a id="sbBtn" href="${path}/project/project_edit/${prjVo.projectNo}" class="btn btn-sm btn-secondary">수정</a>
                 <a href="${path}/project/project_list" class="btn btn-sm btn-secondary">목록으로</a>
+                <button class="btn btn-default" id="print" onclick="return printPage();"><i class="fas fa-print"></i> Print</button>
+                
               </div>
             </div>
           </div>
@@ -163,6 +188,33 @@
     <!-- /.content -->
   </div>
   <!-- /.content-wrapper -->
+
+ <script>
+        var initBodyHtml;
+        function printPage() {
+            window.print();
+        }
+        function beforePrint() {
+            initBodyHtml = document.body.innerHTML;
+            document.body.innerHTML = document.getElementById('card').innerHTML;
+        }
+        function afterPrint() {
+            document.body.innerHTML = initBodyHtml;
+        }
+
+        window.onbeforeprint = beforePrint;
+        window.onafterprint = afterPrint;
+ </script>
+
+<script type="text/javascript">
+var salePopup = function(saleNo) {
+	var url = "${path}/sale/saleDetail/" + saleNo;
+	var windowTargetName = "sale";
+	var features = "width=1300,height=800, scrollbars=no, resizable=no";
+	var search = window.open(url, windowTargetName, features);
+	}
+</script>
+
 
 
  <%@ include file="/WEB-INF/views/common/footer.jsp" %>

@@ -16,6 +16,7 @@ import org.springframework.web.bind.annotation.ResponseBody;
 import com.kh.oup.common.PageVo;
 import com.kh.oup.project.service.ProjectService;
 import com.kh.oup.project.vo.DeptVo;
+import com.kh.oup.project.vo.PrjOder;
 import com.kh.oup.project.vo.ProjectGroupVo;
 import com.kh.oup.project.vo.ProjectVo;
 import com.kh.oup.project.vo.TeamVo;
@@ -60,8 +61,14 @@ public class ProjectController {
 	public String project_detail(Model model, @PathVariable(required=false) int projectNo) {
 		ProjectVo prjVo = service.selectPrj(projectNo);
 		List<ProjectGroupVo> glist = service.selectPrjgroup(projectNo);
+		List<PrjOder> olist = service.selectOlist(projectNo); 
+		List<Integer> slist = service.selectSaleList(projectNo);	
+		
 		model.addAttribute("prjVo",prjVo);
 		model.addAttribute("glist",glist);
+		model.addAttribute("olist",olist);
+		model.addAttribute("slist",slist);
+		
 		return "pages/project/project_detail";
 	}
 	
