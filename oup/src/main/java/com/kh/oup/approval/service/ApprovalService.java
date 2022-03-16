@@ -6,6 +6,7 @@ import javax.servlet.http.HttpServletRequest;
 
 import com.kh.oup.approval.vo.ApprovalVo;
 import com.kh.oup.common.PageVo;
+import com.kh.oup.employee.vo.EmployeeVo;
 
 public interface ApprovalService {
 
@@ -28,6 +29,10 @@ public interface ApprovalService {
 	int getorderNo(int ano) throws Exception;
 
 	int getProjectNo(int aDocNo) throws Exception;
+
+	int appCheck(ApprovalVo approval, EmployeeVo loginEmployee) throws Exception;
+
+	int StatementY(ApprovalVo newApp) throws Exception;
 
 
 }

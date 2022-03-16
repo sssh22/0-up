@@ -19,6 +19,7 @@ import com.kh.oup.product.vo.ProductVo;
 import com.kh.oup.project.vo.ProjectVo;
 import com.kh.oup.sale.service.PopUpService;
 import com.kh.oup.sale.service.SaleService;
+import com.kh.oup.sale.vo.OrderVo;
 import com.kh.oup.sale.vo.SaleListVo;
 import com.kh.oup.sale.vo.SaleVo;
 import com.kh.oup.sale.vo.WarehouseVo;
@@ -123,5 +124,14 @@ public class PopUpController {
 		model.addAttribute("client", cVo);
 		
 		return "pages/sale/printPopup";
+	}
+	
+	@GetMapping("/orderList")
+	public String orderList(Model model) throws Exception {
+		List<OrderVo> list = pservice.getOrderList();
+		
+		model.addAttribute("list", list);
+		
+		return "pages/sale/orderList";
 	}
 }

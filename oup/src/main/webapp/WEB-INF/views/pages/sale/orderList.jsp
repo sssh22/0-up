@@ -7,7 +7,7 @@
 <head>
   <meta charset="utf-8">
   <meta name="viewport" content="width=device-width, initial-scale=1">
-  <title>거래처 검색</title>
+  <title>주문조회</title>
 
   <!-- Google Font: Source Sans Pro -->
   <link rel="stylesheet" href="https://fonts.googleapis.com/css?family=Source+Sans+Pro:300,400,400i,700&display=fallback">
@@ -28,7 +28,7 @@
       <div class="row">
         <div class="col-md">
             <div class="card-header">
-              <h2>거래처 정보 검색</h2>
+              <h2>주문조회</h2>
 
               <div class="card-tools">
                 <button type="button" class="btn btn-tool" data-card-widget="collapse" title="Collapse">
@@ -37,7 +37,7 @@
             </div>
             
             <div class="card-body">
-            	<form action="${path}/client/searchClient" method="get" name="searchform">
+            	<form action="" method="get" name="searchform">
                 <div class="input-group mb-3 " style="left:45%;">
                   <input style="font-size: 150%" type="text" name="search" class="form-control col-sm-6" placeholder="Search" id="searchClient">
                   <button class="btn btn-secondary" onclick="submit(); return false;";><i class="fa fa-search"></i></button>
@@ -46,44 +46,34 @@
                   <thead>
                       <tr>
                           <th style="width: 20%; font-size: 150%" class="text-center">
-                              거래처코드
+                              주문번호
                           </th>
                           <th style="width: 20%; font-size: 150%" class="text-center">
                               거래처명
                           </th>
-                          <th style="width: 15%; font-size: 150%" class="text-center">
-                              대표자
-                          </th>
-                          <th style="width: 25%; font-size: 150%" class="text-center">
-                            사업자등록번호
-                          </th>
                           <th style="width: 20%; font-size: 150%" class="text-center">
-                              미수금
+                              담당자명
                           </th>
                       </tr>
                   </thead>
                   <tbody>
                   <c:forEach items="${list}" var="l">				
                     <tr>
-                      <td><span style="color:blue; font-size: 150%"><span style="text-decoration: underline; cursor: pointer;" onclick="returnCNo('${l.CNo}','${l.CName}', '${l.CUmony}');">${l.CNo}</span></td>
+                      <td><span style="color:blue; font-size: 150%; text-decoration: underline; cursor: pointer;" onclick="returnCNo('${l.ONo}');">${l.ONo}</span></td>
                       <td style="font-size: 150%">${l.CName}</td>
-                      <td style="font-size: 150%">${l.COwner}</td>
-                      <td style="font-size: 150%">${l.BNo}</td>
-                      <td style="font-size: 150%">${l.CUmony}</td>
+                      <td style="font-size: 150%">${l.employeeName}</td>
                     </tr>
                   </c:forEach>
                 </tbody>
               </table>
 
-                </form>
-	            </div>
-              </form>
+             </form>
+             <input type="button" class="btn btn-secondary btn-sm" style="width: 44.33px; height: 31px; font-size: 150%" value="신규" onclick="location.href='${path}/popup/addproduct'">
+	        </div>
           </div>
-      </div>
-    </div>
-        
+     </div> 
   </section>
-  </div>
+ </div>
 
 <!-- jQuery -->
 <script src="${path}/resources/plugins/jquery/jquery.min.js"></script>
@@ -98,11 +88,10 @@
 		document.searchform.submit(search);
 	}	
 	
-	function returnCNo(cNo,cName,cUmony) {
-			opener.document.getElementById("cNo").value = cNo;
-			opener.document.getElementById("cName").value = cName;
-			opener.document.getElementById("aUmoney").value = cUmony;
-			opener.document.getElementById("sUmoney").value = cUmony;
+	function returnCNo(pNo,pName, pUnitPrice) {
+			opener.document.getElementById("productNo" + ${index}).value = pNo; //품목코드
+			opener.document.getElementById("productName" + ${index}).value = pName; //품목명
+			opener.document.getElementById("price" + ${index}).value = pUnitPrice; //단가
 			self.close();
 	}
 

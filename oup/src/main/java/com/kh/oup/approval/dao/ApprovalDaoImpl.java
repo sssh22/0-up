@@ -81,4 +81,56 @@ public class ApprovalDaoImpl implements ApprovalDao{
 		return ss.selectOne("approval.getProjectNo", aDocNo);
 	}
 
+	@Override
+	public String getTeamCode(String aPicName) throws Exception {
+		return ss.selectOne("approval.getTeamCode", aPicName);
+	}
+
+	@Override
+	public String getTeamLeaderNo(String teamCode) throws Exception {
+		return ss.selectOne("approval.getTeamLeaderNo", teamCode);
+	}
+
+	@Override
+	public int appTeamY(ApprovalVo approval) throws Exception {
+		//결재 테이블의 팀장 결재 체크
+		int result = ss.update("approval.appTeamY", approval.getANo());
+		
+		
+		return result;
+	}
+
+	@Override
+	public String getallCode(String dcCode) throws Exception {
+		return ss.selectOne("approval.getAllCode", dcCode);
+	}
+
+	@Override
+	public int appAllY(ApprovalVo approval) throws Exception {
+		//결재 테이블의 결정권자 결재 체크
+		int result = ss.update("approval.appAllY", approval.getANo());
+		return result;
+	}
+
+	@Override
+	public String getDecCode(String dcCode) throws Exception {
+		return ss.selectOne("approval.getDecCode", dcCode);
+	}
+
+	@Override
+	public int appDecY(ApprovalVo approval) throws Exception {
+		//결재 테이블의 전결권자 결재 체크
+		int result = ss.update("approval.appDecY", approval.getANo());
+		return result;
+	}
+
+	@Override
+	public int statementY(ApprovalVo newApp) throws Exception {
+		int result1 = ss.update("approval.statementY", newApp.getANo());
+		//문서타입에 따라 거래명세서, 프로젝트, 주문서의 결재상태 변경
+		int result2 = ss.update("approval.docFinalY", newApp);
+		return result1;
+	}
+
+
 }

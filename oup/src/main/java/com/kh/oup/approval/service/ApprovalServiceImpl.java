@@ -13,6 +13,7 @@ import org.springframework.web.multipart.MultipartFile;
 import com.kh.oup.approval.dao.ApprovalDao;
 import com.kh.oup.approval.vo.ApprovalVo;
 import com.kh.oup.common.PageVo;
+import com.kh.oup.employee.vo.EmployeeVo;
 import com.kh.oup.mail.vo.MailVo;
 
 @Service
@@ -93,6 +94,50 @@ public class ApprovalServiceImpl implements ApprovalService{
 	@Override
 	public int getProjectNo(int aDocNo) throws Exception {
 		return dao.getProjectNo(aDocNo);
+	}
+
+	@Override
+	public int appCheck(ApprovalVo approval, EmployeeVo loginEmployee) throws Exception {
+		int result1 = 0;
+		int result2 = 0;
+		int result3 = 0;
+		
+		//신청자 팀 확인
+		String teamCode = dao.getTeamCode(approval.getAPicName());
+		
+		//팀리더 번호 가져옴
+		String leaderNo = dao.getTeamLeaderNo(teamCode);
+		
+		//결재 버튼을 누른 사람이 신청자 팀의 팀장인지 확인
+		if(leaderNo.equals(String.valueOf(loginEmployee.getEmployeeNo()))) {
+			//팀장결재 체크 
+			result1 = dao.appTeamY(approval);
+		}
+		
+		//전결규정 전결권자 직급코드 가져옴
+		String decCode = dao.getDecCode(approval.getDcCode());
+		//전결권자인지 확인
+		if(decCode.equals(loginEmployee.getJobTitleCode())) {
+			//전결권자 체크
+			result2 = dao.appDecY(approval);
+		}
+		
+		//전결규정 결정권자 직급코드 가져옴
+		String allCode = dao.getallCode(approval.getDcCode());
+		//결정권자인지 확인
+		if(allCode.equals(loginEmployee.getJobTitleCode())) {
+			//결정권자 체크
+			result3 = dao.appAllY(approval);
+		}
+		
+		int result = result1 + result2 + result3;
+		System.out.println(result);
+		return result;
+	}
+
+	@Override
+	public int StatementY(ApprovalVo newApp) throws Exception {
+		return dao.statementY(newApp);
 	}
 
 
