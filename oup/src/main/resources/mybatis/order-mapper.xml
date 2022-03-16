@@ -11,7 +11,7 @@
  
  	<insert id="insertOrder" parameterType="orderVo">
  		insert into order1(
- 			o_no, c_no, project_no, employee_no, warehouse_no, o_date, credit_date, team_code, vat_yn
+ 			o_no, c_no, project_no, employee_no, warehouse_no, o_date, credit_date, team_code, vat_yn, O_STATEMENT
  		)
  		values(
  			${oNo},
@@ -22,7 +22,8 @@
  			#{oDate},
  			#{creditDate},
  			#{teamCode},
- 			#{vatYn}
+ 			#{vatYn},
+ 			'N'
  		)
  	</insert>
  	
