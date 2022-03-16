@@ -9,6 +9,7 @@ import org.springframework.stereotype.Service;
 import com.kh.oup.common.PageVo;
 import com.kh.oup.project.dao.ProjectDao;
 import com.kh.oup.project.vo.DeptVo;
+import com.kh.oup.project.vo.PrjOder;
 import com.kh.oup.project.vo.ProjectGroupVo;
 import com.kh.oup.project.vo.ProjectVo;
 import com.kh.oup.project.vo.TeamVo;
@@ -166,6 +167,18 @@ public class ProjectServiceImpl implements ProjectService{
 	@Override
 	public int delPg(int projectNo) {
 		return dao.delPg(projectNo);
+	}
+
+
+	@Override
+	public List<PrjOder> selectOlist(int projectNo) {
+		return dao.selectOlist(projectNo);
+	}
+
+
+	@Override
+	public List<Integer> selectSaleList(int projectNo) {
+		return dao.selectSaleList(projectNo);
 	}
 
 

@@ -111,7 +111,7 @@
                          	${p.groupMembers}
                       </td>
                       <td class="project_progress">
-                      <c:set var="payment" value="${(1-(p.SUmoney/p.saleSum))*100}"></c:set>
+                      <c:set var="payment" value="${(1-(p.sumu/p.sums))*100}"></c:set>
                           <div class="progress progress-sm">
                               <div class="progress-bar" role="progressbar" aria-valuenow="" aria-valuemin="0" aria-valuemax="100" style="width: payment%">
                               </div>

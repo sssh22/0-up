@@ -14,19 +14,21 @@
  	
  <!-- 리스트 조회 -->	
  <select id="getPrjList" parameterType="pageVo" resultType="com.kh.oup.project.vo.ProjectVo">
- SELECT * FROM
- 	(
- 		SELECT ROWNUM RN, J.* 
- 		FROM
-	 	(
-		 	SELECT * 
-		 	FROM PROJECT P
-		 	LEFT OUTER JOIN SALE S
-		 		ON (P.PROJECT_NO = S.PROJECT_NO)
-		 	ORDER BY P.PROJECT_NO DESC
-	 	) J
- 	) 	
-	WHERE RN BETWEEN #{startRow} AND #{endRow}
+ SELECT * 
+	FROM ( 
+    	SELECT ROWNUM RN, J.* 
+   		FROM ( 
+	        SELECT * 
+	        FROM PROJECT P 
+	        LEFT OUTER JOIN (
+	        SELECT PROJECT_NO,SUM(SALE_SUM) AS SUMS ,SUM(S_UMONEY)AS SUMU
+	        FROM SALE 
+	        GROUP BY PROJECT_NO
+            ) S 
+        ON(P.PROJECT_NO = S.PROJECT_NO)
+        ORDER BY P.PROJECT_NO DESC 
+        ) J 
+    )WHERE RN BETWEEN #{startRow} AND #{endRow}
  
  </select>
  
@@ -37,25 +39,26 @@
 	FROM PROJECT
 	WHERE PROJECT_NAME LIKE '%${search}%'
  </select>
- 
- 
+  
  
  <!--검색 리스트 조회 -->	
  <select id="getSearchPrjList" parameterType="pageVo" resultType="com.kh.oup.project.vo.ProjectVo">
- 
-	 SELECT * 
-	 FROM ( 
+ SELECT * 
+	FROM ( 
     	SELECT ROWNUM RN, J.* 
-    	FROM ( 
-        	SELECT * 
-        	FROM PROJECT P 
-        	LEFT OUTER JOIN SALE S
-		 		ON (P.PROJECT_NO = S.PROJECT_NO)
-        	WHERE P.PROJECT_NAME LIKE '%${search}%' 
-        	ORDER BY P.PROJECT_NO DESC 
-        	) J 
-    	) WHERE RN BETWEEN #{startRow} AND #{endRow}
- 
+   		FROM ( 
+	        SELECT * 
+	        FROM PROJECT P 
+	        LEFT OUTER JOIN (
+	        SELECT PROJECT_NO,SUM(SALE_SUM) AS SUMS ,SUM(S_UMONEY)AS SUMU
+	        FROM SALE 
+	        GROUP BY PROJECT_NO
+            ) S 
+        ON(P.PROJECT_NO = S.PROJECT_NO)
+        WHERE PROJECT_NAME LIKE '%${search}%' 
+        ORDER BY P.PROJECT_NO DESC 
+        ) J 
+    )WHERE RN BETWEEN #{startRow} AND #{endRow}
  
  </select>
  
@@ -67,12 +70,18 @@
  	WHERE PROJECT_NO = #{projectNo}
  </delete>
  
- <!--prj 조회  -->
+ 
+ 
+ <!--prj 조회 ===================================================================  -->
  <select id="getPrj" parameterType="int" resultType="com.kh.oup.project.vo.ProjectVo">
- SELECT P.*, S.S_UMONEY 
+ SELECT P.*, S.SUMU
  FROM PROJECT P
- LEFT OUTER JOIN SALE S
-	ON (P.PROJECT_NO = S.PROJECT_NO)
+	 LEFT OUTER JOIN (
+	        SELECT PROJECT_NO, SUM(S_UMONEY)AS SUMU
+	        FROM SALE 
+	        GROUP BY PROJECT_NO
+            ) S 
+		ON (P.PROJECT_NO = S.PROJECT_NO)
  WHERE P.PROJECT_NO = #{projectNo}
  </select>
 
@@ -81,6 +90,21 @@
  SELECT * 
  FROM GROUP1
  WHERE PROJECT_NO = #{projectNo}
+</select>
+
+<!-- prj조회 oder,statement 리스트 -->
+<select id="getOlist" parameterType="int" resultType="com.kh.oup.project.vo.PrjOder">
+ SELECT O.O_NO, S.S_NO 
+ FROM ORDER1 O 
+ LEFT OUTER JOIN STATEMENT S ON(O.O_NO = S.O_NO) 
+ WHERE O.PROJECT_NO = #{projectNo}
+</select>
+
+<!-- prj조회  판매번호 리스트  -->
+<select id="getSaleList" parameterType="int" resultType="java.lang.Integer">
+SELECT SALE_NO
+FROM SALE
+WHERE PROJECT_NO = #{projectNo}
 </select>
 
 <!-- prj 등록========================================================================== -->

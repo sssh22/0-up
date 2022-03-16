@@ -23,9 +23,10 @@ public class ProjectVo {
 	private String dCCode; //문서종류 코드 ,, 4
 	private String aStatement; //결재상태
 	
-	private String saleSum; //SALE 합계
-	private String sUmoney; //SALE 미수금
 	
+	//sql문으로 합산
+	private String sums; //SALE saleSum들의 합계
+	private String sumu; //SALE sUmoney미수금들의 합계
 	
 	private String groupMembers; 
 	

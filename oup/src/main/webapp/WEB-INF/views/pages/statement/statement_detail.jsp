@@ -38,15 +38,11 @@
             <h1 style="font-size: 40px;">거래 명세서 [보기]</h1>
           </div>
           <br><br><br>
-
-          
-          
         </div>
       </div><!-- /.container-fluid -->
     </section>
 
     <!-- Main content -->
-    
     <table id="atb">
       <tr>
         <td>프로젝트 번호</td>
@@ -61,13 +57,12 @@
         </td>
       </tr>
     </table>
-    <br>
-
-
+	<button class="btn btn-default float-right" id="print" onclick="return printPage();"><i class="fas fa-print"></i> Print</button>
+	<br><br>
 
       <!-- Default box -->
       <div class="card">
-        
+        <div id="prinarea">
         
           <!-- 명세서 =========================  -->
         <table border="1" id="btb">
@@ -170,7 +165,7 @@
           </tr>
         </table>
         
-        
+        </div><!-- printarea -->
         
       </div>
       <!-- /.card -->
@@ -178,7 +173,7 @@
       <div id="btn2">
         <input class="b2" type="button" value="수정" onclick="goedit(${stVo.ONo});">
         <input class="b3" type="button" value="삭제" onclick="deleteSt(${stVo.SNo});">
-        <input class="b4" type="button" value="목록으로" onclick="history.go(-1)">
+        <input class="b4" type="button" value="목록으로" onclick="history.go(-1)">  
       </div>
       <br><br>
 
@@ -195,6 +190,27 @@
  }
  
 </script>
+
+<script>
+        var initBodyHtml;
+        function printPage() {
+            window.print();
+        }
+        function beforePrint() {
+            initBodyHtml = document.body.innerHTML;
+            document.body.innerHTML = document.getElementById('prinarea').innerHTML;
+        }
+        function afterPrint() {
+            document.body.innerHTML = initBodyHtml;
+        }
+
+        window.onbeforeprint = beforePrint;
+        window.onafterprint = afterPrint;
+ </script>
+
+
+
+
 
  <%@ include file="/WEB-INF/views/common/footer.jsp" %>
 
