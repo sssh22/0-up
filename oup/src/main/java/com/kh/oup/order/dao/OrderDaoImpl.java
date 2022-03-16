@@ -43,5 +43,15 @@ public class OrderDaoImpl implements OrderDao{
 		return session.selectList("order.selectOrderList", vo);
 	}
 
+	@Override
+	public OrderVo selectOrderOne(String orderNo) throws Exception {
+		return session.selectOne("order.selectOrderNo", orderNo);
+	}
+
+	@Override
+	public List<OrderProductVo> selectProductOrderList(String orderNo) throws Exception {
+		return session.selectList("order.selectProductOrderNo", orderNo);
+	}
+
 
 }

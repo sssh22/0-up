@@ -77,5 +77,15 @@ public class OrderServiceImpl implements OrderService{
 		return dao.selectOrderList(vo);
 	}
 
+	@Override
+	public OrderVo selectOrder(String orderNo) throws Exception {
+		return dao.selectOrderOne(orderNo);
+	}
+
+	@Override
+	public List<OrderProductVo> selectProductOrder(String orderNo) throws Exception {
+		return dao.selectProductOrderList(orderNo);
+	}
+
 
 }

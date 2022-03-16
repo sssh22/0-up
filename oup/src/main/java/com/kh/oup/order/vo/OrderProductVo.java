@@ -16,6 +16,7 @@ public class OrderProductVo {
 	private int pIndex;				// 주문한 품목 종류수
 	private String[] oDeliberyDateStr;
 	
+	private int orderListNo;
 	private int pNoStr;
 	private String pNameStr;
 	private int oNumStr;
