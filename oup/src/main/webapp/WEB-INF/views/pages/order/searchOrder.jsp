@@ -203,8 +203,9 @@
 
 <script>
 	var index = 1;
-
+	
 	var goPopup = function(){ 
+		let oDate = document.getElementById("orderDate").value;
 		let clientText = document.getElementById("clientText").value;
 		var search = window.open("${path}/client/searchClient?search="+clientText,"search","width=720,height=500, scrollbars=no, resizable=no"); 
 	} 

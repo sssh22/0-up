@@ -96,17 +96,25 @@
 	}	
 	
 	function returnCNo(cNo,cName,creditMonth,creditDay) {
+			if(opener.document.getElementById("orderDate").value == ""){
+				opener.document.getElementById("clientNo").value = cNo;
+				opener.document.getElementById("client").value = cName;
+				if(opener.document.getElementById("creditDate") != null)
+					opener.document.getElementById("creditDate").value = returnDate; 
+				window.close();
+			}
+			
 			let orderDate = new Date(opener.document.getElementById("orderDate").value);
 			orderDate.setMonth(orderDate.getMonth() + creditMonth);
 			orderDate.setDate(orderDate.getDate() + creditDay);
 			let returnDate = new Date(orderDate + 3240 * 10000).toISOString().split("T")[0];
-
-					
+			
 			opener.document.getElementById("clientNo").value = cNo;
 			opener.document.getElementById("client").value = cName;
 			if(opener.document.getElementById("creditDate") != null)
 				opener.document.getElementById("creditDate").value = returnDate; 
 			window.close();
+
 	}
 
 </script>

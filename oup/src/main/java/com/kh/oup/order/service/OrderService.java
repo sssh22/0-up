@@ -18,5 +18,7 @@ public interface OrderService {
 	OrderVo selectOrder(String orderNo) throws Exception;
 
 	List<OrderProductVo> selectProductOrder(String orderNo) throws Exception;
+
+	int changeOrder(OrderVo vo, OrderProductVo pVo) throws Exception;
 	
 }

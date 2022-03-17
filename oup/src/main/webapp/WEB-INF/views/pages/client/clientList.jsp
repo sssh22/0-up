@@ -188,27 +188,28 @@
 	} 
 	
 	function delClient(){
-		let result="";
-		
-		for(let i=0; i<checkArr.length; ++i){
-			let t = checkArr[i];
-			if(t.checked){
-				console.log(t.value);
-				result += t.value + ',';					
+			let result="";
+			
+			for(let i=0; i<checkArr.length; ++i){
+				let t = checkArr[i];
+				if(t.checked){
+					console.log(t.value);
+					result += t.value + ',';					
+				}
 			}
-		}
-		
-		$.ajax({
-			url : "${path}/client/delete",
-			data : {"client" : result},
-			type : 'post',
-			success : function(data){
-				console.log(data);
-			},
-			error : function(e){
-				console.log(e);
-			}
-		});
+			
+			$.ajax({
+				url : "${path}/client/delete",
+				data : {"client" : result},
+				type : 'post',
+				success : function(data){
+					console.log(data);
+				},
+				error : function(e){
+					console.log(e);
+				}
+			});
+			self.location.reload(true);
 	}
 	
 	function changeClient(){

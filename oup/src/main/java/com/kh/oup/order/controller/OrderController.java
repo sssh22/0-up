@@ -1,6 +1,7 @@
 package com.kh.oup.order.controller;
 
 
+import java.util.ArrayList;
 import java.util.List;
 
 import org.springframework.beans.factory.annotation.Autowired;
@@ -9,7 +10,9 @@ import org.springframework.ui.Model;
 import org.springframework.web.bind.annotation.GetMapping;
 import org.springframework.web.bind.annotation.PathVariable;
 import org.springframework.web.bind.annotation.PostMapping;
+import org.springframework.web.bind.annotation.RequestBody;
 import org.springframework.web.bind.annotation.RequestMapping;
+import org.springframework.web.bind.annotation.ResponseBody;
 
 import com.kh.oup.client.vo.ClientVo;
 import com.kh.oup.common.PageVo;
@@ -66,10 +69,18 @@ public class OrderController {
 	public String changeOrder(Model model, @PathVariable String orderNo)throws Exception{
 		OrderVo vo  = service.selectOrder(orderNo);
 		List<OrderProductVo> pVo = service.selectProductOrder(orderNo);
+		System.out.println(pVo);
 		
 		model.addAttribute("vo",vo);
 		model.addAttribute("pvo", pVo);
 		
 		return "pages/order/changeOrder";
+	}
+	
+	@PostMapping("/change")
+	@ResponseBody
+	public String changeOrder(OrderVo vo,  OrderProductVo pVo) throws Exception {
+		int result = service.changeOrder(vo, pVo);
+		return "good";
 	}
 }

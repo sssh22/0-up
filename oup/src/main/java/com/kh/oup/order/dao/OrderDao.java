@@ -22,5 +22,9 @@ public interface OrderDao {
 	OrderVo selectOrderOne(String orderNo) throws Exception;
 
 	List<OrderProductVo> selectProductOrderList(String orderNo) throws Exception;
+
+	int updateOrder(OrderVo vo)  throws Exception;
+
+	int updateOrderProduct(OrderProductVo pVo) throws Exception;
  
 }
