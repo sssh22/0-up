@@ -78,9 +78,8 @@ public class OrderController {
 	}
 	
 	@PostMapping("/change")
-	@ResponseBody
 	public String changeOrder(OrderVo vo,  OrderProductVo pVo) throws Exception {
 		int result = service.changeOrder(vo, pVo);
-		return "good";
+		return "pages/order/searchOrder";
 	}
 }
