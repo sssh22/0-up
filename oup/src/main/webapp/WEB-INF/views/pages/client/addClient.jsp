@@ -139,7 +139,7 @@
 	              </div>
 	              <br><br>
 	              <div class="form-group" style="float: right; margin-right: 20px;">
-	                <button type="submit" class="btn btn-outline-primary btn-lg" >등록</button>
+	                <button type="submit" class="btn btn-outline-primary btn-lg">등록</button>
 	                <button type="button" class="btn btn-outline-primary btn-lg" onclick="window.close()">취소</button>
 	              </div>
               </form>
@@ -181,6 +181,8 @@
 					return; 
 		} 
 	} 
+
+
 </script>
 </body>
 </html>

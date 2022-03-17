@@ -87,5 +87,30 @@ public class OrderServiceImpl implements OrderService{
 		return dao.selectProductOrderList(orderNo);
 	}
 
+	@Override
+	@Transactional(rollbackFor = Exception.class) 
+	public int changeOrder(OrderVo vo, OrderProductVo pVo) throws Exception {		
+		vo.setODate(stringFormatToDate(vo.getODateStr()));
+		vo.setCreditDate(stringFormatToDate(vo.getCreditDateStr()));
+		pVo.setOrderNo(vo.getONo());
+		
+		int pVoNo = pVo.getPNo().length;
+		Date[] delDate = new Date[pVoNo];
+		pVo.setODeliberyDate(delDate);
+		int updateResult = 0;
+		updateResult += dao.updateOrder(vo);
+		
+		for(int i=0; i< pVoNo; i++) {
+			pVo.setOrderListNo(pVo.getOrderList()[i]);
+			pVo.setPNoStr(pVo.getPNo()[i]);
+			pVo.setONumStr(pVo.getONum()[i]);
+			pVo.setOPriceStr(pVo.getOPrice()[i]);
+			pVo.setODeliberyDateStrr(stringFormatToDate(pVo.getODeliberyDateStr()[i]));
+			updateResult += dao.updateOrderProduct(pVo);
+		}
+		return updateResult;
+		
+	}
+
 
 }

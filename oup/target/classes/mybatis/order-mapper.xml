@@ -11,7 +11,7 @@
  
  	<insert id="insertOrder" parameterType="orderVo">
  		insert into order1(
- 			o_no, c_no, project_no, employee_no, warehouse_no, o_date, credit_date, team_code, vat_yn
+ 			o_no, c_no, project_no, employee_no, warehouse_no, o_date, credit_date, team_code, vat_yn, O_STATEMENT
  		)
  		values(
  			${oNo},
@@ -22,7 +22,8 @@
  			#{oDate},
  			#{creditDate},
  			#{teamCode},
- 			#{vatYn}
+ 			#{vatYn},
+ 			'N'
  		)
  	</insert>
  	
@@ -85,5 +86,15 @@
  		<result column="o_price" property="oPriceStr"/>
  		<result column="o_delibery_date" property="oDeliberyDateStrr"/>
  	</resultMap>
+ 	
+ 	<update id="updateorder" parameterType="orderVo">
+ 		update order1 set c_no = ${cNo}, project_no = ${projectNo}, employee_no = ${employeeNo}, warehouse_no = ${warehouseNo},
+ 									o_date = #{oDate}, credit_date = #{creditDate}, team_code = #{teamCode}, vat_yn = #{vatYn}
+ 			where o_no = ${oNo}
+ 	</update>
  
+ 	<update id="updateorderProduct" parameterType="orderProductVo">
+ 		update order_list set p_no = ${pNoStr}, o_num = ${oNumStr}, o_price = ${oPriceStr}, o_delibery_date = #{oDeliberyDateStrr}
+ 			where o_list_no = ${orderListNo}
+ 	</update>
  </mapper>

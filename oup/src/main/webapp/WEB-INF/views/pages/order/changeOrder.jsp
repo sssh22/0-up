@@ -55,8 +55,9 @@
       <!-- Default box -->
       <div class="card"></div>
         <div class="card-body p-0">
-			<form action="${path}/order/addOrder" method="post" name="addOrder">
+			<form action="${path}/order/change" method="post" name="addOrder">
 	          <div class="row" style="background-color: rgb(196, 194, 194); margin: 20px; padding: 6px;">
+	                <input type="hidden" name="oNo" value="${vo.ONo}">
 	                <div class="col-sm-1 mt-3" style="padding:5px;"><b>일자</b></div>
 	                <div class="col-sm-1"></div>
 	                <div class="col-sm-4">  
@@ -146,7 +147,6 @@
 
 	          <div style="margin: 10px;">
 		        <a href="javascript:orderMinus();" style="float:right; margin-left:15px;"><i class="bi bi-dash-square"></i></a>
-		        <a href="javascript:orderPlus();" style="float:right;"><i class="bi bi-plus-square"></i></a>
 	          </div>
 	          
 	
@@ -180,36 +180,44 @@
 	                  </tr>
 	              </thead>
 	              <tbody id="tbody">
-	                  <tr>
+	              <c:forEach items="${pvo}" var="pvo" varStatus="vs">
+	              	<tr>
 	                      <td>
 	                        <input type="checkbox" class="orderCheckBox">
+	                        <input type="hidden" name="orderList" value="${pvo.orderListNo}">
 	                      </td>
 	                      <td class="text-center">
-	                        <a href="#"><i class="bi bi-arrow-bar-down" ></i></a>
+	                        <a href="#"><i class="bi bi-arrow-bar-down"></i></a>
 	                      </td>
 	                      <td>
 	                       	<div class="input-group col">
-			                  <input type="text" class="form-control" name="pNo" id="productNo1" readonly>
-			                  <button type="button" class="input-group-text" onclick="productPopup(1);"><i class="bi bi-search"></i></button>
+			                  <input type="text" class="form-control" name="pNo" id="productNo${vs.count}" value="${pvo.PNoStr}" readonly>
+			                  <button type="button" class="input-group-text" onclick="productPopup(${vs.count});"><i class="bi bi-search"></i></button>
 			                </div>
 	                      </td>
 	                      <td class="project_progress">
-	                        <input type="text" class="form-control" name="pName" id="productName1" readonly>
+	                        <input type="text" class="form-control" id="productName${vs.count}" readonly>
 	                      </td>
 	                      <td>
-	                        <input type="text" class="form-control" name="oNum">
+	                        <input type="text" class="form-control" name="oNum" value="${pvo.ONumStr}">
 	                      </td>
 	                      <td>
-	                        <input type="text" class="form-control" name="oPrice" id="price1" readonly>
+	                        <input type="text" class="form-control" name="oPrice" id="price${vs.count}" value="${pvo.OPriceStr}" readonly>
 	                      </td>
 	                      <td>
-	                        <input type="text" class="form-control" name="vatText" value="0" readonly>
+	                      <c:if test="${vo.vatYn eq 'Y'}">
+	                    	 <input type="number" name="vatText" class="form-control" value="${pvo.OPriceStr}/10" readonly>
+	                      </c:if>
+	                      <c:if test="${vo.vatYn eq 'N'}">
+	                    	 <input type="number" name="vatText" class="form-control" value="0" readonly>
+	                      </c:if>
 	                      </td>
 	                      <td>
-	                        <input type="date" class="form-control" name="oDeliberyDateStr">
+	                        <input type="date" class="form-control" name="oDeliberyDateStr" value="<fmt:formatDate value="${pvo.ODeliberyDateStrr}" pattern="yyyy-MM-dd"/>">
 	                      </td>
+	                      <c:set var="countIndex" value="${vs.count}"></c:set>
 	                  </tr>
-	
+	              </c:forEach>
 	            </tbody>
 	          </table>
 	
@@ -249,37 +257,7 @@
 <script src="${path}/resources/dist/js/adminlte.min.js"></script>
 
 <script>
-	var index = 1;
-
-	function orderPlus(){
-		index +=1;
-		let table = document.getElementById('orderTable');
-		  const newRow = table.insertRow();
-		  
-		  const newCell1 = newRow.insertCell(0);
-		  const newCell2 = newRow.insertCell(1);
-		  const newCell3 = newRow.insertCell(2);
-		  const newCell4 = newRow.insertCell(3);
-		  const newCell5 = newRow.insertCell(4);
-		  const newCell6 = newRow.insertCell(5);
-		  const newCell7 = newRow.insertCell(6);
-		  const newCell8 = newRow.insertCell(7);
-
-		  newCell2.className = "text-center";
-		  newCell1.innerHTML = '<input type="checkbox" class="orderCheckBox">';
-		  newCell2.innerHTML = '<a href="#"><i class="bi bi-arrow-bar-down"></i></a>';
-		  newCell3.innerHTML = '<td>'
-             				 + 		'<div class="input-group col">'
-          					 + 			'<input type="text" class="form-control" name="pNo" id="productNo'+index+'" readonly>'
-          					 + 			'<button type="button" class="input-group-text" onclick="productPopup('+ index +');"><i class="bi bi-search"></i></button>'
-        					 + '	</div></td>';
-		  newCell4.innerHTML = '<input type="text" class="form-control" name="pName" id="productName'+index+'" readonly>';
-		  newCell5.innerHTML = '<input type="text" class="form-control" name="oNum">';
-		  newCell6.innerHTML = '<input type="text" class="form-control" name="oPrice" id="price'+index+'" readonly>';
-		  newCell7.innerHTML = '<input type="text" class="form-control" name="vatText" value="0" readonly>';
-		  newCell8.innerHTML = '<input type="date" class="form-control" name="oDeliberyDateStr">';
-		  console.log(index);
-	}
+	var index = ${countIndex};
 	
 	function orderMinus(){
 		let table = document.getElementById('orderTable');
@@ -303,7 +281,7 @@
 		}
 		if(vat == "N"){
 			for(let i=0; i< pNoArr; i++){
-				document.getElementsByName("vatText")[i].value=0;
+				document.getElementsByName("vatText")[i].value= 0;
 			}
 		}
 	}

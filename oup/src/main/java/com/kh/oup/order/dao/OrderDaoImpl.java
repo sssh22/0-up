@@ -53,5 +53,15 @@ public class OrderDaoImpl implements OrderDao{
 		return session.selectList("order.selectProductOrderNo", orderNo);
 	}
 
+	@Override
+	public int updateOrder(OrderVo vo) throws Exception {
+		return session.update("order.updateorder", vo);
+	}
+
+	@Override
+	public int updateOrderProduct(OrderProductVo pVo) throws Exception {
+		return session.update("order.updateorderProduct", pVo);
+	}
+
 
 }

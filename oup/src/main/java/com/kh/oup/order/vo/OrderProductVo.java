@@ -7,6 +7,7 @@ import lombok.Data;
 @Data
 public class OrderProductVo {
 	private int orderNo;		// 주문서 번호
+	private int[] orderList;
 	private int[] pNo;			// 품목 번호
 	private String[] pName;		// 품목 이름
 	private int[] oNum;			// 품목 개수
