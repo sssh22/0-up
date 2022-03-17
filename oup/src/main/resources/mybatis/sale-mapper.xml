@@ -32,7 +32,7 @@
 			#{employeeNo},
 			#{projectNo},
 			NULL, <!-- #{oNo} -->
-			#{sUmony},
+			#{sUmoney},
 			#{saleDate},
 			#{sUmoney},
 			#{vatYN}
@@ -62,7 +62,7 @@
 	<update id="clientAddUmony" parameterType="HashMap">
 		UPDATE CLIENT
 		SET
-		C_UMONY = #{sUmoney}
+		C_UMONY = #{sUmony}
 		WHERE
 		C_NO = #{cNo}
 	</update>
@@ -179,9 +179,23 @@
 		WHERE SALE_NO = #{saleNo}
 	</select>
 	
+	<select id="getOrderProductList" resultType="com.kh.oup.sale.vo.OrderListVo">
+		SELECT * 
+		FROM ORDER_LIST
+		WHERE O_NO = #{oNo}
+	</select>
+	
 	<select id="unitPrice" resultType="long">
 		SELECT P_UNIT_PRICE
 		FROM PRODUCT
 		WHERE P_NO = #{pNo}
+	</select>
+	
+	<select id="getOrder" resultType="com.kh.oup.sale.vo.OrderVo">
+		SELECT * FROM ORDER1 WHERE O_NO = #{orderNo}
+	</select>
+	
+	<select id="getUmoney" resultType="long">
+		SELECT C_UMONY FROM CLIENT WHERE C_NO = #{cNo}
 	</select>
 </mapper>

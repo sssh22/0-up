@@ -53,13 +53,13 @@
       <!-- Default box -->
       <div class="card"></div>
         <div class="card-body p-0">
-		<form action="" method="post"> <!-- cbj -->
+		<form action="${path}/sale/enter" method="post"> <!-- cbj -->
           <div class="row" style="background-color: rgb(196, 194, 194); margin: 20px; padding: 6px;">
                 <div class="col-sm-1 mt-3" style="padding:5px;"><b>일자</b></div>
                 <div class="col-sm-1"></div>
                 <div class="col-sm-4">  
                   <div class="col">
-                    <input type="date" id="saleDate" name="saleDate" class="form-control mb-3 mt-3" placeholder="기한">
+                    <input type="date" value="${sale.saleDate}" id="saleDate" name="saleDate" class="form-control mb-3 mt-3" placeholder="기한">
                   </div>
                 </div>
 
@@ -67,9 +67,9 @@
                 <div class="col-sm-1"></div>
                 <div class="col-sm-4">                  
                   <div class="input-group col mt-3">
-                    <input id="cNo" type="text" name="cNo" class="form-control" placeholder="거래처">
+                    <input id="cNo" type="text" name="cNo" class="form-control" value="${sale.CNo}" placeholder="거래처">
                     <button type="button" class="input-group-text" onclick="goPopup()"><i class="bi bi-search"></i></button>
-                    <input id="cName" type="text" class="form-control" readonly>
+                    <input id="cName" type="text" class="form-control" value="${sale.CName}" readonly>
                   </div>
                 </div>
 
@@ -77,9 +77,9 @@
                 <div class="col-sm-1"></div>
                 <div class="col-sm-4">
                   <div class="input-group col mb-3">
-                    <input type="text" id="employeeNo" name="employeeNo" class="form-control" placeholder="담당자">
+                    <input type="text" id="employeeNo" name="employeeNo" class="form-control" value="${sale.employeeNo}" placeholder="담당자">
                     <button type="button" class="input-group-text" onclick="employeePopup()"><i class="bi bi-search"></i></button>
-                    <input type="text" id="employeeName" class="form-control" readonly id="id">
+                    <input type="text" id="employeeName" class="form-control" value="${sale.employeeName}" readonly id="id">
                     <input type="hidden" id="teamCode" class="form-control">
                   </div>
                 </div>
@@ -88,9 +88,9 @@
                 </div><div class="col-sm-1"></div>
                 <div class="col-sm-4">
                   <div class="input-group col">
-                    <input type="text" name="wareHouseNo" id="warehouseNo" class="form-control" placeholder="출하창고">
+                    <input type="text" name="wareHouseNo" id="warehouseNo" class="form-control" value="${sale.wareHouseNo}" placeholder="출하창고">
                     <button onclick="warehousePopup()" type="button" class="input-group-text"><i class="bi bi-search"></i></button>
-                    <input id="warehouseName" type="text" class="form-control" readonly>
+                    <input id="warehouseName" type="text" class="form-control" value="${sale.wareHouseName}" readonly>
                   </div>
                 </div>
 
@@ -109,9 +109,9 @@
                 <div class="col-sm-1"></div>
                 <div class="col-sm-4">
                   <div class="input-group col mb-3">
-                    <input type="text" name="projectNo" id="projectNo" class="form-control" placeholder="프로젝트">
+                    <input type="text" name="projectNo" id="projectNo" class="form-control" value="${sale.projectNo}" placeholder="프로젝트">
                     <button type="button" onclick="projectPopup()" class="input-group-text"><i class="bi bi-search"></i></button>
-                    <input type="text" id="projectName" class="form-control" readonly>
+                    <input type="text" id="projectName" class="form-control" value="${sale.projectName}" readonly>
                   </div>
                 </div>
                 
@@ -119,7 +119,7 @@
                 <div class="col-sm-1"></div>
                 <div class="col-sm-4">
                   <div class="col">
-                    <input type="text" id="aUmoney" class="form-control mb-3" placeholder="미수금액" readonly>
+                    <input type="text" id="aUmoney" class="form-control mb-3" value="${sale.SUmoney}" placeholder="미수금액" readonly>
                   </div>
                 </div>
                 
@@ -127,18 +127,18 @@
                 <div class="col-sm-1"></div>
                 <div class="col-sm-4">
                   <div class="col">
-                    <input type="text" id="sUmoney" name="sUmoney" class="form-control mb-3" placeholder="미수금액" readonly>
+                    <input type="text" id="sUmoney" name="sUmoney" class="form-control mb-3" value="${sale.SUmoney}" placeholder="미수금액" readonly>
                   </div>
                 </div>
           </div>
 		
           <div style="margin: 10px;">
             <button type="button" onclick="productPopup()">My품목</button>
-            <button type="button" onclick="orderPopup()">주문</button>
+            <button type="button">주문</button>
             <button onclick="addProduct()" type="button">+</button>
 	       </div>
-			<input id="index" type="hidden" value="2">
-			<input id="index2" type="hidden" value="1">
+			<input id="index" type="hidden" value="${cnt+1}">
+			<input id="index2" type="hidden" value="${cnt}">
 			<table class="table table-bordered projects">
 				<thead>
 					<tr>
@@ -152,39 +152,42 @@
 					</tr>
 				</thead>
 				<tbody id="product">
+				<c:forEach items="${saleList}" var="l" varStatus="status">
 					<tr>
 						<td>
+							<input type="hidden" name="voList[${status.count-1}].saleListNo" value="${l.saleListNo}">
 							<div class="input-group" style="margin: 0px">
-							<input id="productNo1" name="voList[0].pNo" type="number" class="form-control"
-							placeholder="100">
-							<button type="button" class="input-group-text" onclick="productPopup('1')"><i class="bi bi-search"></i></button>
+							<input id="productNo${status.count}" name="voList[${status.count-1}].pNo" type="number" class="form-control"
+							value="${l.PNo}" placeholder="100">
+							<button type="button" class="input-group-text" onclick="productPopup('${status.count}')"><i class="bi bi-search"></i></button>
 							</div>
 						</td>
 						<td class="project_progress">
-							<input id="productName1" type="text"
-							class="form-control" placeholder="단단한돌">
+							<input id="productName${status.count}" type="text"
+							class="form-control" name="voList[${status.count-1}].pName" value="${l.PName}" placeholder="단단한돌">
 						</td>
 						<td>
-							<input onchange="calcResult()" id="count1" name="voList[0].sQnt" type="number" class="form-control"
-							placeholder="1000">
+							<input onchange="calcResult()" id="count${status.count}" name="voList[${status.count-1}].sQnt" type="number" class="form-control"
+							value="${l.SQnt}" placeholder="1000">
 						</td>
 						<td>
-						<input onchange="calcResult()" id="price1" type="number" class="form-control"
+						<input onchange="calcResult()" id="price${status.count}" name="voList[${status.count-1}].pUnitPrice" type="number" value="${l.PUnitPrice}" class="form-control"
 							placeholder="3000원">
 						</td>
 						<td>
-						<input id="result1" name="voList[0].sPrice" class="form-control"
-							readonly="readonly" value="0">
+						<input id="result${status.count}" name="voList[${status.count-1}].sPrice" class="form-control"
+							value="${l.SPrice}" readonly="readonly" value="0">
 						</td>
 						<td>
-						<input id="buga1" type="number" class="form-control"
-							value="0">
+						<input id="buga${status.count}" name="voList[${status.count-1}].buga" type="number" class="form-control"
+							value="${l.buga}">
 						</td>
 						<td>
-						<input name="voList[0].sDeliberyDate" type="date" class="form-control"
-							placeholder="2022-04-18">
+						<input name="voList[${status.count-1}].sDeliberyDate" type="date" class="form-control"
+							value="${l.SDeliberyDate}" placeholder="2022-04-18">
 						</td>
-					
+					</tr>
+				</c:forEach>
 				</tbody>
 			</table>
 			<div style="margin: 10px;">

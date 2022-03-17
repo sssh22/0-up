@@ -8,6 +8,8 @@ import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Repository;
 
 import com.kh.oup.common.PageVo;
+import com.kh.oup.sale.vo.OrderListVo;
+import com.kh.oup.sale.vo.OrderVo;
 import com.kh.oup.sale.vo.SaleListVo;
 import com.kh.oup.sale.vo.SaleVo;
 
@@ -97,6 +99,11 @@ public class SaleDaoImpl implements SaleDao{
 	public List<SaleListVo> getSaleProductList(int saleNo) throws Exception {
 		return ss.selectList("sale.getSaleProductList", saleNo);
 	}
+	
+	@Override
+	public List<OrderListVo> getOrderProductList(String orderNo) throws Exception {
+		return ss.selectList("sale.getOrderProductList", orderNo);
+	}
 
 	@Override
 	public long getProductUnitPrice(String pNo) throws Exception {
@@ -122,4 +129,15 @@ public class SaleDaoImpl implements SaleDao{
 		
 		return ss.update("sale.productCount", test);
 	}
+
+	@Override
+	public OrderVo getOrder(String orderNo) throws Exception {
+		return ss.selectOne("sale.getOrder", orderNo);
+	}
+
+	@Override
+	public long getUmoney(int cNo) throws Exception {
+		return ss.selectOne("sale.getUmoney", cNo);
+	}
+
 }

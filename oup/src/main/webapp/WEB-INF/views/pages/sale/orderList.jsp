@@ -59,7 +59,7 @@
                   <tbody>
                   <c:forEach items="${list}" var="l">				
                     <tr>
-                      <td><span style="color:blue; font-size: 150%; text-decoration: underline; cursor: pointer;" onclick="returnCNo('${l.ONo}');">${l.ONo}</span></td>
+                      <td><span style="color:blue; font-size: 150%; text-decoration: underline; cursor: pointer;" onclick="returnONo('${l.ONo}');">${l.ONo}</span></td>
                       <td style="font-size: 150%">${l.CName}</td>
                       <td style="font-size: 150%">${l.employeeName}</td>
                     </tr>
@@ -88,10 +88,8 @@
 		document.searchform.submit(search);
 	}	
 	
-	function returnCNo(pNo,pName, pUnitPrice) {
-			opener.document.getElementById("productNo" + ${index}).value = pNo; //품목코드
-			opener.document.getElementById("productName" + ${index}).value = pName; //품목명
-			opener.document.getElementById("price" + ${index}).value = pUnitPrice; //단가
+	function returnONo(oNo) {
+			opener.location.replace("${path}/sale/order/" + oNo);
 			self.close();
 	}
 

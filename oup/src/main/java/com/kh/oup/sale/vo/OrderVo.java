@@ -10,7 +10,7 @@ public class OrderVo {
 	private int cNo;			// �ŷ�ó��ȣ
 	private int projectNo;		// ������Ʈ��ȣ
 	private int warehouseNo;	// â���ȣ
-	private Date oDate;			// �ֹ���
+	private String oDate;			// �ֹ���
 	private Date creditDate; 	// ���ű���
 	private String teamCode;	// ���ڵ�
 	private int employeeNo;		// �����
@@ -26,4 +26,7 @@ public class OrderVo {
 	//추가한 것
 	private String cName; //거래처명
 	private String employeeName; //담당자명
+	private String wareHouseName;
+	private String projectName;
+	private long sUmoney;
 }

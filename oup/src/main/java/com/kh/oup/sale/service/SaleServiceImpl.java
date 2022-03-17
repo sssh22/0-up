@@ -8,6 +8,8 @@ import org.springframework.transaction.annotation.Transactional;
 
 import com.kh.oup.common.PageVo;
 import com.kh.oup.sale.dao.SaleDao;
+import com.kh.oup.sale.vo.OrderListVo;
+import com.kh.oup.sale.vo.OrderVo;
 import com.kh.oup.sale.vo.SaleListVo;
 import com.kh.oup.sale.vo.SaleVo;
 
@@ -130,6 +132,41 @@ public class SaleServiceImpl implements SaleService{
 		}
 		
 		return result;
+	}
+
+	@Override
+	public OrderVo getOrder(String orderNo) throws Exception {
+		OrderVo orderVo = dao.getOrder(orderNo);
+		//거래처명
+		orderVo.setCName(dao.getCName(orderVo.getCNo()));
+		//담당자명
+		orderVo.setEmployeeName(dao.getEmployeeName(orderVo.getEmployeeNo()));
+		//출하창고명
+		orderVo.setWareHouseName(dao.getWareHouseName(orderVo.getWarehouseNo()));
+		//프로젝트명
+		orderVo.setProjectName(dao.getProjectName(orderVo.getProjectNo()));
+		orderVo.setSUmoney(dao.getUmoney(orderVo.getCNo()));
+		return orderVo;
+	}
+
+	@Override
+	public OrderListVo getOrderProductList(String orderNo) throws Exception {
+		OrderListVo vo = new OrderListVo();
+		vo.setONo(orderNo);
+		vo.setVoList(dao.getOrderProductList(orderNo));
+		
+		for(int i = 0; i < vo.getVoList().size(); i++) {
+			//품목명
+			vo.getVoList().get(i).setPName(dao.getProductName(vo.getVoList().get(i).getPNo()));
+			//단가
+			vo.getVoList().get(i).setPUnitPrice(dao.getProductUnitPrice(vo.getVoList().get(i).getPNo()));
+			//부가세
+			vo.getVoList().get(i).setBuga((long) (vo.getVoList().get(i).getOPrice() * 0.1));
+			//금액 = 공급가액 + 부가세
+			vo.getVoList().get(i).setResult((long) (vo.getVoList().get(i).getOPrice() + vo.getVoList().get(i).getBuga()));
+		}
+		
+		return vo;
 	}
 
 }
