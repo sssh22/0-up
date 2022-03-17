@@ -132,8 +132,6 @@
           </div>
 		
           <div style="margin: 10px;">
-            <button type="button">찾기</button>
-            <button type="button">거래내역보기</button>
             <button type="button" onclick="productPopup()">My품목</button>
             <button type="button">주문</button>
             <button onclick="addProduct()" type="button">+</button>

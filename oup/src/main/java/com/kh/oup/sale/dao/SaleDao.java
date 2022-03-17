@@ -3,6 +3,8 @@ package com.kh.oup.sale.dao;
 import java.util.List;
 
 import com.kh.oup.common.PageVo;
+import com.kh.oup.sale.vo.OrderListVo;
+import com.kh.oup.sale.vo.OrderVo;
 import com.kh.oup.sale.vo.SaleListVo;
 import com.kh.oup.sale.vo.SaleVo;
 
@@ -45,5 +47,11 @@ public interface SaleDao {
 	int saleListUpdate(SaleListVo saleListVo) throws Exception;
 
 	int productCount(String pNo, long sQnt) throws Exception;
+
+	OrderVo getOrder(String orderNo) throws Exception;
+
+	long getUmoney(int cNo) throws Exception;
+
+	List<OrderListVo> getOrderProductList(String orderNo) throws Exception;
 
 }

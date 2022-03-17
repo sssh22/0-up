@@ -1,5 +1,6 @@
 package com.kh.oup.sale.controller;
 
+import java.util.ArrayList;
 import java.util.List;
 
 import javax.servlet.http.HttpServletRequest;
@@ -15,14 +16,17 @@ import org.springframework.web.bind.annotation.PostMapping;
 import org.springframework.web.bind.annotation.RequestMapping;
 
 import com.kh.oup.common.PageVo;
-import com.kh.oup.employee.vo.EmployeeVo;
-import com.kh.oup.mail.vo.MailVo;
 import com.kh.oup.sale.service.SaleService;
+import com.kh.oup.sale.vo.OrderListVo;
+import com.kh.oup.sale.vo.OrderVo;
 import com.kh.oup.sale.vo.SaleListVo;
 import com.kh.oup.sale.vo.SaleVo;
 
+import lombok.extern.slf4j.Slf4j;
+
 @Controller
 @RequestMapping("/sale")
+@Slf4j
 public class SaleController {
 	
 	@Autowired
@@ -53,6 +57,49 @@ public class SaleController {
 		return "redirect:/sale/enter";
 	}
 	
+	@GetMapping("order/{orderNo}")
+	public String saleOrderDetail(@PathVariable String orderNo, Model model) throws Exception {
+		OrderVo orderVo = service.getOrder(orderNo);
+		
+		SaleVo saleVo = new SaleVo();
+		saleVo.setCNo(orderVo.getCNo());
+		saleVo.setWareHouseNo(orderVo.getWarehouseNo());
+		saleVo.setEmployeeNo(orderVo.getEmployeeNo());
+		saleVo.setProjectNo(orderVo.getProjectNo());
+		saleVo.setSaleDate(orderVo.getODate().substring(0, 10));
+		saleVo.setVatYN(orderVo.getVatYn().charAt(0));
+		saleVo.setCName(orderVo.getCName());
+		saleVo.setEmployeeName(orderVo.getEmployeeName());
+		saleVo.setWareHouseName(orderVo.getWareHouseName());
+		saleVo.setProjectName(orderVo.getProjectName());
+		saleVo.setSUmoney(orderVo.getSUmoney());
+		model.addAttribute("sale", saleVo);
+		
+		OrderListVo orderListVo = service.getOrderProductList(orderNo);
+		SaleListVo saleListVo = new SaleListVo();
+		if(saleListVo.getVoList() == null) saleListVo.setVoList(new ArrayList<SaleListVo>());
+		for(int i = 0; i < orderListVo.getVoList().size(); i++) {
+//			System.out.println("==================");
+//			System.out.println(saleListVo.getVoList());
+			SaleListVo temp = new SaleListVo();
+			saleListVo.getVoList().add(temp);
+			saleListVo.getVoList().get(i).setBuga(orderListVo.getVoList().get(i).getBuga());
+			saleListVo.getVoList().get(i).setPName(orderListVo.getVoList().get(i).getPName());
+			saleListVo.getVoList().get(i).setPNo(orderListVo.getVoList().get(i).getPNo());
+			saleListVo.getVoList().get(i).setPUnitPrice(orderListVo.getVoList().get(i).getPUnitPrice());
+			saleListVo.getVoList().get(i).setResult(orderListVo.getVoList().get(i).getResult());
+			saleListVo.getVoList().get(i).setSDeliberyDate(orderListVo.getVoList().get(i).getODeliberyDate().substring(0, 10));
+			saleListVo.getVoList().get(i).setSPrice(orderListVo.getVoList().get(i).getOPrice());
+			saleListVo.getVoList().get(i).setSQnt(orderListVo.getVoList().get(i).getONum());
+		}
+		
+//		log.warn(orderNo)
+		model.addAttribute("saleList", saleListVo.getVoList());
+		int cnt = saleListVo.getVoList().size();
+		model.addAttribute("cnt", cnt);
+		return "pages/sale/saleOrderEnter";
+	}
+	
 	@GetMapping(value = {"/list/{page}", "/list"})
 	public String saleList(Model model, @PathVariable(required = false)String page, HttpServletRequest request) throws Exception {
 		if(page == null || Integer.parseInt(page) <= 0 )
@@ -78,6 +125,7 @@ public class SaleController {
 		SaleListVo saleListVo = service.getSaleProductList(saleNo);
 		model.addAttribute("saleList", saleListVo.getVoList());
 		int cnt = saleListVo.getVoList().size();
+		
 		model.addAttribute("cnt", cnt);
 		model.addAttribute("saleNo", saleNo);
 		
